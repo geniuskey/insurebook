@@ -758,7 +758,7 @@
         const nt = r.note, tw = ctx.measureText(nt).width;
         ctx.font = IB.font(12, false, 700);
         const lw2 = ctx.measureText(r.n + (open ? " · 열림" : "")).width;
-        if (box.x + lw2 + 12 < box.x + box.w - tw) T(ctx, nt, box.x + box.w - tw - 2 > X(r.b) + 6 || r.a == null ? box.x + box.w : Math.min(box.x + box.w, X(r.b) - 6), y + rh * 0.36, { size: 11, color: P.dim, align: "right" });
+        if (w >= 520 && box.x + lw2 + 12 < box.x + box.w - tw) T(ctx, nt, box.x + box.w, y + rh * 0.36, { size: 11, color: P.dim, align: "right" });
       });
       if (v) { const kx = X(know); ctx.strokeStyle = P.warn; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(kx, box.y + 2 * rh + 4); ctx.lineTo(kx, box.y + 3 * rh - 4); ctx.stroke(); ctx.setLineDash([]); }
       const tx = X(today);
