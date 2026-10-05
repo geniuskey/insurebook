@@ -507,7 +507,7 @@
       });
       // 아래: 연도별 보험료와 사업비 지출
       const N = Math.min(pay, 20), ymax = Math.max(G0 * (a + b), G0) * 1.15;
-      const box = { x: 54, y: tb.y + tb.h + 34, w: w - 68, h: 0 }; box.h = h - box.y - 30;
+      const box = { x: 54, y: tb.y + tb.h + 34, w: w - 68, h: 0 }; box.h = h - box.y - 46;
       const c = IB.chart(ctx, box, { x: [0, N], y: [0, ymax], xTicks: [], yFmt: IB.wonAxis });
       const slot = box.w / N, bw = slot * 0.66;
       for (let t = 0; t < N; t++) {
@@ -546,8 +546,8 @@
       const rows = r.rows.map((x) => ({ year: x.year, paid: x.paid + (x.year === 1 ? extra : 0), claw: x.claw + (L && x.year === L && L <= 2 ? extra * [1, 0.5][L - 1] : 0) }));
       const Y8 = 8, prem = 12 * m;
       const hi = Math.max(prem, rows[0].paid) * 1.18, lo = -Math.max(rows[0].paid, 1) * 0.75;
-      const box = { x: 56, y: 20, w: w - 70, h: h - 66 };
-      const c = IB.chart(ctx, box, { x: [0, Y8], y: [lo, hi], xTicks: [], yFmt: IB.wonAxis, hlines: [{ y: 0, color: P.axis, dash: [] }, { y: 12 * m, color: P.warn, label: "첫해 상한 12배" }] });
+      const box = { x: 56, y: 20, w: w - 70, h: h - 80 };
+      const c = IB.chart(ctx, box, { x: [0, Y8], y: [lo, hi], xTicks: [], yFmt: IB.wonAxis, hlines: [{ y: 0, color: P.axis, dash: [] }, { y: 12 * m, color: P.warn }] });
       G = c;
       const slot = box.w / Y8, bw = slot * 0.6;
       for (let y = 1; y <= Y8; y++) {
@@ -560,8 +560,10 @@
       }
       const lx = L ? box.x + slot * L : box.x + box.w - 2;
       vline(ctx, lx, box.y, box.y + box.h, P.bad, [4, 3], 1.5);
-      knob(ctx, lx, box.y + 10, P, P.bad, 6);
-      T(ctx, L ? L + "년차 해지" : "끝까지 유지", lx + (L && L > 5 ? -10 : 10), box.y + 28, { size: 11.5, color: P.bad, align: L && L > 5 ? "right" : "left", weight: 600 });
+      knob(ctx, lx, box.y + box.h - 30, P, P.bad, 6);
+      const right = !L || L > 5;
+      T(ctx, L ? L + "년차 해지" : "끝까지 유지", lx + (right ? -8 : 8), box.y + box.h - 8, { size: 11.5, color: P.bad, align: right ? "right" : "left", weight: 600 });
+      T(ctx, "첫해 상한 12배", box.x + 4, c.Y(12 * m) - 5, { size: 11, color: P.warn });
       const firstX = rows[0].paid / m, gross = rows.reduce((s, x) => s + x.paid, 0), claw = rows.reduce((s, x) => s + x.claw, 0);
       IB.stat("ru-o-f", won(rows[0].paid) + " <small>(" + firstX.toFixed(1) + "배)</small>");
       IB.stat("ru-o-r", firstX <= 12.0001 ? tone("ok-t", "상한 안") : tone("bad-t", "상한 초과"));
@@ -582,7 +584,7 @@
     cv = IB.canvas("#ps-cv", (ctx, w, h) => {
       const P = IB.palette(), surv = survFor(Pp() / 100), opt = mode() === "split" ? { first: 7 } : {};
       const narrow = w < 520;
-      const gw = narrow ? w - 24 : Math.min(w * 0.46, 300), cell = gw / 10, gx = 12, gy = 30;
+      const gw = narrow ? Math.min(w - 24, 230) : Math.min(w * 0.46, 300), cell = gw / 10, gx = 12, gy = 30;
       T(ctx, "판매한 계약 100건 · " + Math.floor(t) + "년 경과", gx, 16, { size: 12, color: P.dim, base: "middle" });
       for (let i = 0; i < NC; i++) {
         // 계약 i의 해지 시점: 생존곡선의 역함수(연 단위 선형 보간)
@@ -608,7 +610,7 @@
       IB.stat("ps-o-e", won(e.total));
       IB.stat("ps-o-c", tone(e.claw > 3e5 ? "bad-t" : "", won(e.claw)));
       IB.stat("ps-o-t", Math.floor(t) + "<small>년</small>");
-    }, { get height() { const el = document.getElementById("ps-cv"); const w = el.parentElement.clientWidth || 600; return w < 520 ? 30 + (w - 24) + 30 + 140 : Math.min(w * 0.46, 300) + 46; } });
+    }, { get height() { const el = document.getElementById("ps-cv"); const w = el.parentElement.clientWidth || 600; return w < 520 ? 30 + Math.min(w - 24, 230) + 30 + 140 : Math.min(w * 0.46, 300) + 46; } });
     anim = IB.loop(cv.canvas, (dt) => {
       if (t >= YRS) { anim.stop(); return; }
       const prev = t; t = Math.min(YRS, t + dt * 0.9);
