@@ -1,0 +1,766 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "갱신형 보험료는 왜 처음에 싸고 나중에 계단처럼 오르는가. 자연보험료와 평준보험료, 갱신 계단과 누적 보험료의 교차 나이, 갱신 인상의 세 가지 이유, 해지율이 가격에 들어가는 무해지·저해지형, 납입기간과 납입면제를 시뮬레이터로 비교한다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>갱신형·비갱신형·무해지 · InsureBook</title>
+<meta name="description" content="갱신형 보험료는 왜 처음에 싸고 나중에 계단처럼 오르는가. 자연보험료와 평준보험료, 갱신 계단과 누적 보험료의 교차 나이, 갱신 인상의 세 가지 이유, 해지율이 가격에 들어가는 무해지·저해지형, 납입기간과 납입면제를 시뮬레이터로 비교한다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/renewal.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="갱신형·비갱신형·무해지 · InsureBook">
+<meta property="og:description" content="갱신형 보험료는 왜 처음에 싸고 나중에 계단처럼 오르는가. 자연보험료와 평준보험료, 갱신 계단과 누적 보험료의 교차 나이, 갱신 인상의 세 가지 이유, 해지율이 가격에 들어가는 무해지·저해지형, 납입기간과 납입면제를 시뮬레이터로 비교한다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/renewal.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/renewal.html#chapter","name":"갱신형·비갱신형·무해지","headline":"갱신형·비갱신형·무해지 · InsureBook","description":"갱신형 보험료는 왜 처음에 싸고 나중에 계단처럼 오르는가. 자연보험료와 평준보험료, 갱신 계단과 누적 보험료의 교차 나이, 갱신 인상의 세 가지 이유, 해지율이 가격에 들어가는 무해지·저해지형, 납입기간과 납입면제를 시뮬레이터로 비교한다.","url":"https://insurebook.euiyun.com/chapters/renewal.html","position":7,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"7. 갱신형·비갱신형·무해지","item":"https://insurebook.euiyun.com/chapters/renewal.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="renewal">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 07</div>
+    <h1>갱신형·비갱신형·무해지</h1>
+    <p class="lead">같은 암 진단비 3,000만원인데 한 설계서는 월 1만원, 다른 설계서는 월 5만원이다(32세 남성, 이 책의 교육용 모델로 계산한 값). 더 싼 쪽은 '갱신형', 더 비싼 쪽은 '비갱신형'이라고 적혀 있다. 그 옆에는 월 3만원대의 '무해지형'도 있다. 무엇이 다르기에 가격이 다섯 배까지 벌어질까. 답은 같은 보장을 <b>언제, 누가, 얼마나 나눠 내는가</b>에 있다. 이 장은 세 가지 가격표 뒤에 숨은 시간의 계산을 직접 움직여 보며 풀어낸다. 어느 쪽이 무조건 낫다는 결론은 없다. 어떤 사람에게 어느 쪽이 맞는지가 있을 뿐이다.</p>
+    <ul class="objectives">
+      <li>자연보험료와 평준보험료의 차이로 갱신형이 처음에 싼 이유를 설명한다.</li>
+      <li>갱신 주기와 가입 나이에 따라 갱신 보험료의 계단이 어떻게 높아지는지 본다.</li>
+      <li>갱신형과 비갱신형의 누적 보험료가 역전되는 나이를 찾고, 그 전에 계약이 끝나는 경우를 따져 본다.</li>
+      <li>갱신 때 보험료가 오르는 세 가지 이유(나이, 위험률 추세, 손해율·의료비)를 나눠 본다.</li>
+      <li>무해지·저해지형이 싼 원리(해지자의 몫이 유지자에게 넘어간다)와 중도 해지의 대가를 계산하고, 납입기간과 납입면제를 비교한다.</li>
+    </ul>
+  </header>
+
+  <section id="natural">
+    <h2>갱신형은 왜 처음에 쌀까</h2>
+    <p><a href="pricing.html">3장</a>에서 본 두 가지 보험료를 다시 꺼낸다. 그해의 위험만큼만 내는 것이 <span class="term">자연보험료</span><span class="en">(Natural premium)</span>다. 30세의 암 발생 위험은 작고 70세의 위험은 크니, 자연보험료는 나이가 들수록 가파르게 오른다. 반대로 보장 기간 전체의 위험을 미리 계산해 매년 같은 금액으로 고르게 나눈 것이 <span class="term">평준보험료</span><span class="en">(Level premium)</span>다. 젊을 때는 위험보다 더 내고, 그 차액을 <span class="term">책임준비금</span>으로 쌓아 두었다가 나이가 들어 위험이 커지면 꺼내 쓴다.</p>
+    <p>갱신형과 비갱신형은 이 둘 사이 어딘가에 있다. <b>비갱신형</b>은 보장 기간 전체를 하나의 평준보험료로 묶는다. <b>갱신형</b>은 기간을 10년, 20년 같은 토막으로 자르고 토막마다 그 시점의 나이로 평준보험료를 다시 계산한다. 토막이 짧을수록 자연보험료에 가까워지고, 1년 갱신이면 사실상 자연보험료다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 300" role="img" aria-label="자연보험료 곡선, 갱신형 계단, 비갱신형 평준선의 비교">
+        <defs><marker id="c7a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="44" y1="236" x2="430" y2="236" class="s-axis" marker-end="url(#c7a1)"/>
+        <line x1="44" y1="236" x2="44" y2="20" class="s-axis" marker-end="url(#c7a1)"/>
+        <text x="420" y="258" text-anchor="end" class="lbl-dim">나이 →</text>
+        <text x="30" y="128" text-anchor="middle" class="lbl-dim" transform="rotate(-90 30 128)">월 보험료</text>
+        <path d="M50 228 C150 224 220 205 280 160 S380 50 420 34" class="s-dash"/>
+        <text x="262" y="112" class="lbl-dim">자연보험료</text>
+        <path d="M50 222 H150 V190 H250 V128 H350 V62 H420" class="s-bad"/>
+        <text x="152" y="182" class="lbl-bad">갱신형</text>
+        <path d="M50 168 H250" class="s-acc" style="stroke-width:3"/>
+        <path d="M250 236 H420" class="s-acc" style="stroke-width:3"/>
+        <line x1="250" y1="168" x2="250" y2="236" class="s-dash"/>
+        <text x="56" y="160" class="lbl-acc">비갱신형(20년납)</text>
+        <text x="256" y="230" class="lbl-acc">납입 끝, 보장은 계속</text>
+        <text x="150" y="252" text-anchor="middle" class="t-mono">+10</text>
+        <text x="250" y="252" text-anchor="middle" class="t-mono">+20</text>
+        <text x="350" y="252" text-anchor="middle" class="t-mono">+30</text>
+        <text x="50" y="284" class="lbl">처음엔 갱신형이 싸고, 시간이 지날수록 비싸진다.</text>
+      </svg>
+      <figcaption><b>그림 1. 세 가지 보험료의 모양.</b> 점선은 그해의 위험만큼 내는 자연보험료, 빨간 계단은 10년마다 다시 계산하는 갱신형, 파란 선은 20년 동안 같은 금액을 내고 그 뒤에는 내지 않는 비갱신형이다. 모양만 보여 주는 개념도이며 높이는 눈금이 아니다.</figcaption>
+    </figure>
+
+    <p>평준보험료는 자연보험료를 "기간 전체로 평균 낸 값"이다. 다만 단순 평균이 아니라, 먼 미래의 돈일수록 이자만큼 할인하고 그때 살아 있을 확률만큼 가중한 평균이다.</p>
+    <div class="formula">$$P_{\text{평준}} = \frac{\sum_{k} v^{k}\,{}_kp_x\,\mathrm{NP}_{x+k}}{\sum_{k} v^{k}\,{}_kp_x}$$<div class="where">\(\mathrm{NP}_{x+k}\): \(x+k\)세의 자연보험료, \({}_kp_x\): \(x\)세인 사람이 \(k\)년 뒤 살아 있을 확률, \(v = 1/(1+i)\): 할인 계수(예정이율 \(i\)). 위험이 큰 노년의 보험료가 앞쪽으로 당겨져 들어온다.</div></div>
+    <p>아래에서 가입 나이와 보장 종류를 고르고 재생을 누른다. 커서가 나이를 따라 움직이면서, 평준보험료가 자연보험료보다 높은 동안 쌓이는 몫(초록)과 낮아진 뒤 꺼내 쓰는 몫(빨강)이 채워진다.</p>
+
+    <div class="sim" id="sim-nl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>자연보험료를 평준보험료로 바꾸면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nl-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="nl-kind"><button data-value="cancer" class="on">암 진단 3,000만</button><button data-value="death">사망 1억(80세까지)</button></div>
+          <label class="ctrl"><span>가입 나이 <output id="nl-a-out"></output></span><input type="range" id="nl-a" min="20" max="65" step="1" value="32"></label>
+          <div class="btn-row"><button class="btn primary" id="nl-play">멈춤</button><button class="btn" id="nl-end">끝까지</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>자연보험료</span><span><i style="background:var(--accent)"></i>평준보험료(보장 끝까지 납입)</span><span><i style="background:var(--ok)"></i>미리 내서 쌓는 몫</span><span><i style="background:var(--bad)"></i>쌓인 몫에서 꺼내 쓰는 몫</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">커서 나이</span><span class="v" id="nl-o-a">—</span></div>
+        <div class="stat"><span class="k">자연 / 평준(월)</span><span class="v" id="nl-o-p">—</span></div>
+        <div class="stat"><span class="k">두 선이 만나는 나이</span><span class="v" id="nl-o-x">—</span></div>
+        <div class="stat"><span class="k">가입 시 자연보험료 대비</span><span class="v" id="nl-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세 암으로 재생한다. 처음 20년 남짓은 평준보험료가 자연보험료의 몇 배다. 그 차액이 초록으로 쌓인다. ② 두 선이 만나는 나이 뒤로는 자연보험료가 평준보험료를 넘어 빨강이 채워진다. 노년의 보험료를 젊을 때 미리 낸 셈이다. ③ 가입 나이를 60세 이상으로 올린다. 평준보험료 자체가 높아지고 초록 구간이 짧아진다. 늦게 들수록 미리 쌓을 시간이 없다. (암 3,000만원은 100세까지, 사망 1억원은 80세까지, 예정이율 2.5%, 사업비는 넣지 않은 교육용 모델이다.)</div>
+    </div>
+
+    <p>초록과 빨강의 넓이는 이자와 생존 확률을 감안하면 같아진다. 평준보험료는 공짜로 싸지는 것이 아니라 <b>노년의 비싼 보험료를 젊을 때 나눠 내는 것</b>이다. 그래서 갱신형이 처음에 싼 이유는 간단하다. 미래의 위험을 아직 내지 않았기 때문이다. 그 몫은 갱신 때마다 청구서로 돌아온다.</p>
+  </section>
+
+  <section id="stairs">
+    <h2>갱신 계단: 얼마나 오르는가</h2>
+    <p>갱신형 계약은 주기마다 그때의 나이로 보험료를 다시 계산한다. 위험이 나이에 따라 빠르게 오르는 보장일수록 계단이 가파르다. 아래 그래프의 빨간 계단은 갱신형, 파란 선은 같은 나이에 비갱신형(20년납)으로 들었을 때다. 가로축의 손잡이를 끌어 가입 나이를 바꾸고, 갱신 주기를 10년과 20년으로 바꿔 본다.</p>
+
+    <div class="sim" id="sim-st">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>갱신 보험료 계단과 비갱신 평준선</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="st-cv"></canvas><span class="hint" style="top:8px;bottom:auto">손잡이로 나이를 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="st-kind"><button data-value="cancer" class="on">암 진단 3,000만(100세)</button><button data-value="death">사망 1억(80세)</button></div>
+          <div class="seg" id="st-per"><button data-value="10">10년 갱신</button><button data-value="20" class="on">20년 갱신</button></div>
+          <label class="ctrl"><span>가입 나이 <output id="st-a-out"></output></span><input type="range" id="st-a" min="20" max="60" step="1" value="26"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">첫 보험료(갱신형)</span><span class="v" id="st-o-f">—</span></div>
+        <div class="stat"><span class="k">비갱신형(20년납)</span><span class="v" id="st-o-l">—</span></div>
+        <div class="stat"><span class="k">마지막 계단</span><span class="v" id="st-o-m">—</span></div>
+        <div class="stat"><span class="k">갱신 횟수</span><span class="v" id="st-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 26세, 암, 20년 갱신(지우의 계약과 같은 구조)에서 첫 보험료와 46세 계단을 비교한다. 이 책의 모델로는 약 5.5배다. ② 10년 갱신으로 바꾼다. 첫 보험료는 더 싸지만 계단이 더 자주, 촘촘히 오른다. ③ 사망 1억으로 바꾸고 가입 나이를 50세 이상으로 끈다. 70대 계단이 첫 보험료의 수십 배로 치솟는다. 그 나이에는 비갱신형도 비싸지만 계단만큼은 아니다. (갱신 때 위험률·의료비 추세 연 2%가 반영된다고 가정. 비갱신형은 안전할증 10%를 붙였다. INS.renewal로 계산한 교육용 모델이다.)</div>
+    </div>
+
+    <p>계단이 보여 주는 첫 번째 사실은 갱신형의 위험이 <b>보험료가 가장 비싸질 때 소득이 가장 적어진다</b>는 데 있다는 점이다. 은퇴 뒤 60~70대에 보험료가 첫 보험료의 십수 배가 되면, 계약을 유지하기 어려워 해지하는 경우가 생긴다. 보장이 가장 필요한 나이에 보장을 잃는 셈이다. 업계에서는 이것을 흔히 갱신 폭탄이라고 부른다. 갱신형 상품의 설계서에는 갱신 후 예시 보험료가 나오지만, 그 값은 "현재 위험률이 그대로라면"이라는 가정 아래의 숫자이고 실제로는 더 오를 수도 덜 오를 수도 있다.</p>
+    <p>두 번째 사실은 갱신 주기가 짧을수록 첫 보험료가 싸 보인다는 점이다. 10년 갱신과 20년 갱신을 같은 나이에서 비교하면 10년 쪽이 처음에 더 싸다. 가격표 첫 줄만 비교하면 언제나 짧은 갱신 주기가 이긴다. 그래서 설계서를 비교할 때는 첫 보험료가 아니라 계단 전체를 본다.</p>
+  </section>
+
+  <section id="cross">
+    <h2>누적 보험료가 역전되는 나이</h2>
+    <p>그렇다면 평생 낸 돈으로 비교하면 어느 쪽이 쌀까. 갱신형은 처음에 덜 내고 나중에 많이 내고, 비갱신형은 처음 20년 동안만 낸다. 두 누적 곡선은 언젠가 만난다. 그 나이를 <span class="term">교차 나이</span>라고 부르자. 교차 나이 전에 계약이 끝나면, 즉 그 전에 사망하거나 해지하거나 보장이 더 필요 없어지면 갱신형이 덜 낸 것이고, 그 뒤까지 유지하면 비갱신형이 덜 낸 것이다.</p>
+    <p>아래 그래프의 세로선을 끌어 "계약이 끝나는 나이"를 옮겨 본다. 그 나이까지 두 방식이 각각 얼마를 냈는지가 함께 나온다.</p>
+
+    <div class="sim" id="sim-cx">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>갱신형 vs 비갱신형, 누적 보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cx-cv"></canvas><span class="hint" style="top:8px;bottom:auto">세로선을 끌어 계약이 끝나는 나이를 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>가입 나이 <output id="cx-a-out"></output></span><input type="range" id="cx-a" min="20" max="60" step="1" value="32"></label>
+          <div class="seg" id="cx-per"><button data-value="10">10년 갱신</button><button data-value="20" class="on">20년 갱신</button></div>
+          <label class="ctrl"><span>갱신 때 위험률·의료비 추세(연) <output id="cx-t-out"></output></span><input type="range" id="cx-t" min="0" max="6" step="0.5" value="2"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>갱신형 누적</span><span><i style="background:var(--accent)"></i>비갱신형(20년납) 누적</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">교차 나이</span><span class="v" id="cx-o-x">—</span></div>
+        <div class="stat"><span class="k">교차 나이까지 생존 확률</span><span class="v" id="cx-o-s">—</span></div>
+        <div class="stat"><span class="k">고른 나이까지 낸 돈(갱신 / 비갱신)</span><span class="v" id="cx-o-c">—</span></div>
+        <div class="stat"><span class="k">그 나이에 끝나면</span><span class="v" id="cx-o-w">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세, 20년 갱신, 추세 2%에서 교차 나이를 찾는다. 이 책의 모델로는 63세 무렵이다. ② 세로선을 40세, 50세로 옮긴다. 그 나이에 계약이 끝나면 갱신형이 수백만원 덜 냈다. ③ 추세를 0%로 내린다. 교차 나이가 늦어지고 갱신형이 유리한 구간이 길어진다. 6%로 올리면 교차가 앞당겨진다. 갱신형을 고르는 것은 미래의 위험률에 거는 일이다. (암 진단 3,000만원, 100세 보장. 생존 확률은 교육용 생명표(남성)로 계산했다. 이자는 넣지 않은 명목 합계다.)</div>
+    </div>
+
+    <p>교차 나이까지 살아 있을 확률은 90%가 넘는다. 그런데 이것만 보고 "비갱신형이 무조건 낫다"고 결론 내리면 한 가지를 빠뜨린다. 계약은 사망보다 해지로 훨씬 많이 끝난다. 이 책이 쓰는 교육용 근사로는 보험 계약의 약 절반만 5년(61회차)까지 유지된다. 실직, 결혼, 이사, 다른 상품으로의 교체처럼 이유는 다양하다. 교차 나이보다 훨씬 전에 해지할 사람에게는 처음 몇 년 덜 낸 갱신형이 실제로 더 싼 선택이었다. 반대로 비갱신형을 들고 몇 년 만에 해지하면 많이 낸 보험료 대부분이 해지환급금으로 돌아오지 않는다(<a href="pricing.html">3장</a>).</p>
+    <p>또 하나, 위 비교는 이자를 넣지 않았다. 갱신형으로 아낀 돈을 그동안 굴리면 교차 나이는 더 뒤로 밀린다. 반대로 갱신 보험료가 가정보다 더 오르면 앞당겨진다. 교차 나이는 정답이 아니라 판단의 기준점이다.</p>
+  </section>
+
+  <section id="why-up">
+    <h2>갱신 때 오르는 세 가지 이유</h2>
+    <p>갱신 보험료의 인상은 한 덩어리처럼 보이지만 세 가지가 겹쳐 있다.</p>
+    <ol>
+      <li><b>나이</b>: 같은 위험률 표를 써도 10년, 20년 나이를 먹었으니 오른다. 피할 수 없는 부분이고, 갱신형을 고를 때 이미 예정된 인상이다.</li>
+      <li><b>위험률 추세</b>: 갱신할 때는 그 시점의 최신 위험률을 쓴다. 건강검진이 늘어 암이 더 일찍, 더 많이 발견되거나 평균수명이 늘면 같은 나이의 위험률 자체가 달라진다.</li>
+      <li><b>손해율·의료비</b>: 그 상품에서 실제로 나간 보험금이 예상보다 많으면(손해율이 높으면) 보험료를 올린다. 실제 들어간 병원비를 주는 실손보험은 의료비 상승과 의료 이용량이 직접 반영되어 이 몫이 크다. 정해진 금액을 주는 진단비는 의료비가 올라도 보험금이 그대로라 이 몫이 상대적으로 작다.</li>
+    </ol>
+    <div class="formula">$$P_{\text{갱신 후}} = P_{\text{지금}} \times \underbrace{\frac{q_{x+n}}{q_x}}_{\text{나이}} \times \underbrace{(1+g)^{n}}_{\text{위험률 추세}} \times \underbrace{(1+\ell)}_{\text{손해율 조정}}$$<div class="where">\(n\): 갱신 주기(년), \(q\): 위험률, \(g\): 연 위험률·의료비 추세, \(\ell\): 손해율에 따른 조정 비율. 실제 계산은 보장 기간 전체를 다시 평준화하므로 이보다 복잡하지만, 인상을 이렇게 세 겹으로 나눠 볼 수 있다.</div></div>
+    <p>아래 폭포 그래프는 지금 보험료에서 시작해 세 가지 이유가 하나씩 얹히며 갱신 후 보험료가 되는 과정을 보여 준다. 20년 갱신 암보험과 1년 갱신 실손보험을 번갈아 본다.</p>
+
+    <div class="sim" id="sim-dc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>갱신 인상 분해: 나이 · 위험률 추세 · 손해율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dc-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="dc-prod"><button data-value="cancer" class="on">암 진단(20년 갱신)</button><button data-value="silson">실손(1년 갱신)</button></div>
+          <label class="ctrl"><span>지금 나이 <output id="dc-a-out"></output></span><input type="range" id="dc-a" min="20" max="65" step="1" value="26"></label>
+          <label class="ctrl"><span>위험률·의료비 추세(연) <output id="dc-g-out"></output></span><input type="range" id="dc-g" min="0" max="8" step="0.5" value="2"></label>
+          <label class="ctrl"><span>손해율에 따른 조정 <output id="dc-l-out"></output></span><input type="range" id="dc-l" min="-10" max="30" step="1" value="0"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">지금 → 갱신 후(월)</span><span class="v" id="dc-o-p">—</span></div>
+        <div class="stat"><span class="k">인상률</span><span class="v" id="dc-o-r">—</span></div>
+        <div class="stat"><span class="k">인상분 중 나이의 몫</span><span class="v" id="dc-o-a">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 암, 26세, 추세 2%, 조정 0%에서 시작한다. 20년 뒤 인상의 대부분은 나이 몫이다. ② 실손으로 바꾼다. 1년 갱신이라 나이 몫은 한 해 몇 %에 그친다. 추세와 손해율 조정을 올리면 인상의 대부분이 그쪽에서 나온다. 매년 갱신하는 실손 보험료의 인상률이 해마다 들쭉날쭉한 이유다. ③ 손해율 조정을 −10%로 내린다. 보험금이 예상보다 적게 나가면 보험료가 내려갈 수도 있다. (암은 INS.renewal의 계산을 나이·추세로 나눈 것, 실손은 INS.silsonPremium의 4세대 교육용 곡선. 실제 인상률은 회사·상품·연도마다 다르다.)</div>
+    </div>
+
+    <p>암보험처럼 갱신 주기가 긴 상품은 인상의 대부분이 <b>예정된 나이 몫</b>이라 가입할 때 어느 정도 예상할 수 있다. 실손처럼 매년 갱신하는 상품은 나이 몫이 작고 <b>예상하기 어려운 추세와 손해율 몫</b>이 크다. 같은 "갱신형"이라도 불확실성의 종류가 다르다. 실손보험의 갱신 구조와 세대별 차이는 <a href="health.html">8장</a>에서 자세히 본다.</p>
+
+    <div class="callout pro">
+      <strong>"갱신되면 얼마나 올라요?"에 답하는 법</strong>
+      고객이 가장 자주 묻는 질문인데, 정확한 답은 아무도 모른다. 그래서 흔한 실수는 둘 중 하나다. "별로 안 올라요"라고 안심시키거나, "엄청 올라요"라고 비갱신형으로 몰아가는 것. 둘 다 설명의무에 비춰 위험하다. 정직한 답은 세 문장이다. ① 설계서의 갱신 후 예시 보험료를 짚어 주고, 그것이 "현재 위험률이 그대로일 때"의 값이라고 말한다. ② 실제로는 나이 몫에 위험률·손해율 변화가 더해져 그보다 오를 수 있다고 말한다. ③ 은퇴 무렵 갱신 보험료를 낼 수 있을지 고객의 소득 계획과 함께 본다. 비갱신형을 권할 때도 마찬가지다. 비갱신형의 수수료가 대개 더 크다는 사실은 고객이 묻지 않아도 설계사 스스로 의식하고 있어야 하는 이해상충이다(<a href="commission.html">15장</a>).
+    </div>
+  </section>
+
+  <section id="no-refund">
+    <h2>무해지·저해지형: 떠나는 사람이 남는 사람의 보험료를 낸다</h2>
+    <p>비갱신형에는 같은 보장이면서 보험료가 눈에 띄게 싼(이 책의 모델로 예정해지율 4%면 암 진단비 약 28%, 종신 약 35%) <span class="term">무해지환급형</span><span class="en">(No-surrender-value)</span>과 <span class="term">저해지환급형</span><span class="en">(Low-surrender-value)</span>이 있다. 무해지형은 납입기간 중 해지하면 해지환급금이 없고, 저해지형은 표준형의 일부(예: 50%)만 준다. 납입을 끝까지 마치면 표준형과 같은 환급금이 생기는 구조가 많다.</p>
+    <p>보장이 같은데 어떻게 싸질 수 있을까. 비갱신형의 보험료에는 미래 보장을 위한 준비금이 들어 있다는 것을 앞에서 봤다. 표준형에서는 중간에 해지하는 사람이 자기 몫의 준비금(에서 판매 비용을 뺀 금액)을 해지환급금으로 가져간다. 무해지형에서는 해지하는 사람이 그 몫을 놓고 떠난다. 보험사는 처음부터 "몇 %가 중간에 떠날 것"이라는 <span class="term">예정해지율</span>을 가격에 넣고, 떠나는 사람이 남긴 준비금만큼 남는 사람의 보험료를 깎아 준다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 290" role="img" aria-label="무해지형에서 해지자가 남긴 준비금이 유지자의 보험료 할인으로 넘어가는 구조">
+        <defs><marker id="c7a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="20" width="130" height="80" rx="8" class="f-acc-soft"/>
+        <text x="75" y="48" text-anchor="middle" class="lbl-acc">가입자 100명</text>
+        <text x="75" y="70" text-anchor="middle" class="lbl-dim">모두 같은 보험료</text>
+        <text x="75" y="88" text-anchor="middle" class="lbl-dim">준비금이 쌓인다</text>
+        <rect x="170" y="20" width="120" height="80" rx="8" class="f-bad-soft"/>
+        <text x="230" y="48" text-anchor="middle" class="lbl-bad">중도 해지자</text>
+        <text x="230" y="70" text-anchor="middle" class="lbl-dim">환급금 0원</text>
+        <text x="230" y="88" text-anchor="middle" class="lbl-dim">준비금을 남긴다</text>
+        <rect x="310" y="20" width="120" height="80" rx="8" class="f-ok-soft"/>
+        <text x="370" y="48" text-anchor="middle" class="lbl-b">끝까지 유지자</text>
+        <text x="370" y="70" text-anchor="middle" class="lbl-dim">보험료 할인</text>
+        <text x="370" y="88" text-anchor="middle" class="lbl-dim">완납 후 환급</text>
+        <path d="M142 60 H166" class="s-line" marker-end="url(#c7a2)"/>
+        <path d="M230 102 V140 H370 V104" class="s-ok" marker-end="url(#c7a2)"/>
+        <text x="300" y="132" text-anchor="middle" class="lbl">남긴 몫이 넘어간다</text>
+        <text x="10" y="180" class="lbl-b">할인 폭은 예정해지율이 정한다.</text>
+        <text x="10" y="204" class="lbl">예상보다 많이 떠나면 보험사는 이익,</text>
+        <text x="10" y="226" class="lbl">예상보다 적게 떠나면 보험사가 손해를 본다.</text>
+        <text x="10" y="256" class="lbl-dim">개인에게는: 끝까지 유지하면 할인, 중간에 떠나면</text>
+        <text x="10" y="276" class="lbl-dim">남의 할인을 대신 내 준 셈이 된다.</text>
+      </svg>
+      <figcaption><b>그림 2. 무해지형의 돈의 흐름.</b> 무해지형은 가입자끼리 해지 위험을 나누는 장치다. 끝까지 유지하는 사람은 중도 해지자가 남긴 준비금 덕분에 싸게 보장을 받는다. 그래서 무해지형의 할인은 "중간에 해지하지 않을 자신"에 대한 값이다.</figcaption>
+    </figure>
+
+    <p>아래 시뮬레이터 위쪽은 같은 무해지형에 가입한 100명이다. 해마다 예정해지율만큼 사람들이 떠나고(회색), 그들이 남긴 환급금이 쌓인다. 아래쪽 그래프에서는 세로선을 끌어 <b>내가</b> 해지하는 해를 고른다. 표준형이었다면 돌려받았을 돈과 무해지형에서 받는 돈(0원)이 나란히 나온다.</p>
+
+    <div class="sim" id="sim-nh">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>예정해지율과 무해지 할인, 그리고 9년째 해지의 대가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nh-cv"></canvas><span class="hint" style="top:8px;bottom:auto">세로선을 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>예정해지율(연) <output id="nh-l-out"></output></span><input type="range" id="nh-l" min="0" max="10" step="0.5" value="4"></label>
+          <div class="seg" id="nh-prod"><button data-value="cancer" class="on">암 3,000만(20년납)</button><button data-value="whole">종신 1억(20년납)</button></div>
+          <div class="seg" id="nh-ref"><button data-value="0" class="on">무해지</button><button data-value="0.5">저해지 50%</button></div>
+          <div class="btn-row"><button class="btn" id="nh-pause">일시정지</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">표준형 / 무해지(월)</span><span class="v" id="nh-o-p">—</span></div>
+        <div class="stat"><span class="k">할인율</span><span class="v" id="nh-o-d">—</span></div>
+        <div class="stat"><span class="k">20년 뒤 남는 비율</span><span class="v" id="nh-o-s">—</span></div>
+        <div class="stat"><span class="k">고른 해에 해지하면(표준 / 무해지)</span><span class="v" id="nh-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 예정해지율 4%에서 할인율을 본다. 암보험은 약 28% 싸다. 100명 중 20년을 채우는 사람은 절반이 안 된다. ② 세로선을 9년째에 둔다. 표준형이었다면 수백만원을 돌려받았을 텐데 무해지형은 0원이다. 그동안 낸 보험료는 고스란히 비용이 된다. ③ 예정해지율을 0%로 내린다. 할인이 사라진다. 아무도 떠나지 않으면 넘겨받을 몫도 없다. 10%로 올리면 할인이 커지지만 그만큼 많은 사람이 손해를 보는 구조다. (32세 남성, 이 장의 비갱신형 가정(건당 비용·안전할증 포함)을 쓴 INS.price 교육용 모델. 해지율은 납입기간 내내 일정하다고 가정했다.)</div>
+    </div>
+
+    <p>무해지형은 나쁜 상품이 아니다. 끝까지 유지할 사람에게는 같은 보장을 확실히 싸게 사는 방법이다. 문제는 대부분의 사람이 가입할 때 자기가 끝까지 유지할 확률을 과대평가한다는 데 있다. 20년 동안 실직, 이직, 결혼, 출산, 이사가 한 번도 없을 사람은 드물다. 그래서 무해지형을 고를 때는 "이 보험료를 20년 동안 가장 형편이 어려운 해에도 낼 수 있는가"를 먼저 묻는다. 보험료 부담 때문에 무해지형을 고르는 사람이 오히려 중도 해지 위험이 큰 사람일 수 있다는 점이 이 상품의 역설이다.</p>
+    <p>무해지형에는 보험사 쪽의 위험도 있다. 실제 해지율이 예정보다 낮으면 남는 사람에게 약속한 할인을 메울 돈이 모자란다. 이런 가정이 지나치게 낙관적으로 쓰이지 않도록 금융당국이 해지율 가정과 상품 구조를 관리해 왔다. 저해지·무해지 상품의 규칙은 몇 차례 바뀌었고 앞으로도 바뀔 수 있다.</p>
+
+    <div class="callout buyer">
+      <strong>무해지·저해지형 설계서에서 확인할 것</strong>
+      <ul>
+        <li>해지환급금 예시표에서 납입기간 중 칸이 0원(무해지) 또는 표준형의 몇 %(저해지)인지, 납입 완료 직후 금액이 얼마인지.</li>
+        <li>같은 보장의 표준형 보험료. 차이가 곧 "끝까지 유지하겠다"는 약속의 값이다.</li>
+        <li>납입면제 조건. 큰 병에 걸리면 남은 보험료가 면제되어 해지할 일이 줄어든다.</li>
+        <li>감액(가입금액 줄이기)이나 특약 해지를 할 때 환급금이 어떻게 처리되는지. 무해지형은 일부 감액해도 돌려받는 돈이 없을 수 있다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="pay">
+    <h2>납입기간 고르기: 10년납, 20년납, 30년납, 전기납</h2>
+    <p>비갱신형은 보장 기간과 별개로 보험료를 몇 년에 나눠 낼지 고를 수 있다. 100세까지 보장받는 같은 계약을 10년에 몰아 낼 수도, 100세까지 계속 낼 수도 있다. 보장 기간 내내 내는 방식을 <span class="term">전기납</span>이라고 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 250" role="img" aria-label="같은 100세 보장에서 납입기간에 따른 보험료 납입 구간 비교">
+        <text x="10" y="22" class="lbl-dim">32세 가입, 100세 만기</text>
+        <text x="10" y="56" class="lbl">10년납</text>
+        <rect x="80" y="42" width="45" height="20" class="f-bad-soft"/>
+        <rect x="125" y="42" width="305" height="20" class="f-ok-soft"/>
+        <text x="10" y="96" class="lbl">20년납</text>
+        <rect x="80" y="82" width="90" height="20" class="f-bad-soft"/>
+        <rect x="170" y="82" width="260" height="20" class="f-ok-soft"/>
+        <text x="10" y="136" class="lbl">30년납</text>
+        <rect x="80" y="122" width="135" height="20" class="f-bad-soft"/>
+        <rect x="215" y="122" width="215" height="20" class="f-ok-soft"/>
+        <text x="10" y="176" class="lbl">전기납</text>
+        <rect x="80" y="162" width="350" height="20" class="f-bad-soft"/>
+        <text x="80" y="204" class="t-mono">32</text>
+        <text x="125" y="204" text-anchor="middle" class="t-mono">42</text>
+        <text x="170" y="204" text-anchor="middle" class="t-mono">52</text>
+        <text x="215" y="204" text-anchor="middle" class="t-mono">62</text>
+        <text x="430" y="204" text-anchor="end" class="t-mono">100세</text>
+        <text x="80" y="236" class="lbl-bad">보험료 납입</text>
+        <text x="200" y="236" class="lbl">보장만 남는 기간(완납 후)</text>
+      </svg>
+      <figcaption><b>그림 3. 납입기간과 보장기간.</b> 빨간 부분이 보험료를 내는 기간, 초록 부분이 보험료 없이 보장만 남는 기간이다. 납입기간이 짧을수록 매달 많이 내지만 일찍 끝난다. 은퇴 뒤에 보험료를 내지 않으려면 은퇴 전에 납입이 끝나는 설계를 고른다.</figcaption>
+    </figure>
+
+    <p>납입기간이 짧으면 총액이 적다. 이것만 보면 10년납이 가장 싸 보인다. 하지만 오늘의 1만원과 30년 뒤의 1만원은 가치가 다르고, 30년 뒤에 내가 살아 있지 않거나 납입면제를 받으면 그 보험료는 내지 않는다. 그래서 명목 총액과 함께 <b>기대 현재가치</b>(이자로 할인하고 살아서 낼 확률을 곱한 합)로 비교해야 공정하다. 아래에서 할인율을 바꾸고, 납입면제를 켜고 끄며 네 가지 납입기간을 비교한다.</p>
+
+    <div class="sim" id="sim-py">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>납입기간별 총액 vs 기대 현재가치</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="py-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="py-sel"><button data-value="10">10년납</button><button data-value="20" class="on">20년납</button><button data-value="30">30년납</button><button data-value="68">전기납</button></div>
+          <label class="ctrl"><span>내 돈의 할인율(연) <output id="py-r-out"></output></span><input type="range" id="py-r" min="0" max="6" step="0.25" value="2.5"></label>
+          <label class="check"><input type="checkbox" id="py-w" checked> 납입면제 반영(암·뇌혈관·허혈성심장 진단 시)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>명목 총액</span><span><i style="background:var(--accent)"></i>기대 현재가치</span><span><i style="background:var(--ok)"></i>납입면제로 줄어드는 몫</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보험료</span><span class="v" id="py-o-m">—</span></div>
+        <div class="stat"><span class="k">명목 총액</span><span class="v" id="py-o-t">—</span></div>
+        <div class="stat"><span class="k">기대 현재가치</span><span class="v" id="py-o-v">—</span></div>
+        <div class="stat"><span class="k">납입면제의 기대가치</span><span class="v" id="py-o-w">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 할인율 2.5%에서 네 막대를 비교한다. 명목 총액은 전기납이 10년납의 두 배가 넘지만, 기대 현재가치의 차이는 훨씬 작다. ② 할인율을 0%로 내린다. 현재가치가 명목에 가까워져 짧은 납입이 유리해 보인다. 6%로 올리면 긴 납입의 현재가치가 크게 줄어든다. 내 돈을 굴려 얻을 수 있는 수익률이 높을수록 천천히 내는 쪽이 유리하다. ③ 납입면제를 켠 채 전기납을 고른다. 납입기간이 길수록 면제받을 기회도 커서 초록 몫이 커진다. (암 진단 3,000만원 100세 만기, 32세 남성, 이 장의 비갱신형 가정. 생존은 교육용 생명표, 면제 사유는 교육용 발생률로 계산했다.)</div>
+    </div>
+
+    <p>막대를 보면 납입기간 선택은 "총액이 적은 쪽"의 문제가 아니라 <b>현금 흐름과 위험의 선택</b>이다. 짧게 내면 일찍 끝나고 은퇴 뒤 부담이 없지만, 매달 부담이 크고 중간에 해지할 때 잃는 돈도 크다. 길게 내면 매달 부담이 작고 면제·사망으로 덜 낼 기회도 크지만, 은퇴 뒤까지 보험료가 따라온다. 흔한 기준은 <b>은퇴 전에 납입이 끝나도록</b> 고르는 것이다. 32세라면 20년납(52세 완납)이나 25~30년납이 여기에 든다.</p>
+    <p><span class="term">납입면제</span>는 이 선택에서 생각보다 무게가 크다. 이 책의 모델로 32세 남성이 20년 안에 암·뇌혈관질환·허혈성심장질환 중 하나로 진단받을 확률은 약 18%다. 그 일이 생기면 남은 보험료를 내지 않아도 보장이 유지된다. 큰 병에 걸린 뒤 소득이 끊긴 상황에서 보험료 부담이 사라지니, 보험이 가장 필요할 때 계약을 지켜 주는 장치다. 납입면제 사유의 범위(일반암만인지, 뇌·심장의 범위는 어디까지인지)는 상품마다 다르므로 설계서와 약관에서 확인한다(<a href="contract.html">6장</a>).</p>
+
+    <h3>단기납과 완납 이후</h3>
+    <p>최근에는 보험료를 5년, 7년처럼 아주 짧게 내는 <span class="term">단기납</span> 상품도 있다. 특히 종신보험에서 "납입 완료 뒤 일정 시점에 낸 돈보다 많이 돌려준다"는 환급률을 앞세워 저축처럼 팔리는 경우가 있다. 단기납은 매달 부담이 매우 크고, 납입 중 해지하면 손실이 크며, 환급률은 특정 시점까지 유지해야만 의미가 있다. 이 구조는 <a href="life.html">10장</a>에서 따로 해부한다. 완납 이후에는 보험료 없이 보장이 이어지고, 표준형이면 해지환급금이 계속 쌓인다. 완납한 계약은 보험계약대출이나 감액완납 같은 선택지가 많아진다는 점도 기억해 둔다.</p>
+  </section>
+
+  <section id="who">
+    <h2>갱신형이 맞는 사람, 비갱신형이 맞는 사람</h2>
+    <p>지금까지 본 시뮬레이터를 한 장의 표로 모으면 이렇다. 어느 쪽도 모든 사람에게 정답이 아니다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th></th><th>갱신형이 맞는 경우</th><th>비갱신형(표준형)이 맞는 경우</th><th>무해지·저해지형이 맞는 경우</th></tr></thead>
+      <tbody>
+        <tr><td>보장 필요 기간</td><td>정해져 있다(예: 아이가 자랄 때까지, 대출 상환까지)</td><td>평생 또는 노년까지</td><td>평생 또는 노년까지</td></tr>
+        <tr><td>지금 예산</td><td>빠듯하다. 지금 큰 보장이 필요하다</td><td>여유가 있다</td><td>여유는 보통, 장기 유지 확신이 크다</td></tr>
+        <tr><td>중도 해지 가능성</td><td>높아도 손실이 작다</td><td>중간 정도. 환급금이 일부 남는다</td><td>낮아야 한다. 해지하면 0원</td></tr>
+        <tr><td>노년의 소득</td><td>갱신 보험료를 감당할 소득이 있다</td><td>은퇴 전 완납으로 대비</td><td>은퇴 전 완납으로 대비</td></tr>
+        <tr><td>위험</td><td>갱신 보험료가 예상보다 오를 위험</td><td>초기에 비싸게 낸 몫이 해지 시 손실</td><td>해지 시 전액 손실, 상품 규칙 변경</td></tr>
+        <tr><td>대표 예</td><td>실손, 정기보험의 일부, 젊을 때 보장 확대</td><td>노년까지의 진단비</td><td>노년까지의 진단비를 싸게</td></tr>
+      </tbody>
+    </table></div>
+    <p>실손보험처럼 상품 구조상 갱신형만 있는 보장도 있다. 정기보험은 보장 기간을 처음부터 정하는 비갱신형(예: 60세 만기)으로도, 10년 갱신형으로도 살 수 있다. 진단비는 "언제까지 필요한가"가 갈림길이다. 노년의 암 진단비가 꼭 필요하다고 판단하면 비갱신형 쪽이, 일하는 동안의 소득 공백만 메우면 된다고 판단하면 갱신형이나 기간을 정한 비갱신형 쪽이 맞는다.</p>
+
+    <div class="callout pro">
+      <strong>현장에서 갱신형·비갱신형을 함께 쓰는 법</strong>
+      실무에서는 하나만 고르기보다 섞는 경우가 많다. 평생 필요한 핵심 진단비 일부는 비갱신형으로 은퇴 전 완납되게 깔고, 아이가 어릴 때처럼 일정 기간 크게 필요한 보장은 갱신형이나 기간을 정한 정기형으로 얹는다. 고객에게는 그림 1을 그려 주며 "바닥은 고정하고, 지붕은 필요할 때만"이라고 설명하면 이해가 빠르다. 기존 갱신형 계약을 비갱신형으로 바꾸자는 제안은 신중해야 한다. 새 계약은 면책·감액 기간을 처음부터 다시 적용받고(<a href="contract.html">6장</a>), 그사이 생긴 병력 때문에 고지에서 불리해질 수 있으며(<a href="asymmetry.html">4장</a>), 기존 계약에 쌓인 것이 거의 없더라도 새 계약의 초기 사업비를 다시 낸다. 교체가 고객에게 유리한 경우에도 이 세 가지를 비교안내 확인서에 숫자로 남긴다.
+    </div>
+
+    <div class="callout warn">
+      <strong>숫자와 상품 규칙은 해마다 바뀐다</strong>
+      이 장의 보험료, 갱신 계단, 교차 나이, 무해지 할인율은 이 책의 교육용 모델(INS.renewal, INS.price)로 계산한 값이며 특정 회사나 상품과 무관하다. 실제 갱신 보험료는 갱신 시점의 위험률과 손해율에 따라 정해지고, 무해지·저해지 상품의 해지율 가정과 구조는 감독 기준 변화에 따라 바뀌어 왔다. 2026년 기준으로도 상품마다 납입기간 선택지와 납입면제 사유가 다르다. 실제 가입 전에는 설계서의 갱신 후 예시 보험료와 해지환급금 예시표, 약관의 납입면제 조항을 직접 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 갱신형 암보험의 미래</h2>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 7장</span></div>
+      <h4>갱신형 암보험, 46세에 몇 배가 될까</h4>
+      <p>지우의 암보험은 2020년 26세에 든 20년 갱신형이다. 지금 월 3.2만원(특약 포함)을 낸다. 도윤은 이 계약의 암 진단 3,000만원 부분만 떼어 이 책의 교육용 모델로 계단을 그렸다. 26세 첫 보험료는 약 9,400원, 첫 갱신인 46세에는 약 5.1만원으로 약 5.5배가 된다. 그 뒤 66세에 약 15.6만원(약 16.6배), 86세에 약 25.3만원이다. 100세까지 유지하면 갱신은 46·66·86세 세 번이다. 특약도 같은 비율로 오른다고 단순하게 가정하면 지금의 3.2만원은 46세에 약 17만원이 된다. 지우가 말했다. "지금 3만원이라 싸다고 생각했는데, 마흔여섯에 17만원이면 그때 아이 학원비랑 겹치겠네."</p>
+      <p>도윤은 비교안을 하나 더 보여 줬다. 지금 32세에 같은 암 진단 3,000만원을 비갱신형(100세 만기, 20년납)으로 새로 들면 월 약 5만원(50,400원)이다. 지금부터 두 길의 누적 보험료를 비교하면, 갱신형을 유지하는 쪽이 52세까지 약 528만원, 비갱신형이 약 1,210만원으로 갱신형이 한참 덜 낸다. 하지만 갱신 계단이 쌓이면서 64세 무렵 역전되고, 80세에는 갱신형 누적이 약 4,014만원으로 비갱신형의 세 배를 넘는다. 모델상 지우가 64세까지 살아 있을 확률은 약 94%다. 민서가 물었다. "그럼 바꾸는 게 무조건 이득이야?" 도윤은 고개를 저었다. 새 계약은 면책 90일과 첫해 50% 감액을 처음부터 다시 적용받고, 지금까지 낸 6년치 갱신형 보험료는 돌아오지 않는다. 그리고 진단비가 3,000만원이 맞는 금액인지부터 아직 정하지 않았다.</p>
+      <p>마지막으로 도윤은 같은 비갱신형의 무해지형 설계서를 꺼냈다. 예정해지율 4%를 가정하면 월 약 3.6만원(36,154원)으로 표준형보다 약 28% 싸다. 도윤은 숫자 하나를 먼저 짚었다. "대신 20년 납입 중에 해지하면 돌려받는 돈이 0원이야. 9년째에 해지하면 표준형은 약 432만원을 돌려주지만 무해지형은 그동안 낸 약 390만원이 그냥 비용이 돼." 그리고 덧붙였다. "솔직히 말하면 새 계약을 하면 나는 수수료를 받고, 지금 계약을 그대로 두면 아무것도 없어. 그러니까 내 말보다 이 숫자를 보고 정해." 지우와 민서는 2027년 아이 계획을 떠올리며, 20년 동안 매달 낼 수 있는 보험료가 얼마인지부터 적어 보기로 했다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>지금 갱신형(암 부분)은 46세에 약 5.5배. 비갱신형 전환 시 교차 나이 약 64세. 무해지형은 약 28% 싸지만 납입 중 해지 시 0원. 당장 교체하지 않고 비교 기준만 확정.</div><div><b>아직 남은 문제</b>2세대 실손도 매년 갱신된다. 실손을 유지할지 4세대로 바꿀지. 진단비 3,000만원이 적정한지.</div><div><b>다음 단계</b><a href="health.html">8장</a>에서 지우의 2세대 실손과 4세대 전환을 보험료와 자기부담으로 비교한다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>자연보험료는 그해의 위험만큼, 평준보험료는 기간 전체의 위험을 고르게 나눈 값이다. 갱신형은 기간을 토막 내어 토막마다 다시 평준화하므로 처음에 싸고 나중에 오른다.</li>
+      <li>갱신 계단은 위험이 나이에 따라 빠르게 오르는 보장일수록, 가입 나이가 많을수록 가파르다. 갱신 주기가 짧을수록 첫 보험료는 싸 보이지만 계단은 촘촘해진다.</li>
+      <li>갱신형과 비갱신형의 누적 보험료는 교차 나이에서 역전된다(이 책의 모델로 32세 암 20년 갱신이면 63세 무렵). 그 전에 해지·사망·필요 소멸로 계약이 끝나면 갱신형이 덜 낸다.</li>
+      <li>갱신 인상은 나이, 위험률 추세, 손해율·의료비 세 겹이다. 긴 주기의 진단비는 나이 몫이, 매년 갱신하는 실손은 추세·손해율 몫이 크다.</li>
+      <li>무해지·저해지형은 중도 해지자가 남긴 준비금으로 유지자의 보험료를 깎아 주는 구조다. 할인 폭은 예정해지율이 정하고, 납입 중 해지하면 낸 보험료가 비용이 된다.</li>
+      <li>납입기간은 총액이 아니라 기대 현재가치와 현금 흐름으로 비교한다. 은퇴 전 완납이 흔한 기준이고, 납입면제는 보험이 가장 필요할 때 계약을 지켜 주는 장치다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>같은 암 진단비인데 20년 갱신형이 비갱신형보다 처음 보험료가 훨씬 싼 가장 근본적인 이유는?</p>
+        <div class="opts">
+          <button class="opt">갱신형은 보장 범위가 더 좁기 때문이다</button>
+          <button class="opt" data-correct>노년의 높은 위험에 대한 몫을 지금 내지 않고 갱신 때 내기 때문이다</button>
+          <button class="opt">갱신형은 설계사 수수료가 없기 때문이다</button>
+          <button class="opt">갱신형은 예정이율이 더 높기 때문이다</button>
+        </div>
+        <div class="quiz-exp">비갱신형은 보장 기간 전체의 위험을 평준화해 젊을 때 노년의 몫까지 미리 낸다. 갱신형은 지금 토막의 위험만 내고, 나머지는 갱신 때마다 그 나이의 보험료로 낸다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>갱신형과 비갱신형의 누적 보험료가 64세에 역전되는 계약이 있다. 갱신형이 더 적게 내는 사람은?</p>
+        <div class="opts">
+          <button class="opt">90세까지 계약을 유지하는 사람</button>
+          <button class="opt">64세 이후에 보장이 가장 많이 필요한 사람</button>
+          <button class="opt">갱신 때 위험률이 크게 오르는 경우의 모든 사람</button>
+          <button class="opt" data-correct>50세 무렵 보장이 필요 없어져 해지하는 사람</button>
+        </div>
+        <div class="quiz-exp">교차 나이 전에 계약이 끝나면(해지·사망·필요 소멸) 처음 몇 년 덜 낸 갱신형이 누적으로 적게 낸다. 교차 나이 뒤까지 유지하면 비갱신형이 적게 낸다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>무해지환급형 보험료가 표준형보다 싼 이유로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>납입 중 해지하는 사람이 남기는 준비금을 예정해지율로 미리 반영해 유지하는 사람의 보험료를 깎아 주기 때문이다</button>
+          <button class="opt">보험금 지급 조건이 표준형보다 까다롭기 때문이다</button>
+          <button class="opt">보험사가 사업비를 받지 않기 때문이다</button>
+          <button class="opt">납입이 끝난 뒤에도 해지환급금이 영원히 없기 때문이다</button>
+        </div>
+        <div class="quiz-exp">무해지형의 할인은 해지자의 몫이 유지자에게 넘어가는 구조에서 나온다. 보장 조건은 같은 경우가 많고, 납입 완료 뒤에는 표준형과 같은 환급금이 생기는 구조가 많다. 예정해지율이 0이면 할인도 사라진다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>매년 갱신하는 실손보험의 보험료 인상률이 해마다 크게 달라지는 주된 이유는?</p>
+        <div class="opts">
+          <button class="opt">가입자의 나이가 해마다 다르게 오르기 때문이다</button>
+          <button class="opt">갱신할 때마다 면책 기간이 새로 적용되기 때문이다</button>
+          <button class="opt" data-correct>1년 갱신이라 나이 몫은 작고, 의료비·이용량과 손해율에 따른 조정 몫이 크기 때문이다</button>
+          <button class="opt">실손보험은 무해지형이라 해지율에 따라 바뀌기 때문이다</button>
+        </div>
+        <div class="quiz-exp">1년 사이 나이 증가에 따른 인상은 몇 % 수준이다. 실제로 쓴 병원비를 주는 실손은 의료비 상승과 이용량, 그에 따른 손해율이 해마다 달라 조정 폭이 들쭉날쭉하다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function alpha(ctx, a, fn) { ctx.save(); ctx.globalAlpha = a; fn(); ctx.restore(); }
+  const inv = (c, px) => { const b = c.box; return c.x0 + ((px - b.x) / b.w) * (c.x1 - c.x0); };
+  const memo = (fn) => { const m = {}; return (...a) => { const k = a.join("|"); return k in m ? m[k] : (m[k] = fn(...a)); }; };
+
+  // INS.renewal과 같은 가정으로 계산한 비갱신형 월 보험료(건당 연 3만원, 신계약비 0.9, 유지비 8%, 안전할증 10%)
+  const level = memo(function (kind, age, pay, refund, lapse) {
+    const type = kind === "death" ? "term" : kind === "whole" ? "whole" : kind;
+    const until = kind === "death" ? 80 : 100;
+    const o = { type, age, sex: "m", S: kind === "cancer" ? 3e7 : 1e8, pay, fee: 30000, alpha: 0.9, beta: 0.08 };
+    if (type !== "whole") o.term = until - age;
+    if (refund < 1) { o.refund = refund; o.lapse = lapse; }
+    const p = INS.price(o);
+    return { monthly: p.monthly * 1.1, rows: p.rows.map((r) => ({ t: r.t, paid: r.paid * 1.1, sv: r.surrender * 1.1, persist: r.persist })) };
+  });
+  const renewal = memo((kind, age, period, trend) => INS.renewal({ kind, age, sex: "m", S: kind === "cancer" ? 3e7 : 1e8, period: Number(period), until: kind === "death" ? 80 : 100, trend }));
+
+  /* ---------------------------------------------------------- 1. 자연 vs 평준 (애니메이션) */
+  (function () {
+    let cur = 0, playing = true;
+    const redraw = () => cv && cv.redraw();
+    const kind = IB.seg("nl-kind", () => { cur = 0; redraw(); });
+    const Ar = IB.range("nl-a", (v) => v + "세", () => { cur = 0; redraw(); });
+    const model = memo(function (k, age) {
+      const S = k === "cancer" ? 3e7 : 1e8, until = k === "cancer" ? 100 : 80, n = until - age, v = 1 / 1.025;
+      const sv = INS.survival(age, n, "m");
+      const nat = []; let num = 0, den = 0;
+      for (let j = 0; j < n; j++) { const np = INS.natural(k, age + j, S, "m", 0.25); nat.push(np); num += Math.pow(v, j) * sv[j] * np; den += Math.pow(v, j) * sv[j]; }
+      const lv = num / den;
+      let cross = null; for (let j = 0; j < n; j++) if (cross == null && nat[j] > lv) cross = age + j;
+      return { nat, lv, n, until, cross };
+    });
+    let cv = null;
+    cv = IB.canvas("#nl-cv", (ctx, w, h) => {
+      const P = IB.palette(), k = kind(), age = Ar(), m = model(k, age);
+      const ymax = Math.max(...m.nat, m.lv) * 1.08;
+      const c = IB.chart(ctx, { x: 56, y: 16, w: w - 72, h: h - 60 }, { x: [age, m.until], y: [0, ymax], xFmt: (v) => v + "세", yFmt: IB.wonAxis,
+        xTicks: w < 480 ? undefined : undefined });
+      const upto = Math.min(m.n, Math.floor(cur));
+      for (let j = 0; j < upto; j++) {
+        const a = age + j, d = m.lv - m.nat[j];
+        ctx.fillStyle = d >= 0 ? P.ok : P.bad;
+        alpha(ctx, 0.35, () => { const y0 = c.Y(m.lv), y1 = c.Y(m.nat[j]); ctx.fillRect(c.X(a), Math.min(y0, y1), Math.max(1, c.X(a + 1) - c.X(a)), Math.abs(y1 - y0)); });
+      }
+      // 자연보험료 계단
+      ctx.strokeStyle = P.dim; ctx.lineWidth = 2; ctx.beginPath();
+      m.nat.forEach((np, j) => { const x0 = c.X(age + j), x1 = c.X(age + j + 1), y = c.Y(np); if (!j) ctx.moveTo(x0, y); else ctx.lineTo(x0, y); ctx.lineTo(x1, y); });
+      ctx.stroke();
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.moveTo(c.X(age), c.Y(m.lv)); ctx.lineTo(c.X(m.until), c.Y(m.lv)); ctx.stroke();
+      if (m.cross != null) { vline(ctx, c.X(m.cross), c.box.y, c.box.y + c.box.h, P.faint, [3, 3], 1); }
+      const ca = Math.min(m.until - 1, age + Math.floor(Math.min(cur, m.n - 1)));
+      if (cur > 0) { vline(ctx, c.X(ca + 0.5), c.box.y, c.box.y + c.box.h, P.text, [], 1.4); }
+      T(ctx, "평준 " + IB.wonAxis(m.lv), c.box.x + 6, c.Y(m.lv) - 6, { size: 11.5, color: P.accent, weight: 600 });
+      const j = ca - age;
+      IB.stat("nl-o-a", ca + "<small>세</small>");
+      IB.stat("nl-o-p", IB.wonAxis(m.nat[j]) + " / " + IB.wonAxis(m.lv));
+      IB.stat("nl-o-x", m.cross != null ? m.cross + "<small>세</small>" : "—");
+      IB.stat("nl-o-r", (m.lv / m.nat[0]).toFixed(1) + "<small>배</small>");
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 400 });
+    const btn = document.getElementById("nl-play");
+    const anim = IB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      const m = model(kind(), Ar());
+      cur += dt * Math.max(8, m.n / 6);
+      if (cur >= m.n) { cur = m.n; playing = false; btn.textContent = "재생"; }
+      cv.redraw();
+    });
+    btn.addEventListener("click", () => { if (!playing && cur >= model(kind(), Ar()).n) cur = 0; playing = !playing; btn.textContent = playing ? "멈춤" : "재생"; anim.start(); });
+    document.getElementById("nl-end").addEventListener("click", () => { playing = false; btn.textContent = "재생"; cur = model(kind(), Ar()).n; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 2. 갱신 계단 */
+  (function () {
+    let G = null;
+    const redraw = () => cv && cv.redraw();
+    const kind = IB.seg("st-kind", redraw);
+    const per = IB.seg("st-per", redraw);
+    const Ar = IB.range("st-a", (v) => v + "세", redraw);
+    let cv = null;
+    cv = IB.canvas("#st-cv", (ctx, w, h) => {
+      const P = IB.palette(), k = kind(), age = Ar(), r = renewal(k, age, per(), 0.02);
+      const until = k === "death" ? 80 : 100, lv = r.level.monthly, lp = r.level.pay;
+      const top = Math.max(...r.steps.map((s) => s.monthly), lv) * 1.12;
+      const box = { x: 58, y: 34, w: w - 74, h: h - 82 };
+      const c = IB.chart(ctx, box, { x: [20, until], y: [0, top], xFmt: (v) => v + "세", yFmt: IB.wonAxis, xTicks: w < 480 ? [20, 40, 60, 80, 100].filter((v) => v <= until) : undefined });
+      c.x0 = 20; c.x1 = until; G = c;
+      // 비갱신 평준선
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.moveTo(c.X(age), c.Y(lv)); ctx.lineTo(c.X(age + lp), c.Y(lv)); ctx.stroke();
+      ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(c.X(age + lp), c.Y(0) - 1); ctx.lineTo(c.X(until), c.Y(0) - 1); ctx.stroke(); ctx.setLineDash([]);
+      // 갱신 계단
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2.6; ctx.beginPath();
+      r.steps.forEach((s, i) => { const y = c.Y(s.monthly); if (!i) ctx.moveTo(c.X(s.age), y); else ctx.lineTo(c.X(s.age), y); ctx.lineTo(c.X(s.age + s.years), y); });
+      ctx.stroke();
+      r.steps.forEach((s, i) => {
+        if (i === 0 || c.X(s.age + s.years) - c.X(s.age) < 28) return;
+        T(ctx, "×" + (s.monthly / r.steps[0].monthly).toFixed(1), c.X(s.age) + 3, c.Y(s.monthly) - 5, { size: 11, mono: true, color: P.bad });
+      });
+      T(ctx, "비갱신 " + IB.wonAxis(lv), c.X(age) + 4, c.Y(lv) - 6, { size: 11, color: P.accent, weight: 600 });
+      knob(ctx, c.X(age), c.box.y + c.box.h, P, P.accent, 7);
+      const last = r.steps[r.steps.length - 1];
+      IB.stat("st-o-f", won(r.steps[0].monthly));
+      IB.stat("st-o-l", won(lv));
+      IB.stat("st-o-m", won(last.monthly) + " <small>(" + last.age + "세, ×" + (last.monthly / r.steps[0].monthly).toFixed(1) + ")</small>");
+      IB.stat("st-o-n", (r.steps.length - 1) + "<small>번</small>");
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; Ar.set(IB.clamp(Math.round(inv(G, x)), 20, 60)); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 누적 보험료 교차 */
+  (function () {
+    let endAge = 50, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Ar = IB.range("cx-a", (v) => v + "세", (v) => { if (endAge <= v) endAge = v + 5; redraw(); });
+    const per = IB.seg("cx-per", redraw);
+    const Tr = IB.range("cx-t", (v) => v + "%", redraw);
+    let cv = null;
+    cv = IB.canvas("#cx-cv", (ctx, w, h) => {
+      const P = IB.palette(), age = Ar(), r = renewal("cancer", age, per(), Tr() / 100);
+      const lv = r.level.monthly, lp = r.level.pay;
+      const cumR = [[age, 0]], cumL = [[age, 0]];
+      let a1 = 0, a2 = 0;
+      for (let a = age; a < 100; a++) {
+        const st = r.steps.filter((s) => s.age <= a).pop();
+        a1 += st.monthly * 12; if (a - age < lp) a2 += lv * 12;
+        cumR.push([a + 1, a1]); cumL.push([a + 1, a2]);
+      }
+      const top = Math.max(a1, a2) * 1.05;
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 74, h: h - 60 }, { x: [age, 100], y: [0, top], xFmt: (v) => v + "세", yFmt: IB.wonAxis,
+        series: [{ data: cumL, color: P.accent, width: 2.6 }, { data: cumR, color: P.bad, width: 2.6 }] });
+      c.x0 = age; c.x1 = 100; G = c;
+      if (r.crossAge) {
+        const y = cumR[r.crossAge - age][1];
+        ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(c.X(r.crossAge), c.Y(y), 4.5, 0, TAU); ctx.fill();
+        T(ctx, "교차 " + r.crossAge + "세", c.X(r.crossAge) + 7, c.Y(y) + 16, { size: 11.5, color: P.text, weight: 600 });
+      }
+      const e = IB.clamp(endAge, age + 1, 100);
+      vline(ctx, c.X(e), c.box.y, c.box.y + c.box.h, P.dim, [4, 3], 1.5);
+      const vr = cumR[e - age][1], vl = cumL[e - age][1];
+      [[vr, P.bad], [vl, P.accent]].forEach(([v, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(e), c.Y(v), 4.5, 0, TAU); ctx.fill(); });
+      knob(ctx, c.X(e), c.box.y + c.box.h, P, P.text, 7);
+      const sv = INS.survival(age, 100 - age, "m");
+      IB.stat("cx-o-x", r.crossAge ? r.crossAge + "<small>세</small>" : "100세 안에 없음");
+      IB.stat("cx-o-s", r.crossAge ? IB.pct(sv[r.crossAge - age], 1) : "—");
+      IB.stat("cx-o-c", IB.wonAxis(vr) + " / " + IB.wonAxis(vl) + " <small>(" + e + "세)</small>");
+      const d = vl - vr;
+      IB.stat("cx-o-w", d >= 0 ? tone("ok-t", "갱신형 " + IB.wonAxis(d) + " 덜 냄") : tone("bad-t", "갱신형 " + IB.wonAxis(-d) + " 더 냄"));
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; endAge = IB.clamp(Math.round(inv(G, x)), Ar() + 1, 100); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 갱신 인상 분해 */
+  (function () {
+    const redraw = () => cv && cv.redraw();
+    const prod = IB.seg("dc-prod", redraw);
+    const Ar = IB.range("dc-a", (v) => v + "세", redraw);
+    const Gr = IB.range("dc-g", (v) => v + "%", redraw);
+    const Lr = IB.range("dc-l", (v) => (v > 0 ? "+" : "") + v + "%", redraw);
+    function model() {
+      const age = Ar(), g = Gr() / 100, l = Lr() / 100;
+      if (prod() === "cancer") {
+        const r0 = renewal("cancer", age, 20, 0);
+        const now = r0.steps[0].monthly, aged = r0.steps[1] ? r0.steps[1].monthly : now;
+        const trended = aged * Math.pow(1 + g, 20), fin = trended * (1 + l);
+        return { now, aged, trended, fin, after: (age + 20) + "세 갱신", unit: 20 };
+      }
+      const now = INS.silsonPremium(age, 4), aged = INS.silsonPremium(age + 1, 4);
+      const trended = aged * (1 + g), fin = trended * (1 + l);
+      return { now, aged, trended, fin, after: "1년 뒤", unit: 1 };
+    }
+    let cv = null;
+    cv = IB.canvas("#dc-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model();
+      const steps = [
+        ["지금", 0, m.now, P.dim, true],
+        ["나이", m.now, m.aged, P.warn, false],
+        ["추세", m.aged, m.trended, P.accent2, false],
+        ["손해율", m.trended, m.fin, m.fin >= m.trended ? P.bad : P.ok, false],
+        ["갱신 후", 0, m.fin, P.bad, true],
+      ];
+      const top = Math.max(m.now, m.aged, m.trended, m.fin) * 1.15;
+      const box = { x: 58, y: 20, w: w - 74, h: h - 64 };
+      const c = IB.chart(ctx, box, { x: [0, 5], y: [0, top], xTicks: [], yFmt: IB.wonAxis });
+      const slot = box.w / 5, bw = slot * 0.6;
+      steps.forEach(([lab, a, b, col, total], i) => {
+        const x = box.x + slot * i + (slot - bw) / 2, y0 = c.Y(Math.max(a, b)), y1 = c.Y(Math.min(a, b));
+        ctx.fillStyle = col; alpha(ctx, total ? 0.85 : 0.75, () => ctx.fillRect(x, y0, bw, Math.max(1.5, y1 - y0)));
+        if (i < 4) { ctx.strokeStyle = P.faint; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(x + bw, c.Y(b)); ctx.lineTo(x + slot, c.Y(b)); ctx.stroke(); ctx.setLineDash([]); }
+        const d = b - a, s = total ? IB.wonAxis(b) : (d >= 0 ? "+" : "−") + IB.wonAxis(Math.abs(d));
+        T(ctx, s, x + bw / 2, y0 - 5, { size: w < 480 ? 10 : 11, mono: true, color: P.text, align: "center" });
+        T(ctx, lab, x + bw / 2, box.y + box.h + 16, { size: w < 480 ? 11 : 12, color: total ? P.text : P.dim, align: "center", weight: total ? 700 : 400 });
+      });
+      T(ctx, m.after, box.x + box.w - 4, box.y + 6, { size: 11.5, color: P.dim, align: "right", base: "top" });
+      const inc = m.fin - m.now;
+      IB.stat("dc-o-p", IB.wonAxis(m.now) + " → " + IB.wonAxis(m.fin));
+      IB.stat("dc-o-r", tone(inc > 0 ? "bad-t" : "ok-t", (inc >= 0 ? "+" : "") + Math.round((inc / m.now) * 100) + "%"));
+      IB.stat("dc-o-a", inc > 0 ? Math.round(((m.aged - m.now) / inc) * 100) + "%" : "—");
+    }, { aspect: 0.58, minHeight: 290, maxHeight: 380 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 무해지: 해지율과 할인 */
+  (function () {
+    const N = 100, PAY = 20, VIEW = 30;
+    let t = 0, lapseYear = 9, G = null, paused = false, fates = [];
+    const redraw = () => cv && cv.redraw();
+    const Lr = IB.range("nh-l", (v) => v + "%", () => { roll(); redraw(); });
+    const prod = IB.seg("nh-prod", redraw);
+    const ref = IB.seg("nh-ref", redraw);
+    function roll() {
+      const r = IB.rng(7), q = Lr() / 100;
+      fates = [];
+      for (let i = 0; i < N; i++) { let y = Infinity; for (let k = 1; k <= PAY; k++) if (r() < q) { y = k; break; } fates.push(y); }
+    }
+    roll();
+    let cv = null;
+    cv = IB.canvas("#nh-cv", (ctx, w, h) => {
+      const P = IB.palette(), q = Lr() / 100, rf = Number(ref());
+      const std = level(prod(), 32, PAY, 1, 0), nh = level(prod(), 32, PAY, rf, q);
+      // 위: 100명
+      const top = 112, cols = 20, rows = 5, cell = Math.min((w - 32) / cols, 15);
+      const gx = (w - cell * cols) / 2, gy = 26;
+      const yr = Math.min(PAY, Math.floor(t));
+      let left = 0, stay = 0;
+      for (let i = 0; i < N; i++) {
+        const cx = gx + (i % cols + 0.5) * cell, cy = gy + (Math.floor(i / cols) + 0.5) * cell;
+        const gone = fates[i] <= yr;
+        if (gone) left++; else stay++;
+        ctx.fillStyle = gone ? P.faint : P.accent;
+        alpha(ctx, gone ? 0.45 : 0.9, () => { ctx.beginPath(); ctx.arc(cx, cy, cell * 0.34, 0, TAU); ctx.fill(); });
+      }
+      // 떠난 사람이 남긴 표준형 환급금 합계
+      let pot = 0;
+      for (let i = 0; i < N; i++) if (fates[i] <= yr) pot += std.rows[fates[i]].sv * (1 - rf);
+      T(ctx, yr + "년째 · 남은 " + stay + "명 · 떠난 " + left + "명", 16, 16, { size: 12, weight: 700, color: P.text });
+      T(ctx, "떠난 사람이 두고 간 몫 " + IB.wonAxis(pot), 16, gy + rows * cell + 18, { size: 11.5, color: P.ok });
+      // 아래: 낸 돈과 환급금
+      const box = { x: 58, y: top + 18, w: w - 74, h: h - top - 18 - 40 };
+      const paidStd = [], paidNh = [], svStd = [], svNh = [];
+      for (let k = 0; k <= VIEW; k++) {
+        const rs = std.rows[Math.min(k, std.rows.length - 1)], rn = nh.rows[Math.min(k, nh.rows.length - 1)];
+        paidStd.push([k, rs.paid]); paidNh.push([k, rn.paid]); svStd.push([k, rs.sv]); svNh.push([k, rn.sv]);
+      }
+      const ymax = Math.max(paidStd[VIEW][1], svStd[VIEW][1]) * 1.05;
+      const c = IB.chart(ctx, box, { x: [0, VIEW], y: [0, ymax], xFmt: (v) => v + "년", yFmt: IB.wonAxis, xTicks: w < 480 ? [0, 10, 20, 30] : [0, 5, 10, 15, 20, 25, 30],
+        series: [{ data: paidStd, color: P.dim, width: 1.6, dash: [5, 4] }, { data: paidNh, color: P.bad, width: 2 }, { data: svStd, color: P.ok, width: 2, dash: [5, 4] }, { data: svNh, color: P.ok, width: 2.6 }] });
+      c.x0 = 0; c.x1 = VIEW; G = c;
+      alpha(ctx, 0.08, () => { ctx.fillStyle = P.bad; ctx.fillRect(c.X(0), box.y, c.X(PAY) - c.X(0), box.h); });
+      const ly = IB.clamp(lapseYear, 1, VIEW);
+      vline(ctx, c.X(ly), box.y, box.y + box.h, P.text, [4, 3], 1.5);
+      const rs = std.rows[ly], rn = nh.rows[ly];
+      [[rs.sv, P.ok], [rn.sv, P.ok], [rn.paid, P.bad]].forEach(([v, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(ly), c.Y(v), 4, 0, TAU); ctx.fill(); });
+      knob(ctx, c.X(ly), box.y + box.h, P, P.text, 7);
+      T(ctx, w < 480 ? "점선: 표준형" : "점선: 표준형(낸 돈·환급금), 실선: " + (rf === 0 ? "무해지" : "저해지"), box.x + 6, box.y + 12, { size: 11, color: P.dim });
+      IB.stat("nh-o-p", IB.wonAxis(std.monthly) + " / " + IB.wonAxis(nh.monthly));
+      IB.stat("nh-o-d", tone(q > 0 ? "ok-t" : "", Math.round((1 - nh.monthly / std.monthly) * 100) + "%"));
+      IB.stat("nh-o-s", IB.pct(nh.rows[PAY].persist, 0) + " <small>(사망·진단 포함)</small>");
+      IB.stat("nh-o-x", ly + "년째: " + IB.wonAxis(rs.sv) + " / " + tone(rn.sv < 1 ? "bad-t" : "", IB.wonAxis(rn.sv)) + " <small>(낸 돈 " + IB.wonAxis(rn.paid) + ")</small>");
+    }, { aspect: 0.82, minHeight: 400, maxHeight: 520 });
+    const anim = IB.loop(cv.canvas, (dt) => {
+      if (paused) return;
+      t += dt * 2.2;
+      if (t > PAY + 3) t = 0;
+      cv.redraw();
+    });
+    document.getElementById("nh-pause").addEventListener("click", (e) => { paused = !paused; e.target.textContent = paused ? "다시 재생" : "일시정지"; anim.start(); });
+    IB.drag(cv.canvas, { move(x, y) { if (!G || y < G.box.y - 10) return; lapseYear = IB.clamp(Math.round(inv(G, x)), 1, VIEW); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 납입기간 */
+  (function () {
+    const AGE = 32, PAYS = [10, 20, 30, 68], LBL = { 10: "10년납", 20: "20년납", 30: "30년납", 68: "전기납" };
+    const redraw = () => cv && cv.redraw();
+    const sel = IB.seg("py-sel", redraw);
+    const Rr = IB.range("py-r", (v) => v + "%", redraw);
+    const wEl = document.getElementById("py-w");
+    wEl.addEventListener("change", redraw);
+    // 살아서·면제 없이 k년째 초에 보험료를 낼 확률
+    const sv = INS.survival(AGE, 70, "m");
+    const nowv = [1];
+    for (let k = 0; k < 70; k++) {
+      const a = AGE + k, h = INS.incidence("cancer", a, "m") + INS.incidence("cerebro", a, "m") + INS.incidence("ischemic", a, "m");
+      nowv.push(nowv[k] * Math.max(0, 1 - h));
+    }
+    function calc(pay, r) {
+      const m = level("cancer", AGE, pay, 1, 0).monthly, A = m * 12, v = 1 / (1 + r);
+      let ev = 0, evw = 0;
+      for (let k = 0; k < pay; k++) { const d = Math.pow(v, k) * sv[k] * A; ev += d; evw += d * nowv[k]; }
+      return { m, total: A * pay, ev, evw };
+    }
+    let cv = null;
+    cv = IB.canvas("#py-cv", (ctx, w, h) => {
+      const P = IB.palette(), r = Rr() / 100, wv = wEl.checked, s = Number(sel());
+      const res = PAYS.map((p) => calc(p, r));
+      const top = Math.max(...res.map((x) => x.total)) * 1.12;
+      const box = { x: 58, y: 18, w: w - 74, h: h - 62 };
+      const c = IB.chart(ctx, box, { x: [0, 4], y: [0, top], xTicks: [], yFmt: IB.wonAxis });
+      const slot = box.w / 4, bw = slot * 0.28;
+      res.forEach((x, i) => {
+        const cx = box.x + slot * (i + 0.5), on = PAYS[i] === s;
+        alpha(ctx, on ? 1 : 0.45, () => {
+          ctx.fillStyle = P.dim; ctx.fillRect(cx - bw - 2, c.Y(x.total), bw, c.Y(0) - c.Y(x.total));
+          const pv = wv ? x.evw : x.ev;
+          ctx.fillStyle = P.accent; ctx.fillRect(cx + 2, c.Y(pv), bw, c.Y(0) - c.Y(pv));
+          if (wv) { ctx.fillStyle = P.ok; ctx.fillRect(cx + 2, c.Y(x.ev), bw, c.Y(pv) - c.Y(x.ev)); }
+        });
+        if (w >= 480 || on) {
+          T(ctx, IB.wonAxis(x.total), cx - bw / 2 - 2, c.Y(x.total) - 4, { size: w < 480 ? 9.5 : 10.5, mono: true, color: P.text, align: w < 480 ? "right" : "center" });
+          T(ctx, IB.wonAxis(wv ? x.evw : x.ev), cx + bw / 2 + 2, c.Y(x.ev) - 4, { size: w < 480 ? 9.5 : 10.5, mono: true, color: P.accent, align: w < 480 ? "left" : "center" });
+        }
+        T(ctx, LBL[PAYS[i]], cx, box.y + box.h + 16, { size: 12, color: on ? P.text : P.dim, align: "center", weight: on ? 700 : 400 });
+      });
+      const x = res[PAYS.indexOf(s)];
+      IB.stat("py-o-m", won(x.m));
+      IB.stat("py-o-t", won(x.total));
+      IB.stat("py-o-v", won(wv ? x.evw : x.ev));
+      IB.stat("py-o-w", tone("ok-t", won(x.ev - x.evw)));
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 400 });
+  })();
+})();
+</script>
+</body>
+</html>

@@ -253,7 +253,7 @@
     </div>
 
     <p>여기서 세 가지를 봤다. 첫째, 보험료는 기대손실보다 반드시 크다. 마진이 없으면 보험사는 버틸 수 없고, 사업비가 없으면 아무도 팔고 관리하지 않는다. 둘째, 같은 마진이라도 가입자가 많을수록 안전하다. 규모가 곧 가격 경쟁력이다. 셋째, 가입자 입장에서 부가보험료는 돌려받지 못하는 돈이다. 보험 전체로 보면 가입자는 평균적으로 부가보험료만큼 손해를 본다.</p>
-    <div class="formula">$$\text{보험료} = \frac{p\,L\,(1+m)}{1-e},\qquad \text{부가율} = \frac{\text{보험료}}{p\,L} - 1$$<div class="where">\(m\): 안전 마진, \(e\): 보험료 가운데 사업비로 쓰는 비율. 마진 5%, 사업비 15%면 부가율은 약 24%다. 기대손실 100원을 넘기는 데 124원을 낸다.</div></div>
+    <p>시뮬레이터 안의 계산은 한 줄이다. 보험료 = \(pL(1+m)/(1-e)\), 여기서 \(m\)은 안전 마진, \(e\)는 보험료 가운데 사업비로 쓰는 비율이다. 그리고 <span class="term">부가율</span> = 보험료 ÷ 기대손실 − 1이다. 마진 5%, 사업비 15%면 부가율은 약 24%, 기대손실 100원을 넘기는 데 124원을 내는 셈이다.</p>
     <div class="callout pro">
       <strong>"보험은 결국 손해 아니에요?"라는 질문</strong>
       지우가 처음에 던진 이 질문은 현장에서 가장 흔하고, 정직하게 답해야 신뢰가 생긴다. 답은 "네, 평균적으로는 손해입니다"다. 그다음이 중요하다. "그 손해는 사업비와 마진만큼이고, 그 값을 내고 사는 것은 <b>감당할 수 없는 나쁜 해를 없애는 것</b>입니다. 그래서 감당할 수 있는 작은 위험까지 보험으로 사면 손해만 남습니다." 이렇게 말하면 고객은 설계사가 무엇이든 더 팔려는 사람이 아니라는 것을 안다. 작은 보장을 덜어 내자고 먼저 말하는 설계사가 결국 큰 보장의 상담을 맡는다.
@@ -534,7 +534,7 @@
         const [cx, cy] = pos(c, i), cw = cwOf(c), x = cx - cw / 2, y = cy - G.ch / 2;
         const placed = c.at && !(drag && drag.c === c), good = placed && c.ok.includes(quadOf(c.at));
         ctx.save();
-        if (drag && drag.c === c) { ctx.shadowColor = "rgba(0,0,0,0.25)"; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4; }
+        if (drag && drag.c === c) { ctx.shadowColor = P.faint; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4; }
         rrect(ctx, x, y, cw, G.ch, 8); ctx.fillStyle = P.surface; ctx.fill(); ctx.restore();
         ctx.save(); rrect(ctx, x, y, cw, G.ch, 8);
         ctx.lineWidth = placed ? 2 : 1; ctx.strokeStyle = placed ? (good ? P.ok : P.bad) : P.border; ctx.stroke();
@@ -683,7 +683,7 @@
     let cv = null;
     cv = IB.canvas("#co-cv", (ctx, w, h) => {
       const P = IB.palette(), rho = Rr(), N = Math.round(Math.pow(10, logN));
-      const box = { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 48 };
+      const box = { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - (w < 480 ? 68 : 48) };
       const ind = [], cor = [];
       for (let e = 0; e <= 6.0001; e += 0.05) { const n = Math.pow(10, e); ind.push([n, sigma(n, 0)]); cor.push([n, sigma(n, rho)]); }
       const c = IB.chart(ctx, box, {
@@ -713,7 +713,7 @@
       IB.stat("co-o-i", won(sigma(N, 0)));
       IB.stat("co-o-c", tone(sigma(N, rho) > p * L ? "bad-t" : "", won(sigma(N, rho))));
       IB.stat("co-o-f", rho > 0 ? won(L * Math.sqrt(rho * p * (1 - p))) : "없음(0원까지)");
-    }, { aspect: 0.64, minHeight: 320, maxHeight: 420 });
+    }, { aspect: 0.64, minHeight: 340, maxHeight: 420 });
     IB.drag(cv.canvas, {
       move(x) { if (!G) return; const b = G.box; logN = IB.clamp(((x - b.x) / b.w) * 6, 0, 6); logN = Math.round(logN * 10) / 10; simulate(); cv.redraw(); },
     });
@@ -777,7 +777,7 @@
     cv = IB.canvas("#ut-cv", (ctx, w, h) => {
       const P = IB.palette(), W = Wr() * 1e4, p = Pr() / 100, L = Lf * W, lo = W * 0.012;
       const EU = (1 - p) * Math.log(W) + p * Math.log(W - L), CE = Math.exp(EU), pis = W - CE, Ew = W - p * L;
-      const box = { x: 30, y: 26, w: w - 46, h: h - 26 - 126 };
+      const box = { x: 30, y: 26, w: w - 46, h: h - 26 - (w < 480 ? 140 : 126) };
       const curve = []; for (let i = 0; i <= 160; i++) { const x = lo + ((W * 1.04 - lo) * i) / 160; curve.push([x, Math.log(x)]); }
       const c = IB.chart(ctx, box, { x: [0, W * 1.04], y: [Math.log(lo), Math.log(W * 1.04)], yTicks: [], xTicks: [0, W / 4, W / 2, (3 * W) / 4, W], xFmt: IB.wonAxis, xLabel: "자산", series: [{ data: curve, color: P.accent, width: 2.5 }] });
       G = { c, W };
@@ -875,7 +875,7 @@
       vline(ctx, X(D), A.y - 2, A.y + A.h, P.text, [], 2);
       knob(ctx, X(D), A.y + A.h, P, P.text, 8);
       // 아래: 1년 비용 막대
-      const B = { x: narrow ? 112 : 150, y: A.y + A.h + 38, w: w - (narrow ? 112 : 150) - 16, h: h - (A.y + A.h + 38) - 26 };
+      const B = { x: narrow ? 112 : 150, y: A.y + A.h + 38, w: w - (narrow ? 112 : 150) - 16, h: h - (A.y + A.h + 38) - (narrow ? 40 : 26) };
       const rows = [["연 보험료(이전)", E.prem, P.accent], ["평균 보유 손실", E.mean, P.ok], ["나쁜 해(상위 1%)", E.p99, P.warn], ["최악(상위 0.1%)", E.p999, P.bad]];
       const mx = Math.max(F * 1.25, ...rows.map((r) => r[1])), sc = (B.w - 54) / mx, rh = B.h / rows.length, bh = Math.min(18, rh * 0.6);
       rows.forEach(([lab, v, col], i) => {
@@ -892,7 +892,7 @@
       IB.stat("rt-o-o", tone(E.over > 0.001 ? "bad-t" : "ok-t", (E.over * 100).toFixed(2) + "%"));
       const p30 = 1 - Math.pow(1 - E.over, 30);
       IB.stat("rt-o-30", tone(p30 > 0.05 ? "bad-t" : p30 > 0 ? "warn-t" : "ok-t", (p30 * 100).toFixed(1) + "%"));
-    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 560 ? 400 : 380; } });
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 560 ? 420 : 380; } });
     IB.drag(cv.canvas, { move(x) { if (!G) return; logD = IB.clamp(LO + ((x - G.A.x) / G.A.w) * (HI - LO), LO, HI - 0.3); logD = Math.round(logD * 20) / 20; cv.redraw(); } });
   })();
 })();

@@ -1,0 +1,927 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험은 청구할 때 비로소 값을 한다. 청구 절차와 서류, 지급 기한과 소멸시효 3년, 실손24와 숨은 보험금 찾기, 손해사정과 의료자문, 고지의무 위반과 인과관계 같은 흔한 분쟁 유형, 금융감독원 분쟁조정과 소송의 선택, 보험사기의 선을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보험금 청구와 분쟁 · InsureBook</title>
+<meta name="description" content="보험은 청구할 때 비로소 값을 한다. 청구 절차와 서류, 지급 기한과 소멸시효 3년, 실손24와 숨은 보험금 찾기, 손해사정과 의료자문, 고지의무 위반과 인과관계 같은 흔한 분쟁 유형, 금융감독원 분쟁조정과 소송의 선택, 보험사기의 선을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/claim.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="보험금 청구와 분쟁 · InsureBook">
+<meta property="og:description" content="보험은 청구할 때 비로소 값을 한다. 청구 절차와 서류, 지급 기한과 소멸시효 3년, 실손24와 숨은 보험금 찾기, 손해사정과 의료자문, 고지의무 위반과 인과관계 같은 흔한 분쟁 유형, 금융감독원 분쟁조정과 소송의 선택, 보험사기의 선을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/claim.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/claim.html#chapter","name":"보험금 청구와 분쟁","headline":"보험금 청구와 분쟁 · InsureBook","description":"보험은 청구할 때 비로소 값을 한다. 청구 절차와 서류, 지급 기한과 소멸시효 3년, 실손24와 숨은 보험금 찾기, 손해사정과 의료자문, 고지의무 위반과 인과관계 같은 흔한 분쟁 유형, 금융감독원 분쟁조정과 소송의 선택, 보험사기의 선을 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/claim.html","position":17,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"17. 보험금 청구와 분쟁","item":"https://insurebook.euiyun.com/chapters/claim.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="claim">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 17</div>
+    <h1>보험금 청구와 분쟁</h1>
+    <p class="lead">새벽 세 시, 민서가 배를 움켜쥐고 응급실에 갔다. 급성 충수염(맹장염)이었고, 그날 오후 복강경 수술을 받고 나흘 입원했다. 퇴원하는 날 원무과 창구에서 민서가 물었다. "보험금 받으려면 뭘 떼 가야 해요?" 보험은 가입할 때가 아니라 청구할 때 비로소 값을 한다. 그런데 청구에는 서류와 기한과 절차가 있고, 가끔은 보험사와 생각이 달라 다툼이 생긴다. 이 장은 청구의 처음부터 분쟁의 끝까지를 따라가며, 무엇을 준비하고 언제까지 해야 하며 거절당하면 어디로 가야 하는지를 직접 움직여 본다.</p>
+    <ul class="objectives">
+      <li>사고부터 지급, 이의 제기, 분쟁조정, 소송까지 청구의 흐름을 그린다.</li>
+      <li>청구 유형별 필요 서류를 고르고, 지급 기한과 소멸시효 3년을 날짜로 계산한다.</li>
+      <li>실손24 전산 청구와 숨은 보험금 찾기로 놓치는 보험금을 줄이는 법을 안다.</li>
+      <li>손해사정과 의료자문이 무엇이고 누가 지급 여부를 판단하는지 이해한다.</li>
+      <li>고지의무 위반의 해지 요건과 인과관계, 진단·수술·입원의 정의를 둘러싼 흔한 분쟁 유형을 구분한다.</li>
+      <li>분쟁조정과 소송의 시간·비용을 비교하고, 보험사기의 선을 분명히 안다.</li>
+    </ul>
+  </header>
+
+  <section id="flow">
+    <h2>청구의 흐름: 사고에서 지급까지</h2>
+    <p>보험금 청구는 생각보다 단순한 순서를 따른다. 사고나 진단이 생기고, 병원에서 서류를 떼고, 보험사에 청구하고, 보험사가 심사해서 지급하거나 지급하지 않는다. 대부분의 청구는 여기서 끝난다. 일부만 보험사의 판단에 동의하지 않아 다음 단계로 간다. 아래 그림에서 왼쪽 위의 굵은 길이 대부분의 청구가 지나가는 길이고, 오른쪽 아래로 갈수록 드물고 길고 비싼 길이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 380" role="img" aria-label="보험금 청구의 흐름: 사고, 서류, 청구, 심사, 지급 또는 부지급, 이의 제기, 분쟁조정, 소송">
+        <defs><marker id="cl-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="14" width="96" height="48" rx="8" class="f-bad-soft"/>
+        <text x="58" y="36" text-anchor="middle" class="lbl-b">사고·진단</text>
+        <text x="58" y="54" text-anchor="middle" class="lbl-dim">시효 시작</text>
+        <line x1="106" y1="38" x2="126" y2="38" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="130" y="14" width="96" height="48" rx="8" class="f-elev"/>
+        <rect x="130" y="14" width="96" height="48" rx="8" fill="none" class="s-line"/>
+        <text x="178" y="36" text-anchor="middle" class="lbl-b">서류 발급</text>
+        <text x="178" y="54" text-anchor="middle" class="lbl-dim">병원 원무과</text>
+        <line x1="226" y1="38" x2="246" y2="38" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="250" y="14" width="96" height="48" rx="8" class="f-acc-soft"/>
+        <text x="298" y="36" text-anchor="middle" class="lbl-acc">청구</text>
+        <text x="298" y="54" text-anchor="middle" class="lbl-dim">앱·실손24·팩스</text>
+        <line x1="346" y1="38" x2="366" y2="38" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="370" y="14" width="80" height="48" rx="8" class="f-warn-soft"/>
+        <text x="410" y="36" text-anchor="middle" class="lbl-b">심사</text>
+        <text x="410" y="54" text-anchor="middle" class="lbl-dim">손해사정</text>
+        <line x1="410" y1="62" x2="410" y2="100" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="300" y="104" width="150" height="48" rx="8" class="f-ok-soft"/>
+        <text x="375" y="126" text-anchor="middle" class="lbl-b">지급</text>
+        <text x="375" y="144" text-anchor="middle" class="lbl-dim">대부분 여기서 끝난다</text>
+        <line x1="300" y1="128" x2="236" y2="128" class="s-dash" marker-end="url(#cl-ar1)"/>
+        <rect x="90" y="104" width="142" height="48" rx="8" class="f-bad-soft"/>
+        <text x="161" y="126" text-anchor="middle" class="lbl-bad">부지급·일부 지급</text>
+        <text x="161" y="144" text-anchor="middle" class="lbl-dim">사유를 서면으로</text>
+        <line x1="161" y1="152" x2="161" y2="186" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="60" y="190" width="202" height="48" rx="8" class="f-elev"/>
+        <rect x="60" y="190" width="202" height="48" rx="8" fill="none" class="s-line"/>
+        <text x="161" y="212" text-anchor="middle" class="lbl-b">이의 제기·재심사</text>
+        <text x="161" y="230" text-anchor="middle" class="lbl-dim">보험사 민원, 추가 서류, 의료자문</text>
+        <line x1="161" y1="238" x2="161" y2="272" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="40" y="276" width="242" height="48" rx="8" class="f-acc2-soft"/>
+        <text x="161" y="298" text-anchor="middle" class="lbl-acc2">분쟁조정</text>
+        <text x="161" y="316" text-anchor="middle" class="lbl-dim">금융감독원 등, 신청 비용 없음</text>
+        <line x1="282" y1="300" x2="316" y2="300" class="s-line" marker-end="url(#cl-ar1)"/>
+        <rect x="320" y="276" width="130" height="48" rx="8" class="f-warn-soft"/>
+        <text x="385" y="298" text-anchor="middle" class="lbl-b">소송</text>
+        <text x="385" y="316" text-anchor="middle" class="lbl-dim">시간·비용 가장 큼</text>
+        <text x="10" y="358" class="lbl-dim">아래로 내려갈수록 드물고, 오래 걸리고, 비싸다.</text>
+        <text x="10" y="376" class="lbl-dim">분쟁조정을 거치지 않고 소송으로 갈 수도 있다.</text>
+      </svg>
+      <figcaption><b>그림 1. 청구의 흐름.</b> 소멸시효는 사고·진단 시점부터 흐른다. 보험사는 서류를 받은 뒤 정해진 기한 안에 지급하거나, 지급하지 않을 때 그 사유를 알려야 한다. 결과에 동의하지 않으면 보험사에 이의를 제기하고, 그래도 풀리지 않으면 금융감독원 분쟁조정이나 소송으로 간다.</figcaption>
+    </figure>
+
+    <p>그림의 맨 왼쪽 칸이 중요하다. 청구할 권리는 사고나 진단이 생긴 날부터 <b>3년</b>이 지나면 시효로 사라진다(2026년 기준, 상법). 보험사는 서류를 받은 뒤 약관이 정한 기한 안에 지급해야 하고, 늦어지면 약관에 정한 이자를 더해 준다. 그리고 부지급을 결정하면 그 이유를 알려야 한다. 이 세 가지 시계를 아는 것만으로도 청구의 절반은 끝난다.</p>
+  </section>
+
+  <section id="docs">
+    <h2>무엇을 떼어 가야 하나: 청구 서류</h2>
+    <p>청구 서류는 보험이 "무엇을 주는가"에 따라 달라진다. 실손보험은 실제로 쓴 돈을 돌려주니 <b>얼마를 썼는지</b>(영수증, 세부내역서)가 핵심이다. 정액 보험(진단비·수술비·입원일당)은 정해진 금액을 주니 <b>지급 사유가 생겼는지</b>(진단서, 조직검사 결과지, 수술확인서, 입퇴원확인서)가 핵심이다. 사망보험금은 사망 사실과 받을 사람이 누구인지를 증명해야 한다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>청구 유형</th><th>꼭 필요한 서류</th><th>경우에 따라</th></tr></thead>
+      <tbody>
+        <tr><td>실손 · 통원</td><td>진료비 영수증, 처방전 또는 약제비 영수증(약값 청구 시)</td><td>진료비 세부내역서(비급여가 있을 때), 소액은 영수증만으로 되는 경우가 많다</td></tr>
+        <tr><td>실손 · 입원</td><td>진료비 영수증, 진료비 세부내역서, 입퇴원확인서(질병명·코드 포함)</td><td>진단서(질병명 확인이 더 필요할 때)</td></tr>
+        <tr><td>수술비(정액)</td><td>수술확인서(수술명·수술 코드), 질병명이 적힌 서류</td><td>진단서, 수술 기록지(수술 방식 확인이 필요할 때)</td></tr>
+        <tr><td>진단비(암 등)</td><td>진단서(질병 코드), 조직검사 결과지(병리 보고서)</td><td>입퇴원확인서, 영상 판독지 등 추가 검사 결과</td></tr>
+        <tr><td>입원일당</td><td>입퇴원확인서(질병명·코드, 입원 기간)</td><td>진단서</td></tr>
+        <tr><td>사망보험금</td><td>사망진단서(또는 시체검안서), 기본증명서·가족관계증명서</td><td>상속인 확인 서류, 사고사라면 사고 경위 자료</td></tr>
+      </tbody>
+    </table></div>
+    <p>모든 청구에는 보험금 청구서(개인정보 처리 동의 포함), 신분증 사본, 받을 계좌가 공통으로 들어간다. 보험사 앱으로 청구하면 청구서와 동의는 화면에서 끝나고 서류는 사진으로 올린다. 서류 발급에는 병원마다 수수료가 드는 것이 많으니, 필요 없는 서류까지 떼지 않도록 먼저 확인한다.</p>
+    <p>아래에서 청구 유형을 고른 다음, 준비한 서류 카드를 눌러 체크한다. 필요한 카드는 진하게, 경우에 따라 필요한 카드는 점선 테두리로 보인다. 필요 없는 카드를 누르면 왜 필요 없는지 알려 준다.</p>
+
+    <div class="sim" id="sim-docs">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>청구 서류 체크리스트</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="dc-cv"></canvas><span class="hint">카드를 눌러 체크한다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dc-kind"><button data-value="clinic" class="on">통원</button><button data-value="inpatient">입원</button><button data-value="surgery">수술비</button><button data-value="diag">진단비</button><button data-value="death">사망</button></div>
+          <div class="btn-row"><button class="btn" id="dc-all">필수만 체크</button><button class="btn" id="dc-clear">모두 지우기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필수 서류</span><span class="v" id="dc-o-n">—</span></div>
+        <div class="stat"><span class="k">빠진 필수 서류</span><span class="v" id="dc-o-m">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v" id="dc-o-s">—</span></div>
+      </div>
+      <div class="sim-note" id="dc-msg">해볼 것: ① "입원"을 고르고 영수증만 체크해 본다. 실손 입원은 세부내역서와 입퇴원확인서가 빠지면 보완 요청이 온다. ② "진단비"로 바꾼다. 진단서만으로는 부족하고 조직검사 결과지가 필수다. 암은 병리 진단으로 확정하기 때문이다. ③ "통원"에서 수술확인서를 눌러 본다. 필요 없는 서류는 발급비만 든다. (대표적인 경우를 단순화한 목록이다. 실제 필요 서류는 회사·상품·청구 금액에 따라 다르므로 청구 전 보험사 안내를 확인한다.)</div>
+    </div>
+
+    <p>체크리스트를 돌려 보면 두 가지가 보인다. 실손은 돈의 증거, 정액은 사유의 증거가 핵심이라는 것, 그리고 같은 입원이라도 실손과 수술비를 함께 청구하면 두 묶음의 서류가 다 필요하다는 것이다. 병원 원무과에 "실손 청구용 서류와 수술비 청구용 서류를 함께 주세요"라고 말하면 대개 알아서 챙겨 준다. 수술비는 특히 <b>수술 코드</b>가 적힌 수술확인서가 있어야 약관의 수술 분류(1~5종 등)와 맞춰 볼 수 있다.</p>
+
+    <div class="callout buyer">
+      <strong>퇴원하는 날 원무과에서</strong>
+      <ul>
+        <li>내가 가진 보험을 먼저 떠올린다: 실손(개인·단체), 수술비, 입원일당, 진단비. 각각 필요한 서류가 다르다.</li>
+        <li>진료비 영수증과 <b>세부내역서</b>를 함께 받는다. 비급여 항목은 세부내역서로 확인한다.</li>
+        <li>수술을 했다면 수술명과 수술 코드가 적힌 수술확인서, 입원했다면 질병 코드가 적힌 입퇴원확인서를 받는다.</li>
+        <li>암·뇌·심장 진단이라면 진단서와 함께 조직검사 결과지나 영상 판독지 같은 <b>확정 근거</b>를 받는다.</li>
+        <li>실손24로 청구할 수 있는 병원이면 종이 서류 없이 앱에서 바로 보낼 수 있다(다음 절).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="deadline">
+    <h2>언제까지, 언제 받나: 지급 기한과 소멸시효</h2>
+    <p>보험사는 서류를 받은 뒤 오래 붙잡고 있을 수 없다. 표준약관 기준으로 보험사는 청구 서류를 접수한 날부터 <b>보통 3영업일 이내</b>에 보험금을 지급한다. 사고 조사나 의료 확인이 필요하면 기한이 늘어나는데, 이때는 지급 예정일과 그 사유를 알려야 하고, 지급 예정일은 원칙적으로 서류 접수일부터 약 30영업일 안쪽으로 정한다(약관마다 다르고, 가입자 쪽 사정으로 조사가 늦어지는 기간은 빠진다). 정당한 이유 없이 늦으면 약관에 정한 이자를 더해 준다.</p>
+    <p>가입자 쪽 시계는 <span class="term">소멸시효</span><span class="en">(Statute of limitations)</span>다. 보험금을 청구할 권리는 청구할 수 있게 된 때(대개 사고·진단·수술 날)부터 3년 동안 행사하지 않으면 사라진다. 3년은 길어 보이지만, 몇만 원짜리 통원 영수증을 서랍에 넣어 두었다가 잊거나, 오래전 수술의 수술비 특약을 몰랐다가 뒤늦게 알게 되는 일이 흔하다.</p>
+    <p>아래 시간축에서 빨간 손잡이(사고·진단일)와 파란 손잡이(청구일)를 끌어 본다. 오늘은 2026년 10월 5일로 고정했다.</p>
+
+    <div class="sim" id="sim-dl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>소멸시효 3년과 지급 기한 달력</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dl-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="check"><input type="checkbox" id="dl-inv"> 조사·의료 확인이 필요한 청구</label>
+          <div class="btn-row"><button class="btn" id="dl-p1">2년 전 수술</button><button class="btn" id="dl-p2">3년 2개월 전 통원</button><button class="btn" id="dl-p3">어제 퇴원</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시효 만료일</span><span class="v" id="dl-o-e">—</span></div>
+        <div class="stat"><span class="k">청구일 기준 남은 기간</span><span class="v" id="dl-o-r">—</span></div>
+        <div class="stat"><span class="k">지급 기한(대략)</span><span class="v" id="dl-o-p">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v" id="dl-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "어제 퇴원"을 누른다. 오늘 청구하면 주말을 빼고 3영업일 뒤가 지급 기한이다. ② "조사·의료 확인"을 켠다. 지급 기한이 약 30영업일(한 달 반 정도)로 늘어난다. ③ "3년 2개월 전 통원"을 누른다. 빨간 손잡이를 아무리 끌어와도 시효 만료일이 오늘보다 앞이라 청구권이 사라진 상태다. 손잡이를 오른쪽으로 끌어 사고일이 3년 안쪽으로 들어오는 순간 다시 청구할 수 있다. (영업일은 주말만 뺐고 공휴일은 무시했다. 시효의 시작점과 중단 사유는 사안마다 다를 수 있다. 표준약관을 단순화한 교육용 달력이다.)</div>
+    </div>
+
+    <p>달력에서 본 대로, 청구할 수 있는 권리는 사고 날부터 조용히 줄어든다. 작은 금액일수록 "나중에 모아서"가 시효를 넘기는 지름길이다. 반대로 보험사 쪽 기한은 서류를 낸 날부터 흐르므로, 서류를 빠짐없이 내는 것이 지급을 앞당기는 가장 확실한 방법이다. 서류가 모자라 보완 요청이 오면 그만큼 기한이 밀린다.</p>
+  </section>
+
+  <section id="digital">
+    <h2>실손24와 숨은 보험금 찾기</h2>
+    <p>실손보험은 금액이 작은 청구가 많다. 감기로 의원에 가서 낸 2만원, 물리치료 몇 번에 낸 5만원. 이런 청구는 서류를 떼고 사진을 찍고 앱에 올리는 수고가 받을 돈보다 크게 느껴져 그냥 포기하는 사람이 많았다. 그래서 병원이 진료비 서류를 보험사에 전자적으로 바로 보내는 <span class="term">실손보험 청구 전산화</span>가 도입되었다. 가입자는 <span class="term">실손24</span> 앱이나 누리집에서 병원과 진료 건을 고르기만 하면 된다. 2024년 10월 병원급에서 시작해 2025년 10월부터 의원·약국으로 넓어졌고, 참여 기관은 2026년 기준으로도 계속 늘어나는 중이다. 내가 다니는 병원이 참여하는지는 앱에서 확인한다.</p>
+    <p>아래는 외래 진료 1,000건이 줄지어 들어오는 모습이다. 진료마다 받을 수 있는 실손 보험금(세대·자기부담을 반영한 금액)이 다르고, 사람은 그 돈이 청구하는 수고보다 클 때만 청구한다고 가정한다. 청구 방법을 바꾸고, 내 시간의 값을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-s24">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>귀찮아서 버려지는 보험금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="s24-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="s24-m"><button data-value="paper" class="on">종이 서류</button><button data-value="app">앱 사진</button><button data-value="e">실손24 전산</button></div>
+          <label class="ctrl"><span>내 시간의 값(시간당) <output id="s24-v-out"></output></span><input type="range" id="s24-v" min="5000" max="60000" step="1000" value="15000"></label>
+          <div class="btn-row"><button class="btn" id="s24-pause">일시정지</button><button class="btn" id="s24-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>청구한 진료</span><span><i style="background:var(--bad)"></i>포기한 진료</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">청구 수고(시간)</span><span class="v" id="s24-o-t">—</span></div>
+        <div class="stat"><span class="k">포기한 진료 비율</span><span class="v" id="s24-o-n">—</span></div>
+        <div class="stat"><span class="k">포기한 보험금 비율</span><span class="v" id="s24-o-w">—</span></div>
+        <div class="stat"><span class="k">흘러간 진료</span><span class="v" id="s24-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "종이 서류"에서 지켜본다. 청구 수고를 1시간(1만 5천원어치)으로 잡으면 진료의 약 70%가 빨간 쪽(포기)으로 떨어지고, 받을 수 있던 보험금의 약 16%가 버려진다. ② "실손24 전산"으로 바꾼다. 포기하는 진료가 약 38%로 줄고 버려지는 보험금은 거의 0이 된다. 남는 빨간 점은 받을 돈이 없는(공제금액 이하) 진료다. ③ 시간의 값을 6만원까지 올리고 "종이 서류"로 돌아간다. 진료의 약 95%, 보험금의 약 70%를 포기한다. 바쁜 사람일수록 전산화가 큰 차이를 만든다. (청구 수고: 종이 60분·앱 사진 15분·전산 3분 가정. 진료비는 중앙값 약 5만원의 로그정규 분포, 비급여 비율 0~50%, 실손 2·3·4세대가 섞인 교육용 모델로 INS.medical의 통원 계산을 썼다.)</div>
+    </div>
+
+    <p>점들이 보여 주는 것은 단순하다. 받을 권리가 있는 돈도 <b>꺼내는 비용</b>이 크면 버려진다. 전산화는 그 비용을 거의 0으로 만든다. 다만 전산 청구가 된다고 심사가 사라지는 것은 아니다. 보험사는 같은 기준으로 지급 여부를 판단하고, 필요하면 추가 서류를 요청한다.</p>
+    <p>잊어버린 보험금은 또 있다. 만기가 지났는데 찾아가지 않은 만기보험금, 휴면보험금, 중도보험금처럼 내 이름으로 쌓여 있는 돈이다. 생명보험협회·손해보험협회가 운영하는 <span class="term">내보험찾아줌</span>에서 본인 인증만 하면 회사별로 찾아갈 돈을 한 번에 조회할 수 있다. 내가 가진 계약 목록 자체는 <span class="term">내보험다보여</span>에서 볼 수 있다. 가족이 사망한 경우에는 상속인이 금융감독원의 상속인 금융거래 조회 서비스로 고인의 보험 계약을 찾을 수 있다.</p>
+
+    <h3>실손이 두 개면 두 번 받을까</h3>
+    <p>민서처럼 개인 실손과 회사 단체실손을 함께 가진 사람이 많다(<a href="health.html">8장</a>). 실손보험은 실제로 쓴 돈을 넘어서 주지 않는다. 두 계약이 같은 병원비를 보장하면 둘이 나눠서 낸다. 이것이 <span class="term">비례보상</span>이다.</p>
+    <div class="formula">$$\text{A사 지급액} = \text{두 계약 합산 지급 한도} \times \frac{\text{A사 단독 보상액}}{\text{A사 단독 보상액} + \text{B사 단독 보상액}}$$<div class="where">단독 보상액: 그 계약 하나만 있다고 할 때 줄 금액. 합산 지급 한도는 대략 "실제 낸 돈(본인부담)에서 두 계약의 자기부담 가운데 작은 쪽을 뺀 금액"이다. 결과적으로 자기부담이 더 작은 계약 하나만큼은 받지만, 둘을 더한 만큼 받지는 않는다. 약관의 다수보험 조항을 단순화했다.</div></div>
+    <p>정액 보험은 다르다. 수술비 30만원, 입원일당 하루 2만원처럼 정해진 금액을 주는 계약은 여러 개에 가입했으면 각각 받는다. 아래에서 민서의 충수염 수술비를 놓고 총 진료비와 비급여 비율을 바꿔 본다. 단체실손과 정액 수술비를 켜고 끄면 누가 얼마를 내는지가 바뀐다.</p>
+
+    <div class="sim" id="sim-split">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>민서의 수술비, 누가 얼마를 내나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>총 진료비 <output id="sp-c-out"></output></span><input type="range" id="sp-c" min="1000000" max="15000000" step="100000" value="3500000"></label>
+          <label class="ctrl"><span>비급여 비율 <output id="sp-n-out"></output></span><input type="range" id="sp-n" min="0" max="70" step="1" value="25"></label>
+          <label class="check"><input type="checkbox" id="sp-g" checked> 회사 단체실손(자기부담 10% 가정)</label>
+          <label class="check"><input type="checkbox" id="sp-f" checked> 단체보험 질병수술비 30만원(가상)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>건강보험</span><span><i style="background:var(--ok)"></i>개인 실손(4세대)</span><span><i style="background:var(--accent-2)"></i>단체실손</span><span><i style="background:var(--bad)"></i>최종 내 부담</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">병원 창구에서 낸 돈</span><span class="v" id="sp-o-p">—</span></div>
+        <div class="stat"><span class="k">실손 합계(개인 / 단체)</span><span class="v" id="sp-o-s">—</span></div>
+        <div class="stat"><span class="k">정액 수술비</span><span class="v" id="sp-o-f">—</span></div>
+        <div class="stat"><span class="k">최종 내 부담</span><span class="v" id="sp-o-o">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(총 350만원, 비급여 25%)에서 민서가 창구에서 낸 돈은 140만원이다. 개인 실손만 있으면 약 103만원을 받고, 단체실손이 함께 있으면 두 회사가 나눠 합계 126만원이 된다. 둘을 더한 229만원이 아니다. ② 단체실손을 끈다. 4세대 실손의 자기부담(급여 20%, 비급여 30%)이 그대로 남는다. ③ 비급여 비율을 70%로 올린다. 4세대는 비급여 자기부담에 상한이 없어 내 부담이 빠르게 커진다. 정액 수술비 30만원은 실손과 상관없이 따로 받는다. (INS.medical 입원 계산. 단체실손은 엔진의 2세대 구조로 근사했고 실제 단체실손의 조건은 회사마다 다르다. 수술비 30만원은 가상의 특약 금액이다.)</div>
+    </div>
+
+    <p>실손을 두 개 가지고 있으면 자기부담이 작은 쪽 수준까지 받을 수는 있지만, 보험료는 두 번 낸다. 8장에서 단체실손이 있는 동안 개인실손을 잠시 멈추는 제도를 살펴본 이유다. 정액 보험은 계약마다 따로 받으니, 청구할 때 <b>정액 특약을 빠뜨리지 않는 것</b>이 실제로 받는 돈을 가장 크게 바꾼다. 수술비 특약이 있는 줄 모르고 실손만 청구하는 경우가 흔하다.</p>
+
+    <div class="callout pro">
+      <strong>청구 지원은 설계사가 신뢰를 쌓는 순간이다</strong>
+      고객이 사고 소식을 전하면 먼저 고객이 가진 모든 계약의 지급 사유를 훑어 "이번에 청구할 수 있는 것" 목록을 만든다(실손, 수술비, 입원일당, 진단비). 다른 회사 계약도 함께 본다. 필요한 서류를 한 번에 알려 주면 병원을 두 번 가지 않아도 된다. 다만 설계사가 할 수 있는 일은 안내와 접수 지원까지다. 보험금 액수를 산정하거나 보험사와 지급 여부를 대리해 협상하는 것은 손해사정사의 영역이므로, 분쟁 소지가 있으면 그 경로를 안내한다. 고객이 자주 묻는 질문: "실손 두 개면 두 배 받나요?"(아니다, 비례보상), "작은 금액도 청구해도 되나요?"(된다, 청구 건수로 불이익을 주지 않는다. 다만 4세대는 비급여 이용량이 다음 해 보험료 할증에 반영된다).
+    </div>
+  </section>
+
+  <section id="adjust">
+    <h2>누가 지급을 결정하나: 손해사정과 의료자문</h2>
+    <p>청구가 들어오면 보험사는 보험금을 줄지, 얼마를 줄지 판단한다. 이 일을 <span class="term">손해사정</span><span class="en">(Loss adjustment)</span>이라 한다. 사고 사실을 확인하고, 약관의 지급 사유에 해당하는지 보고, 금액을 계산한다. 대부분의 소액 청구는 보험사 안에서 자동 또는 간단한 심사로 끝나지만, 금액이 크거나 사실관계가 복잡하면 <span class="term">손해사정사</span>가 조사한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 330" role="img" aria-label="지급 판단에 관여하는 사람들: 가입자, 보험사, 손해사정사, 주치의, 자문의, 제3의료기관">
+        <defs><marker id="cl-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="20" width="130" height="56" rx="8" class="f-acc-soft"/>
+        <text x="75" y="44" text-anchor="middle" class="lbl-acc">가입자</text>
+        <text x="75" y="64" text-anchor="middle" class="lbl-dim">청구·서류</text>
+        <rect x="320" y="20" width="130" height="56" rx="8" class="f-elev"/>
+        <rect x="320" y="20" width="130" height="56" rx="8" fill="none" class="s-line"/>
+        <text x="385" y="44" text-anchor="middle" class="lbl-b">보험사</text>
+        <text x="385" y="64" text-anchor="middle" class="lbl-dim">최종 지급 결정</text>
+        <line x1="140" y1="42" x2="316" y2="42" class="s-acc" marker-end="url(#cl-ar2)"/>
+        <line x1="320" y1="58" x2="144" y2="58" class="s-dash" marker-end="url(#cl-ar2)"/>
+        <text x="230" y="36" text-anchor="middle" class="lbl-dim">청구</text>
+        <text x="230" y="74" text-anchor="middle" class="lbl-dim">지급·부지급 통보</text>
+        <rect x="10" y="118" width="130" height="56" rx="8" class="f-ok-soft"/>
+        <text x="75" y="142" text-anchor="middle" class="lbl-b">주치의</text>
+        <text x="75" y="162" text-anchor="middle" class="lbl-dim">진단서·소견서</text>
+        <line x1="75" y1="118" x2="75" y2="80" class="s-line" marker-end="url(#cl-ar2)"/>
+        <rect x="165" y="118" width="130" height="56" rx="8" class="f-warn-soft"/>
+        <text x="230" y="142" text-anchor="middle" class="lbl-b">손해사정사</text>
+        <text x="230" y="162" text-anchor="middle" class="lbl-dim">사실 조사·금액 산정</text>
+        <rect x="320" y="118" width="130" height="56" rx="8" class="f-acc2-soft"/>
+        <text x="385" y="142" text-anchor="middle" class="lbl-acc2">보험사 자문의</text>
+        <text x="385" y="162" text-anchor="middle" class="lbl-dim">의료자문 소견</text>
+        <line x1="290" y1="118" x2="350" y2="80" class="s-line" marker-end="url(#cl-ar2)"/>
+        <line x1="385" y1="118" x2="385" y2="80" class="s-line" marker-end="url(#cl-ar2)"/>
+        <rect x="120" y="222" width="220" height="60" rx="8" class="f-elev"/>
+        <rect x="120" y="222" width="220" height="60" rx="8" fill="none" class="s-acc"/>
+        <text x="230" y="246" text-anchor="middle" class="lbl-acc">제3의료기관</text>
+        <text x="230" y="268" text-anchor="middle" class="lbl-dim">양쪽이 합의해 정한 병원의 판정</text>
+        <path d="M75 174 C75 210 110 240 120 246" class="s-dash" fill="none" marker-end="url(#cl-ar2)"/>
+        <path d="M385 174 C385 210 350 240 340 246" class="s-dash" fill="none" marker-end="url(#cl-ar2)"/>
+        <text x="10" y="312" class="lbl-dim">주치의와 자문의의 의견이 다를 때 제3의료기관을 찾는다.</text>
+      </svg>
+      <figcaption><b>그림 2. 지급 판단에 관여하는 사람들.</b> 지급 결정은 보험사가 하지만 근거는 여러 곳에서 온다. 가입자 쪽 근거는 주치의의 진단서와 소견서, 보험사 쪽 근거는 손해사정사의 조사와 자문의의 의료자문이다. 의학적 판단이 엇갈리면 양쪽이 합의한 제3의료기관에 판정을 맡길 수 있다.</figcaption>
+    </figure>
+
+    <p>손해사정사는 보험사가 고용하거나 위탁하는 경우가 대부분이라 공정성에 대한 의문이 생길 수 있다. 그래서 가입자가 <b>직접 손해사정사를 선임</b>할 수 있는 길이 있다. 일정한 요건을 갖추면 보험사가 가입자의 선임에 동의하고 그 비용을 부담하도록 하는 기준도 마련되어 있다(세부 요건은 청구 유형과 회사 기준에 따라 다르다, 2026년 기준). 가입자가 선임한 손해사정사는 가입자 쪽 근거를 정리해 보험사에 제출한다.</p>
+    <p><span class="term">의료자문</span>은 보험사가 외부 의사에게 진료 기록을 보내 의견을 묻는 것이다. 예를 들어 입원이 의학적으로 꼭 필요했는지, 진단이 약관의 정의에 맞는지를 묻는다. 의료자문은 법적 판정이 아니라 보험사가 참고하는 의견이므로, 결과에 동의하지 않으면 그 내용을 요청해 보고 주치의 소견으로 반박할 수 있다. 약관은 보통 양쪽 의견이 다를 때 <b>보험사와 가입자가 함께 정한 제3의료기관</b>의 판정을 받을 수 있게 하고, 그 비용은 보험사가 부담하도록 정한다. 보험사별 의료자문 건수와 그에 따른 부지급 비율은 협회 공시에서 비교할 수 있다(<a href="company.html">16장</a>).</p>
+  </section>
+
+  <section id="disputes">
+    <h2>흔한 분쟁 유형</h2>
+    <p>보험금 분쟁은 대개 몇 가지 유형으로 모인다. 아래 그림은 분쟁이 생기는 지점을 계약부터 청구까지 시간 순서로 놓은 것이다. 실제 사건은 사실관계에 따라 결론이 달라지므로, 여기서는 유형과 판단의 쟁점만 정리한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 300" role="img" aria-label="보험금 분쟁이 생기는 지점: 고지의무, 진단 확정, 수술의 정의, 입원 필요성, 면책 사유">
+        <defs><marker id="cl-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="20" y1="60" x2="446" y2="60" class="s-axis" marker-end="url(#cl-ar3)"/>
+        <circle cx="40" cy="60" r="6" class="f-acc"/>
+        <text x="40" y="40" text-anchor="middle" class="lbl-b">청약</text>
+        <circle cx="240" cy="60" r="6" class="f-bad"/>
+        <text x="240" y="40" text-anchor="middle" class="lbl-b">사고·진단·치료</text>
+        <circle cx="410" cy="60" r="6" class="f-ok"/>
+        <text x="410" y="40" text-anchor="middle" class="lbl-b">청구</text>
+        <rect x="10" y="90" width="140" height="88" rx="8" class="f-acc-soft"/>
+        <text x="80" y="114" text-anchor="middle" class="lbl-acc">① 고지의무</text>
+        <text x="80" y="136" text-anchor="middle" class="lbl-dim">알릴 것을</text>
+        <text x="80" y="154" text-anchor="middle" class="lbl-dim">알렸는가</text>
+        <rect x="160" y="90" width="140" height="88" rx="8" class="f-bad-soft"/>
+        <text x="230" y="114" text-anchor="middle" class="lbl-bad">②~④ 정의</text>
+        <text x="230" y="136" text-anchor="middle" class="lbl-dim">진단 확정·수술</text>
+        <text x="230" y="154" text-anchor="middle" class="lbl-dim">입원 필요성</text>
+        <rect x="310" y="90" width="140" height="88" rx="8" class="f-warn-soft"/>
+        <text x="380" y="114" text-anchor="middle" class="lbl-b">⑤ 면책</text>
+        <text x="380" y="136" text-anchor="middle" class="lbl-dim">주지 않기로</text>
+        <text x="380" y="154" text-anchor="middle" class="lbl-dim">정한 경우인가</text>
+        <line x1="80" y1="90" x2="45" y2="68" class="s-dash"/>
+        <line x1="230" y1="90" x2="238" y2="68" class="s-dash"/>
+        <line x1="380" y1="90" x2="405" y2="68" class="s-dash"/>
+        <text x="20" y="214" class="lbl">쟁점은 대부분 둘 중 하나다.</text>
+        <text x="20" y="240" class="lbl">사실이 무엇이었나(조사·기록),</text>
+        <text x="20" y="266" class="lbl">그 사실이 약관의 정의에 맞나(해석·의학).</text>
+      </svg>
+      <figcaption><b>그림 3. 분쟁이 생기는 지점.</b> 고지의무는 계약할 때의 문제, 진단·수술·입원의 정의는 치료 내용의 문제, 면책은 약관이 처음부터 보장에서 뺀 경우의 문제다. 약관의 뜻이 애매하면 작성자인 보험사에게 불리하게, 가입자에게 유리하게 해석한다는 원칙(작성자 불이익 원칙)이 있다.</figcaption>
+    </figure>
+
+    <h3>① 고지의무 위반: 해지 요건과 인과관계</h3>
+    <p>가입할 때 묻는 병력·직업 같은 질문에 사실대로 답할 의무가 <span class="term">고지의무</span>다(<a href="asymmetry.html">4장</a>). 이를 어기면 보험사는 계약을 해지할 수 있다. 다만 언제까지나 그런 것은 아니다. 2026년 기준 법과 표준약관은 보험사의 해지권에 시간 제한을 둔다. 보험사가 위반 사실을 <b>안 날부터 1개월</b> 안에 해지해야 하고, <b>계약일부터 3년</b>이 지나면 해지할 수 없으며, <b>보장개시일부터 보험금 지급 사유 없이 2년</b>(진단계약은 1년)이 지나도 해지할 수 없다. 또 설계사가 고지할 기회를 주지 않았거나 사실과 다르게 고지하라고 권했다면 해지할 수 없다.</p>
+    <p>해지할 수 있는 경우에도 보험금 문제는 따로 본다. 숨긴 사실과 이번 사고 사이에 <span class="term">인과관계</span>가 없으면, 계약은 해지되더라도 <b>이번 보험금은 지급한다</b>. 예를 들어 숨긴 병력이 위 용종 제거였는데 이번 청구가 교통사고 골절이라면, 용종은 골절에 아무 영향을 주지 않았다. 아래 시간축에서 사고일과 보험사가 위반을 안 날을 끌어 보고, 해지 통보까지 걸린 기간과 두 가지 조건을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-disc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>고지의무 위반, 해지할 수 있나 보험금은 나오나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ds-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>안 날부터 해지 통보까지 <output id="ds-n-out"></output></span><input type="range" id="ds-n" min="0" max="90" step="1" value="14"></label>
+          <label class="check"><input type="checkbox" id="ds-c"> 숨긴 사실과 이번 사고 사이에 인과관계가 있다</label>
+          <label class="check"><input type="checkbox" id="ds-a"> 설계사가 고지를 막거나 다르게 쓰라고 했다</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">계약 해지</span><span class="v" id="ds-o-r">—</span></div>
+        <div class="stat"><span class="k">이번 보험금</span><span class="v" id="ds-o-p">—</span></div>
+        <div class="stat"><span class="k">판단의 근거</span><span class="v" id="ds-o-w">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(가입 1년 6개월째 사고, 청구 때 보험사가 알게 됨, 2주 뒤 통보)은 해지 요건을 모두 갖췄다. 그런데 인과관계가 없으면 계약은 해지되어도 보험금은 나온다. 인과관계를 켜면 그때 비로소 부지급이 된다. ② 사고 손잡이를 2년 너머로 끈다. 보장개시 뒤 2년 동안 지급 사유가 없었으므로 해지 자체가 막힌다. ③ 통보 기간을 31일 이상으로 늘리거나 "설계사가 고지를 막았다"를 켠다. 해지권이 사라진다. (INS.KR.disclosure: 안 날부터 1개월, 보장개시 후 2년, 계약일부터 3년. 보장개시일을 계약일로 단순화했고, 사기 목적의 고지의무 위반이나 진단계약 등 예외는 다루지 않았다. 실제 판단은 사실관계에 따라 다르다.)</div>
+    </div>
+
+    <p>시뮬레이터의 핵심은 두 개의 다른 질문이다. "계약을 해지할 수 있는가"와 "이번 보험금을 줘야 하는가." 보험사가 해지 통보와 함께 부지급을 알려 오면, 두 질문을 나눠서 본다. 시간 제한을 넘겼는지, 숨긴 사실이 이번 사고와 정말 관련이 있는지. 다만 고지의무 위반은 가입자에게 결코 유리한 싸움이 아니다. 가장 좋은 방법은 4장에서 본 대로 처음부터 정확히 알리는 것이다.</p>
+
+    <div class="callout pro">
+      <strong>설계사에게 말한 것은 고지가 아니다</strong>
+      설계사는 보험사를 대신해 고지를 받을 권한(고지수령권)이 없다. 고객이 상담 중에 "작년에 갑상선 결절 추적검사를 받았다"고 말로 했더라도 청약서(또는 전자 청약 화면)의 질문에 표시하지 않았다면 고지하지 않은 것이 될 수 있다. 그러니 고지 항목은 반드시 고객이 직접 읽고 답하게 하고, 애매한 이력은 "일단 쓰고 심사에 맡기자"가 원칙이다. "그 정도는 안 써도 된다"는 말은 고객의 보장을 위험에 빠뜨리고, 나중에 분쟁이 되면 설계사의 책임 문제로도 번진다. 고객에게는 "고지는 보험사가 정한 질문에 대한 답이고, 쓰면 부담보나 할증이 붙을 수는 있어도 보장이 통째로 사라지는 일은 막는다"고 설명한다.
+    </div>
+
+    <h3>② 진단 확정 요건</h3>
+    <p>암 진단비 약관은 보통 암의 진단 확정을 <b>병리 진단</b>(조직검사 등에서 얻은 조직을 병리 전문의가 판독한 결과)으로 하도록 정한다. 병리 진단이 어려운 경우에는 다른 검사로 대신할 수 있다는 단서가 있는 경우가 많다. 분쟁은 "주치의는 암이라고 했는데 병리 보고서에는 경계성 종양으로 적혀 있다"거나, 진단 코드가 유사암·소액암으로 분류되는지(<a href="fixed.html">9장</a>)를 두고 생긴다. 뇌·심장 질환은 진단서의 질병 코드와 함께 영상 판독 결과가 쟁점이 되곤 한다.</p>
+    <h3>③ 수술의 정의</h3>
+    <p>수술비 약관은 "수술"을 따로 정의한다. 대표적으로 기구를 써서 생체에 절단·적출 등의 조작을 가하는 것을 수술로 보고, 흡인·천자 같은 처치나 단순한 시술은 빼는 식이다. 의학 기술이 바뀌면서 내시경이나 카테터를 쓰는 새로운 치료가 약관의 정의에 들어가는지를 두고 분쟁이 생긴다. 같은 치료라도 가입 시기의 약관에 따라 결론이 다를 수 있으니, 내 계약 약관의 정의와 수술 분류표를 확인한다.</p>
+    <h3>④ 입원의 필요성</h3>
+    <p>입원일당이나 실손 입원 보험금은 "의사가 필요하다고 인정해 입원한 경우"를 전제로 한다. 통원으로도 충분한 치료를 위해 오래 입원했다고 보이면, 보험사는 의료자문을 거쳐 입원 일부를 인정하지 않을 수 있다. 요양병원 장기 입원, 통증 치료를 위한 반복 입원 등이 이런 유형의 분쟁에 자주 오른다. 진료 기록에 입원이 필요했던 이유(검사 수치, 증상, 치료 내용)가 남아 있는지가 중요하다.</p>
+    <h3>⑤ 면책 사유</h3>
+    <p>약관은 보험금을 주지 않는 경우를 미리 정한다. 고의로 자신을 해친 경우(단, 정신질환 등으로 자유로운 의사결정을 할 수 없었던 경우와 일정 기간이 지난 뒤의 자살 등은 예외로 정한다), 계약자·수익자의 고의, 전쟁, 그리고 상품마다 다른 면책 기간(예: 암보험 가입 후 90일, <a href="contract.html">6장</a>). 면책 조항은 보험사가 가입 때 설명해야 하는 중요한 내용이며, 설명하지 않은 면책 조항은 계약 내용으로 주장할 수 없는 경우가 있다.</p>
+
+    <div class="callout buyer">
+      <strong>부지급·일부 지급 통보를 받았을 때</strong>
+      <ul>
+        <li>통보서에서 <b>부지급 사유와 근거가 된 약관 조항</b>을 확인한다. 말로만 들었다면 서면으로 요청한다.</li>
+        <li>의료자문이 근거라면 자문 내용(자문 소견)을 요청하고, 주치의에게 반박 소견서를 받을 수 있는지 묻는다.</li>
+        <li>고지의무 위반이 이유라면 시간 제한(안 날 1개월, 계약 3년, 보장개시 2년)과 인과관계를 따로 따져 본다.</li>
+        <li>보험사 민원(재심사)부터 넣고, 풀리지 않으면 금융감독원 분쟁조정을 생각한다. 시효 3년이 흐르고 있음을 잊지 않는다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="mediation">
+    <h2>분쟁조정과 소송: 어디까지 갈 것인가</h2>
+    <p>보험사의 재심사로도 풀리지 않으면 두 갈래가 있다. 하나는 <span class="term">분쟁조정</span>이다. 금융감독원의 금융분쟁조정위원회가 양쪽 주장을 듣고 조정안을 내는데, 신청에 비용이 들지 않고 서면으로 진행할 수 있다. 법은 처리 기한을 정해 두었지만(신청 후 약 30일 안에 위원회 회부, 회부 후 약 60일 안에 조정안 작성, 2026년 기준), 사실 조사가 길어지면 실제로는 몇 달이 걸리기도 한다. 양쪽이 조정안을 받아들이면 조정이 성립하고, 그 조정은 <b>재판상 화해와 같은 효력</b>을 가진다. 어느 한쪽이 받아들이지 않으면 조정은 성립하지 않고 소송으로 갈 수 있다. 한국소비자원의 소비자분쟁조정위원회도 비슷한 역할을 한다.</p>
+    <p>금융소비자보호법은 작은 분쟁에서 소비자를 보호하는 장치를 하나 더 두었다. 일반 금융소비자가 신청한 <b>일정 금액 이하의 소액 분쟁</b>(2026년 기준 약 2,000만원 이하)은 조정 절차가 끝나기 전에 금융회사가 소송을 제기할 수 없다. 보험사가 먼저 "줄 돈이 없다"는 소송(채무부존재 확인 소송)을 걸어 소비자를 압박하는 것을 막기 위해서다. 다른 갈래인 <span class="term">소송</span>은 최종적인 판단을 받을 수 있지만, 시간이 가장 오래 걸리고 인지대·변호사 보수 같은 비용이 든다.</p>
+    <p>아래에서 경로를 고르고 청구 금액과 "내 주장이 받아들여질 가능성"(스스로의 판단)을 바꿔 본다. 경로마다 기대할 수 있는 회수액, 비용, 시간을 함께 보여 준다.</p>
+
+    <div class="sim" id="sim-path">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>재심사 · 분쟁조정 · 소송, 경로별 시간과 비용</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pt-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="pt-r"><button data-value="0">재심사까지</button><button data-value="1" class="on">분쟁조정까지</button><button data-value="2">소송까지</button></div>
+          <label class="ctrl"><span>다투는 보험금 <output id="pt-a-out"></output></span><input type="range" id="pt-a" min="500000" max="100000000" step="500000" value="12000000"></label>
+          <label class="ctrl"><span>내 주장이 인정될 가능성 <output id="pt-p-out"></output></span><input type="range" id="pt-p" min="5" max="95" step="5" value="50"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대 회수액</span><span class="v" id="pt-o-e">—</span></div>
+        <div class="stat"><span class="k">드는 비용(가정)</span><span class="v" id="pt-o-c">—</span></div>
+        <div class="stat"><span class="k">걸리는 시간(대략)</span><span class="v" id="pt-o-t">—</span></div>
+        <div class="stat"><span class="k">소액분쟁 보호</span><span class="v" id="pt-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(1,200만원, 가능성 50%)에서 "분쟁조정까지"는 비용 없이 몇 달이 걸린다. 금액이 2,000만원 이하라 조정 중 보험사가 소송을 걸 수 없다. ② 금액을 100만원으로 내리고 "소송까지"를 누른다. 기대 회수액보다 비용이 커져 순기대값이 음수가 된다. 작은 분쟁은 소송으로 끝까지 가는 것이 대개 손해다. ③ 금액을 1억원으로, 가능성을 80%로 올린다. 이제는 소송 비용을 치르고도 기대값이 크게 남는다. 큰 금액일수록 전문가(손해사정사·변호사)의 검토가 값을 한다. (교육용 가정: 재심사 비용 0원·약 1개월, 분쟁조정 비용 0원·약 4개월, 소송은 분쟁조정 뒤 진행해 약 12개월 추가, 비용은 인지대 약 0.45%와 변호사 보수 청구액의 10%(최소 300만원)로 가정. 단계별로 인정 가능성이 같다고 단순화했다. 실제 비용과 결과는 사건마다 크게 다르다.)</div>
+    </div>
+
+    <p>시뮬레이터가 말하는 것은 "무조건 끝까지 가라"도 "적당히 포기하라"도 아니다. <b>금액과 근거의 강도에 맞는 경로</b>를 고르라는 것이다. 근거가 탄탄하고 금액이 작다면 재심사와 분쟁조정이 시간과 돈 모두 아낀다. 금액이 크고 쟁점이 법적 해석이라면 조정안을 받아들이지 않을 가능성까지 생각해 처음부터 전문가와 상의하는 편이 낫다. 어느 길이든 지금까지 받은 서류, 통보서, 통화 기록을 시간 순으로 정리해 두는 것이 가장 큰 무기다.</p>
+  </section>
+
+  <section id="fraud">
+    <h2>보험사기의 선</h2>
+    <p>청구는 권리지만, 선을 넘으면 범죄다. 실제로 입원할 필요가 없는데 입원한 것처럼 꾸미는 허위 입원, 다친 정도를 부풀리는 과장 청구, 받지 않은 치료를 받은 것처럼 서류를 만드는 것, 실손으로 보장되지 않는 미용 시술을 다른 치료로 둔갑시키는 것은 모두 <span class="term">보험사기</span>다. 병원이나 브로커가 "실손으로 처리해 주겠다", "입원하면 일당이 나온다"며 권하는 경우가 있지만, 그 제안에 응한 환자도 처벌 대상이 된다.</p>
+    <p>보험사기방지특별법은 보험사기를 형법의 사기죄보다 무겁게 처벌하도록 정하고 있다(10년 이하의 징역 또는 5,000만원 이하의 벌금, 2026년 기준). 금액이 크거나 상습이면 더 무겁게 처벌하고, 보험사기를 알선·권유·광고하는 행위도 처벌하도록 법이 강화되어 왔다. 받은 보험금은 돌려줘야 하고, 계약이 해지될 수 있다. 보험사기는 결국 모든 가입자의 보험료를 올린다. 16장에서 본 손해율의 일부가 바로 이런 새는 돈이다.</p>
+    <p>반대로 정당한 청구를 망설일 이유는 없다. 작은 금액을 자주 청구한다고 보험사기가 되는 것이 아니다. 경계는 <b>사실과 다르게 꾸미느냐</b>에 있다. 실제로 받은 치료를, 실제로 낸 돈만큼, 약관이 정한 대로 청구하는 것은 가입자의 당연한 권리다.</p>
+
+    <div class="callout warn">
+      <strong>제도와 기준은 해마다 바뀐다</strong>
+      실손보험 청구 전산화(실손24)의 참여 기관, 분쟁조정의 처리 기한, 소액분쟁의 기준 금액, 손해사정사 선임 기준, 보험사기방지특별법의 처벌 수준 등 이 장의 제도는 2026년 기준이며 바뀔 수 있다. 지급 기한과 필요 서류는 약관과 회사마다 다르다. 이 장의 시뮬레이터 숫자는 교육용 모델과 가정에서 나온 값이고 법률 자문이 아니다. 실제 분쟁에서는 약관, 금융감독원 안내, 필요하면 손해사정사·변호사의 조언을 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 민서의 충수염, 그리고 아버지의 분쟁</h2>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 17장</span></div>
+      <h4>충수염 수술 한 번에 청구 세 건</h4>
+      <p>민서의 연락을 받은 도윤은 먼저 민서가 가진 계약을 훑었다. 4세대 개인 실손, 회사 단체보험의 단체실손, 그리고 단체보험 증권에 있던 질병수술비 특약(이 사례에서는 30만원으로 가정). 청구할 것이 세 건이었다. 민서는 진료비 영수증과 세부내역서, 질병 코드가 적힌 입퇴원확인서, 수술 코드가 적힌 수술확인서를 원무과에서 한 번에 받았다. 다닌 병원이 실손24에 참여하고 있어 개인 실손은 앱에서 병원과 진료 건을 골라 종이 없이 보냈다.</p>
+      <p>이 책의 교육용 모델로 계산하면 총 진료비 350만원(비급여 25%) 가운데 건강보험이 210만원을 내고, 민서가 창구에서 낸 돈은 140만원이다. 개인 실손만 있었다면 약 103만원을 받고 약 37만원이 남는다. 단체실손이 함께 있어 두 회사가 비례보상으로 나눠 합계 126만원(개인 약 57만원, 단체 약 69만원)을 냈고, 민서의 부담은 14만원으로 줄었다. 여기에 정액 수술비 30만원을 따로 받았다. "실손이 두 개라고 두 배는 아니구나." 민서의 말에 도윤은 8장에서 본 개인실손 중지 이야기를 다시 꺼냈다. 회사를 다니는 동안 두 실손의 보험료를 함께 낼지는 따로 정할 문제다.</p>
+      <p>청구가 끝나자 지우가 오래된 이야기를 꺼냈다. 10년쯤 전, 아버지가 가입 1년 반 만에 큰 병으로 진단비를 청구했다가 고지의무 위반으로 계약 해지와 부지급 통보를 받은 일이다. 가입 몇 년 전 위 용종을 떼어 낸 사실을 청약서에 쓰지 않았던 것이다. 아버지는 보험사에 재심사를 요청하며 "용종과 이번 병은 관계가 없다"는 주치의 소견서를 냈지만 받아들여지지 않았고, 결국 금융감독원에 분쟁조정을 신청했다. 쟁점은 인과관계였다. 해지 요건(안 날 1개월, 계약 3년, 보장개시 2년 안의 사고)은 갖췄지만 숨긴 사실이 사고에 영향을 주지 않았다면 보험금은 지급해야 한다. 조정 과정에서 보험사가 보험금을 지급하는 쪽으로 정리되었고, 계약은 해지된 채로 끝났다. 도윤은 "아버님 경우는 인과관계로 보험금은 지켰지만 보장은 잃으셨어. 그래서 고지는 처음부터 정확히 하는 게 제일 싸게 먹혀."라고 말했다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>민서의 수술 청구 완료(실손 2건 비례보상 126만원 + 정액 수술비 30만원, 교육용 모델). 실손24로 전산 청구. 분쟁이 생기면 재심사 → 분쟁조정 → 소송 순서로 금액에 맞춰 판단.</div><div><b>아직 남은 문제</b>지우네 보장의 공백과 중복을 한 장에 정리하고, 무엇을 더하고 뺄지 결정해야 한다. 두 실손을 함께 유지할지도 그중 하나다.</div><div><b>다음 단계</b><a href="planning.html">18장</a>에서 지금까지의 분석을 모아 최종 보장 분석표를 만든다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>청구의 흐름은 사고 → 서류 → 청구 → 심사(손해사정) → 지급/부지급 → 이의 제기 → 분쟁조정 → 소송이다. 대부분은 지급에서 끝난다.</li>
+      <li>실손은 돈의 증거(영수증·세부내역서), 정액은 사유의 증거(진단서·조직검사 결과지·수술확인서·입퇴원확인서)가 핵심이다. 한 번의 치료로 여러 계약을 청구할 수 있다.</li>
+      <li>보험사는 서류 접수 후 보통 3영업일 안에 지급하고, 조사가 필요하면 지급 예정일을 알려 기한을 늘린다(약관마다 다름). 가입자의 청구권은 사고일부터 3년이 지나면 시효로 사라진다.</li>
+      <li>실손24 전산 청구는 청구 수고를 줄여 버려지던 작은 보험금을 살린다. 숨은 보험금은 내보험찾아줌, 계약 목록은 내보험다보여에서 찾는다. 실손이 여러 개면 비례보상, 정액은 각각 받는다.</li>
+      <li>지급 결정은 보험사가 하지만 손해사정사의 조사, 자문의의 의료자문이 근거가 된다. 가입자도 손해사정사를 선임할 수 있고, 의학적 판단이 엇갈리면 제3의료기관 판정을 요청할 수 있다.</li>
+      <li>고지의무 위반 해지는 안 날 1개월, 계약일 3년, 보장개시 후 무사고 2년의 제한이 있고, 숨긴 사실과 사고에 인과관계가 없으면 보험금은 지급된다. 진단 확정·수술의 정의·입원 필요성·면책은 약관의 정의를 둘러싼 흔한 분쟁 유형이다.</li>
+      <li>금융감독원 분쟁조정은 비용이 없고, 성립하면 재판상 화해의 효력이 있다. 일정 금액 이하 소액분쟁은 조정 중 금융회사가 소송을 걸 수 없다. 경로는 금액과 근거의 강도에 맞춰 고른다. 사실과 다르게 꾸민 청구는 보험사기로 무겁게 처벌된다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>개인 실손(단독으로 계산하면 100만원 지급)과 단체실손(단독으로 계산하면 120만원 지급)이 같은 입원비를 보장한다. 가장 알맞은 설명은?</p>
+        <div class="opts">
+          <button class="opt">두 계약에서 각각 받아 220만원을 받는다</button>
+          <button class="opt">먼저 청구한 회사 한 곳에서만 받는다</button>
+          <button class="opt" data-correct>두 회사가 합산 한도 안에서 단독 보상액 비율로 나눠 내므로, 합계는 실제 낸 돈을 넘지 않는다</button>
+          <button class="opt">단체실손이 있으면 개인 실손은 자동으로 해지된다</button>
+        </div>
+        <div class="quiz-exp">실손보험은 실제 손해를 넘어서 보상하지 않는다. 여러 실손이 같은 비용을 보장하면 각 회사의 단독 보상액 비율로 나눠 내는 비례보상이 적용된다. 정액 보험(수술비·진단비)은 이와 달리 계약마다 따로 받는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2023년 5월 10일에 통원 치료를 받고 영수증을 잊고 있었다. 2026년 10월 5일 기준으로 옳은 것은? (시효 중단 사유 없음)</p>
+        <div class="opts">
+          <button class="opt" data-correct>사고일부터 3년이 지나 청구권이 시효로 소멸했을 가능성이 크다</button>
+          <button class="opt">보험 계약이 유지되는 동안에는 언제든 청구할 수 있다</button>
+          <button class="opt">5년 안이므로 아직 청구할 수 있다</button>
+          <button class="opt">실손24로 청구하면 기한이 없다</button>
+        </div>
+        <div class="quiz-exp">보험금 청구권의 소멸시효는 3년이다. 2023년 5월 10일 사고라면 2026년 5월 무렵 시효가 끝났다. 전산 청구 여부와 상관없이 시효는 같다. 작은 금액일수록 미루지 않고 바로 청구하는 것이 좋다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>가입 1년 4개월 만에 교통사고로 골절 수술을 받고 수술비를 청구했다. 보험사가 가입 전 위 용종 제거 사실을 알리지 않았다며 2주 뒤 해지를 통보했다. 가장 알맞은 결론은?</p>
+        <div class="opts">
+          <button class="opt">고지의무를 어겼으므로 계약 해지와 함께 이번 보험금도 받을 수 없다</button>
+          <button class="opt" data-correct>해지 요건은 갖췄을 수 있지만, 용종과 골절 사이에 인과관계가 없으므로 이번 수술비는 지급되어야 한다</button>
+          <button class="opt">가입 1년이 지났으므로 보험사는 어떤 경우에도 해지할 수 없다</button>
+          <button class="opt">설계사에게 말로 알렸다면 청약서에 쓰지 않았어도 고지한 것으로 본다</button>
+        </div>
+        <div class="quiz-exp">사고가 보장개시 후 2년 안이고, 계약 3년 안이며, 안 날부터 1개월 안에 통보했으므로 해지 요건은 갖췄을 수 있다. 그러나 숨긴 사실(위 용종)이 이번 사고(교통사고 골절)에 영향을 주지 않았으므로 보험금은 지급한다. 설계사에게는 고지수령권이 없어 말로 한 것만으로는 고지가 되지 않을 수 있다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>금융감독원 분쟁조정에 대한 설명으로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt">신청 비용이 소송보다 비싸지만 결과가 빠르다</button>
+          <button class="opt">조정안은 양쪽이 받아들이지 않아도 판결과 같은 효력이 있다</button>
+          <button class="opt">분쟁조정을 먼저 거치지 않으면 소송을 할 수 없다</button>
+          <button class="opt" data-correct>양쪽이 조정안을 받아들여 성립하면 재판상 화해와 같은 효력이 있고, 일정 금액 이하 소액분쟁은 조정 중 금융회사가 소송을 제기할 수 없다</button>
+        </div>
+        <div class="quiz-exp">분쟁조정은 신청 비용이 없고, 양쪽이 수락해 성립하면 재판상 화해와 같은 효력을 가진다. 어느 쪽이든 수락하지 않으면 성립하지 않는다. 금융소비자보호법은 일반 금융소비자가 신청한 소액분쟁(2026년 기준 약 2,000만원 이하)에 대해 조정 절차가 끝나기 전 금융회사의 소송 제기를 막는다. 조정을 거치지 않고 바로 소송할 수도 있다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function hline(ctx, x0, x1, y, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke(); ctx.restore();
+  }
+  function fitText(ctx, s, maxW, size, weight) {
+    let fs = size; ctx.font = IB.font(fs, false, weight);
+    while (ctx.measureText(s).width > maxW && fs > 9) { fs -= 0.5; ctx.font = IB.font(fs, false, weight); }
+    return fs;
+  }
+
+  /* ---------------------------------------------------------- 1. 청구 서류 체크리스트 */
+  (function () {
+    const DOCS = [
+      { k: "form", t: "보험금 청구서·동의서" },
+      { k: "id", t: "신분증·통장 사본" },
+      { k: "rcpt", t: "진료비 영수증" },
+      { k: "detail", t: "진료비 세부내역서" },
+      { k: "rx", t: "처방전·약제비 영수증" },
+      { k: "adm", t: "입퇴원확인서" },
+      { k: "diag", t: "진단서" },
+      { k: "surg", t: "수술확인서" },
+      { k: "path", t: "조직검사 결과지" },
+      { k: "death", t: "사망진단서" },
+      { k: "family", t: "가족관계증명서" },
+    ];
+    // 2: 필수, 1: 경우에 따라
+    const NEED = {
+      clinic: { form: 2, id: 2, rcpt: 2, detail: 1, rx: 1 },
+      inpatient: { form: 2, id: 2, rcpt: 2, detail: 2, adm: 2, diag: 1 },
+      surgery: { form: 2, id: 2, surg: 2, diag: 1, adm: 1 },
+      diag: { form: 2, id: 2, diag: 2, path: 2, adm: 1 },
+      death: { form: 2, id: 2, death: 2, family: 2 },
+    };
+    const WHY = {
+      rcpt: "정액 보험은 쓴 돈과 상관없이 정해진 금액을 주므로 영수증이 필요 없다.",
+      detail: "세부내역서는 실손에서 비급여 항목을 확인할 때 쓴다.",
+      rx: "약값을 청구하는 실손 통원 청구에서 쓴다.",
+      adm: "입원하지 않은 청구에는 필요 없다.",
+      diag: "이 청구는 진단서 없이 다른 서류로 지급 사유를 확인한다.",
+      surg: "수술을 받지 않았거나 수술비 특약을 청구하지 않으면 필요 없다.",
+      path: "조직검사 결과지는 암 등 진단 확정이 필요한 진단비 청구에서 쓴다.",
+      death: "사망보험금 청구에서만 쓴다.",
+      family: "사망보험금의 수익자·상속인 확인에 쓴다.",
+    };
+    const KNAME = { clinic: "실손 통원", inpatient: "실손 입원", surgery: "수술비", diag: "진단비", death: "사망보험금" };
+    const have = new Set();
+    let cv = null, G = null, note = "";
+    const kind = IB.seg("dc-kind", () => { note = ""; redraw(); });
+    const redraw = () => cv && cv.redraw();
+    const el = document.getElementById("dc-cv");
+    const msg = document.getElementById("dc-msg"), msg0 = msg.innerHTML;
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette(), need = NEED[kind()];
+      const cols = w >= 600 ? 4 : w >= 420 ? 3 : 2, gap = 8, pad = 12;
+      const cw = (w - pad * 2 - gap * (cols - 1)) / cols, ch = 46;
+      const rects = [];
+      T(ctx, KNAME[kind()] + " 청구", pad, 18, { size: 12.5, color: P.dim, weight: 600, base: "middle" });
+      DOCS.forEach((d, i) => {
+        const x = pad + (i % cols) * (cw + gap), y = 32 + Math.floor(i / cols) * (ch + gap);
+        const lv = need[d.k] || 0, on = have.has(d.k);
+        rects.push({ x, y, w: cw, h: ch, k: d.k });
+        ctx.save();
+        rrect(ctx, x, y, cw, ch, 8);
+        ctx.fillStyle = on ? (lv ? P.ok : P.warn) : P.surface; ctx.globalAlpha = on ? 0.22 : 1; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.lineWidth = lv === 2 ? 2 : 1.2; ctx.setLineDash(lv === 1 ? [4, 3] : []);
+        ctx.strokeStyle = lv ? (on ? P.ok : P.accent) : P.border; ctx.stroke(); ctx.restore();
+        // 체크 상자
+        const bx = x + 10, by = y + ch / 2 - 7;
+        ctx.save(); ctx.strokeStyle = lv ? P.text : P.faint; ctx.lineWidth = 1.4; ctx.strokeRect(bx, by, 14, 14);
+        if (on) { ctx.strokeStyle = lv ? P.ok : P.warn; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(bx + 3, by + 7); ctx.lineTo(bx + 6, by + 11); ctx.lineTo(bx + 12, by + 3); ctx.stroke(); }
+        ctx.restore();
+        const fs = fitText(ctx, d.t, cw - 36, 12.5, lv === 2 ? 600 : 400);
+        T(ctx, d.t, x + 30, y + ch / 2 - (lv ? 6 : 0), { size: fs, color: lv ? P.text : P.faint, base: "middle", weight: lv === 2 ? 600 : 400 });
+        if (lv) T(ctx, lv === 2 ? "필수" : "경우에 따라", x + 30, y + ch / 2 + 10, { size: 10.5, color: lv === 2 ? P.accent : P.dim, base: "middle" });
+      });
+      G = { rects };
+      const req = Object.keys(need).filter((k) => need[k] === 2), miss = req.filter((k) => !have.has(k));
+      const extra = [...have].filter((k) => !need[k]);
+      IB.stat("dc-o-n", (req.length - miss.length) + " <small>/ " + req.length + "</small>");
+      IB.stat("dc-o-m", miss.length ? tone("bad-t", miss.length + "<small>개</small>") : tone("ok-t", "없음"));
+      IB.stat("dc-o-s", miss.length ? tone("warn-t", "보완 요청 가능") : extra.length ? tone("warn-t", "청구 가능(불필요 " + extra.length + ")") : tone("ok-t", "청구 가능"));
+      if (note) msg.innerHTML = note;
+      else if (miss.length && have.size) msg.innerHTML = "<b>빠진 필수 서류:</b> " + miss.map((k) => DOCS.find((d) => d.k === k).t).join(", ") + ". 빠진 채로 청구하면 보험사가 보완을 요청하고, 그만큼 지급 기한이 밀린다.";
+      else if (!miss.length) msg.innerHTML = "<b>" + KNAME[kind()] + "</b> 청구에 필요한 필수 서류를 모두 갖췄다. 점선 카드는 상황에 따라 요청받을 수 있다. 보험금 청구서·동의서와 신분증·통장은 보험사 앱으로 청구하면 화면에서 대신한다.";
+      else msg.innerHTML = msg0;
+    }, { get height() { const w = el.parentElement.clientWidth || 600; const cols = w >= 600 ? 4 : w >= 420 ? 3 : 2; return 32 + Math.ceil(DOCS.length / cols) * 54 + 30; } });
+    IB.drag(cv.canvas, {
+      start(x, y) {
+        if (!G) return;
+        const r = G.rects.find((q) => x >= q.x && x <= q.x + q.w && y >= q.y && y <= q.y + q.h);
+        if (!r) return;
+        if (have.has(r.k)) have.delete(r.k); else have.add(r.k);
+        const need = NEED[kind()];
+        note = !need[r.k] && have.has(r.k) ? "<b>" + DOCS.find((d) => d.k === r.k).t + "</b>는 " + KNAME[kind()] + " 청구에 필요 없다. " + (WHY[r.k] || "") + " 발급 수수료만 든다." : "";
+        redraw();
+      },
+    });
+    document.getElementById("dc-all").addEventListener("click", () => { have.clear(); const need = NEED[kind()]; Object.keys(need).forEach((k) => { if (need[k] === 2) have.add(k); }); note = ""; redraw(); });
+    document.getElementById("dc-clear").addEventListener("click", () => { have.clear(); note = ""; redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 2. 소멸시효·지급 기한 달력 */
+  (function () {
+    const DAY = 86400000, TODAY = Date.UTC(2026, 9, 5);
+    const T0 = Date.UTC(2022, 6, 1), T1 = Date.UTC(2028, 0, 1);
+    let ev = TODAY - 730 * DAY, cl = TODAY, G = null, grab = null, cv = null;
+    const invEl = document.getElementById("dl-inv");
+    const redraw = () => cv && cv.redraw();
+    invEl.addEventListener("change", redraw);
+    const addYears = (t, y) => { const d = new Date(t); d.setUTCFullYear(d.getUTCFullYear() + y); return d.getTime(); };
+    const addBiz = (t, n) => { let d = t, k = 0; while (k < n) { d += DAY; const wd = new Date(d).getUTCDay(); if (wd !== 0 && wd !== 6) k++; } return d; };
+    const fmt = (t) => { const d = new Date(t); return d.getUTCFullYear() + "." + String(d.getUTCMonth() + 1).padStart(2, "0") + "." + String(d.getUTCDate()).padStart(2, "0"); };
+    const snap = (t) => Math.round(t / DAY) * DAY;
+    cv = IB.canvas("#dl-cv", (ctx, w, h) => {
+      const P = IB.palette(), x0 = 18, x1 = w - 18, X = (t) => x0 + (t - T0) / (T1 - T0) * (x1 - x0);
+      const yA = 70, yB = 150;
+      const exp = addYears(ev, 3), inv = invEl.checked, pay = addBiz(cl, inv ? 30 : 3);
+      // 연도 눈금
+      hline(ctx, x0, x1, yA, P.axis, [], 1.5);
+      for (let y = 2023; y <= 2028; y++) { const t = Date.UTC(y, 0, 1), x = X(t); vline(ctx, x, yA - 5, yA + 5, P.axis, [], 1); T(ctx, String(y), x, yA + 20, { size: 10.5, mono: true, color: P.dim, align: "center" }); }
+      // 시효 구간
+      const xe = X(ev), xx = X(Math.min(exp, T1));
+      ctx.fillStyle = exp >= cl ? P.ok : P.bad; ctx.globalAlpha = 0.18; ctx.fillRect(xe, yA - 22, xx - xe, 22); ctx.globalAlpha = 1;
+      T(ctx, "청구할 수 있는 3년", (xe + xx) / 2, yA - 30, { size: 11, color: exp >= cl ? P.ok : P.bad, align: "center", weight: 600 });
+      if (exp <= T1) { vline(ctx, X(exp), yA - 24, yA + 4, P.bad, [3, 3], 1.5); T(ctx, "만료 " + fmt(exp), Math.min(X(exp), x1 - 4), yA - 44, { size: 10.5, mono: true, color: P.bad, align: X(exp) > x1 - 80 ? "right" : "center" }); }
+      // 오늘
+      vline(ctx, X(TODAY), 22, yB + 28, P.text, [2, 3], 1);
+      T(ctx, "오늘", X(TODAY), 16, { size: 10.5, color: P.text, align: "center", base: "middle" });
+      knob(ctx, xe, yA, P, P.bad, 8);
+      // 청구·지급 줄
+      hline(ctx, x0, x1, yB, P.grid, [], 1);
+      T(ctx, "청구 → 지급 기한", x0, yB - 16, { size: 11, color: P.dim });
+      const xc = X(cl), xp = X(Math.min(pay, T1));
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.3; ctx.fillRect(xc, yB - 7, Math.max(2, xp - xc), 14); ctx.globalAlpha = 1;
+      knob(ctx, xc, yB, P, P.accent, 8);
+      const lbl = (inv ? "약 30영업일 " : "3영업일 ") + fmt(pay);
+      T(ctx, lbl, Math.min(xc, x1 - 140), yB + 26, { size: 10.5, mono: false, color: P.accent });
+      G = { X, x0, x1, yA, yB };
+      const left = Math.round((exp - cl) / DAY);
+      IB.stat("dl-o-e", fmt(exp));
+      IB.stat("dl-o-r", left >= 0 ? (left > 365 ? (left / 365).toFixed(1) + "<small>년</small>" : left + "<small>일</small>") : tone("bad-t", "지남"));
+      IB.stat("dl-o-p", left >= 0 ? fmt(pay) : "—");
+      IB.stat("dl-o-s", left < 0 ? tone("bad-t", "시효 소멸") : left < 90 ? tone("warn-t", "만료 임박") : tone("ok-t", "청구 가능"));
+    }, { height: 210 });
+    IB.drag(cv.canvas, {
+      start(x, y) { if (!G) return; grab = Math.abs(y - G.yA) < Math.abs(y - G.yB) ? "ev" : "cl"; },
+      move(x) {
+        if (!G || !grab) return;
+        const t = snap(T0 + (IB.clamp(x, G.x0, G.x1) - G.x0) / (G.x1 - G.x0) * (T1 - T0));
+        if (grab === "ev") { ev = Math.min(t, TODAY); if (cl < ev) cl = ev; }
+        else cl = IB.clamp(t, ev, T1);
+        redraw();
+      },
+      end() { grab = null; },
+    });
+    document.getElementById("dl-p1").addEventListener("click", () => { ev = addYears(TODAY, -2); cl = TODAY; redraw(); });
+    document.getElementById("dl-p2").addEventListener("click", () => { ev = TODAY - 1180 * DAY; cl = TODAY; redraw(); });
+    document.getElementById("dl-p3").addEventListener("click", () => { ev = TODAY - DAY; cl = TODAY; redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 실손24: 버려지는 보험금 */
+  (function () {
+    const MIN = { paper: 60, app: 15, e: 3 }, MNAME = { paper: "종이 서류", app: "앱 사진", e: "실손24 전산" };
+    const NV = 1000;
+    const rnd = IB.rng(1724), gn = IB.randnSeeded(1724);
+    const VISITS = [];
+    for (let i = 0; i < NV; i++) {
+      const cost = Math.round(50000 * Math.exp(0.75 * gn()) / 100) * 100;
+      const nc = rnd() * 0.5, u = rnd(), gen = u < 0.25 ? 2 : u < 0.5 ? 3 : 4;
+      const setting = rnd() < 0.6 ? "clinic" : "hospital";
+      const m = INS.medical({ cost, nonCov: nc, setting, gen });
+      VISITS.push({ pay: m.silson, yJ: rnd() });
+    }
+    let cv = null, idx = 0, acc = 0, paused = false, dots = [], done = [];
+    const mode = IB.seg("s24-m", () => reset());
+    const V = IB.range("s24-v", (v) => won(v), () => reset());
+    function reset() { idx = 0; dots = []; done = []; if (cv) cv.redraw(); }
+    const hassle = () => (MIN[mode()] / 60) * V();
+    cv = IB.canvas("#s24-cv", (ctx, w, h) => {
+      const P = IB.palette(), hz = hassle();
+      const gateX = Math.round(w * 0.45), midY = h / 2;
+      // 영역
+      ctx.fillStyle = P.ok; ctx.globalAlpha = 0.08; ctx.fillRect(gateX + 30, 8, w - gateX - 38, midY - 14); ctx.globalAlpha = 1;
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.08; ctx.fillRect(gateX + 30, midY + 6, w - gateX - 38, midY - 14); ctx.globalAlpha = 1;
+      T(ctx, "청구", w - 14, 24, { size: 12, color: P.ok, align: "right", weight: 700 });
+      T(ctx, "포기", w - 14, h - 14, { size: 12, color: P.bad, align: "right", weight: 700 });
+      vline(ctx, gateX, 20, h - 20, P.text, [5, 4], 1.5);
+      T(ctx, "받을 돈 > 수고?", gateX, 14, { size: 11, color: P.text, align: "center", base: "middle" });
+      T(ctx, "수고 " + won(Math.round(hz / 100) * 100), gateX, h - 8, { size: 11, color: P.dim, align: "center" });
+      T(ctx, "진료가 들어온다", 10, midY - 30, { size: 11, color: P.dim });
+      // 결과 점
+      done.forEach((d) => { ctx.fillStyle = d.ok ? P.ok : P.bad; ctx.globalAlpha = 0.75; ctx.beginPath(); ctx.arc(d.x, d.y, 2.6, 0, TAU); ctx.fill(); });
+      ctx.globalAlpha = 1;
+      dots.forEach((d) => { const r = 2.5 + Math.min(5, Math.sqrt(d.v.pay / 4000)); ctx.fillStyle = d.x < gateX ? P.accent : d.ok ? P.ok : P.bad; ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, TAU); ctx.fill(); });
+      // 통계
+      let n = 0, nf = 0, sum = 0, sf = 0;
+      done.forEach((d) => { n++; sum += d.v.pay; if (!d.ok) { nf++; sf += d.v.pay; } });
+      IB.stat("s24-o-t", MIN[mode()] + "<small>분</small>");
+      IB.stat("s24-o-n", n ? tone(nf / n > 0.5 ? "bad-t" : "warn-t", IB.pct(nf / n, 0)) : "—");
+      IB.stat("s24-o-w", sum ? IB.pct(sf / sum, 0) : "—");
+      IB.stat("s24-o-c", n + " <small>/ " + NV + "</small>");
+    }, { aspect: 0.6, minHeight: 260, maxHeight: 340 });
+    IB.loop(cv.canvas, (dt) => {
+      if (paused) return;
+      const w = cv.w, h = cv.h, gateX = Math.round(w * 0.45), midY = h / 2, hz = hassle();
+      acc += dt;
+      while (acc > 0.03 && idx < NV) { acc -= 0.03; const v = VISITS[idx++]; dots.push({ v, x: 8, y: midY + (v.yJ - 0.5) * 40, ok: v.pay > hz && v.pay > 0, ty: 0 }); }
+      if (idx >= NV) acc = 0;
+      const sp = 220 * dt;
+      dots.forEach((d) => {
+        d.x += sp;
+        if (d.x > gateX && !d.ty) { d.ty = d.ok ? 16 + d.v.yJ * (midY - 34) : midY + 14 + d.v.yJ * (midY - 34); d.tx = gateX + 40 + rndX() * (w - gateX - 90); }
+        if (d.ty) d.y += (d.ty - d.y) * Math.min(1, dt * 6);
+      });
+      const keep = [];
+      dots.forEach((d) => { if (d.ty && d.x >= d.tx) { done.push({ x: d.tx, y: d.ty, ok: d.ok, v: d.v }); } else keep.push(d); });
+      dots = keep;
+      cv.redraw();
+    });
+    const rx = IB.rng(99); function rndX() { return rx(); }
+    const pb = document.getElementById("s24-pause");
+    pb.addEventListener("click", () => { paused = !paused; pb.textContent = paused ? "재생" : "일시정지"; });
+    document.getElementById("s24-re").addEventListener("click", reset);
+  })();
+
+  /* ---------------------------------------------------------- 4. 민서의 수술비 나누기 */
+  (function () {
+    const FIX = 300000;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const Cr = IB.range("sp-c", (v) => won(v), redraw);
+    const Nr = IB.range("sp-n", (v) => v + "%", redraw);
+    const gEl = document.getElementById("sp-g"), fEl = document.getElementById("sp-f");
+    gEl.addEventListener("change", redraw); fEl.addEventListener("change", redraw);
+    function calc() {
+      const o = { cost: Cr(), nonCov: Nr() / 100, setting: "inpatient" };
+      const a = INS.medical(Object.assign({ gen: 4 }, o));
+      let sa = a.silson, sg = 0;
+      if (gEl.checked) {
+        const g = INS.medical(Object.assign({ gen: 2 }, o));
+        const selfA = a.patient - a.silson, selfG = g.patient - g.silson;
+        const lim = Math.min(a.patient - Math.min(selfA, selfG), a.silson + g.silson);
+        const den = a.silson + g.silson || 1;
+        sa = lim * a.silson / den; sg = lim * g.silson / den;
+      }
+      const fix = fEl.checked ? FIX : 0;
+      return { a, sa, sg, fix, oop: a.patient - sa - sg, net: a.patient - sa - sg - fix, solo: a.silson };
+    }
+    cv = IB.canvas("#sp-cv", (ctx, w, h) => {
+      const P = IB.palette(), C = calc(), cost = Cr();
+      const x0 = 16, x1 = w - 16, X = (v) => x0 + (v / cost) * (x1 - x0);
+      // 총 진료비 막대
+      T(ctx, "총 진료비 " + won(cost), x0, 18, { size: 12, color: P.dim, base: "middle" });
+      const y1 = 30, bh = 34;
+      const segs = [[C.a.nhis, P.accent, "건강보험"], [C.sa, P.ok, "개인 실손"], [C.sg, P.accent2, "단체실손"], [C.oop, P.bad, "내 부담"]];
+      let s = 0;
+      segs.forEach(([v, col, lab]) => {
+        if (v <= 0) return;
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(X(s), y1, X(s + v) - X(s), bh); ctx.globalAlpha = 1;
+        if (X(s + v) - X(s) > 52) T(ctx, IB.wonAxis(v), (X(s) + X(s + v)) / 2, y1 + bh / 2 + 1, { size: 11, mono: true, color: "#fff", align: "center", base: "middle", weight: 600 });
+        s += v;
+      });
+      // 창구에서 낸 돈 괄호
+      const ys = y1 + bh + 10;
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(X(C.a.nhis), ys); ctx.lineTo(X(C.a.nhis), ys + 6); ctx.lineTo(X(cost), ys + 6); ctx.lineTo(X(cost), ys); ctx.stroke();
+      T(ctx, "창구에서 낸 돈 " + won(C.a.patient), X(cost), ys + 20, { size: 11.5, color: P.text, align: "right", base: "middle" });
+      // 받는 돈 vs 낸 돈 비교 막대
+      const B = { x: 110, y: ys + 44, w: w - 110 - 20, h: h - (ys + 44) - 12 };
+      const rows = [["실손 하나만", C.solo, P.ok], ["실손 합계", C.sa + C.sg, P.ok], ["정액 수술비", C.fix, P.accent2], ["최종 내 부담", C.net, C.net >= 0 ? P.bad : P.ok]];
+      const span = Math.max(C.a.patient, C.sa + C.sg + C.fix) * 1.1;
+      const Z = B.x + (C.net < 0 ? B.w * 0.18 : 0), S = (B.x + B.w - Z) / span, rh = B.h / rows.length;
+      vline(ctx, Z, B.y, B.y + B.h, P.axis, [], 1);
+      vline(ctx, Z + C.a.patient * S, B.y, B.y + B.h, P.dim, [4, 3], 1);
+      rows.forEach(([lab, v, col], i) => {
+        const y = B.y + rh * i + rh / 2, bh2 = Math.min(18, rh * 0.6);
+        T(ctx, lab, B.x - 8, y, { size: 11.5, color: P.text, align: "right", base: "middle", weight: i === 3 ? 700 : 400 });
+        ctx.fillStyle = col; ctx.globalAlpha = i === 0 ? 0.4 : 0.85;
+        const bx = v >= 0 ? Z : Z + v * S; ctx.fillRect(bx, y - bh2 / 2, Math.max(1.5, Math.abs(v) * S), bh2); ctx.globalAlpha = 1;
+        const str = (v < 0 ? "+" : "") + won(Math.abs(v)) + (i === 3 && v < 0 ? " 남음" : "");
+        T(ctx, str, Math.max(Z, Z + v * S) + 5, y, { size: 11, mono: true, color: P.text, base: "middle" });
+      });
+      IB.stat("sp-o-p", won(C.a.patient));
+      IB.stat("sp-o-s", won(C.sa + C.sg) + " <small>(" + IB.wonAxis(C.sa) + " / " + IB.wonAxis(C.sg) + ")</small>");
+      IB.stat("sp-o-f", C.fix ? won(C.fix) : "없음");
+      IB.stat("sp-o-o", C.net >= 0 ? tone(C.net > 1e6 ? "bad-t" : "warn-t", won(C.net)) : tone("ok-t", "+" + won(-C.net) + " 남음"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 360 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 고지의무 위반 타임라인 */
+  (function () {
+    const D = INS.KR.disclosure, M = 60;
+    let ev = 18, kn = 18.5, G = null, grab = null, cv = null;
+    const redraw = () => cv && cv.redraw();
+    const N = IB.range("ds-n", (v) => v + "일", redraw);
+    const cEl = document.getElementById("ds-c"), aEl = document.getElementById("ds-a");
+    cEl.addEventListener("change", redraw); aEl.addEventListener("change", redraw);
+    function judge() {
+      const notice = kn + N() / 30.4;
+      const r = [];
+      if (aEl.checked) r.push("설계사가 고지를 방해");
+      if (ev > D.benefitYears * 12) r.push("보장개시 후 " + D.benefitYears + "년 무사고");
+      if (N() > D.knowMonths * 30) r.push("안 날부터 " + D.knowMonths + "개월 경과");
+      if (notice > D.contractYears * 12) r.push("계약일부터 " + D.contractYears + "년 경과");
+      const can = r.length === 0;
+      const pay = !can || !cEl.checked;
+      return { can, pay, r, notice };
+    }
+    cv = IB.canvas("#ds-cv", (ctx, w, h) => {
+      const P = IB.palette(), J = judge();
+      const x0 = 20, x1 = w - 20, X = (m) => x0 + (m / M) * (x1 - x0), yL = 92;
+      // 구간
+      ctx.fillStyle = P.warn; ctx.globalAlpha = 0.12; ctx.fillRect(X(0), yL - 40, X(D.benefitYears * 12) - X(0), 40); ctx.globalAlpha = 1;
+      T(ctx, "보장개시 후 2년", X(12), yL - 46, { size: 10.5, color: P.warn, align: "center" });
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.08; ctx.fillRect(X(0), yL, X(D.contractYears * 12) - X(0), 30); ctx.globalAlpha = 1;
+      T(ctx, "계약일부터 3년(해지 가능 기간)", X(0), yL + 44, { size: 10.5, color: P.accent });
+      hline(ctx, x0, x1, yL, P.axis, [], 1.5);
+      for (let m = 0; m <= M; m += 12) { vline(ctx, X(m), yL - 4, yL + 4, P.axis, [], 1); T(ctx, m === 0 ? "계약" : m / 12 + "년", X(m), yL + 62, { size: 10.5, color: P.dim, align: "center" }); }
+      vline(ctx, X(24), yL - 40, yL, P.warn, [3, 3], 1.2);
+      vline(ctx, X(36), yL, yL + 30, P.accent, [3, 3], 1.2);
+      // 알게 된 날 → 통보
+      const xk = X(kn), xn = X(Math.min(M, J.notice));
+      ctx.fillStyle = N() > 30 ? P.bad : P.ok; ctx.globalAlpha = 0.35; ctx.fillRect(xk, yL + 8, Math.max(2, xn - xk), 10); ctx.globalAlpha = 1;
+      // 손잡이
+      knob(ctx, X(ev), yL - 18, P, P.bad, 8);
+      T(ctx, "사고", X(ev), yL - 32, { size: 11, color: P.bad, align: "center", weight: 700 });
+      knob(ctx, xk, yL + 13, P, P.accent, 7);
+      T(ctx, "보험사가 안 날", Math.min(x1 - 40, Math.max(x0 + 40, xk)), yL + 86, { size: 11, color: P.accent, align: "center", weight: 600 });
+      // 결론 상자
+      const by = yL + 100, bw = (w - 48) / 2;
+      [[J.can ? "계약 해지 가능" : "해지 불가", J.can ? P.bad : P.ok], [J.pay ? "이번 보험금 지급" : "이번 보험금 부지급", J.pay ? P.ok : P.bad]].forEach(([s, col], i) => {
+        const bx = 16 + i * (bw + 16);
+        ctx.save(); rrect(ctx, bx, by, bw, 34, 8); ctx.fillStyle = col; ctx.globalAlpha = 0.15; ctx.fill(); ctx.globalAlpha = 1; ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke(); ctx.restore();
+        const fs = fitText(ctx, s, bw - 12, 13, 700);
+        T(ctx, s, bx + bw / 2, by + 18, { size: fs, color: col, align: "center", base: "middle", weight: 700 });
+      });
+      G = { X, x0, x1, yL };
+      IB.stat("ds-o-r", J.can ? tone("bad-t", "가능") : tone("ok-t", "불가"));
+      IB.stat("ds-o-p", J.pay ? tone("ok-t", "지급") : tone("bad-t", "부지급"));
+      IB.stat("ds-o-w", J.can ? (cEl.checked ? "해지 요건 충족 + 인과관계 있음" : "해지 요건 충족, 인과관계 없음") : J.r.join(", "));
+    }, { height: 290 });
+    IB.drag(cv.canvas, {
+      start(x, y) { if (!G) return; grab = y < G.yL ? "ev" : "kn"; },
+      move(x) {
+        if (!G || !grab) return;
+        const m = Math.round(IB.clamp((x - G.x0) / (G.x1 - G.x0) * M, 0.5, M - 0.5) * 2) / 2;
+        if (grab === "ev") { ev = m; if (kn < ev) kn = ev; } else kn = Math.max(m, 0.5);
+        redraw();
+      },
+      end() { grab = null; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 분쟁 경로의 시간과 비용 */
+  (function () {
+    const SMALL = 2e7;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const route = IB.seg("pt-r", redraw);
+    const A = IB.range("pt-a", (v) => won(v), redraw);
+    const Pp = IB.range("pt-p", (v) => v + "%", redraw);
+    function stage(i) {
+      const a = A(), p = Pp() / 100;
+      const lawyer = Math.max(3e6, a * 0.1), stamp = a * 0.0045;
+      const cost = [0, 0, stamp + lawyer][i];
+      const months = [1, 5, 17][i];
+      return { a, p, cost, months, exp: p * a, net: p * a - cost };
+    }
+    cv = IB.canvas("#pt-cv", (ctx, w, h) => {
+      const P = IB.palette(), r = +route(), a = A();
+      const names = ["재심사·민원", "분쟁조정", "소송(1심)"], cols = [P.accent, P.accent2, P.warn];
+      // 위: 단계 사다리
+      const nw = (w - 32 - 2 * 14) / 3, ny = 18, nh = 50;
+      names.forEach((nm, i) => {
+        const x = 16 + i * (nw + 14), on = i <= r;
+        ctx.save(); rrect(ctx, x, ny, nw, nh, 8); ctx.fillStyle = cols[i]; ctx.globalAlpha = on ? 0.22 : 0.06; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.strokeStyle = on ? cols[i] : P.border; ctx.lineWidth = on ? 2 : 1; ctx.stroke(); ctx.restore();
+        const fs = fitText(ctx, nm, nw - 10, 12.5, 700);
+        T(ctx, nm, x + nw / 2, ny + 20, { size: fs, color: on ? P.text : P.faint, align: "center", base: "middle", weight: 700 });
+        const s = stage(i);
+        T(ctx, "누적 약 " + s.months + "개월", x + nw / 2, ny + 38, { size: 10.5, color: on ? P.dim : P.faint, align: "center", base: "middle" });
+        if (i < 2) { const ax = x + nw + 2; ctx.strokeStyle = i < r ? P.text : P.faint; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(ax, ny + nh / 2); ctx.lineTo(ax + 10, ny + nh / 2); ctx.stroke(); }
+      });
+      if (r >= 1 && a <= SMALL) T(ctx, "소액분쟁: 조정 중 보험사 소송 제기 제한", w / 2, ny + nh + 16, { size: 10.5, color: P.ok, align: "center", base: "middle" });
+      // 아래: 경로별 기대 회수액·비용
+      const B = { x: 86, y: ny + nh + 56, w: w - 86 - 18, h: h - (ny + nh + 56) - 10 };
+      const ss = [0, 1, 2].map(stage);
+      const span = Math.max(a, ...ss.map((s) => s.cost)) * 1.05;
+      const Z = B.x + B.w * 0.22, S = (B.x + B.w - Z) / span;
+      const rh = B.h / 3;
+      vline(ctx, Z, B.y, B.y + B.h, P.axis, [], 1);
+      ss.forEach((s, i) => {
+        const y = B.y + rh * i + rh / 2, bh = Math.min(14, rh * 0.28), on = i === r;
+        ctx.globalAlpha = on ? 1 : 0.4;
+        T(ctx, ["재심사", "분쟁조정", "소송"][i] + "까지", B.x - 8, y, { size: 11.5, color: P.text, align: "right", base: "middle", weight: on ? 700 : 400 });
+        ctx.fillStyle = P.ok; ctx.fillRect(Z, y - bh - 1, s.exp * S, bh);
+        if (s.cost > 0) {
+          const cw = Math.min(Z - B.x - 4, s.cost * S);
+          ctx.fillStyle = P.bad; ctx.fillRect(Z - cw, y + 1, cw, bh);
+          if (s.cost * S > Z - B.x - 4) T(ctx, "≪", Z - cw - 2, y + 1 + bh / 2, { size: 11, color: P.bad, align: "right", base: "middle" });
+        }
+        const netS = (s.net >= 0 ? "순 +" : "순 −") + IB.wonAxis(Math.abs(s.net));
+        T(ctx, netS, Z + s.exp * S + 6, y - bh / 2 - 1, { size: 11, mono: false, color: s.net >= 0 ? P.ok : P.bad, base: "middle", weight: 600 });
+        ctx.globalAlpha = 1;
+      });
+      T(ctx, "← 비용", Z - 4, B.y - 8, { size: 10.5, color: P.bad, align: "right" });
+      T(ctx, "기대 회수액 →", Z + 4, B.y - 8, { size: 10.5, color: P.ok });
+      const s = ss[r];
+      IB.stat("pt-o-e", won(s.exp));
+      IB.stat("pt-o-c", s.cost ? tone("bad-t", won(s.cost)) : "0원");
+      IB.stat("pt-o-t", "약 " + s.months + "<small>개월</small>");
+      IB.stat("pt-o-s", a <= SMALL ? (r >= 1 ? tone("ok-t", "적용") : "조정 신청 시 적용") : "대상 아님");
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 360 });
+  })();
+})();
+</script>
+</body>
+</html>

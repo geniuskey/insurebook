@@ -1,0 +1,787 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험료는 생명표의 사망률, 예정이율, 예정사업비율 세 가지 가정으로 만들어진다. 자연보험료와 평준보험료, 쌓이는 책임준비금, 예정이율 1%p의 힘, 신계약비 상각과 해지환급금을 시뮬레이터로 직접 계산한다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보험료는 어떻게 만들어지는가 · InsureBook</title>
+<meta name="description" content="보험료는 생명표의 사망률, 예정이율, 예정사업비율 세 가지 가정으로 만들어진다. 자연보험료와 평준보험료, 쌓이는 책임준비금, 예정이율 1%p의 힘, 신계약비 상각과 해지환급금을 시뮬레이터로 직접 계산한다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/pricing.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="보험료는 어떻게 만들어지는가 · InsureBook">
+<meta property="og:description" content="보험료는 생명표의 사망률, 예정이율, 예정사업비율 세 가지 가정으로 만들어진다. 자연보험료와 평준보험료, 쌓이는 책임준비금, 예정이율 1%p의 힘, 신계약비 상각과 해지환급금을 시뮬레이터로 직접 계산한다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/pricing.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/pricing.html#chapter","name":"보험료는 어떻게 만들어지는가","headline":"보험료는 어떻게 만들어지는가 · InsureBook","description":"보험료는 생명표의 사망률, 예정이율, 예정사업비율 세 가지 가정으로 만들어진다. 자연보험료와 평준보험료, 쌓이는 책임준비금, 예정이율 1%p의 힘, 신계약비 상각과 해지환급금을 시뮬레이터로 직접 계산한다.","url":"https://insurebook.euiyun.com/chapters/pricing.html","position":3,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"3. 보험료는 어떻게 만들어지는가","item":"https://insurebook.euiyun.com/chapters/pricing.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="pricing">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 03</div>
+    <h1>보험료는 어떻게 만들어지는가</h1>
+    <p class="lead">지우의 종신보험은 2012년, 열여덟 살 때 부모님이 들어 준 계약이다. 월 12만원을 14년째 내고 있다. 도윤이 증권을 보더니 말했다. "이 계약, 지금은 이 값에 못 사." 같은 사망보험금 1억원인데 왜 그때와 지금의 값이 다를까. 해지하면 왜 낸 돈보다 적게 돌려받는 시기가 있을까. 보험료 안에는 무엇이 들어 있을까. 이 장은 보험료를 만드는 세 가지 가정과 그 가정이 수십 년짜리 계약 안에서 어떻게 움직이는지를 하나씩 열어 본다.</p>
+    <ul class="objectives">
+      <li>생명표에서 나이별 사망확률 q(x)와 기대여명을 읽고, 경험생명표와 국민생명표의 차이를 안다.</li>
+      <li>3이원방식(예정위험률·예정이율·예정사업비율)으로 보험료가 어떻게 정해지는지 직접 바꿔 본다.</li>
+      <li>자연보험료와 평준보험료를 비교하고, 초기에 더 낸 돈이 책임준비금으로 쌓이는 원리를 본다.</li>
+      <li>예정이율 1%p가 장기 보험료를 얼마나 바꾸는지, 옛 계약이 왜 값진지 계산한다.</li>
+      <li>신계약비 상각 때문에 초기 해지환급금이 적은 이유를 이해하고, 영업보험료를 항목별로 나눠 읽는다.</li>
+    </ul>
+  </header>
+
+  <section id="life-table">
+    <h2>생명표 읽기: 나이마다 다른 1년의 위험</h2>
+    <p><a href="pooling.html">2장</a>에서 보험료의 바닥은 기대손실, 곧 확률 × 피해액이라고 했다. 사망보험에서 그 확률은 "이 나이의 사람이 앞으로 1년 안에 사망할 확률"이다. 이것을 나이별로 늘어놓은 표가 <span class="term">생명표</span><span class="en">(Life table)</span>이고, 그 핵심 숫자를 \(q(x)\)라고 쓴다. \(x\)세인 사람이 \(x+1\)세가 되기 전에 사망할 확률이다.</p>
+    <p>생명표는 두 종류가 있다. 통계청이 전체 국민의 사망 기록으로 만드는 <span class="term">국민생명표</span>와, 보험개발원이 보험 가입자의 실제 사망 경험으로 만드는 <span class="term">경험생명표</span>다. 보험료 계산에는 경험생명표가 쓰인다. 가입자는 가입할 때 건강 심사를 거치고, 대체로 소득과 의료 접근성이 평균보다 나은 사람들이라서 같은 나이라도 사망률이 국민 평균보다 낮게 나타난다. 경험생명표는 몇 년마다 새로 고쳐지는데, 2026년 기준 최근 개정은 2024년 무렵의 제10회로 알려져 있다(약).</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th class="num">나이 x</th><th class="num">1년 사망확률 q(x)</th><th class="num">x세까지 생존 l(x)</th><th class="num">그해 사망 d(x)</th><th class="num">기대여명 e(x)</th></tr></thead>
+      <tbody>
+        <tr><td class="num">0</td><td class="num">0.00043</td><td class="num">100,000</td><td class="num">43</td><td class="num">80.6년</td></tr>
+        <tr><td class="num">32</td><td class="num">0.00092</td><td class="num">98,235</td><td class="num">90</td><td class="num">49.7년</td></tr>
+        <tr><td class="num">50</td><td class="num">0.00317</td><td class="num">95,306</td><td class="num">302</td><td class="num">32.9년</td></tr>
+        <tr><td class="num">70</td><td class="num">0.01825</td><td class="num">80,930</td><td class="num">1,477</td><td class="num">16.5년</td></tr>
+        <tr><td class="num">90</td><td class="num">0.11066</td><td class="num">29,277</td><td class="num">3,240</td><td class="num">5.6년</td></tr>
+      </tbody>
+    </table></div>
+    <p>위 표는 이 책의 교육용 모델(<code>INS.qx</code>, 남자, 국민생명표 근사)로 만든 생명표의 몇 줄이다. 10만 명이 함께 태어났다고 치고, 해마다 \(q(x)\)만큼 줄여 나가며 남은 사람 \(l(x)\)와 그해 사망자 \(d(x)\)를 적는다. 실제 생명표에는 영아기 사망이 따로 높게 나타나지만 이 모델은 그 부분을 단순화했다. 표를 숫자로만 보면 잘 와닿지 않으니 그래프로 옮긴다. 곡선 위 손잡이를 끌어 나이를 바꾸고, 성별과 눈금을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-lt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>나이별 1년 사망확률 q(x)</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lt-cv"></canvas><span class="hint">곡선 위 손잡이를 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="lt-sex"><button data-value="m" class="on">남자</button><button data-value="f">여자</button></div>
+          <label class="check"><input type="checkbox" id="lt-log" checked> 로그 눈금</label>
+          <label class="ctrl"><span>나이 <output id="lt-a-out"></output></span><input type="range" id="lt-a" min="20" max="100" step="1" value="32"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>경험생명표(가입자, 근사)</span><span><i style="background:var(--text-dim)"></i>국민생명표(전체, 근사)</span><span><i style="background:var(--accent-2)"></i>다른 성별(경험)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">q(x) · 경험 / 국민</span><span class="v" id="lt-o-q">—</span></div>
+        <div class="stat"><span class="k">1만 명 중 1년 사망(경험)</span><span class="v" id="lt-o-d">—</span></div>
+        <div class="stat"><span class="k">남은 기대여명(경험 / 국민)</span><span class="v" id="lt-o-e">—</span></div>
+        <div class="stat"><span class="k">출생 시 기대수명(국민)</span><span class="v" id="lt-o-l">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세 남자에 둔다. 1만 명 중 1년에 약 5.5명이 사망한다(경험생명표). 국민생명표로는 약 9.2명이다. ② 손잡이를 60세, 80세로 끈다. 로그 눈금에서 곡선이 거의 직선이다. 사망확률이 일정한 비율로 커진다는 뜻이고, 이 모델에서는 약 7년마다 두 배가 된다. ③ 로그 눈금을 끈다. 30~50대의 위험이 바닥에 붙어 보이지 않다가 80세 너머에서 치솟는다. ④ 여자로 바꾼다. 같은 나이의 사망확률이 남자의 대략 절반이다. (곰페르츠-메이컴 곡선으로 기대수명을 생명표 값에 맞춘 교육용 근사다. 실제 생명표의 나이별 값과 다르다.)</div>
+    </div>
+
+    <p>로그 눈금에서 거의 곧은 선이라는 것이 이 그래프의 핵심이다. 사망확률은 나이가 들수록 일정한 비율로 불어난다. 32세에 1만 명 중 5~6명이던 1년 사망자가 60세에는 약 42명, 80세에는 약 278명이 된다(경험생명표 근사, 남자). 이 책의 모델로 32세 남자의 남은 기대여명은 경험생명표로 약 55년, 국민생명표로 약 50년이다. 보험 가입자 집단이 더 오래 산다는 차이가 그대로 보인다.</p>
+    <p>이 차이는 상품마다 반대로 작용한다. 사망보험은 사망률이 낮을수록 싸지고, 연금보험은 오래 살수록 오래 지급해야 하므로 사망률이 낮을수록 비싸진다. 그래서 경험생명표가 개정되어 평균 수명이 늘어나면 사망보험료는 내려가고 연금보험료는 오르는 일이 함께 일어난다.</p>
+  </section>
+
+  <section id="three-rates">
+    <h2>3이원방식: 보험료를 만드는 세 가지 가정</h2>
+    <p>1년짜리 보험이라면 보험료는 \(q(x)\) × 보험금에 사업비만 얹으면 된다. 하지만 종신보험이나 20년 만기 보험은 지금 받은 보험료를 수십 년 뒤에 지급할 보험금에 쓴다. 그래서 세 가지를 미리 가정해야 한다. 앞으로 얼마나 사망하거나 아플지, 그동안 맡은 돈이 얼마의 이자를 벌지, 계약을 팔고 관리하는 데 얼마가 들지. 이 셋으로 보험료를 계산하는 방법을 <span class="term">3이원방식</span>이라고 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 330" role="img" aria-label="3이원방식: 예정위험률, 예정이율, 예정사업비율이 보험료를 만든다">
+        <defs><marker id="pr-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="14" width="130" height="92" rx="8" class="f-acc-soft"/>
+        <text x="75" y="40" text-anchor="middle" class="lbl-acc">예정위험률</text>
+        <text x="75" y="62" text-anchor="middle" class="lbl-dim">얼마나 사망·발병</text>
+        <text x="75" y="82" text-anchor="middle" class="lbl-dim">하는가 (생명표)</text>
+        <text x="75" y="100" text-anchor="middle" class="t-mono">↑ → 보험료 ↑</text>
+        <rect x="155" y="14" width="130" height="92" rx="8" class="f-ok-soft"/>
+        <text x="220" y="40" text-anchor="middle" class="lbl-b">예정이율</text>
+        <text x="220" y="62" text-anchor="middle" class="lbl-dim">맡긴 돈이 얼마를</text>
+        <text x="220" y="82" text-anchor="middle" class="lbl-dim">버는가 (할인율)</text>
+        <text x="220" y="100" text-anchor="middle" class="t-mono">↑ → 보험료 ↓</text>
+        <rect x="300" y="14" width="130" height="92" rx="8" class="f-bad-soft"/>
+        <text x="365" y="40" text-anchor="middle" class="lbl-bad">예정사업비율</text>
+        <text x="365" y="62" text-anchor="middle" class="lbl-dim">팔고 관리하는 데</text>
+        <text x="365" y="82" text-anchor="middle" class="lbl-dim">얼마가 드는가</text>
+        <text x="365" y="100" text-anchor="middle" class="t-mono">↑ → 보험료 ↑</text>
+        <path d="M75 108 L180 170" class="s-line" marker-end="url(#pr-ar1)"/>
+        <path d="M220 108 L220 166" class="s-line" marker-end="url(#pr-ar1)"/>
+        <path d="M365 108 L262 170" class="s-line" marker-end="url(#pr-ar1)"/>
+        <rect x="110" y="172" width="220" height="44" rx="8" class="f-elev"/>
+        <text x="220" y="200" text-anchor="middle" class="lbl-b">영업보험료</text>
+        <rect x="10" y="244" width="140" height="70" rx="6" class="f-acc-soft"/>
+        <text x="80" y="270" text-anchor="middle" class="lbl-acc">위험보험료</text>
+        <text x="80" y="292" text-anchor="middle" class="lbl-dim">올해 보험금 몫</text>
+        <rect x="150" y="244" width="140" height="70" rx="6" class="f-acc2-soft"/>
+        <text x="220" y="270" text-anchor="middle" class="lbl-acc2">저축보험료</text>
+        <text x="220" y="292" text-anchor="middle" class="lbl-dim">준비금으로 쌓인다</text>
+        <rect x="290" y="244" width="140" height="70" rx="6" class="f-bad-soft"/>
+        <text x="360" y="270" text-anchor="middle" class="lbl-bad">부가보험료</text>
+        <text x="360" y="292" text-anchor="middle" class="lbl-dim">신계약비·유지비</text>
+        <path d="M220 218 L220 240" class="s-line" marker-end="url(#pr-ar1)"/>
+        <path d="M10 236 h280 M10 231 v10 M290 231 v10" class="s-dash"/>
+        <text x="150" y="232" text-anchor="middle" class="t-mono">순보험료</text>
+      </svg>
+      <figcaption><b>그림 1. 3이원방식.</b> 세 가지 예정률이 영업보험료를 정한다. 위험률과 이율로 순보험료(위험보험료 + 저축보험료)를, 사업비율로 부가보험료를 계산한다. 예정이율만 방향이 반대다. 돈을 맡아 굴리는 동안 이자가 많이 붙는다고 가정할수록 지금 걷을 돈이 줄어든다.</figcaption>
+    </figure>
+
+    <p>세 가정 가운데 무엇이 보험료를 가장 크게 움직일까. 아래에서 32세 남자의 사망보험금 1억원짜리 두 상품, 60세 만기 정기보험(전기납)과 종신보험(20년납)을 놓고 세 슬라이더를 움직여 본다. 왼쪽 막대는 기준 가정(위험률 100%, 예정이율 2.5%, 사업비 100%)이고 오른쪽 막대가 지금 가정이다.</p>
+
+    <div class="sim" id="sim-tr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>세 가지 예정률로 보험료 다시 계산하기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tr-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="tr-type"><button data-value="term" class="on">정기(60세 만기)</button><button data-value="whole">종신(20년납)</button></div>
+          <label class="ctrl"><span>예정위험률(생명표 대비) <output id="tr-k-out"></output></span><input type="range" id="tr-k" min="50" max="200" step="5" value="100"></label>
+          <label class="ctrl"><span>예정이율 <output id="tr-i-out"></output></span><input type="range" id="tr-i" min="0.5" max="6" step="0.25" value="2.5"></label>
+          <label class="ctrl"><span>예정사업비(기준 대비) <output id="tr-e-out"></output></span><input type="range" id="tr-e" min="0" max="250" step="10" value="100"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>위험보험료(첫해)</span><span><i style="background:var(--accent-2)"></i>저축보험료</span><span><i style="background:var(--bad)"></i>부가보험료</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보험료</span><span class="v" id="tr-o-p">—</span></div>
+        <div class="stat"><span class="k">기준 대비</span><span class="v" id="tr-o-r">—</span></div>
+        <div class="stat"><span class="k">위험 / 저축 / 부가</span><span class="v" id="tr-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 정기보험에서 위험률을 80%, 120%로 바꾼다. 이 책의 교육용 모델로 계산하면 월 보험료가 약 1.29만원에서 1.03만원, 1.54만원으로 약 20%씩 움직인다. ② 종신으로 바꿔 같은 일을 한다. 약 6% 안팎만 움직인다. 대신 예정이율을 1.5%, 3.5%로 바꾸면 약 16.4만원이 24.8만원, 11.1만원으로 크게 흔들린다. ③ 예정사업비를 0%로 내린다. 부가보험료가 사라진 값이 순보험료다. 250%까지 올리면 같은 보장에 무엇을 더 내는지 보인다. ④ 예정이율을 0.5%까지 내린다. 종신보험료가 치솟는다. 이자가 거의 없으면 미래의 보험금 1억원을 거의 다 원금으로 모아야 하기 때문이다. (INS.price 사용. 위험률 슬라이더는 생명표의 사망확률에 배수를 곱해 계산했다. 사업비는 신계약비·유지비를 함께 늘리고 줄인다.)</div>
+    </div>
+
+    <p>두 상품의 성격이 갈린다. 정기보험은 보험료의 대부분이 그해의 위험을 사는 데 쓰이므로 <b>위험률</b>에 민감하고, 이율에는 둔하다. 종신보험은 언젠가 반드시 1억원을 지급하므로 보험료의 대부분이 그 1억원을 미리 모으는 저축이고, 그래서 <b>이율</b>에 매우 민감하다. 같은 '사망보험금 1억원'이라도 무엇을 사는지가 완전히 다르다. 32세 기준 정기보험(60세 만기)은 이 책의 모델로 월 약 1.3만원, 종신보험(20년납)은 월 약 16.4만원이다. 그 차이는 대부분 저축보험료다.</p>
+    <p>세 가정은 보험사가 마음대로 정하는 것이 아니다. 위험률은 경험생명표와 업계 통계를 바탕으로, 이율은 금리 환경과 감독 당국의 기준(표준이율 등)을 참고해서, 사업비는 감독 규정의 틀 안에서 정한다. 다만 같은 틀 안에서도 회사와 상품마다 가정이 조금씩 달라서 같은 보장의 보험료가 다르다.</p>
+  </section>
+
+  <section id="level">
+    <h2>자연보험료와 평준보험료</h2>
+    <p>나이마다 그해의 위험만큼만 내는 보험료를 <span class="term">자연보험료</span><span class="en">(Natural premium)</span>라고 한다. 1년 만기 보험을 해마다 다시 사는 것과 같다. 공평하지만 문제가 있다. 앞의 생명표처럼 위험이 약 7년마다 두 배가 되니, 보험료도 그렇게 오른다. 보험이 가장 필요해지는 나이에 보험료를 감당할 수 없게 된다.</p>
+    <p>그래서 장기보험은 전체 기간의 보험료를 미리 계산해 매년 같은 금액으로 나눈다. 이것이 <span class="term">평준보험료</span><span class="en">(Level premium)</span>다. 기준은 <span class="term">수지상등의 원칙</span>이다. 가입자 전체가 낼 보험료의 현재가치와 보험사가 지급할 보험금의 현재가치가 같아지도록 정한다.</p>
+    <div class="formula">$$\sum_{k=0}^{n-1} v^{k}\,{}_kp_x\,P \;=\; \sum_{k=0}^{n-1} v^{k+1}\,{}_kp_x\,q_{x+k}\,S$$<div class="where">\(P\): 해마다 내는 평준(순)보험료, \(S\): 보험금, \({}_kp_x\): \(x\)세인 사람이 \(k\)년 뒤까지 살아 있을 확률, \(q_{x+k}\): 그해 사망확률, \(v = 1/(1+i)\): 예정이율 \(i\)로 할인하는 값. 왼쪽은 들어올 돈, 오른쪽은 나갈 돈의 현재가치다.</div></div>
+    <p>평준보험료는 초기에는 자연보험료보다 비싸고 나중에는 싸다. 초기에 더 낸 돈은 어디로 갈까. 아래에서 가입 나이와 만기 나이를 바꿔 본다. 빨간 곡선이 자연보험료, 파란 수평선이 평준보험료다(사망보험금 1억원, 사업비를 뺀 순보험료).</p>
+
+    <div class="sim" id="sim-nl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>자연보험료 vs 평준보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nl-cv"></canvas><span class="hint">가로로 끌어 나이를 짚는다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>가입 나이 <output id="nl-a-out"></output></span><input type="range" id="nl-a" min="20" max="55" step="1" value="32"></label>
+          <label class="ctrl"><span>만기 나이 <output id="nl-e-out"></output></span><input type="range" id="nl-e" min="60" max="100" step="5" value="80"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>자연보험료(그해 위험만큼)</span><span><i style="background:var(--accent)"></i>평준보험료</span><span><i style="background:var(--ok)"></i>더 낸 몫 → 준비금</span><span><i style="background:var(--warn)"></i>덜 낸 몫 ← 준비금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">평준보험료(연, 순)</span><span class="v" id="nl-o-l">—</span></div>
+        <div class="stat"><span class="k">짚은 나이의 자연보험료</span><span class="v" id="nl-o-n">—</span></div>
+        <div class="stat"><span class="k">두 선이 만나는 나이</span><span class="v" id="nl-o-c">—</span></div>
+        <div class="stat"><span class="k">짚은 나이의 준비금(1건)</span><span class="v" id="nl-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(32세 가입, 80세 만기)에서 평준보험료는 연 약 37만원, 첫해 자연보험료는 약 5.4만원이다. 59세 무렵에 두 선이 만난다. 초록 영역의 돈이 준비금으로 쌓이고, 주황 영역에서 꺼내 쓴다. 준비금은 66세 무렵 약 1,090만원으로 가장 크고 80세에 0이 된다. ② 가입 나이를 45세로 올린다. 평준보험료가 약 58만원으로 오르고 초록 영역이 짧아진다. 늦게 들수록 비싼 이유다. ③ 만기를 100세로 늘린다. 마지막 해의 자연보험료는 연 약 1,600만원이고 준비금이 5,700만원 넘게 쌓인다. 오래 보장할수록 보험료 안의 저축이 커진다. (INS.price의 순보험료, 남자, 예정이율 2.5%. 해지는 없다고 가정했다.)</div>
+    </div>
+
+    <p>초록 영역은 보험사가 가져가는 돈이 아니다. 가입자들이 나중의 위험을 위해 미리 맡겨 둔 돈이다. 보험사는 이 돈을 <span class="term">책임준비금</span><span class="en">(Policy reserve)</span>으로 따로 쌓아 두어야 한다. 장기보험이 복잡한 가장 큰 이유가 여기 있다. 보험료 한 번에 '올해의 위험'과 '미래를 위한 저축'이 섞여 있고, 계약마다 그 저축이 얼마인지는 나이와 경과 기간에 따라 다르다. 이 복잡함에는 분명한 이유가 있다. 평준화가 없으면 노년의 보험료를 아무도 감당할 수 없다.</p>
+    <p>이제 같은 그림을 한 사람이 아니라 가입자 집단 전체로 본다. 1,000명이 32세에 함께 종신보험에 들었다면 그 준비금은 어떻게 쌓이고 쓰일까.</p>
+
+    <div class="sim" id="sim-rs">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>책임준비금이 쌓이고 쓰이는 78년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rs-cv"></canvas><span class="hint">그래프를 끌어 해를 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>재생 속도 <output id="rs-s-out"></output></span><input type="range" id="rs-s" min="1" max="10" step="1" value="4"></label>
+          <div class="btn-row"><button class="btn primary" id="rs-play">일시정지</button><button class="btn" id="rs-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>1인 준비금</span><span><i style="background:var(--accent)"></i>기금 전체(남은 사람 × 1인 준비금)</span><span><i style="background:var(--bad)"></i>사망자</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">나이 · 경과</span><span class="v" id="rs-o-a">—</span></div>
+        <div class="stat"><span class="k">살아 있는 가입자</span><span class="v" id="rs-o-n">—</span></div>
+        <div class="stat"><span class="k">1인 준비금</span><span class="v" id="rs-o-v">—</span></div>
+        <div class="stat"><span class="k">기금 전체</span><span class="v" id="rs-o-f">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 재생되는 동안 20년(52세)까지 기금이 빠르게 커지는 것을 본다. 해마다 보험료가 들어오고 사망자는 적다. 20년째 기금은 약 416억원이다. ② 52세 뒤에는 보험료가 더 들어오지 않는데도 1인 준비금은 계속 오른다. 이자가 붙기 때문이다. 기금 전체는 75세 무렵 약 562억원으로 가장 크다. ③ 80대 이후에는 사망자가 빠르게 늘어 기금이 보험금으로 빠져나간다. 1인 준비금이 1억원에 가까워질수록 남은 한 사람 한 사람이 거의 자기 보험금을 스스로 모은 셈이 된다. ④ 그래프를 끌어 원하는 해를 짚는다. (32세 남자 1,000명, 종신 1억원, 20년납, 예정이율 2.5%, 사업비를 뺀 순보험료 연 약 169만원. 사망자 수는 경험생명표 근사의 기댓값이며 해지는 없다고 가정했다.)</div>
+    </div>
+
+    <p>준비금은 처음에는 '이자가 붙는 저축'처럼 자라다가, 나중에는 '사망자의 보험금'으로 빠져나간다. 보험사의 장부에서 이 돈은 가입자에게 돌려줄 빚(부채)이다. 보험사의 재무제도와 건전성 규제가 왜 그렇게 까다로운지는 <a href="company.html">16장</a>에서 이 준비금을 출발점으로 다시 본다.</p>
+  </section>
+
+  <section id="interest">
+    <h2>예정이율 1%p의 힘</h2>
+    <p>앞의 시뮬레이터에서 종신보험이 이율에 매우 민감하다는 것을 봤다. 이유는 시간이다. 32세에 든 종신보험의 1억원은 평균적으로 50년쯤 뒤에 지급된다(남은 기대여명 약 55년). 50년 뒤의 1억원을 마련하려면 연 4%로 불어나는 돈이면 지금 약 1,400만원만 있으면 되지만, 연 2.5%면 약 2,900만원이 필요하다. 할인 기간이 길수록 이율의 작은 차이가 크게 불어난다.</p>
+    <p>이 이율이 <span class="term">예정이율</span>이다. 보험사가 계약 기간 동안 맡은 돈으로 벌 수 있다고 가정하는 이율이고, 한 번 정하면 그 계약에서는 보통 끝까지 바뀌지 않는다(금리확정형). 금리가 높던 시절에 든 계약은 높은 예정이율이 그대로 남아 있다. 아래에서 예정이율을 가로로 끌어 본다. 실선은 가입 나이 슬라이더로 정한 사람, 점선은 지우가 처음 가입한 18세다.</p>
+
+    <div class="sim" id="sim-ir">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>예정이율과 종신보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ir-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>가입 나이(실선) <output id="ir-a-out"></output></span><input type="range" id="ir-a" min="20" max="55" step="1" value="32"></label>
+          <div class="seg" id="ir-pay"><button data-value="10">10년납</button><button data-value="20" class="on">20년납</button><button data-value="30">30년납</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>가입 나이(실선)</span><span><i style="background:var(--accent-2)"></i>18세 가입(점선)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">예정이율</span><span class="v" id="ir-o-i">—</span></div>
+        <div class="stat"><span class="k">월 보험료 · 실선</span><span class="v" id="ir-o-a">—</span></div>
+        <div class="stat"><span class="k">월 보험료 · 18세</span><span class="v" id="ir-o-b">—</span></div>
+        <div class="stat"><span class="k">2.5%일 때 대비</span><span class="v" id="ir-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세, 20년납에서 세로선을 2.5%에 둔다. 이 책의 교육용 모델로 월 약 16.4만원이다. 4%로 옮기면 약 9.2만원, 거의 절반이 된다. ② 2.5%에서 0.25%p씩 움직인다. 2.75%면 약 14.8만원, 2.25%면 약 18.1만원이다. 예정이율이 0.25%p 내릴 때마다 보험료가 10% 넘게 오른다. ③ 1%까지 끌어 내린다. 월 약 30.7만원으로 치솟는다. 이자가 거의 없으면 보험금 대부분을 원금으로 모아야 한다. ④ 18세 점선의 4% 지점(지우의 2012년 계약 조건)과 실선의 2.5% 지점(지우가 오늘 다시 든다면)을 비교한다. (종신 1억원, 남자, 사업비 기본값. 특약은 넣지 않았다.)</div>
+    </div>
+
+    <p>곡선이 오른쪽 아래로 휘어 있다. 예정이율이 낮은 쪽에서는 조금만 내려가도 보험료가 크게 뛴다. 그래서 감독 당국의 기준이율이나 회사의 예정이율이 내려가는 시기에는 신규 계약의 보험료가 일제히 오른다. 반대로 보면 예정이율이 높던 시절의 계약은 지금 같은 값에 다시 살 수 없는 '자산'이다. 오래된 종신보험이나 연금보험을 해지하기 전에 반드시 가입 당시의 예정이율을 확인해야 하는 이유다.</p>
+    <div class="callout pro">
+      <strong>예정이율 인하 소식과 절판 마케팅</strong>
+      "다음 달부터 예정이율이 내려가서 보험료가 오릅니다. 이번 달이 마지막 기회입니다." 이 말은 사실일 때가 많다. 문제는 그 사실이 <b>필요 없는 계약까지 서두르게 만드는 압박</b>으로 쓰일 때다. 인상 폭이 10%라도, 필요 없는 보험을 서둘러 들면 100%를 잃는다. 현장에서는 이렇게 순서를 지키는 것이 좋다. 먼저 필요(2장의 보유와 이전)를 정하고, 그 필요에 맞는 상품이 정해진 뒤에 "이 상품은 다음 달 오를 예정이니 결정이 섰다면 이번 달이 유리하다"고 말한다. 순서가 뒤집히면 절판 마케팅이고, 그렇게 든 계약은 유지율이 낮아 결국 설계사의 수수료 환수로 돌아온다(<a href="commission.html">15장</a>).
+    </div>
+  </section>
+
+  <section id="surrender">
+    <h2>신계약비 상각과 해지환급금</h2>
+    <p>평준보험료 안에 저축이 들어 있다면, 중간에 해지할 때 그 저축(준비금)을 돌려받아야 할 것 같다. 실제로 돌려받는다. 다만 다 받지는 못하는 기간이 있다. 계약을 처음 맺을 때 드는 비용, 곧 설계사 수수료와 심사·발행 비용인 <span class="term">신계약비</span><span class="en">(Acquisition cost)</span>를 보험사가 첫해에 한꺼번에 쓰고, 이를 몇 년에 걸쳐 보험료에서 나눠 갚도록 설계하기 때문이다. 아직 갚지 않은 신계약비(미상각 신계약비)는 해지할 때 준비금에서 뺀다. 이렇게 돌려받는 돈이 <span class="term">해지환급금</span><span class="en">(Surrender value)</span>이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 300" role="img" aria-label="보험료가 사업비, 위험보험료, 저축보험료로 나뉘고 준비금에서 미상각 신계약비를 뺀 것이 해지환급금이 된다">
+        <defs><marker id="pr-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="150" y="10" width="140" height="40" rx="8" class="f-elev"/>
+        <text x="220" y="35" text-anchor="middle" class="lbl-b">내가 낸 보험료</text>
+        <path d="M190 52 L70 92" class="s-line" marker-end="url(#pr-ar2)"/>
+        <path d="M220 52 L220 92" class="s-line" marker-end="url(#pr-ar2)"/>
+        <path d="M250 52 L370 92" class="s-line" marker-end="url(#pr-ar2)"/>
+        <rect x="10" y="96" width="122" height="54" rx="6" class="f-bad-soft"/>
+        <text x="71" y="119" text-anchor="middle" class="lbl-bad">부가보험료</text>
+        <text x="71" y="139" text-anchor="middle" class="lbl-dim">사업비로 쓰임</text>
+        <rect x="159" y="96" width="122" height="54" rx="6" class="f-acc-soft"/>
+        <text x="220" y="119" text-anchor="middle" class="lbl-acc">위험보험료</text>
+        <text x="220" y="139" text-anchor="middle" class="lbl-dim">그해 사망자에게</text>
+        <rect x="308" y="96" width="122" height="54" rx="6" class="f-acc2-soft"/>
+        <text x="369" y="119" text-anchor="middle" class="lbl-acc2">저축보험료</text>
+        <text x="369" y="139" text-anchor="middle" class="lbl-dim">+ 예정이율 이자</text>
+        <path d="M369 152 L369 182" class="s-line" marker-end="url(#pr-ar2)"/>
+        <rect x="290" y="186" width="140" height="44" rx="6" class="f-ok-soft"/>
+        <text x="360" y="213" text-anchor="middle" class="lbl-b">책임준비금</text>
+        <rect x="10" y="186" width="160" height="44" rx="6" class="f-warn-soft"/>
+        <text x="90" y="206" text-anchor="middle" class="lbl">미상각 신계약비</text>
+        <text x="90" y="223" text-anchor="middle" class="lbl-dim">첫해에 먼저 쓴 몫</text>
+        <path d="M71 152 L80 182" class="s-dash" marker-end="url(#pr-ar2)"/>
+        <text x="230" y="213" text-anchor="middle" class="lbl-b">−</text>
+        <path d="M220 234 L220 254" class="s-line" marker-end="url(#pr-ar2)"/>
+        <rect x="120" y="258" width="200" height="36" rx="8" class="f-ok-soft"/>
+        <text x="220" y="281" text-anchor="middle" class="lbl-b">해지환급금</text>
+      </svg>
+      <figcaption><b>그림 2. 해지환급금은 어디서 오는가.</b> 저축보험료와 이자가 책임준비금으로 쌓이고, 해지할 때는 아직 갚지 못한 신계약비를 뺀 나머지를 돌려받는다. 신계약비를 다 갚는 시점(이 책의 모델에서는 7년)이 지나면 해지환급금은 준비금과 같아진다.</figcaption>
+    </figure>
+
+    <p>아래에서 32세에 든 종신보험 1억원(20년납, 예정이율 2.5%)을 해지하는 시점을 고른다. 그래프의 세로선을 끌어 해지할 해를 정하고, 신계약비의 크기, 상각 기간, 환급형을 바꿔 본다. 무해지·저해지 환급형은 <a href="renewal.html">7장</a>에서 자세히 다루지만, 여기서는 해지환급금을 줄이는 대신 보험료를 깎는 구조라는 것만 확인한다.</p>
+
+    <div class="sim" id="sim-sv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>낸 돈, 준비금, 해지환급금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sv-cv"></canvas><span class="hint">세로선을 끌어 해지 시점을 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="sv-ref"><button data-value="1" class="on">표준형</button><button data-value="0.5">저해지 50%</button><button data-value="0">무해지</button></div>
+          <label class="ctrl"><span>신계약비(연 보험료 대비) <output id="sv-a-out"></output></span><input type="range" id="sv-a" min="0" max="200" step="10" value="90"></label>
+          <label class="ctrl"><span>상각 기간 <output id="sv-m-out"></output></span><input type="range" id="sv-m" min="1" max="15" step="1" value="7"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>낸 돈(누적)</span><span><i style="background:var(--accent-2)"></i>책임준비금(표준)</span><span><i style="background:var(--ok)"></i>해지환급금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보험료</span><span class="v" id="sv-o-p">—</span></div>
+        <div class="stat"><span class="k">해지 시점</span><span class="v" id="sv-o-t">—</span></div>
+        <div class="stat"><span class="k">낸 돈 → 받는 돈</span><span class="v" id="sv-o-m">—</span></div>
+        <div class="stat"><span class="k">환급률</span><span class="v" id="sv-o-r">—</span></div>
+        <div class="stat"><span class="k">원금 회복</span><span class="v" id="sv-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 표준형 기본값에서 1년째 해지하면 약 196만원을 내고 약 17만원(9%)을 받는다. 3년째 약 71%, 7년째 약 92%다. 원금은 14년째에 회복된다. ② 신계약비를 0%로 내린다. 해지환급금 선이 준비금 선에 붙는다. 1년째 환급률이 약 91%로 뛰고 원금 회복이 9년째로 당겨진다. 기본값과의 차이 전부가 미상각 신계약비다. ③ 신계약비를 200%로 올린다. 처음 몇 해의 환급금이 0원이 되고 원금 회복이 20년 넘게 밀린다. ④ 무해지로 바꾼다. 월 보험료가 약 10.6만원으로 내려가지만 납입 기간 20년 동안 해지환급금은 0원이다. (INS.price 사용. 32세 남자, 유지비 8%. 무해지·저해지는 연 해지율 4%를 가격에 반영했다. 실제 상품의 상각 방식과 해지공제는 감독 규정과 상품마다 다르다.)</div>
+    </div>
+
+    <p>해지환급금이 낸 돈보다 적은 기간은 보험사가 가입자를 속여서 생기는 것이 아니라, 보험료 구조에서 나온다. 첫해에 신계약비를 먼저 쓰고 나중에 걷기 때문이다. 다만 그 신계약비의 대부분은 판매 수수료이고, 그래서 이 구조는 <a href="commission.html">15장</a>의 수수료 이야기와 붙어 있다. 판매가 쉬운 상품일수록 신계약비가 작아질 수 있다는 점에서 이 복잡함의 일부는 '판매 구조에서 온 것'이다. 같은 보장을 온라인으로 사면 보험료나 초기 해지환급금이 조금 나을 수 있는 이유도 여기에 있다.</p>
+    <div class="callout pro">
+      <strong>"왜 해지하면 이것밖에 안 줘요?"</strong>
+      고객이 해지환급금을 보고 화를 낼 때 가장 나쁜 답은 "약관이 그래요"이고, 두 번째로 나쁜 답은 얼버무리는 것이다. 가입 단계에서 해지환급금 예시표의 1년·3년·5년·10년 환급률을 함께 짚고, "처음 몇 년은 계약을 만드는 비용(수수료 포함)을 먼저 쓰고 나눠 갚는 구조라서 일찍 해지하면 원금보다 적습니다"라고 설명해 두면 같은 숫자를 봐도 분쟁이 되지 않는다. 이 설명은 설명의무의 핵심 항목이기도 하다. 고객이 보험료 부담 때문에 해지를 고민하면, 해지 전에 감액(보험금을 줄여 보험료를 낮추기), 납입 일시중지, 보험계약대출 같은 다른 길이 있는지 먼저 확인한다. 각 방법의 조건과 이자는 상품마다 다르므로 보험사에 확인한 뒤 안내한다.
+    </div>
+  </section>
+
+  <section id="slip">
+    <h2>영업보험료를 항목별로 나눠 읽기</h2>
+    <p>이제 32세 남자가 오늘 사망보험금 1억원짜리 종신보험(20년납)을 든다고 하고, 첫해 월 보험료를 이 장의 언어로 쪼갠다. 이 책의 교육용 모델(예정이율 2.5%, 신계약비 연 보험료의 90%를 7년 상각, 유지비 8%)로 계산한 값이다.</p>
+    <div class="slip">
+      <div class="row"><span>위험보험료 (올해 32세의 사망 위험)</span><span>4,485</span></div>
+      <div class="row"><span>저축보험료 (책임준비금으로 적립)</span><span>136,702</span></div>
+      <div class="row"><span>부가보험료 · 신계약비 상각분</span><span>9,275</span></div>
+      <div class="row"><span>부가보험료 · 유지·수금비</span><span>13,084</span></div>
+      <div class="row total"><span>영업보험료 (월)</span><span>163,546</span></div>
+    </div>
+    <p>숫자가 말하는 것은 분명하다. 월 16만원 남짓 가운데 올해의 사망 위험을 사는 데 드는 돈은 약 4,500원, 3%가 안 된다. 약 84%는 저축이고, 약 14%는 사업비다. 첫해에 보험사는 연 보험료의 90%인 약 177만원을 신계약비로 쓰고, 그것을 매달 약 9,300원씩 7년에 걸쳐 회수한다. 같은 사망보험금 1억원을 60세까지만 사는 정기보험이 월 약 1.3만원인 이유, 그리고 종신보험을 '보장 + 저축 + 사업비'의 묶음이라고 부르는 이유가 이 영수증에 다 들어 있다.</p>
+    <p>영수증의 위험보험료 4,485원은 첫해의 값이다. 평준보험료는 매년 같지만, 그 안에서 위험과 저축이 나뉘는 비율은 해마다 바뀐다. 사망확률은 오르는데, 동시에 쌓인 준비금만큼은 보험사가 위험을 지지 않아도 되기 때문이다. 사망하면 보험사가 실제로 새로 내놓는 돈은 보험금에서 그 계약의 준비금을 뺀 <span class="term">위험보험금</span>(보험금 − 준비금)이다. 아래 막대에서 해마다의 속을 들여다본다. 막대를 끌어 해를 고르고, 상품을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-dc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>같은 보험료, 해마다 다른 속</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dc-cv"></canvas><span class="hint">막대를 끌어 해를 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dc-type"><button data-value="whole" class="on">종신(20년납)</button><button data-value="term">정기(60세 만기)</button></div>
+          <label class="ctrl"><span>가입 나이 <output id="dc-a-out"></output></span><input type="range" id="dc-a" min="25" max="50" step="1" value="32"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>위험보험료 = v·q·(보험금 − 준비금)</span><span><i style="background:var(--accent-2)"></i>저축보험료(음수면 준비금 인출)</span><span><i style="background:var(--bad)"></i>부가보험료</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">고른 해</span><span class="v" id="dc-o-t">—</span></div>
+        <div class="stat"><span class="k">위험 / 저축 / 부가(월)</span><span class="v" id="dc-o-p">—</span></div>
+        <div class="stat"><span class="k">위험보험금</span><span class="v" id="dc-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 종신 기본값에서 1년째를 고른다. 위험보험료는 월 약 4,400원으로 영수증의 4,485원보다 조금 작다. 영수증은 보험금 전액 기준으로 단순화한 값이고, 여기서는 준비금만큼을 뺀 위험보험금으로 계산했기 때문이다. ② 20년째로 끈다. 사망확률이 세 배 넘게 올랐지만 위험보험금이 약 5,760만원으로 줄어 위험보험료는 월 약 9,000원에 그친다. 나머지는 여전히 저축이다. ③ 정기로 바꾼다. 처음에는 저축보험료가 위로 쌓이다가 17년째(48세)부터 0 아래로 내려간다. 젊을 때 쌓은 준비금을 꺼내 오른 위험보험료를 메우는 모습이다. 28년째에는 위험보험료가 월 약 3.1만원으로 평준 순보험료의 거의 세 배다. (INS.price의 표준 준비금으로 계산했다. 남자, 예정이율 2.5%, 사업비 기본값.)</div>
+    </div>
+
+    <p>종신보험의 막대는 끝까지 대부분이 저축이고, 정기보험의 막대는 저축이 위로 쌓였다가 아래로 빠진다. 앞에서 본 자연보험료와 평준보험료의 그림을 보험료 한 장 안에서 다시 본 셈이다. 설계서의 "위험보험료"와 "저축보험료" 구분이 해마다 달라지는 이유도 여기에 있다.</p>
+    <p>이것이 종신보험이 나쁘다는 뜻은 아니다. 평생 사망보장이 꼭 필요한 사람(상속 재원, 평생 부양해야 할 가족이 있는 경우)에게는 저축 부분이 바로 그 보장을 위한 돈이다. 다만 "사망보장이 필요하다"와 "종신보험이 필요하다"는 다른 질문이다. 필요한 사망보장의 크기와 기간은 <a href="life.html">10장</a>에서 계산한다.</p>
+    <div class="callout buyer">
+      <strong>설계서와 증권에서 확인할 것</strong>
+      <ul>
+        <li><b>예정이율(또는 적용이율)</b>: 금리확정형인지 금리연동형인지, 가입 당시 몇 %였는지. 오래된 계약은 해지 전에 꼭 확인한다.</li>
+        <li><b>해지환급금 예시표</b>: 1년·3년·5년·10년·납입 완료 시점의 환급률. 무해지·저해지형이면 납입 중 환급금이 얼마인지.</li>
+        <li><b>보험료 구성</b>: 주계약과 특약이 각각 얼마인지. 사망보장 외의 특약이 보험료의 절반을 넘지 않는지.</li>
+        <li><b>납입기간과 보장기간</b>: 20년납 종신처럼 둘이 다르면, 납입이 끝난 뒤에도 준비금이 계속 자란다.</li>
+      </ul>
+    </div>
+    <div class="callout warn">
+      <strong>수치와 제도는 해마다 바뀐다</strong>
+      예정이율, 경험생명표, 표준이율, 사업비 규정은 금리 환경과 감독 정책에 따라 해마다 바뀔 수 있다. 이 장의 보험료는 2026년 무렵을 염두에 둔 교육용 모델의 값이며, 실제 보험료는 나이·성별·직업·병력·회사·가입 시기에 따라 크게 다르다. 같은 보장이라도 상품마다 예정률이 달라 보험료가 다르다. 특정 상품을 권하지 않는다. 가입·해지 결정 전에는 해당 상품의 설계서와 약관, 보험사의 해지환급금 조회 결과를 직접 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우의 종신보험 해부</h2>
+    <p>도윤은 지우의 증권을 펴 놓고 이 장의 계산기로 2012년 계약을 다시 계산했다. 증권에 적힌 월 12만원은 주계약(사망 1억원)과 재해·입원·수술 특약의 합이다. 특약은 따로 다루기로 하고, 주계약만 3이원방식으로 뜯어봤다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목 (주계약 사망 1억원, 20년납)</th><th class="num">2012년 18세 · 4%</th><th class="num">오늘 32세 · 2.5%</th></tr></thead>
+      <tbody>
+        <tr><td>월 보험료(모델)</td><td class="num">55,730</td><td class="num">163,546</td></tr>
+        <tr><td>· 위험보험료(첫해)</td><td class="num">2,915</td><td class="num">4,485</td></tr>
+        <tr><td>· 저축보험료</td><td class="num">44,795</td><td class="num">136,702</td></tr>
+        <tr><td>· 부가보험료</td><td class="num">8,019</td><td class="num">22,359</td></tr>
+        <tr><td>20년 동안 낼 돈</td><td class="num">약 1,338만원</td><td class="num">약 3,925만원</td></tr>
+        <tr><td>원금 회복 시점</td><td class="num">11년째</td><td class="num">14년째</td></tr>
+      </tbody>
+    </table></div>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 3장</span></div>
+      <h4>2012년의 4%는 지금 못 사는 조건이다</h4>
+      <p>이 책의 교육용 모델로 계산하면 지우의 주계약(18세, 예정이율 약 4%, 20년납)은 월 약 5.6만원이다. 증권의 월 12만원 가운데 나머지 약 6.4만원은 특약 몫으로 보인다(실제 비율은 증권의 보험료 내역으로 확인해야 한다). 같은 주계약을 오늘 32세에 예정이율 2.5%로 새로 들면 월 약 16.4만원, 2.9배다. 늦게 드는 만큼 위험률이 오르고, 예정이율이 낮아진 만큼 저축보험료가 세 배 가까이 커졌기 때문이다. 같은 18세라도 예정이율이 2.5%였다면 월 약 11.8만원이었을 것이다. 차이의 대부분은 나이가 아니라 이율에서 왔다.</p>
+      <p>지금 해지하면 어떻게 될까. 납입 14년째인 주계약은 모델로 낸 돈 약 936만원에 해지환급금 약 1,016만원(환급률 약 108%)이다. 원금은 이미 회복했다. 하지만 해지하는 순간 사망보장 1억원이 사라지고, 같은 보장을 다시 사려면 월 16만원이 넘게 든다. 남은 납입은 6년, 약 401만원이다. 납입이 끝나는 2032년(38세)에는 준비금이 약 1,644만원이 되고, 그 뒤로는 보험료 없이 이자로 계속 자란다. 지우는 처음으로 이 계약이 '비싼 보험'이 아니라 '지금은 못 사는 조건'이라는 것을 알았다. 도윤은 솔직하게 덧붙였다. "이걸 깨고 새 종신으로 갈아타게 하면 나는 수수료를 꽤 받아. 그런데 숫자로는 네가 손해야. 적어도 주계약은 깰 이유가 없어 보여."</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>주계약(사망 1억원, 약 4%)은 모델로 월 약 5.6만원, 오늘 다시 사면 약 16.4만원. 해지환급금은 원금을 넘었지만 보장을 잃는다. 주계약은 섣불리 해지하지 않는다.</div><div><b>아직 남은 문제</b>월 약 6.4만원으로 보이는 특약은 무엇을 보장하는가. 민서는 가입할 때 무엇을 알려야 하는가.</div><div><b>다음 단계</b><a href="asymmetry.html">4장</a>에서 민서의 갑상선 결절 이력과 고지 항목을 대조한다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>생명표의 q(x)는 x세인 사람의 1년 사망확률이다. 로그 눈금에서 거의 직선이며, 이 책의 모델에서는 약 7년마다 두 배가 된다. 보험료에는 가입자의 경험으로 만든 경험생명표를 쓴다.</li>
+      <li>3이원방식: 예정위험률·예정이율·예정사업비율로 보험료를 정한다. 위험률과 사업비가 오르면 보험료가 오르고, 예정이율이 오르면 내린다.</li>
+      <li>정기보험은 위험률에, 종신보험은 예정이율에 민감하다. 같은 사망보험금이라도 종신보험료의 대부분은 저축이다.</li>
+      <li>평준보험료는 수지상등의 원칙으로 정한다. 초기에 자연보험료보다 더 낸 돈은 책임준비금으로 쌓였다가 나중의 높은 위험률을 메운다.</li>
+      <li>장기 계약에서는 예정이율의 작은 차이가 보험료를 크게 바꾼다. 예정이율이 높던 시절의 계약은 지금 다시 살 수 없는 조건이므로 해지 전에 이율을 확인한다.</li>
+      <li>해지환급금 = 책임준비금 − 미상각 신계약비. 첫해에 쓴 신계약비를 몇 년에 걸쳐 갚기 때문에 초기 해지환급금은 낸 돈보다 적다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>평준보험료 방식의 장기 사망보험에서 가입 초기의 보험료가 그해 위험(자연보험료)보다 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt">보험사가 초기에 이익을 많이 남기려고 해서</button>
+          <button class="opt" data-correct>더 낸 돈이 책임준비금으로 쌓여 나이가 들어 위험이 커진 시기의 보험금을 메우기 때문에</button>
+          <button class="opt">젊을 때 사망확률이 노년보다 높기 때문에</button>
+          <button class="opt">예정이율이 0%라고 가정하기 때문에</button>
+        </div>
+        <div class="quiz-exp">평준보험료는 전체 기간의 보험료를 같은 금액으로 나눈 것이다. 초기에 자연보험료보다 더 낸 몫은 가입자를 위한 책임준비금으로 쌓이고, 자연보험료가 평준보험료를 넘는 나이부터 그 준비금을 꺼내 쓴다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>보험사가 신상품의 예정이율을 2.75%에서 2.5%로 내렸다. 다른 조건이 같다면 어떤 일이 생기는가?</p>
+        <div class="opts">
+          <button class="opt">모든 상품의 보험료가 똑같이 0.25% 오른다</button>
+          <button class="opt">이미 가입한 계약의 보험료도 함께 오른다</button>
+          <button class="opt">보험료가 내려간다</button>
+          <button class="opt" data-correct>신규 계약의 보험료가 오르며, 종신보험처럼 기간이 긴 상품일수록 많이 오른다</button>
+        </div>
+        <div class="quiz-exp">예정이율이 낮아지면 미래 보험금을 할인하는 폭이 줄어 지금 걷어야 할 돈이 늘어난다. 할인 기간이 긴 종신보험은 영향이 크다. 이 책의 모델로 32세 종신 1억원(20년납)은 약 14.8만원에서 16.4만원으로 10% 넘게 오른다. 금리확정형으로 이미 가입한 계약의 예정이율은 보통 바뀌지 않는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>종신보험에 가입하고 2년 만에 해지했더니 해지환급금이 낸 돈보다 훨씬 적었다. 가장 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt" data-correct>첫해에 먼저 쓴 신계약비 가운데 아직 갚지 않은 몫(미상각 신계약비)을 준비금에서 빼기 때문이다</button>
+          <button class="opt">예정이율만큼 이자가 마이너스로 붙기 때문이다</button>
+          <button class="opt">2년 동안 낸 보험료가 모두 위험보험료였기 때문이다</button>
+          <button class="opt">해지하면 위약금으로 낸 돈의 절반을 떼기 때문이다</button>
+        </div>
+        <div class="quiz-exp">해지환급금 = 책임준비금 − 미상각 신계약비다. 신계약비는 첫해에 한꺼번에 쓰고 몇 년(이 책의 모델은 7년)에 걸쳐 보험료로 갚기 때문에, 초기에 해지하면 못 갚은 몫만큼 덜 돌려받는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>경험생명표가 개정되어 같은 나이의 사망률이 낮아졌다. 사망보험과 연금보험의 신규 보험료는 대체로 어떻게 움직이는가?</p>
+        <div class="opts">
+          <button class="opt">둘 다 내려간다</button>
+          <button class="opt">둘 다 오른다</button>
+          <button class="opt" data-correct>사망보험은 내려가고, 같은 연금액을 주는 연금보험은 오른다</button>
+          <button class="opt">생명표는 보험료와 관계가 없다</button>
+        </div>
+        <div class="quiz-exp">사망률이 낮으면 사망보험금을 지급할 확률이 줄어 사망보험료는 내려간다. 반대로 연금은 오래 살수록 오래 지급해야 하므로 같은 연금액에 더 많은 돈이 필요해 보험료가 오른다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function dot(ctx, x, y, col, r) { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, r || 4, 0, TAU); ctx.fill(); }
+  const fmtN = (n) => Math.round(n).toLocaleString("ko-KR");
+  const wonP = (x) => (x < 1e6 ? fmtN(x) + "원" : IB.won(x));
+  const BOT = (w) => (w < 480 ? 68 : 48); // 좁은 화면에서는 손잡이 안내 글자 자리를 더 둔다
+  const man = (x) => (x < 1e5 ? fmtN(x) + "원" : (x / 1e4).toFixed(1) + "만원");
+  // 엔진에는 위험률 배수 옵션이 없어서, 계산하는 동안만 INS.qx에 배수를 곱해 둔다.
+  function priceK(o, k) {
+    if (!k || k === 1) return INS.price(o);
+    const q = INS.qx;
+    INS.qx = (a, s, t) => (a >= 110 ? 1 : Math.min(1, q(a, s, t) * k));
+    try { return INS.price(o); } finally { INS.qx = q; }
+  }
+
+  /* ---------------------------------------------------------- 1. 생명표 */
+  (function () {
+    let G = null;
+    const redraw = () => cv && cv.redraw();
+    const sex = IB.seg("lt-sex", redraw);
+    const logEl = document.getElementById("lt-log");
+    logEl.addEventListener("change", redraw);
+    const Ar = IB.range("lt-a", (v) => v + "세", redraw);
+    let cv = null;
+    cv = IB.canvas("#lt-cv", (ctx, w, h) => {
+      const P = IB.palette(), s = sex(), o = s === "m" ? "f" : "m", a = Ar(), lg = logEl.checked;
+      const ser = (sx, tb) => { const d = []; for (let x = 20; x <= 100; x++) d.push([x, INS.qx(x, sx, tb)]); return d; };
+      const box = { x: 62, y: 16, w: w - 62 - 16, h: h - 16 - BOT(w) };
+      const c = IB.chart(ctx, box, {
+        x: [20, 100], y: lg ? [1e-4, 0.5] : [0, 0.3], logY: lg, xLabel: "나이", xTicks: [20, 30, 40, 50, 60, 70, 80, 90, 100], xFmt: (v) => v + "",
+        yFmt: (v) => (v >= 0.01 ? Math.round(v * 100) + "%" : +(v * 100).toPrecision(2) + "%"), yTicks: lg ? [1e-4, 1e-3, 1e-2, 0.1] : [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3],
+        series: [{ data: ser(o, "insured"), color: P.accent2, width: 1.6, dash: [2, 3] }, { data: ser(s, "pop"), color: P.dim, width: 2, dash: [6, 4] }, { data: ser(s, "insured"), color: P.accent, width: 2.8 }],
+      });
+      G = c;
+      const qi = INS.qx(a, s), qp = INS.qx(a, s, "pop");
+      vline(ctx, c.X(a), box.y, box.y + box.h, P.faint, [3, 3]);
+      dot(ctx, c.X(a), c.Y(Math.max(lg ? 1e-4 : 0, Math.min(qp, lg ? 0.5 : 0.3))), P.dim, 4);
+      knob(ctx, c.X(a), c.Y(Math.max(lg ? 1e-4 : 0, Math.min(qi, lg ? 0.5 : 0.3))), P, P.accent, 7);
+      const per = qi * 1e4, lbl = "1만 명 중 " + (per < 10 ? per.toFixed(1) : fmtN(per)) + "명";
+      const right = c.X(a) > box.x + box.w * 0.7;
+      T(ctx, a + "세 · " + lbl, c.X(a) + (right ? -10 : 10), box.y + 14, { size: 12, color: P.text, weight: 600, align: right ? "right" : "left" });
+      IB.stat("lt-o-q", (qi * 100).toPrecision(2) + "% <small>/ " + (qp * 100).toPrecision(2) + "%</small>");
+      IB.stat("lt-o-d", (per < 10 ? per.toFixed(1) : fmtN(per)) + "<small>명</small>");
+      IB.stat("lt-o-e", INS.lifeExpectancy(a, s).toFixed(1) + "<small>년</small> / " + INS.lifeExpectancy(a, s, "pop").toFixed(1) + "<small>년</small>");
+      IB.stat("lt-o-l", INS.lifeExpectancy(0, s, "pop").toFixed(1) + "<small>세 (" + (s === "m" ? "남" : "여") + ")</small>");
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; Ar.set(IB.clamp(Math.round(20 + ((x - b.x) / b.w) * 80), 20, 100)); } });
+  })();
+
+  /* ---------------------------------------------------------- 2. 3이원방식 */
+  (function () {
+    const BASE = { term: { type: "term", age: 32, sex: "m", S: 1e8, term: 28, pay: 28 }, whole: { type: "whole", age: 32, sex: "m", S: 1e8, pay: 20 } };
+    const redraw = () => cv && cv.redraw();
+    const type = IB.seg("tr-type", redraw);
+    const Kr = IB.range("tr-k", (v) => v + "%", redraw);
+    const Ir = IB.range("tr-i", (v) => v.toFixed(2) + "%", redraw);
+    const Er = IB.range("tr-e", (v) => v + "%", redraw);
+    let cv = null;
+    cv = IB.canvas("#tr-cv", (ctx, w, h) => {
+      const P = IB.palette(), t = type(), e = Er() / 100;
+      const b = INS.price(Object.assign({ i: 0.025 }, BASE[t]));
+      const n = priceK(Object.assign({ i: Ir() / 100, alpha: 0.9 * e, beta: 0.08 * e }, BASE[t]), Kr() / 100);
+      const parts = (p) => [p.parts.risk, p.parts.saving, p.parts.expense];
+      const pb = parts(b), pn = parts(n);
+      const ymax = Math.max(b.monthly, n.monthly) * 1.18;
+      const box = { x: 62, y: 18, w: w - 62 - 16, h: h - 18 - 40 };
+      const bars = IB.bars(ctx, box, {
+        labels: ["기준 가정", "지금 가정"], y: [0, ymax], yFmt: IB.wonAxis, gap: 0.42,
+        stacks: [{ label: "위험", color: P.accent, data: [pb[0], pn[0]] }, { label: "저축", color: P.accent2, data: [pb[1], pn[1]] }, { label: "부가", color: P.bad, data: [pb[2], pn[2]] }],
+        valueFmt: (v) => man(v),
+      });
+      // 각 칸 안에 금액
+      [pb, pn].forEach((arr, i) => {
+        let acc = 0;
+        arr.forEach((v) => {
+          const y0 = bars.Y(acc), y1 = bars.Y(acc + v); acc += v;
+          if (y0 - y1 > 16 && bars.bw > 60) T(ctx, man(v), bars.X(i), (y0 + y1) / 2, { size: 11, color: P.bg, align: "center", base: "middle", weight: 700, mono: true });
+        });
+      });
+      const r = n.monthly / b.monthly - 1;
+      IB.stat("tr-o-p", wonP(n.monthly));
+      IB.stat("tr-o-r", tone(Math.abs(r) < 0.005 ? "" : r > 0 ? "bad-t" : "ok-t", (r >= 0 ? "+" : "") + (r * 100).toFixed(1) + "%"));
+      IB.stat("tr-o-s", pn.map((v) => fmtN(v)).join(" / ") + "<small>원</small>");
+    }, { aspect: 0.6, minHeight: 290, maxHeight: 380 });
+  })();
+
+  /* ---------------------------------------------------------- 3. 자연 vs 평준 */
+  (function () {
+    const S = 1e8, I = 0.025;
+    let pick = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Ar = IB.range("nl-a", (v) => v + "세", () => { pick = null; redraw(); });
+    const Er = IB.range("nl-e", (v) => v + "세", () => { pick = null; redraw(); });
+    let cv = null;
+    cv = IB.canvas("#nl-cv", (ctx, w, h) => {
+      const P = IB.palette(), a = Ar(), e = Er(), n = e - a;
+      const lv = INS.price({ type: "term", age: a, sex: "m", S, term: n, pay: n, i: I, loadOnly: true });
+      const L = lv.annual, nat = (x) => (INS.qx(x, "m") * S) / (1 + I);
+      const natEnd = nat(e - 1), ymax = Math.min(natEnd * 1.05, L * 7);
+      const box = { x: 62, y: 18, w: w - 62 - 16, h: h - 18 - BOT(w) };
+      const xt = []; for (let x = Math.ceil(a / 10) * 10; x <= e; x += 10) xt.push(x);
+      const c = IB.chart(ctx, box, { x: [a, e], y: [0, ymax], xTicks: xt, xFmt: (v) => v + "세", yFmt: IB.wonAxis, xLabel: "나이 (그해 내는 순보험료, 연)" });
+      G = c;
+      ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+      // 영역: 계단 모양(한 해씩)
+      let cross = null;
+      for (let x = a; x < e; x++) {
+        const v = nat(x), x0 = c.X(x), x1 = c.X(x + 1);
+        if (cross == null && v > L) cross = x;
+        ctx.fillStyle = v < L ? P.ok : P.warn; ctx.globalAlpha = 0.28;
+        const ya = c.Y(Math.min(v, ymax)), yb = c.Y(L);
+        ctx.fillRect(x0, Math.min(ya, yb), x1 - x0 + 0.5, Math.abs(ya - yb)); ctx.globalAlpha = 1;
+      }
+      // 자연보험료 계단선
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2.4; ctx.beginPath();
+      for (let x = a; x < e; x++) { const y = c.Y(Math.min(nat(x), ymax * 1.2)); if (x === a) ctx.moveTo(c.X(x), y); else ctx.lineTo(c.X(x), y); ctx.lineTo(c.X(x + 1), y); }
+      ctx.stroke();
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.moveTo(c.X(a), c.Y(L)); ctx.lineTo(c.X(e), c.Y(L)); ctx.stroke();
+      ctx.restore();
+      T(ctx, "평준 " + IB.wonAxis(L), box.x + 6, c.Y(L) - 6, { size: 11.5, color: P.accent, weight: 600 });
+      if (natEnd > ymax) T(ctx, "↑ 마지막 해 " + IB.wonAxis(natEnd), box.x + box.w - 4, box.y + 12, { size: 11, color: P.bad, align: "right" });
+      const px = pick == null ? (cross != null ? cross : a) : pick;
+      const row = lv.rows[Math.min(lv.rows.length - 1, px - a)];
+      vline(ctx, c.X(px + 0.5), box.y, box.y + box.h, P.text, [4, 3], 1.3);
+      knob(ctx, c.X(px + 0.5), box.y + box.h, P, P.text, 6);
+      IB.stat("nl-o-l", wonP(L));
+      IB.stat("nl-o-n", wonP(nat(px)) + " <small>(" + px + "세)</small>");
+      IB.stat("nl-o-c", cross != null ? cross + "<small>세</small>" : "만나지 않음");
+      IB.stat("nl-o-v", won(row.reserve));
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box, a = Ar(), e = Er(); pick = IB.clamp(Math.floor(a + ((x - b.x) / b.w) * (e - a)), a, e - 1); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 책임준비금 애니메이션 */
+  (function () {
+    const N0 = 1000, AGE = 32, PAY = 20;
+    const pr = INS.price({ type: "whole", age: AGE, sex: "m", S: 1e8, pay: PAY, i: 0.025, loadOnly: true });
+    const rows = pr.rows, TMAX = rows.length - 1;
+    const fund = rows.map((r) => r.reserve * r.inforce * N0), FMAX = Math.max(...fund);
+    const order = []; { const r = IB.rng(31); for (let i = 0; i < N0; i++) order.push(i); for (let i = N0 - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = order[i]; order[i] = order[j]; order[j] = t; } }
+    const rank = new Array(N0); order.forEach((p, k) => (rank[p] = k));
+    let t = 0, playing = true, G = null, hold = 0;
+    const Sr = IB.range("rs-s", (v) => v + "년/초");
+    const el = document.getElementById("rs-cv");
+    const at = (tt) => { const i = Math.floor(tt), f = tt - i, a = rows[Math.min(i, TMAX)], b = rows[Math.min(i + 1, TMAX)]; return { reserve: a.reserve + (b.reserve - a.reserve) * f, inforce: a.inforce + (b.inforce - a.inforce) * f, fund: fund[Math.min(i, TMAX)] + (fund[Math.min(i + 1, TMAX)] - fund[Math.min(i, TMAX)]) * f }; };
+    const cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette(), cur = at(t), alive = Math.round(cur.inforce * N0);
+      // 위: 1,000명
+      const cols = w >= 520 ? 100 : 50, rws = N0 / cols, gb = { x: 12, y: 24, w: w - 24, h: Math.min(120, (w - 24) / cols * rws) };
+      const cell = Math.min(gb.w / cols, gb.h / rws), gx = gb.x + (gb.w - cell * cols) / 2;
+      T(ctx, "가입자 1,000명 · 살아 있는 " + fmtN(alive) + "명", gb.x, 14, { size: 12, color: P.dim, base: "middle" });
+      for (let i = 0; i < N0; i++) {
+        const dead = rank[i] >= alive, x = gx + (i % cols) * cell + cell / 2, y = gb.y + Math.floor(i / cols) * cell + cell / 2;
+        ctx.fillStyle = dead ? P.bad : P.accent; ctx.globalAlpha = dead ? 0.35 : 0.8;
+        ctx.beginPath(); ctx.arc(x, y, Math.max(1, cell * 0.36), 0, TAU); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      // 아래: 준비금 그래프
+      const box = { x: 54, y: gb.y + rws * cell + 30, w: w - 54 - 54, h: 0 }; box.h = h - box.y - 50;
+      const xt = [32, 52, 72, 92, 110];
+      const c = IB.chart(ctx, box, { x: [AGE, 110], y: [0, 1.05e8], xTicks: xt, xFmt: (v) => v + "세", yFmt: IB.wonAxis });
+      G = c;
+      // 기금(오른쪽 축)
+      const FY = (v) => box.y + box.h - (v / (FMAX * 1.05)) * box.h;
+      ctx.save(); ctx.beginPath(); ctx.moveTo(c.X(AGE), FY(0));
+      for (let k = 0; k <= TMAX; k++) { if (k > t) break; ctx.lineTo(c.X(AGE + k), FY(fund[k])); }
+      ctx.lineTo(c.X(AGE + t), FY(cur.fund)); ctx.lineTo(c.X(AGE + t), FY(0)); ctx.closePath();
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.18; ctx.fill(); ctx.restore();
+      ctx.save(); ctx.strokeStyle = P.accent; ctx.lineWidth = 1.6; ctx.beginPath();
+      for (let k = 0; k <= TMAX; k++) { if (k > t) break; const X = c.X(AGE + k), Y = FY(fund[k]); k ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }
+      ctx.lineTo(c.X(AGE + t), FY(cur.fund)); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = P.accent; ctx.font = IB.font(10.5, true); ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      [0.25, 0.5, 0.75, 1].forEach((f) => ctx.fillText(Math.round((FMAX * f) / 1e8) + "억", box.x + box.w + 6, FY(FMAX * f)));
+      // 1인 준비금(전체는 흐리게, 지난 구간은 진하게)
+      ctx.save(); ctx.strokeStyle = P.accent2; ctx.globalAlpha = 0.3; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.beginPath();
+      rows.forEach((r, k) => { const X = c.X(AGE + k), Y = c.Y(r.reserve); k ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }); ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.strokeStyle = P.accent2; ctx.lineWidth = 2.6; ctx.beginPath();
+      for (let k = 0; k <= TMAX; k++) { if (k > t) break; const X = c.X(AGE + k), Y = c.Y(rows[k].reserve); k ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }
+      ctx.lineTo(c.X(AGE + t), c.Y(cur.reserve)); ctx.stroke(); ctx.restore();
+      vline(ctx, c.X(AGE + PAY), box.y, box.y + box.h, P.faint, [3, 3]);
+      T(ctx, "납입 끝", c.X(AGE + PAY) + 4, box.y + 10, { size: 11, color: P.dim });
+      dot(ctx, c.X(AGE + t), c.Y(cur.reserve), P.accent2, 5);
+      knob(ctx, c.X(AGE + t), box.y + box.h, P, P.text, 6);
+      IB.stat("rs-o-a", (AGE + Math.floor(t)) + "<small>세 · " + Math.floor(t) + "년차</small>");
+      IB.stat("rs-o-n", fmtN(alive) + "<small>명</small>");
+      IB.stat("rs-o-v", won(cur.reserve));
+      IB.stat("rs-o-f", (cur.fund / 1e8).toFixed(1) + "<small>억원</small>");
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 520 ? 400 : 420; } });
+    const pb = document.getElementById("rs-play");
+    const setPlay = (v) => { playing = v; pb.textContent = v ? "일시정지" : "재생"; if (v && t >= TMAX) t = 0; };
+    IB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      if (t >= TMAX) { hold += dt; if (hold > 2.5) { hold = 0; t = 0; } cv.redraw(); return; }
+      t = Math.min(TMAX, t + dt * Sr());
+      cv.redraw();
+    });
+    pb.addEventListener("click", () => setPlay(!playing));
+    document.getElementById("rs-re").addEventListener("click", () => { t = 0; hold = 0; setPlay(true); cv.redraw(); });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; if (playing) setPlay(false); t = IB.clamp(((x - b.x) / b.w) * TMAX, 0, TMAX); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 5. 예정이율 */
+  (function () {
+    const IS = []; for (let i = 1; i <= 7.0001; i += 0.125) IS.push(+i.toFixed(3));
+    let iSel = 2.5, G = null, cache = {};
+    const curve = (age, pay) => {
+      const key = age + "|" + pay; if (cache[key]) return cache[key];
+      return (cache[key] = IS.map((i) => [i, INS.price({ type: "whole", age, sex: "m", S: 1e8, pay, i: i / 100 }).monthly]));
+    };
+    const redraw = () => cv && cv.redraw();
+    const Ar = IB.range("ir-a", (v) => v + "세", redraw);
+    const pay = IB.seg("ir-pay", redraw);
+    const prem = (age, i) => INS.price({ type: "whole", age, sex: "m", S: 1e8, pay: +pay(), i: i / 100 }).monthly;
+    let cv = null;
+    cv = IB.canvas("#ir-cv", (ctx, w, h) => {
+      const P = IB.palette(), a = Ar(), py = +pay();
+      const ca = curve(a, py), cb = curve(18, py);
+      const ymax = Math.max(ca[0][1], cb[0][1]) * 1.08;
+      const box = { x: 62, y: 18, w: w - 62 - 16, h: h - 18 - BOT(w) };
+      const c = IB.chart(ctx, box, {
+        x: [1, 7], y: [0, ymax], xTicks: [1, 2, 3, 4, 5, 6, 7], xFmt: (v) => v + "%", yFmt: IB.wonAxis, xLabel: "예정이율",
+        series: [{ data: cb, color: P.accent2, width: 2, dash: [6, 4] }, { data: ca, color: P.accent, width: 2.8 }],
+      });
+      G = c;
+      // 기준점
+      const pA = prem(a, 2.5), pB = prem(18, 4);
+      dot(ctx, c.X(2.5), c.Y(pA), P.accent, 4); dot(ctx, c.X(4), c.Y(pB), P.accent2, 4);
+      T(ctx, a + "세 · 2.5%", c.X(2.5) + 7, c.Y(pA) - 6, { size: 11, color: P.accent });
+      T(ctx, "18세 · 4%", c.X(4) + 7, c.Y(pB) - 6, { size: 11, color: P.accent2 });
+      const va = prem(a, iSel), vb = prem(18, iSel);
+      vline(ctx, c.X(iSel), box.y, box.y + box.h, P.text, [4, 3], 1.3);
+      dot(ctx, c.X(iSel), c.Y(vb), P.accent2, 5);
+      knob(ctx, c.X(iSel), c.Y(va), P, P.accent, 7);
+      const right = c.X(iSel) > box.x + box.w * 0.65;
+      T(ctx, iSel.toFixed(2) + "% → " + man(va), c.X(iSel) + (right ? -10 : 10), box.y + 14, { size: 12, color: P.text, weight: 600, align: right ? "right" : "left" });
+      const ref = prem(a, 2.5);
+      IB.stat("ir-o-i", iSel.toFixed(2) + "%");
+      IB.stat("ir-o-a", wonP(va));
+      IB.stat("ir-o-b", wonP(vb));
+      IB.stat("ir-o-r", tone(va > ref * 1.005 ? "bad-t" : va < ref * 0.995 ? "ok-t" : "", "×" + (va / ref).toFixed(2)));
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; iSel = IB.clamp(Math.round((1 + ((x - b.x) / b.w) * 6) * 4) / 4, 1, 7); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 해지환급금 */
+  (function () {
+    let yr = 3, G = null;
+    const redraw = () => cv && cv.redraw();
+    const ref = IB.seg("sv-ref", redraw);
+    const Ar = IB.range("sv-a", (v) => v + "%", redraw);
+    const Mr = IB.range("sv-m", (v) => v + "년", redraw);
+    let key = "", res = null;
+    function model() {
+      const k = [ref(), Ar(), Mr()].join("|");
+      if (k === key) return res;
+      const rf = +ref();
+      const std = INS.price({ type: "whole", age: 32, sex: "m", S: 1e8, pay: 20, i: 0.025, alpha: Ar() / 100, amort: Mr() });
+      const cur = rf === 1 ? std : INS.price({ type: "whole", age: 32, sex: "m", S: 1e8, pay: 20, i: 0.025, alpha: Ar() / 100, amort: Mr(), refund: rf, lapse: 0.04 });
+      key = k; res = { std, cur };
+      return res;
+    }
+    let cv = null;
+    cv = IB.canvas("#sv-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model(), Y = 40, rows = m.cur.rows.slice(0, Y + 1);
+      const paid = rows.map((r) => [r.t, r.paid]), resv = m.std.rows.slice(0, Y + 1).map((r) => [r.t, r.reserve]), sv = rows.map((r) => [r.t, r.surrender]);
+      const ymax = Math.max(...resv.map((p) => p[1]), ...paid.map((p) => p[1])) * 1.06;
+      const box = { x: 62, y: 18, w: w - 62 - 16, h: h - 18 - BOT(w) };
+      const c = IB.chart(ctx, box, {
+        x: [0, Y], y: [0, ymax], xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], xFmt: (v) => v + "년", yFmt: IB.wonAxis, xLabel: "가입 후 경과 (32세 가입, 20년납)",
+        series: [{ data: resv, color: P.accent2, width: 1.8, dash: [6, 4] }, { data: paid, color: P.dim, width: 2 }, { data: sv, color: P.ok, width: 2.8 }],
+      });
+      G = c;
+      ctx.globalAlpha = 0.08; ctx.fillStyle = P.dim; ctx.fillRect(c.X(0), box.y, c.X(Math.min(Mr(), 20)) - c.X(0), box.h); ctx.globalAlpha = 1;
+      T(ctx, "신계약비 상각 " + Math.min(Mr(), 20) + "년", c.X(0) + 6, box.y + 12, { size: 11, color: P.dim });
+      const r = rows[yr];
+      vline(ctx, c.X(yr), box.y, box.y + box.h, P.text, [4, 3], 1.3);
+      dot(ctx, c.X(yr), c.Y(r.paid), P.dim, 4.5);
+      dot(ctx, c.X(yr), c.Y(r.surrender), P.ok, 5);
+      knob(ctx, c.X(yr), box.y + box.h, P, P.text, 7);
+      const be = m.cur.breakEven;
+      IB.stat("sv-o-p", wonP(m.cur.monthly));
+      IB.stat("sv-o-t", yr + "<small>년째 (" + (32 + yr) + "세)</small>");
+      IB.stat("sv-o-m", IB.wonAxis(r.paid) + " → " + IB.wonAxis(r.surrender));
+      IB.stat("sv-o-r", tone(r.ratio < 1 ? "bad-t" : "ok-t", (r.ratio * 100).toFixed(0) + "%"));
+      IB.stat("sv-o-b", be == null ? tone("bad-t", "40년 안에 없음") : be + "<small>년째</small>");
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; yr = IB.clamp(Math.round(((x - b.x) / b.w) * 40), 1, 40); cv.redraw(); } });
+  })();
+  /* ---------------------------------------------------------- 7. 해마다 다른 보험료의 속 */
+  (function () {
+    let pick = 0, G = null;
+    const redraw = () => cv && cv.redraw();
+    const type = IB.seg("dc-type", () => { pick = 0; redraw(); });
+    const Ar = IB.range("dc-a", (v) => v + "세", redraw);
+    function model() {
+      const a = Ar(), t = type();
+      const o = t === "whole" ? { type: "whole", age: a, sex: "m", S: 1e8, pay: 20 } : { type: "term", age: a, sex: "m", S: 1e8, term: 60 - a, pay: 60 - a };
+      const p = INS.price(o), v = 1 / 1.025, n = p.pay, out = [];
+      for (let k = 0; k < n; k++) {
+        const V0 = p.rows[k].reserve, V1 = p.rows[k + 1].reserve, q = INS.qx(a + k, "m");
+        out.push({ k, risk: (v * q * (1e8 - V1)) / 12, saving: (v * V1 - V0) / 12, expense: (p.annual - p.netStd) / 12, atRisk: 1e8 - V1 });
+      }
+      return { a, out };
+    }
+    let cv = null;
+    cv = IB.canvas("#dc-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model(), n = m.out.length;
+      if (pick >= n) pick = n - 1;
+      const box = { x: 62, y: 18, w: w - 62 - 16, h: h - 18 - BOT(w) };
+      const lo = Math.min(0, ...m.out.map((r) => r.saving)), hi = Math.max(...m.out.map((r) => Math.max(0, r.saving) + r.risk + r.expense));
+      const labels = m.out.map((r) => String(r.k + 1));
+      const b = IB.bars(ctx, box, {
+        labels, y: [lo * 1.1, hi * 1.12], yFmt: IB.wonAxis, gap: 0.22, highlight: pick, xLabel: w < 480 ? undefined : "가입 후 몇 년째",
+        stacks: [{ label: "위험", color: P.accent, data: m.out.map((r) => r.risk) }, { label: "저축", color: P.accent2, data: m.out.map((r) => r.saving) }, { label: "부가", color: P.bad, data: m.out.map((r) => r.expense) }],
+      });
+      G = { b, n };
+      const r = m.out[pick];
+      vline(ctx, b.X(pick), box.y, box.y + box.h, P.text, [4, 3], 1.2);
+      knob(ctx, b.X(pick), box.y + box.h, P, P.text, 6);
+      IB.stat("dc-o-t", (pick + 1) + "<small>년째 (" + (m.a + pick) + "세)</small>");
+      IB.stat("dc-o-p", fmtN(r.risk) + " / " + tone(r.saving < 0 ? "bad-t" : "", fmtN(r.saving)) + " / " + fmtN(r.expense) + "<small>원</small>");
+      IB.stat("dc-o-r", won(r.atRisk));
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 390 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const B = G.b.box; pick = IB.clamp(Math.floor(((x - B.x) / B.w) * G.n), 0, G.n - 1); cv.redraw(); } });
+  })();
+})();
+</script>
+</body>
+</html>

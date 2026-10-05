@@ -1,0 +1,802 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "손해보험은 실제 손해만큼만 갚는다. 정액 보장과 실손보상의 차이, 보험가액과 보험가입금액, 일부보험의 비례보상, 중복보험의 비례분담, 일상생활배상책임, 자동차보험의 담보 구조와 할증, 자기부담금, 운전자보험과 특약 할인을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>손해보험: 자동차·화재·배상 · InsureBook</title>
+<meta name="description" content="손해보험은 실제 손해만큼만 갚는다. 정액 보장과 실손보상의 차이, 보험가액과 보험가입금액, 일부보험의 비례보상, 중복보험의 비례분담, 일상생활배상책임, 자동차보험의 담보 구조와 할증, 자기부담금, 운전자보험과 특약 할인을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/property.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="손해보험: 자동차·화재·배상 · InsureBook">
+<meta property="og:description" content="손해보험은 실제 손해만큼만 갚는다. 정액 보장과 실손보상의 차이, 보험가액과 보험가입금액, 일부보험의 비례보상, 중복보험의 비례분담, 일상생활배상책임, 자동차보험의 담보 구조와 할증, 자기부담금, 운전자보험과 특약 할인을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/property.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/property.html#chapter","name":"손해보험: 자동차·화재·배상","headline":"손해보험: 자동차·화재·배상 · InsureBook","description":"손해보험은 실제 손해만큼만 갚는다. 정액 보장과 실손보상의 차이, 보험가액과 보험가입금액, 일부보험의 비례보상, 중복보험의 비례분담, 일상생활배상책임, 자동차보험의 담보 구조와 할증, 자기부담금, 운전자보험과 특약 할인을 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/property.html","position":12,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"12. 손해보험: 자동차·화재·배상","item":"https://insurebook.euiyun.com/chapters/property.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="property">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 12</div>
+    <h1>손해보험: 자동차·화재·배상</h1>
+    <p class="lead">지우의 보험 서랍에는 '일상생활배상책임'이라는 특약이 두 번 나온다. 운전자보험에 하나, 주택화재보험에 하나. 지우는 생각한다. "두 개니까 사고 나면 두 배로 받겠지?" 암 진단비라면 맞는 말이다. 하지만 배상책임은 그렇지 않다. 남의 집 천장을 300만원어치 망가뜨렸다면 받는 돈은 300만원이고, 두 보험사가 그것을 나눠 낼 뿐이다. 이 장은 손해보험의 이 원칙, "실제 손해만큼만"에서 출발해 화재보험의 비례보상, 중복 가입, 자동차보험의 담보와 할증까지 따라간다.</p>
+    <ul class="objectives">
+      <li>정액 보장(인보험)과 실손보상(손해보험)의 차이, 이득 금지 원칙을 안다.</li>
+      <li>보험가액과 보험가입금액의 차이로 일부보험·초과보험이 생기는 원리와 비례보상을 계산한다.</li>
+      <li>중복보험에서 보험금은 그대로이고 회사끼리 나눠 낸다는 것을 확인하고, 일상생활배상책임의 보상 범위를 구분한다.</li>
+      <li>자동차보험 담보의 구조와 사고 처리 시 할증, 자기차량손해 자기부담금을 따져 보험 처리 여부를 판단한다.</li>
+      <li>운전자보험이 자동차보험과 무엇이 다른지, 특약 할인과 다이렉트 가입의 의미를 안다.</li>
+    </ul>
+  </header>
+
+  <section id="principle">
+    <h2>정액으로 주는 보험, 손해만큼 주는 보험</h2>
+    <p>보험은 무엇을 갚느냐에 따라 두 갈래로 나뉜다. 사람의 생명과 몸에 생긴 일에 미리 정한 금액을 주는 것을 <span class="term">정액보상</span><span class="en">(Fixed benefit)</span>이라 한다. 암 진단비 3,000만원, 사망보험금 1억원처럼 실제로 돈이 얼마나 들었는지 묻지 않는다. 사람의 목숨이나 건강은 값을 매길 수 없으니, 계약할 때 정한 금액을 주는 것이다. 그래서 진단비 보험을 세 개 들었다면 세 곳에서 모두 받는다(<a href="fixed.html">9장</a>).</p>
+    <p>반대로 집, 자동차, 물건, 그리고 남에게 물어 줘야 할 돈처럼 값을 셀 수 있는 손해에는 <span class="term">실손보상</span><span class="en">(Indemnity)</span>이 원칙이다. 실제로 생긴 손해만큼만 갚는다. 보험으로 사고 전보다 형편이 나아지면 일부러 사고를 내려는 사람이 생기기 때문이다(<a href="asymmetry.html">4장</a>의 도덕적 해이). 이것을 <span class="term">이득 금지 원칙</span>이라 한다. 생명보험사가 주로 파는 인보험도 실손의료보험처럼 실제 비용을 갚는 상품이 있고, 손해보험사도 상해·질병 진단비 같은 정액 상품을 판다. 이 장에서 다루는 화재·배상·자동차보험은 모두 실손보상이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 320" role="img" aria-label="정액보상과 실손보상의 차이: 같은 손해에 보험 세 개를 들었을 때">
+        <text x="110" y="24" text-anchor="middle" class="lbl-acc">정액보상(진단비 등)</text>
+        <text x="330" y="24" text-anchor="middle" class="lbl-acc2">실손보상(배상·화재·자동차)</text>
+        <line x1="220" y1="10" x2="220" y2="250" class="s-dash"/>
+        <rect x="20" y="200" width="40" height="40" class="f-bad-soft"/>
+        <text x="40" y="262" text-anchor="middle" class="lbl-dim">손해</text>
+        <rect x="80" y="200" width="36" height="40" class="f-ok-soft"/>
+        <rect x="120" y="200" width="36" height="40" class="f-ok-soft"/>
+        <rect x="160" y="200" width="36" height="40" class="f-ok-soft"/>
+        <text x="138" y="262" text-anchor="middle" class="lbl-dim">계약 3개가 각각</text>
+        <text x="98" y="224" text-anchor="middle" class="lbl">A</text>
+        <text x="138" y="224" text-anchor="middle" class="lbl">B</text>
+        <text x="178" y="224" text-anchor="middle" class="lbl">C</text>
+        <text x="120" y="70" text-anchor="middle" class="lbl-b">받는 돈 = 정한 금액 × 3</text>
+        <text x="120" y="94" text-anchor="middle" class="lbl-dim">손해보다 많을 수 있다</text>
+        <path d="M80 190 L80 120 L196 120 L196 190" class="s-ok"/>
+        <rect x="240" y="200" width="40" height="40" class="f-bad-soft"/>
+        <text x="260" y="262" text-anchor="middle" class="lbl-dim">손해</text>
+        <rect x="300" y="200" width="120" height="40" class="f-ok-soft"/>
+        <line x1="340" y1="200" x2="340" y2="240" class="s-line"/>
+        <line x1="380" y1="200" x2="380" y2="240" class="s-line"/>
+        <text x="320" y="224" text-anchor="middle" class="lbl">A</text>
+        <text x="360" y="224" text-anchor="middle" class="lbl">B</text>
+        <text x="400" y="224" text-anchor="middle" class="lbl">C</text>
+        <text x="360" y="262" text-anchor="middle" class="lbl-dim">셋이 나눠 낸다</text>
+        <text x="330" y="70" text-anchor="middle" class="lbl-b">받는 돈 = 손해액</text>
+        <text x="330" y="94" text-anchor="middle" class="lbl-dim">보험이 몇 개든 그대로</text>
+        <text x="220" y="296" text-anchor="middle" class="lbl-dim">정액은 "얼마를 주기로 했나", 실손은 "얼마를 잃었나"를 묻는다</text>
+      </svg>
+      <figcaption><b>그림 1. 정액보상과 실손보상.</b> 같은 사고에 보험 세 개를 들었을 때, 정액보상은 계약마다 정한 금액을 모두 주지만 실손보상은 손해액을 넘지 않는다. 실손 상품을 여러 개 들면 받는 돈은 그대로이고, 보험사끼리 나눠 낼 뿐이다. 보험료만 여러 번 낸다.</figcaption>
+    </figure>
+
+    <p>그림을 숫자로 확인한다. 아래에서 손해액과 계약 수를 바꾸고, 정액형과 실손형을 오가며 받는 돈을 비교한다.</p>
+
+    <div class="sim" id="sim-pi">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>계약을 늘리면 받는 돈도 늘까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pi-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="pi-kind"><button data-value="fixed">정액형(계약당 1,000만원)</button><button data-value="indem" class="on">실손형</button></div>
+          <div class="seg" id="pi-n"><button data-value="1">1개</button><button data-value="2" class="on">2개</button><button data-value="3">3개</button></div>
+          <label class="ctrl"><span>실제 손해액 <output id="pi-l-out"></output></span><input type="range" id="pi-l" min="0" max="30000000" step="500000" value="5000000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">받는 돈 합계</span><span class="v" id="pi-o-p">—</span></div>
+        <div class="stat"><span class="k">손해 대비</span><span class="v" id="pi-o-r">—</span></div>
+        <div class="stat"><span class="k">계약 하나가 내는 돈</span><span class="v" id="pi-o-e">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 실손형, 손해 500만원에서 계약을 1개 → 3개로 늘린다. 받는 돈은 500만원 그대로이고 계약 하나가 내는 몫만 줄어든다. ② 정액형으로 바꾼다. 계약이 3개면 손해와 상관없이 3,000만원을 받는다. ③ 정액형에서 손해액을 0원으로 내린다. 정액형은 "진단을 받았다"는 사실에 돈을 주므로 그대로 3,000만원이다. 손해를 셀 수 있는 위험에 정액을 허용하지 않는 이유다. (계약마다 한도가 손해액보다 크다고 가정. 자기부담금은 생략했다.)</div>
+    </div>
+
+    <p>실손형에서 계약을 늘려도 받는 돈 막대는 키가 그대로다. 대신 색이 나뉜다. 이것이 손해보험을 정리할 때의 첫 번째 원칙이다. <b>같은 손해를 보장하는 실손 계약은 하나면 충분하다.</b> 다만 뒤에서 보듯 한도를 넘는 큰 사고에서는 계약이 둘이면 한도가 늘어나는 효과가 있으니, "하나만 남긴다"는 원칙은 한도가 넉넉하다는 전제 위에 있다.</p>
+  </section>
+
+  <section id="coinsurance">
+    <h2>보험가액과 보험가입금액: 일부보험의 비례보상</h2>
+    <p>화재보험에는 금액이 둘 나온다. <span class="term">보험가액</span><span class="en">(Insurable value)</span>은 보험에 든 물건의 실제 가치, 곧 사고가 났을 때 잃을 수 있는 최대 금액이다. <span class="term">보험가입금액</span><span class="en">(Sum insured)</span>은 계약할 때 내가 정한 보장 한도이고, 보험료는 이것을 기준으로 매긴다. 둘이 같으면 <span class="term">전부보험</span>, 가입금액이 가액보다 작으면 <span class="term">일부보험</span>, 크면 <span class="term">초과보험</span>이다.</p>
+    <p>보험료를 아끼려고 3억원짜리 건물을 1억원에 가입했다고 하자. 불이 나서 6,000만원 손해가 났다면 6,000만원을 다 받을까. 받지 못한다. 보험사는 가액의 일부만 보험료를 받았으니 손해도 그 비율만큼만 갚는다. 이것이 <span class="term">비례보상</span>이다. 다만 주택처럼 작은 손해(부분 손해)가 대부분인 물건은 가입금액이 가액의 80% 이상이면 손해 전액을 주는 기준을 두는 경우가 많다(약관에 따라 다름).</p>
+    <div class="formula">$$\text{보험금} = \text{손해액} \times \min\!\left(1,\ \frac{\text{보험가입금액}}{\text{보험가액} \times 80\%}\right),\quad \text{한도: 보험가입금액}$$<div class="where">주택 물건에 흔히 쓰는 80% 기준의 형태다. 단순 비례 방식이면 분모가 보험가액 그대로다. 실제 공식은 상품과 물건의 종류(주택, 일반, 공장)에 따라 다르다.</div></div>
+    <p>아래 그래프의 가로축이 가입금액이다. 손잡이를 좌우로 끌어 가입금액을 바꾸면, 같은 손해에 대해 받는 보험금이 어떻게 달라지는지 보인다.</p>
+
+    <div class="sim" id="sim-co">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>가입금액을 줄이면 무엇을 잃는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="co-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="co-rule"><button data-value="80" class="on">80% 기준(주택)</button><button data-value="100">단순 비례</button></div>
+          <label class="ctrl"><span>건물의 보험가액 <output id="co-v-out"></output></span><input type="range" id="co-v" min="100000000" max="600000000" step="10000000" value="300000000"></label>
+          <label class="ctrl"><span>손해액 <output id="co-l-out"></output></span><input type="range" id="co-l" min="0" max="600000000" step="5000000" value="60000000"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>받는 보험금</span><span><i style="background:var(--bad)"></i>내가 떠안는 손해</span><span><i style="background:var(--warn)"></i>초과보험 구간</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보험가입금액</span><span class="v" id="co-o-s">—</span></div>
+        <div class="stat"><span class="k">보험금</span><span class="v" id="co-o-p">—</span></div>
+        <div class="stat"><span class="k">내가 떠안는 손해</span><span class="v" id="co-o-x">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v" id="co-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(가액 3억원, 가입 1억 5,000만원, 손해 6,000만원, 80% 기준)에서 보험금은 6,000만원 × 1.5억/2.4억 = 3,750만원이다. 가입금액을 2억 4,000만원(가액의 80%)까지 끌면 손해 전액을 받는다. ② "단순 비례"로 바꾼다. 같은 1억 5,000만원이면 절반인 3,000만원만 받는다. ③ 손잡이를 가액보다 오른쪽(초과보험)으로 끈다. 보험료는 더 내지만 보험금은 손해액에서 늘지 않는다. 손해액을 6억원까지 올리면 가액을 넘는 손해는 애초에 생길 수 없다는 것도 보인다. (건물만 본 단순화. 가재도구, 임차자 배상, 잔존물 제거비 등은 따로 정한다.)</div>
+    </div>
+
+    <p>선이 두 번 꺾인다. 가입금액이 작은 동안 보험금은 비례해서 오르다가, 기준(가액의 80% 또는 100%)에 닿으면 손해 전액에서 멈춘다. 그 오른쪽은 보험료만 오르는 구간이다. 그래서 화재보험의 적정 가입금액은 "많을수록"이 아니라 "가액의 기준선 근처"다. 건물 가치는 해마다 변하므로(건축비 상승, 감가) 오래된 계약은 일부보험이 되어 있을 수 있다.</p>
+    <p>세입자인 지우에게 필요한 것은 건물 자체보다 두 가지다. 내 실수로 불이 나 집주인의 건물에 끼친 손해를 물어 주는 <span class="term">임차자 배상책임</span>과, 내 가재도구의 손해다. 지우의 주택화재보험이 바로 이 구성이다.</p>
+  </section>
+
+  <section id="double">
+    <h2>중복보험: 보험료는 더해지고 보험금은 나눠진다</h2>
+    <p>같은 손해를 보장하는 실손 계약이 둘 이상이고, 보장 한도의 합이 손해액보다 크면 <span class="term">중복보험</span>이다. 이때 각 보험사는 자기 계약만 있었다면 냈을 금액(<span class="term">독립책임액</span>)의 비율대로 손해를 나눠 낸다. 이것을 <span class="term">비례분담</span>이라 한다.</p>
+    <div class="formula">$$\text{A사 지급액} = \text{보험금 총액} \times \frac{\text{A사 독립책임액}}{\sum \text{각 사 독립책임액}}$$<div class="where">보험금 총액은 손해액(자기부담금 차감 후)과 한도 합계 가운데 작은 쪽이다. 한도가 같은 계약 두 개면 반씩 낸다. 가입자는 한 곳에 청구해도 되고, 보험사끼리 나중에 정산한다.</div></div>
+    <p>가장 흔한 중복이 <span class="term">일상생활배상책임</span>(줄여서 일배책) 특약이다. 일상생활 중 실수로 남의 몸이나 재산에 손해를 입혀 법률상 배상해야 할 때 그 돈을 대신 내 준다. 보험료가 아주 작아서 운전자보험, 화재보험, 상해보험, 자녀보험에 조금씩 끼워 팔리고, 그래서 한 사람이 두세 개를 가진 경우가 흔하다. 아래에서 아랫집 누수 사고가 났을 때 돈이 어떻게 흘러가는지 본다.</p>
+
+    <div class="sim" id="sim-du">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>일배책 세 개, 누수 한 번</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="du-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="du-n"><button data-value="1">계약 1개</button><button data-value="2" class="on">2개</button><button data-value="3">3개</button></div>
+          <label class="ctrl"><span>배상해야 할 손해액 <output id="du-l-out"></output></span><input type="range" id="du-l" min="0" max="300000000" step="1000000" value="8000000"></label>
+          <label class="check"><input type="checkbox" id="du-big"> 두 번째 계약의 한도가 2억원</label>
+          <div class="btn-row"><button class="btn primary" id="du-go">사고 다시 내기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">특약 보험료 합계(연, 가정)</span><span class="v" id="du-o-pr">—</span></div>
+        <div class="stat"><span class="k">받는 보험금</span><span class="v" id="du-o-p">—</span></div>
+        <div class="stat"><span class="k">회사별 분담</span><span class="v" id="du-o-s">—</span></div>
+        <div class="stat"><span class="k">내가 내는 돈</span><span class="v" id="du-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 손해 800만원에서 계약을 1개 → 2개 → 3개로 늘린다. 보험료는 계약 수만큼 늘지만 받는 돈은 자기부담 20만원을 뺀 780만원 그대로이고, 회사별 분담만 쪼개진다. ② 손해액을 1억 5,000만원으로 올린다. 계약이 1개면 한도 1억원에서 멈춰 5,000만원 넘게 내가 낸다. 2개면 한도가 합쳐져 전액을 받는다. 중복이 쓸모 있는 유일한 경우다. ③ "두 번째 계약의 한도가 2억원"을 켠다. 독립책임액이 커진 회사가 더 많이 낸다. (계약마다 한도 1억원, 자기부담 20만원, 특약 보험료 계약당 월 1,000원은 설명을 위한 가정이다. 실제 보험료·한도·자기부담은 계약마다 다르다.)</div>
+    </div>
+
+    <p>계약 수를 늘려도 동전의 총량은 같다. 출발하는 상자만 늘어난다. 한도 1억원짜리 일배책 하나로 감당되지 않는 사고는 드물기 때문에, 대부분의 가정에서는 일배책을 <b>하나만, 가족 전체가 보장되는 형태로</b> 남기는 것이 깔끔하다. 다만 지우는 그 하나를 어느 계약에 남길지 따져야 한다. 운전자보험을 해지하거나 이사하면서 화재보험이 끝나면 일배책도 함께 사라지기 때문이다.</p>
+
+    <div class="callout pro">
+      <strong>보장 분석에서 일배책 중복을 정리할 때</strong>
+      고객의 증권을 모두 펼쳐 '배상책임'이라는 글자가 들어간 특약을 모두 찾는다(일상생활배상책임, 가족일상생활배상책임, 자녀배상책임 등). 확인할 것은 ① 피보험자 범위(본인형인가, 가족형인가), ② 대물 자기부담금과 한도, ③ 주택 소재지 조건(증권에 적힌 주소가 지금 사는 집인가), ④ 그 특약이 붙은 주계약이 언제까지 유지되는가다. 가장 오래 유지될 주계약의 가족형 하나를 남기고 나머지 특약만 해지할 수 있는지 확인한다. 고객에게는 "두 개면 두 배"가 아니라는 것을 그림 1로 먼저 보여 주면 설득이 쉽다. 아낀 보험료가 작아도, 이 정리가 고객의 신뢰를 얻는 첫 장면이 되는 경우가 많다.
+    </div>
+  </section>
+
+  <section id="liability">
+    <h2>일상생활배상책임: 어디까지 보상되는가</h2>
+    <p>일배책은 보험료 대비 쓸모가 큰 특약이지만, 이름처럼 "일상생활의 모든 사고"를 덮지는 않는다. 핵심은 <b>남에게 끼친 손해</b>를 <b>법률상 배상할 책임</b>이 있을 때 보상한다는 것이다. 내 물건, 함께 사는 가족의 물건, 빌리거나 맡은 물건, 자동차 사고, 일하다 생긴 사고, 고의로 낸 사고는 대개 보상하지 않는다. 그리고 손해 가운데 첫 일부는 내가 내는 <span class="term">자기부담금</span>이 있다. 대물 사고에 흔히 수십만원 수준이고, 누수 사고는 계약 시기에 따라 더 높게 정해진 경우도 있다(약관마다 다름).</p>
+    <p>아래에서 사례를 하나씩 눌러 본다. 손해액과 자기부담금을 바꾸고, 피보험자 범위를 가족형으로 바꿨을 때 달라지는 사례도 찾아본다.</p>
+
+    <div class="sim" id="sim-lc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>이 사고, 일배책으로 보상될까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lc-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="lc-case"><button data-value="leak" class="on">아랫집 누수</button><button data-value="bike">자전거로 보행자</button><button data-value="dog">반려견이 행인</button><button data-value="kid">아이가 친구 집 TV</button><button data-value="borrow">빌린 카메라</button><button data-value="car">운전 중 접촉</button></div>
+          <label class="ctrl"><span>손해액 <output id="lc-l-out"></output></span><input type="range" id="lc-l" min="0" max="20000000" step="100000" value="3000000"></label>
+          <label class="ctrl"><span>대물 자기부담금 <output id="lc-d-out"></output></span><input type="range" id="lc-d" min="0" max="1000000" step="50000" value="200000"></label>
+          <label class="check"><input type="checkbox" id="lc-fam"> 가족형(배우자·자녀도 피보험자)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보상 여부</span><span class="v" id="lc-o-c">—</span></div>
+        <div class="stat"><span class="k">보험금</span><span class="v" id="lc-o-p">—</span></div>
+        <div class="stat"><span class="k">내가 내는 돈</span><span class="v" id="lc-o-x">—</span></div>
+      </div>
+      <div class="sim-note" id="lc-msg">사례를 눌러 본다.</div>
+    </div>
+    <p class="sim-note" style="border:0;background:none;padding:0 2px">해볼 것: ① "아랫집 누수"에서 자기부담금을 0원에서 100만원까지 끌어 본다. 작은 누수는 자기부담금이 대부분을 먹는다. ② "아이가 친구 집 TV"를 누르고 가족형을 껐다 켠다. 본인형이면 아이가 낸 사고는 보상되지 않는다. ③ "빌린 카메라"와 "운전 중 접촉"을 누른다. 손해를 아무리 키워도 0원이다. 맡은 물건과 자동차 사고는 다른 보험의 영역이다. (사례의 판단은 일반적인 약관 구조를 단순화한 것이다. 실제 보상은 약관, 사고 경위, 과실 비율, 손해사정 결과에 따라 달라진다.)</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 330" role="img" aria-label="전세집 누수 사고에서 원인에 따라 책임과 보험이 갈리는 흐름">
+        <defs><marker id="pr-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="130" y="10" width="180" height="40" rx="6" class="f-bad-soft"/>
+        <text x="220" y="35" text-anchor="middle" class="lbl-b">아랫집 천장에 물이 샌다</text>
+        <path d="M220 52 v18" class="s-line" marker-end="url(#pr-ar1)"/>
+        <rect x="140" y="74" width="160" height="34" rx="6" class="f-surface"/>
+        <text x="220" y="96" text-anchor="middle" class="lbl">원인은 무엇인가?</text>
+        <path d="M160 110 L90 140" class="s-line" marker-end="url(#pr-ar1)"/>
+        <path d="M280 110 L350 140" class="s-line" marker-end="url(#pr-ar1)"/>
+        <rect x="10" y="144" width="190" height="62" rx="6" class="f-acc-soft"/>
+        <text x="105" y="168" text-anchor="middle" class="lbl-acc">세입자의 사용·관리</text>
+        <text x="105" y="190" text-anchor="middle" class="lbl-dim">세탁기 호스, 넘친 욕조</text>
+        <rect x="240" y="144" width="190" height="62" rx="6" class="f-acc2-soft"/>
+        <text x="335" y="168" text-anchor="middle" class="lbl-acc2">건물 자체의 하자</text>
+        <text x="335" y="190" text-anchor="middle" class="lbl-dim">배관 노후, 방수층 손상</text>
+        <path d="M105 208 v24" class="s-acc" marker-end="url(#pr-ar1)"/>
+        <path d="M335 208 v24" class="s-acc2" marker-end="url(#pr-ar1)"/>
+        <rect x="10" y="236" width="190" height="62" rx="6" class="f-ok-soft"/>
+        <text x="105" y="260" text-anchor="middle" class="lbl-b">세입자가 배상</text>
+        <text x="105" y="282" text-anchor="middle" class="lbl-dim">세입자의 일배책</text>
+        <rect x="240" y="236" width="190" height="62" rx="6" class="f-ok-soft"/>
+        <text x="335" y="260" text-anchor="middle" class="lbl-b">집주인이 배상</text>
+        <text x="335" y="282" text-anchor="middle" class="lbl-dim">집주인의 일배책·화재보험</text>
+        <text x="220" y="320" text-anchor="middle" class="lbl-dim">원인이 섞이거나 불분명하면 손해사정으로 나눈다</text>
+      </svg>
+      <figcaption><b>그림 2. 누수 사고의 책임은 원인에 따라 갈린다.</b> 세입자가 쓰다가 생긴 누수는 세입자의 배상책임이고, 건물 배관이나 방수층처럼 소유자가 관리해야 할 부분의 하자는 집주인의 책임이 된다. 어느 쪽 보험이 나설지도 그에 따라 정해진다. 일배책은 증권에 적힌 주택에서 생긴 사고를 보상하므로, 이사하면 주소 변경을 알려야 한다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="auto">
+    <h2>자동차보험의 담보 구조</h2>
+    <p>자동차보험은 한 장의 증권에 여러 담보가 묶인 상품이다. 크게 보면 <b>남에게 준 피해</b>(배상책임)와 <b>나와 내 차의 피해</b>로 나뉜다. 법이 가입을 강제하는 <span class="term">의무보험</span>은 대인배상Ⅰ과 일정 한도의 대물배상이고, 나머지는 선택이다. 차를 가진 사람이 의무보험에 들지 않으면 과태료를 내고, 사고가 나면 모든 배상을 직접 해야 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 360" role="img" aria-label="자동차보험 담보 구조: 남에게 준 피해와 나의 피해">
+        <text x="110" y="22" text-anchor="middle" class="lbl-bad">남에게 준 피해(배상)</text>
+        <text x="330" y="22" text-anchor="middle" class="lbl-acc">나와 내 차의 피해</text>
+        <rect x="10" y="36" width="200" height="72" rx="6" class="f-bad-soft"/>
+        <text x="20" y="58" class="lbl-b">대인배상Ⅰ</text>
+        <text x="200" y="58" text-anchor="end" class="lbl-bad">의무</text>
+        <text x="20" y="80" class="lbl-dim">상대방 사망·부상</text>
+        <text x="20" y="98" class="lbl-dim">법정 한도까지</text>
+        <rect x="10" y="116" width="200" height="72" rx="6" class="f-warn-soft"/>
+        <text x="20" y="138" class="lbl-b">대인배상Ⅱ</text>
+        <text x="20" y="160" class="lbl-dim">Ⅰ을 넘는 금액</text>
+        <text x="20" y="178" class="lbl-dim">보통 무한으로 든다</text>
+        <rect x="10" y="196" width="200" height="72" rx="6" class="f-bad-soft"/>
+        <text x="20" y="218" class="lbl-b">대물배상</text>
+        <text x="200" y="218" text-anchor="end" class="lbl-bad">일부 의무</text>
+        <text x="20" y="240" class="lbl-dim">남의 차·물건</text>
+        <text x="20" y="258" class="lbl-dim">한도를 넉넉히 고른다</text>
+        <rect x="230" y="36" width="200" height="72" rx="6" class="f-acc-soft"/>
+        <text x="240" y="58" class="lbl-b">자기신체사고</text>
+        <text x="240" y="80" class="lbl-dim">또는 자동차상해(더 넓음)</text>
+        <text x="240" y="98" class="lbl-dim">운전자·동승 가족의 부상</text>
+        <rect x="230" y="116" width="200" height="72" rx="6" class="f-acc-soft"/>
+        <text x="240" y="138" class="lbl-b">무보험차상해</text>
+        <text x="240" y="160" class="lbl-dim">보험 없는 차·뺑소니에</text>
+        <text x="240" y="178" class="lbl-dim">내가 다쳤을 때</text>
+        <rect x="230" y="196" width="200" height="72" rx="6" class="f-acc2-soft"/>
+        <text x="240" y="218" class="lbl-b">자기차량손해</text>
+        <text x="240" y="240" class="lbl-dim">내 차 수리비</text>
+        <text x="240" y="258" class="lbl-dim">자기부담금이 있다</text>
+        <rect x="10" y="282" width="420" height="66" rx="6" class="f-surface"/>
+        <text x="220" y="306" text-anchor="middle" class="lbl">특약: 운전자 범위·나이 한정, 긴급출동, 마일리지, 블랙박스 등</text>
+        <text x="220" y="330" text-anchor="middle" class="lbl-dim">운전자 범위를 좁힐수록 싸지만, 범위 밖 사람이 몰면 보상이 없다</text>
+      </svg>
+      <figcaption><b>그림 3. 자동차보험 담보 구조.</b> 왼쪽 열은 사고 상대방에게 물어 줄 돈이고, 오른쪽 열은 나와 내 차를 위한 돈이다. 왼쪽은 손해의 상한이 없어서 한도를 넉넉하게, 오른쪽은 내 형편에 따라 고른다. 대인배상Ⅰ의 법정 한도는 사망 1억 5,000만원, 부상 3,000만원 수준이고 대물배상 의무 한도는 2,000만원이다(2026년 기준, 약).</figcaption>
+    </figure>
+
+    <p>담보를 고를 때의 원칙은 2장의 빈도·심도 그대로다. 남에게 준 피해는 상한이 없다. 비싼 차와 부딪히면 대물 손해가 수억원이 될 수 있으니 대물배상 한도는 의무 한도보다 훨씬 넉넉하게 고르고, 대인배상Ⅱ는 무한으로 든다. 이 부분은 보험료 차이가 크지 않다. 반대로 자기차량손해(자차)는 내 차의 가치와 비상금을 보고 정한다. 오래된 차는 차량 가액이 낮아 자차 보험료에 비해 받을 돈이 적을 수 있다.</p>
+    <p>나의 부상은 <span class="term">자기신체사고</span>(자손)와 <span class="term">자동차상해</span>(자상) 가운데 하나를 고른다. 자손은 부상 등급별 한도 안에서 정액에 가깝게 주고, 자상은 내 과실과 상관없이 실제 치료비·휴업손해 등을 더 넓게 보상하는 대신 보험료가 조금 비싸다. 상대방이 보험이 없거나 뺑소니인 경우를 위한 무보험차상해도 함께 확인한다.</p>
+  </section>
+
+  <section id="surcharge">
+    <h2>작은 사고, 보험으로 처리할까 내 돈으로 낼까</h2>
+    <p>자동차보험은 사고를 보험으로 처리하면 다음 갱신부터 보험료가 오른다. 사고의 크기와 종류에 따른 <span class="term">사고점수</span>만큼 할인·할증 등급이 나빠지고, 최근 3년간 사고 건수에 따른 할증이 따로 붙고, 무사고였다면 받았을 할인도 미뤄진다. 그래서 주차장에서 남의 차 범퍼를 살짝 긁은 정도라면, 보험 처리 대신 직접 물어 주는 쪽이 3년 동안 내는 돈 전체로 보면 쌀 수 있다.</p>
+    <p>가입할 때 고르는 <span class="term">물적사고 할증기준금액</span>(50만·100만·150만·200만원 등)도 이 계산에 들어간다. 대물 사고의 보험금이 이 금액 이하면 할증 폭이 작아진다. 아래에서 사고의 손해액(세로선)을 끌어, 보험 처리와 직접 처리 가운데 3년 동안 덜 내는 쪽을 찾는다.</p>
+
+    <div class="sim" id="sim-sc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보험 처리의 손익분기점</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">세로선을 끌어 손해액을 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>지금 연 보험료 <output id="sc-p-out"></output></span><input type="range" id="sc-p" min="300000" max="2000000" step="10000" value="740000"></label>
+          <label class="ctrl"><span>사고 1건 처리 시 3년간 연 인상률 <output id="sc-s-out"></output></span><input type="range" id="sc-s" min="5" max="50" step="1" value="20"></label>
+          <div class="seg" id="sc-th"><button data-value="500000">할증기준 50만</button><button data-value="1000000">100만</button><button data-value="2000000" class="on">200만</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>직접 처리: 손해액 그대로</span><span><i style="background:var(--accent)"></i>보험 처리: 3년간 늘어나는 보험료</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">손익분기 손해액</span><span class="v" id="sc-o-be">—</span></div>
+        <div class="stat"><span class="k">선택한 손해액</span><span class="v" id="sc-o-l">—</span></div>
+        <div class="stat"><span class="k">직접 / 보험 처리</span><span class="v" id="sc-o-c">—</span></div>
+        <div class="stat"><span class="k">판단</span><span class="v" id="sc-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(연 74만원, 인상률 20%, 할증기준 200만원)에서 손익분기 손해액은 이 책의 가정으로 약 22만원이다. 30만원짜리 범퍼 긁힘이면 보험 처리가 조금 낫고, 15만원이면 직접 처리가 낫다. ② 할증기준을 50만원으로 바꾼다. 50만원을 넘는 사고는 할증이 커져 계단이 앞당겨진다. ③ 인상률을 50%로, 연 보험료를 200만원으로 올린다. 보험료가 비싼 사람일수록 같은 사고도 직접 처리하는 편이 유리한 범위가 넓어진다. (교육용 단순화: 사고 1건을 보험 처리하면 다음 3년 동안 연 보험료가 정한 비율만큼 오르고, 할증기준 이하의 대물 사고는 그 절반만 오른다고 가정했다. 실제로는 등급 할증, 사고건수요율, 무사고 할인 유예가 겹치고 회사와 담보마다 다르며, 보험료 자체의 인상은 무시했다.)</div>
+    </div>
+
+    <p>손익분기점의 의미는 단순하다. 사고 손해액이 앞으로 3년 동안 더 낼 보험료보다 작으면 직접 처리가 낫다. 다만 사고 직후에는 손해액이 얼마일지 모른다. 상대방이 나중에 병원에 가거나 수리비가 생각보다 커질 수도 있다. 그래서 현장에서는 일단 보험사에 사고를 접수해 두고, 손해액이 확정된 뒤 소액이면 보험사가 낸 돈을 돌려주고 할증을 피하는 방법을 쓰는 경우가 많다. 가능 여부와 기한은 회사마다 다르니 접수할 때 물어본다.</p>
+
+    <h3>자기차량손해의 자기부담금</h3>
+    <p>내 차를 고칠 때는 자기부담금이 하나 더 있다. 자기차량손해 담보는 보통 손해액의 20%를 내가 내되, 최소 20만원에서 최대 50만원 사이로 정한다(가입 시 선택에 따라 다름). 앞의 할증까지 생각하면, 작은 자차 수리는 "자기부담금 + 3년간 할증"이 수리비보다 큰지 따져 봐야 한다. 아래에서 수리비 손잡이를 끌어 본다.</p>
+
+    <div class="sim" id="sim-dd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>자차 수리, 내가 실제로 내는 돈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dd-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>자기부담 비율 <output id="dd-r-out"></output></span><input type="range" id="dd-r" min="10" max="30" step="5" value="20"></label>
+          <label class="ctrl"><span>최대 자기부담금 <output id="dd-m-out"></output></span><input type="range" id="dd-m" min="300000" max="1000000" step="50000" value="500000"></label>
+          <label class="check"><input type="checkbox" id="dd-sc" checked> 앞 시뮬레이터의 할증 비용까지 더하기</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>직접 수리: 수리비 전액</span><span><i style="background:var(--accent-2)"></i>자기부담금</span><span><i style="background:var(--accent)"></i>자기부담금 + 할증</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">수리비</span><span class="v" id="dd-o-l">—</span></div>
+        <div class="stat"><span class="k">자기부담금</span><span class="v" id="dd-o-d">—</span></div>
+        <div class="stat"><span class="k">보험사가 내는 돈</span><span class="v" id="dd-o-p">—</span></div>
+        <div class="stat"><span class="k">보험 처리가 나아지는 수리비</span><span class="v" id="dd-o-be">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(20%, 최소 20만원, 최대 50만원)에서 수리비를 300만원에 둔다. 자기부담금은 50만원(한도), 보험사가 250만원을 낸다. ② 수리비를 100만원 아래로 끌어내린다. 자기부담금은 최소 20만원이고, 할증까지 더하면 보험 처리가 직접 수리보다 비싸지는 구간이 보인다. 이 책의 가정으로 그 경계는 약 42만원이다. ③ 할증 체크를 끈다. 자기부담금만 보면 수리비가 20만원을 넘는 순간부터 보험 처리가 낫다. 할증을 빼고 판단하면 작은 사고를 너무 쉽게 보험 처리하게 된다. (최소 자기부담금 20만원 고정. 할증 비용은 바로 위 시뮬레이터의 연 보험료·인상률·할증기준을 그대로 가져온다. 교육용 단순화다.)</div>
+    </div>
+
+    <p>자기부담금은 도덕적 해이를 막고 작은 청구를 줄여 보험료를 낮추는 장치다(<a href="asymmetry.html">4장</a>). 할증까지 생각하면 자차 담보가 실제로 쓸모 있는 것은 수리비가 수십만원을 넘는 사고, 그리고 차가 크게 부서지는 사고다. 비상금이 넉넉하고 차가 오래되었다면 자차를 빼고 대물·대인 한도에 돈을 쓰는 선택도 합리적일 수 있다.</p>
+
+    <div class="callout buyer">
+      <strong>자동차보험 갱신 때 확인할 다섯 줄</strong>
+      ① 대인배상Ⅱ 무한, 대물배상 한도(의무 2,000만원보다 넉넉한가). ② 자기신체사고와 자동차상해 중 무엇인가, 무보험차상해가 있는가. ③ 자차 자기부담금(비율·최소·최대)과 차량 가액. ④ 운전자 범위·나이 한정이 지금 실제로 운전하는 사람과 맞는가(가족이 가끔 운전한다면 특히). ⑤ 마일리지·블랙박스·자녀 등 받을 수 있는 할인 특약을 빠뜨리지 않았는가. 같은 조건으로 다이렉트 견적을 두세 곳 받아 비교하면 차이를 바로 알 수 있다.
+    </div>
+  </section>
+
+  <section id="driver">
+    <h2>운전자보험은 자동차보험과 무엇이 다른가</h2>
+    <p>"자동차보험이 있는데 운전자보험이 왜 또 필요하냐"는 질문이 많다. 둘은 막는 위험이 다르다. 자동차보험은 사고로 생긴 <b>민사상 배상</b>(피해자의 치료비, 차 수리비)과 내 피해를 갚는다. 운전자보험은 운전자가 사고로 지게 되는 <b>형사상·행정상 책임의 비용</b>을 덮는다. 신호 위반, 중앙선 침범, 어린이보호구역 사고처럼 중대 과실(12대 중과실 등)로 사람을 다치게 하면 종합보험에 들어 있어도 형사 처벌 대상이 될 수 있고, 그때 드는 형사합의금·벌금·변호사 비용은 자동차보험이 내 주지 않는다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th></th><th>자동차보험</th><th>운전자보험</th></tr></thead>
+      <tbody>
+        <tr><td>성격</td><td>의무(대인Ⅰ·대물 일부) + 선택, 1년 갱신</td><td>선택, 장기 상품이 많다</td></tr>
+        <tr><td>무엇을 갚나</td><td>피해자 배상(민사), 내 부상, 내 차</td><td>형사합의금(교통사고처리지원금), 벌금, 변호사 선임비용 등</td></tr>
+        <tr><td>보장 대상</td><td>그 차(운전자 범위 안)</td><td>그 사람(다른 차를 운전해도)</td></tr>
+        <tr><td>대표 담보</td><td>대인Ⅰ·Ⅱ, 대물, 자손·자상, 무보험차, 자차</td><td>교통사고처리지원금, 벌금(대인·스쿨존), 변호사 선임비용, 면허 정지·취소 위로금</td></tr>
+        <tr><td>보상하지 않는 것</td><td>음주·무면허·뺑소니는 운전자가 거액의 사고부담금을 진다</td><td>음주·무면허·뺑소니 사고는 대부분 보상하지 않는다</td></tr>
+        <tr><td>보험료</td><td>차종·경력·사고 이력에 따라 연 수십만~수백만원</td><td>보장 범위에 따라 월 만원 안팎~수만원(약)</td></tr>
+      </tbody>
+    </table></div>
+    <p>운전자보험의 담보 한도와 조건은 해마다 바뀌어 왔다. 교통사고처리지원금은 예전에는 가입자가 먼저 합의금을 내고 청구했지만 지금은 보험사가 피해자에게 직접 주는 방식이 일반적이고, 변호사 선임비용은 경찰 조사 단계부터 보장하는 상품이 늘었다. 오래된 운전자보험은 지금 기준보다 한도가 낮거나 조건이 좁을 수 있다. 반대로 갱신형 특약이 많고 만기가 긴 상품은 총 보험료가 생각보다 크다. 지우의 운전자보험(월 1.5만원)은 2023년 가입이라 조건은 최근 수준에 가깝다.</p>
+
+    <div class="callout pro">
+      <strong>운전자보험 상담에서 흔한 실수</strong>
+      ① 운전자보험을 자동차보험의 "추가 보장"으로 설명해 중복처럼 들리게 하는 것. 민사와 형사를 나눠 설명하면 고객이 바로 이해한다. ② 자동차보험의 '법률비용지원' 특약과 운전자보험의 변호사 선임비용이 겹치는지 확인하지 않는 것. ③ 운전을 거의 안 하는 고객에게 장기납 운전자보험을 권하는 것. ④ 운전자보험에 일상생활배상책임·상해 특약을 잔뜩 붙여 보험료를 키우는 것. 일배책이 이미 다른 계약에 있다면 중복이다. 고객이 "운전자보험 하나 들어 두면 다 되죠?"라고 물으면, 무엇이 되고 무엇이 안 되는지를 표로 보여 주는 편이 오래 간다.
+    </div>
+  </section>
+
+  <section id="direct">
+    <h2>다이렉트 가입과 특약 할인</h2>
+    <p>자동차보험은 해마다 갱신하고, 담보 구성이 비교적 표준화되어 있어 온라인으로 직접 가입하는 <span class="term">다이렉트</span>(CM 채널) 비중이 큰 상품이다. 설계사 수수료가 적게 드는 만큼 같은 조건이면 보험료가 낮은 경우가 많다. 반대로 사고가 났을 때의 안내나 담보 설계 상담이 필요하면 설계사를 통한 가입이 도움이 될 수 있다. 채널의 장단점은 <a href="agent.html">14장</a>에서 더 본다.</p>
+    <p>보험료를 낮추는 또 하나의 길은 할인 특약이다. 1년에 적게 달리면 돌려받는 마일리지 특약, 블랙박스 장착 할인, 안전운전 점수 할인, 어린 자녀(회사에 따라 임신 중 태아 포함)가 있으면 받는 할인 등이 있다. 아래는 지우의 연 74만원에 할인을 하나씩 쌓아 본 것이다. 할인율은 설명을 위한 예시 값이다.</p>
+
+    <div class="sim" id="sim-dc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>갱신 보험료에 할인 쌓기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>1년 주행거리 <output id="dc-km-out"></output></span><input type="range" id="dc-km" min="1000" max="20000" step="500" value="7000"></label>
+          <label class="check"><input type="checkbox" id="dc-mi" checked> 마일리지 특약</label>
+          <label class="check"><input type="checkbox" id="dc-bb" checked> 블랙박스 장착</label>
+          <label class="check"><input type="checkbox" id="dc-sd"> 안전운전 점수 할인</label>
+          <label class="check"><input type="checkbox" id="dc-kid"> 자녀(태아 포함) 할인</label>
+          <label class="check"><input type="checkbox" id="dc-own"> 자기차량손해 빼기</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">할인 전</span><span class="v" id="dc-o-b">—</span></div>
+        <div class="stat"><span class="k">할인 후 예상</span><span class="v" id="dc-o-a">—</span></div>
+        <div class="stat"><span class="k">줄어드는 금액</span><span class="v" id="dc-o-d">—</span></div>
+        <div class="stat"><span class="k">마일리지 구간</span><span class="v" id="dc-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(연 7,000km, 마일리지·블랙박스)에서 할인이 얼마나 쌓이는지 본다. ② 주행거리를 2,000km로 내렸다가 15,000km로 올린다. 마일리지 할인은 구간마다 계단으로 바뀌고, 일정 거리를 넘으면 사라진다. 실제로는 만기 때 주행거리를 확인해 돌려주는 방식(후할인)이 많다. ③ 자기차량손해 빼기를 켠다. 할인 특약보다 담보를 빼는 효과가 훨씬 크지만, 내 차 수리비를 전부 직접 감당한다는 뜻이다. (할인율은 마일리지 구간 3천km 이하 30%, 5천km 이하 25%, 7천km 이하 18%, 1만km 이하 12%, 1만 2천km 이하 6%, 블랙박스 3%, 안전운전 8%, 자녀 6%, 자차 비중 30%로 정한 교육용 예시다. 실제 할인율·구간·적용 방식은 회사와 상품마다 다르다.)</div>
+    </div>
+
+    <p>할인 특약은 대부분 조건만 맞으면 손해 볼 일이 없는 선택이다. 그래서 갱신 때 빠뜨린 할인이 없는지 확인하는 것만으로 보험료가 꽤 내려가는 경우가 많다. 반면 담보를 빼는 것은 보험료를 줄이는 대신 위험을 내가 다시 떠안는 결정이다. 할인은 "공짜 점심"에 가깝고, 담보 축소는 2장의 보유 결정이라는 점을 구분한다.</p>
+
+    <div class="callout warn">
+      <strong>요율과 제도는 해마다 바뀐다</strong>
+      자동차보험료는 손해율과 정비 요금, 의료비 등에 따라 해마다 조정되고, 할인·할증 등급 체계와 사고건수요율, 특약 할인율도 바뀐다. 대인배상Ⅰ·대물배상 의무 한도, 음주·무면허 사고부담금, 운전자보험의 벌금 한도 같은 제도 값도 법 개정으로 달라질 수 있다. 이 장의 수치는 2026년 기준 대표값이거나 설명을 위한 예시이며, 특정 회사나 상품을 권하지 않는다. 실제 보험료는 견적과 약관으로 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 두 개의 일배책과 자동차보험 갱신</h2>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 12장</span></div>
+      <h4>일배책은 하나만, 대신 가족 모두가 보장되게</h4>
+      <p>도윤은 지우의 운전자보험과 주택화재보험 증권을 나란히 놓았다. 둘 다 일상생활배상책임 특약이 있고, 둘 다 본인형이었다. "두 개라서 두 배 나오는 게 아니야. 사고가 나면 두 회사가 반씩 낼 뿐이야." 지우는 이 장의 중복보험 시뮬레이터를 떠올렸다. 손해가 한도 1억원을 넘는 사고가 아니면 두 번째 특약은 보험료만 받는다. 더 큰 문제는 본인형이라 민서가 낸 사고는 어느 쪽에서도 보상되지 않고, 내년에 태어날 아이도 마찬가지라는 점이었다.</p>
+      <p>정리 방향은 이렇게 정했다. 전세집 주소가 적힌 주택화재보험 쪽에 일배책을 남기되 가족형으로 바꿀 수 있는지 보험사에 확인하고, 운전자보험의 일배책 특약은 특약만 해지할 수 있으면 해지한다. 특약 보험료는 월 수백 원에서 천 원대 수준이라(약) 돈을 아끼는 효과는 작지만, 보장의 빈틈(민서와 아이)을 메우는 효과가 크다. 이사하면 증권의 주택 소재지를 바꿔야 한다는 것도 메모했다.</p>
+      <p>민서가 물었다. "작년에 아랫집 천장에 얼룩이 생겼을 때 집주인이 고쳤잖아. 그건 우리 보험이 아니었어?" 도윤은 그림 2를 펼쳤다. 그때 원인은 욕실 배관의 노후였고, 건물 하자라 집주인의 책임이었다. 만약 세탁기 호스가 빠져 물이 샜다면 지우네의 배상책임이고, 그때 쓸 것이 일배책이다. 아랫집 도배·천장 수리비가 180만원이고 자기부담금이 20만원(이 사례의 가정)이라면 160만원이 나온다.</p>
+      <p>자동차보험 갱신도 함께 봤다. 연 74만원 그대로 갱신하기 전에 ① 대물배상 한도가 넉넉한지, ② 자차 자기부담금 20%(최소 20만원·최대 50만원)를 유지할지, ③ 1년 주행이 약 7,000km라 마일리지 특약과 블랙박스 할인을 넣었는지 확인했다. 아이가 태어나면 자녀 할인을 받을 수 있는지도 갱신 때 묻기로 했다. 그리고 손익분기 시뮬레이터로 기준을 하나 정했다. 이 책의 가정으로는 20만원대 아래의 작은 대물 사고는 접수만 해 두고 직접 처리를 검토한다. 도윤은 덧붙였다. "자동차보험은 다이렉트로 비교 견적을 받아 봐. 내가 끼어서 비싸질 이유가 없는 상품이야."</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>일배책은 화재보험 쪽 하나를 가족형으로 남기고 중복 특약은 정리. 자동차보험은 대물 한도 점검, 자기부담금 유지, 할인 특약 확인 후 다이렉트 비교.</div><div><b>아직 남은 문제</b>사적 보험 말고, 지우네가 이미 가진 국민연금·건강보험·산재보험은 얼마나 지켜 주는가.</div><div><b>다음 단계</b><a href="social.html">13장</a>에서 사회보험 안전망을 계산하고, 그만큼 사적 보장 필요액을 줄인다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>인보험의 정액보상은 정한 금액을 주고, 손해보험의 실손보상은 실제 손해만큼만 준다(이득 금지). 실손 계약을 여러 개 들어도 받는 돈은 그대로다.</li>
+      <li>보험가액은 물건의 실제 가치, 보험가입금액은 계약의 한도다. 일부보험이면 비례보상으로 손해의 일부만 받고, 초과보험은 보험료만 더 낸다. 주택은 가액의 80% 기준을 두는 경우가 많다.</li>
+      <li>중복보험은 독립책임액 비율로 나눠 낸다. 일상생활배상책임은 하나만, 가족 모두가 보장되는 형태로 남기는 것이 대개 깔끔하다. 한도를 넘는 큰 사고에서만 중복이 한도를 늘린다.</li>
+      <li>일배책은 남에게 끼친 손해의 법률상 배상책임을 보상한다. 내 물건·동거 가족의 물건·맡은 물건·자동차 사고·업무 중 사고·고의 사고는 대개 제외된다. 누수는 원인에 따라 책임 주체가 갈린다.</li>
+      <li>자동차보험은 대인배상Ⅰ·대물 일부가 의무다. 배상 담보는 넉넉하게(대인Ⅱ 무한, 대물 높은 한도), 내 차는 형편에 맞게 고른다.</li>
+      <li>사고를 보험 처리하면 3년 정도 보험료가 오른다. 손해액이 늘어날 보험료보다 작으면 직접 처리가 낫다. 자차는 자기부담금(보통 20%, 최소 20만·최대 50만원)과 할증을 함께 따진다.</li>
+      <li>운전자보험은 형사합의금·벌금·변호사 비용처럼 자동차보험이 갚지 않는 형사상 비용을 덮는다. 자동차보험은 할인 특약을 챙기고 다이렉트 견적으로 비교한다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>일상생활배상책임 특약(한도 각 1억원)을 두 계약에 가지고 있다. 아랫집에 누수로 500만원의 손해를 입혔고 자기부담금은 없다고 할 때, 받는 보험금은?</p>
+        <div class="opts">
+          <button class="opt">1,000만원(두 계약에서 각각 500만원)</button>
+          <button class="opt">250만원(한 계약의 절반)</button>
+          <button class="opt" data-correct>500만원을 두 보험사가 나눠 낸다</button>
+          <button class="opt">중복 가입이라 보상받을 수 없다</button>
+        </div>
+        <div class="quiz-exp">배상책임은 실손보상이라 손해액 500만원을 넘게 받을 수 없다. 두 계약의 한도가 같으므로 독립책임액 비율대로 250만원씩 나눠 낸다. 보험료는 두 번 냈지만 보험금은 그대로다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>보험가액 3억원인 주택을 보험가입금액 1억 2,000만원으로 화재보험에 들었다. 손해액이 4,000만원일 때, 80% 기준을 쓰는 약관이라면 보험금은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>2,000만원</button>
+          <button class="opt">1,600만원</button>
+          <button class="opt">4,000만원</button>
+          <button class="opt">1억 2,000만원</button>
+        </div>
+        <div class="quiz-exp">기준 금액은 3억원 × 80% = 2억 4,000만원이다. 보험금 = 4,000만원 × 1.2억/2.4억 = 2,000만원. 단순 비례였다면 4,000만원 × 1.2억/3억 = 1,600만원이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>자동차보험과 운전자보험의 차이로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt">운전자보험이 있으면 자동차보험의 대인배상Ⅰ에 가입하지 않아도 된다</button>
+          <button class="opt">둘은 같은 위험을 보장하므로 하나만 있으면 된다</button>
+          <button class="opt">운전자보험은 음주운전 사고의 벌금도 보장한다</button>
+          <button class="opt" data-correct>자동차보험은 피해자 배상(민사)과 내 피해를, 운전자보험은 형사합의금·벌금·변호사 비용 같은 형사상 비용을 주로 보장한다</button>
+        </div>
+        <div class="quiz-exp">대인배상Ⅰ은 법으로 정한 의무보험이라 운전자보험으로 대신할 수 없다. 운전자보험은 중대 과실 사고 등에서 운전자가 지는 형사상 비용을 덮으며, 음주·무면허·뺑소니 사고는 대부분 보상하지 않는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>연 보험료가 74만원인 사람이 주차장에서 남의 차에 15만원짜리 흠집을 냈다. 보험 처리하면 다음 3년 동안 보험료가 연 10%씩 오른다고 가정할 때 가장 합리적인 판단은?</p>
+        <div class="opts">
+          <button class="opt">보험료를 냈으니 무조건 보험 처리한다</button>
+          <button class="opt" data-correct>3년간 늘어날 보험료(약 22만원)가 손해액보다 크므로 직접 처리를 검토한다</button>
+          <button class="opt">보험 처리하면 할증이 없으므로 보험 처리한다</button>
+          <button class="opt">사고를 보험사에 알리지 않고 숨긴다</button>
+        </div>
+        <div class="quiz-exp">74만원 × 10% × 3년 ≈ 22만원을 더 내게 되므로 15만원 사고는 직접 처리가 싸다. 다만 손해가 커질 수 있으니 사고 접수는 해 두고, 확정된 뒤 소액이면 보험금을 돌려주고 할증을 피하는 방법이 있는지 확인한다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function fitText(ctx, s, maxW, size, weight) { let fs = size; ctx.font = IB.font(fs, false, weight); while (ctx.measureText(s).width > maxW && fs > 9) { fs -= 0.5; ctx.font = IB.font(fs, false, weight); } return fs; }
+  const invX = (c, px, x0, x1) => x0 + ((px - c.box.x) / c.box.w) * (x1 - x0);
+
+  /* ---------------------------------------------------------- 1. 정액 vs 실손 */
+  (function () {
+    const FIX = 1e7;
+    const redraw = () => cv && cv.redraw();
+    const kind = IB.seg("pi-kind", redraw);
+    const nS = IB.seg("pi-n", redraw);
+    const Lr = IB.range("pi-l", (v) => won(v), redraw);
+    let cv = null;
+    cv = IB.canvas("#pi-cv", (ctx, w, h) => {
+      const P = IB.palette(), n = +nS(), L = Lr(), fixed = kind() === "fixed";
+      const parts = fixed ? Array(n).fill(FIX) : Array(n).fill(L / n);
+      const pay = parts.reduce((a, b) => a + b, 0);
+      const cols = [P.accent, P.accent2, P.ok];
+      const stacks = parts.map((v, i) => ({ label: "계약 " + "ABC"[i], color: cols[i], data: [0, v] }));
+      stacks.unshift({ label: "손해", color: P.bad, data: [L, 0] });
+      const ymax = Math.max(3.3e7, L * 1.15);
+      const b = IB.bars(ctx, { x: 58, y: 24, w: w - 72, h: h - 62 }, { labels: ["실제 손해", "받는 돈"], stacks, y: [0, ymax], yFmt: IB.wonAxis, gap: 0.42 });
+      let cum = 0;
+      parts.forEach((v, i) => { if (v > ymax * 0.05) T(ctx, "ABC"[i], b.X(1), b.Y(cum + v / 2), { size: 13, weight: 700, color: "#fff", align: "center", base: "middle" }); cum += v; });
+      T(ctx, IB.wonAxis(L), b.X(0), b.Y(L) - 6, { size: 12, mono: true, color: P.text, align: "center" });
+      T(ctx, IB.wonAxis(pay), b.X(1), b.Y(pay) - 6, { size: 12, mono: true, color: P.text, align: "center" });
+      T(ctx, fixed ? "정액형: 계약마다 정한 금액" : "실손형: 손해를 나눠 낸다", 58, 14, { size: 12, color: P.dim, base: "middle" });
+      IB.stat("pi-o-p", won(pay));
+      IB.stat("pi-o-r", L > 0 ? tone(pay > L ? "warn-t" : "ok-t", Math.round((pay / L) * 100) + "%") : tone("warn-t", "손해 0원"));
+      IB.stat("pi-o-e", won(parts[0]));
+    }, { aspect: 0.56, minHeight: 260, maxHeight: 340 });
+  })();
+
+  /* ---------------------------------------------------------- 2. 일부보험 비례보상 */
+  (function () {
+    let S = 1.5e8, G = null;
+    const redraw = () => cv && cv.redraw();
+    const rule = IB.seg("co-rule", redraw);
+    const Vr = IB.range("co-v", (v) => won(v), () => { S = Math.min(S, Vr() * 1.5); redraw(); });
+    const Lr = IB.range("co-l", (v) => won(v), redraw);
+    const payout = (s, V, L, k) => Math.min(L * Math.min(1, s / (V * k)), s, L);
+    let cv = null;
+    cv = IB.canvas("#co-cv", (ctx, w, h) => {
+      const P = IB.palette(), V = Vr(), L = Math.min(Lr(), V), k = +rule() / 100;
+      const xmax = V * 1.5, pts = [];
+      for (let i = 0; i <= 120; i++) { const s = (xmax * i) / 120; pts.push([s, payout(s, V, L, k)]); }
+      const c = IB.chart(ctx, { x: 58, y: 18, w: w - 72, h: h - 76 }, {
+        x: [0, xmax], y: [0, Math.max(L, 1e6) * 1.25], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: "보험가입금액",
+        xTicks: [0, V * 0.5, V * k, V, V * 1.5].filter((v, i, a) => a.indexOf(v) === i),
+        hlines: [{ y: L, color: P.bad, dash: [5, 4], label: "손해액 " + IB.wonAxis(L) }],
+        series: [{ data: pts, color: P.ok, width: 2.8 }],
+      });
+      G = c;
+      ctx.globalAlpha = 0.1; ctx.fillStyle = P.warn; ctx.fillRect(c.X(V), c.box.y, c.X(xmax) - c.X(V), c.box.h); ctx.globalAlpha = 1;
+      T(ctx, "초과보험", c.X(V) + 5, c.box.y + 12, { size: 11, color: P.warn });
+      vline(ctx, c.X(V * k), c.box.y, c.box.y + c.box.h, P.faint, [3, 3], 1);
+      T(ctx, k < 1 ? "가액의 80%" : "가액", c.X(V * k) - 4, c.box.y + 12, { size: 11, color: P.dim, align: "right" });
+      const p = payout(S, V, L, k), x = c.X(S);
+      // 받는 돈 / 떠안는 손해 막대
+      const bw = 12;
+      ctx.fillStyle = P.ok; ctx.globalAlpha = 0.85; ctx.fillRect(x - bw / 2, c.Y(p), bw, c.Y(0) - c.Y(p));
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.6; ctx.fillRect(x - bw / 2, c.Y(L), bw, c.Y(p) - c.Y(L)); ctx.globalAlpha = 1;
+      knob(ctx, x, c.box.y + c.box.h, P, P.ok, 7);
+      IB.stat("co-o-s", won(S) + " <small>(가액의 " + Math.round((S / V) * 100) + "%)</small>");
+      IB.stat("co-o-p", tone("ok-t", won(p)));
+      IB.stat("co-o-x", L - p > 0 ? tone("bad-t", won(L - p)) : "0원");
+      IB.stat("co-o-k", S > V ? tone("warn-t", "초과보험") : S >= V * k ? tone("ok-t", S >= V ? "전부보험" : "기준 충족") : tone("bad-t", "일부보험"));
+    }, { aspect: 0.6, minHeight: 290, maxHeight: 380 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const V = Vr(); S = Math.round(IB.clamp(invX(G, x, 0, V * 1.5), 0, V * 1.5) / 5e6) * 5e6; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 중복보험 비례분담 (애니메이션) */
+  (function () {
+    const DED = 2e5, PREM = 1000 * 12;
+    let coins = [], G = null;
+    const nS = IB.seg("du-n", () => fire());
+    const Lr = IB.range("du-l", (v) => won(v), () => fire());
+    const bigEl = document.getElementById("du-big");
+    bigEl.addEventListener("change", () => fire());
+    function model() {
+      const n = +nS(), lim = [1e8, bigEl.checked ? 2e8 : 1e8, 1e8].slice(0, n), net = Math.max(0, Lr() - DED);
+      const indep = lim.map((l) => Math.min(net, l)), si = indep.reduce((a, b) => a + b, 0);
+      const total = Math.min(net, lim.reduce((a, b) => a + b, 0));
+      const share = indep.map((x) => (si > 0 ? (total * x) / si : 0));
+      return { n, lim, total, share, self: Lr() - total };
+    }
+    function fire() {
+      const m = model(); coins = [];
+      m.share.forEach((s, i) => { const k = Math.min(18, Math.ceil((s / Math.max(1, m.total)) * 24)); for (let j = 0; j < (s > 0 ? k : 0); j++) coins.push({ i, t: -j * 0.09 - i * 0.05 }); });
+      cv && cv.redraw();
+    }
+    let cv = null;
+    cv = IB.canvas("#du-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model(), cols = [P.accent, P.accent2, P.ok];
+      const bx = 12, bw = Math.min(150, w * 0.36), bh = 46, gap = 12, top = 34;
+      const vx = w - bw - 12, vy = h / 2 - 40;
+      T(ctx, "보험사", bx, 18, { size: 12, color: P.dim, base: "middle" });
+      const boxes = [];
+      for (let i = 0; i < 3; i++) {
+        const y = top + i * (bh + gap), on = i < m.n;
+        rrect(ctx, bx, y, bw, bh, 8); ctx.fillStyle = P.surface; ctx.fill();
+        ctx.lineWidth = on ? 2 : 1; ctx.strokeStyle = on ? cols[i] : P.border; ctx.setLineDash(on ? [] : [4, 4]); ctx.stroke(); ctx.setLineDash([]);
+        const nm = ["A손해보험 · 운전자", "B손해보험 · 화재", "C손해보험 · 상해"][i];
+        const fs = fitText(ctx, nm, bw - 14, 12, 600);
+        T(ctx, nm, bx + 8, y + 18, { size: fs, weight: 600, color: on ? P.text : P.faint });
+        T(ctx, on ? "한도 " + IB.wonAxis(m.lim[i]) + " · 분담 " + IB.wonAxis(m.share[i]) : "계약 없음", bx + 8, y + 36, { size: 11, color: on ? P.dim : P.faint });
+        boxes.push([bx + bw, y + bh / 2]);
+      }
+      rrect(ctx, vx, vy, bw, 80, 10); ctx.fillStyle = P.surface; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = P.bad; ctx.stroke();
+      T(ctx, "아랫집(피해자)", vx + bw / 2, vy + 22, { size: 12.5, weight: 700, color: P.text, align: "center" });
+      T(ctx, "손해 " + IB.wonAxis(Lr()), vx + bw / 2, vy + 44, { size: 12, mono: true, color: P.bad, align: "center" });
+      T(ctx, "보험금 " + IB.wonAxis(m.total), vx + bw / 2, vy + 64, { size: 12, mono: true, color: P.ok, align: "center" });
+      const by = top + 3 * (bh + gap) + 6;
+      T(ctx, "보험료(연, 가정): " + "계약 " + m.n + "개 × " + IB.won(PREM) + " = " + IB.won(PREM * m.n), bx, by + 8, { size: 12, color: P.dim, base: "middle" });
+      if (Lr() > 0 && m.self > DED + 1) T(ctx, "한도를 넘는 " + IB.wonAxis(m.self - DED) + "은 내가 낸다", bx, by + 28, { size: 12, color: P.bad, base: "middle", weight: 600 });
+      else T(ctx, "자기부담 " + IB.wonAxis(Math.min(DED, Lr())) + "만 내가 낸다", bx, by + 28, { size: 12, color: P.dim, base: "middle" });
+      G = { boxes, vx, vy };
+      coins.forEach((c) => {
+        if (c.t <= 0 || c.t >= 1 || c.i >= boxes.length) return;
+        const [sx, sy] = boxes[c.i], ex = vx, ey = vy + 40, u = c.t, x = sx + (ex - sx) * u, y = sy + (ey - sy) * u - Math.sin(u * Math.PI) * 40;
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, TAU); ctx.fillStyle = cols[c.i]; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = P.bg; ctx.stroke();
+      });
+      IB.stat("du-o-pr", won(PREM * m.n));
+      IB.stat("du-o-p", tone("ok-t", won(m.total)));
+      IB.stat("du-o-s", m.share.map((s, i) => "ABC"[i] + " " + IB.wonAxis(s)).join(" · "));
+      IB.stat("du-o-x", m.self > DED + 1 ? tone("bad-t", won(m.self)) : won(m.self));
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 360 });
+    IB.loop(cv.canvas, (dt) => {
+      if (!coins.length) return;
+      let alive = false;
+      coins.forEach((c) => { c.t += dt * 0.9; if (c.t < 1) alive = true; });
+      cv.redraw();
+      if (!alive) coins = [];
+    });
+    document.getElementById("du-go").addEventListener("click", fire);
+    fire();
+  })();
+
+  /* ---------------------------------------------------------- 4. 일배책 사례 */
+  (function () {
+    const CASES = {
+      leak: { t: "아랫집 누수", kind: "대물", cov: true, L: 3e6, e: "세입자가 쓰다가 생긴 누수로 아랫집 천장·도배에 손해를 입혔다. 증권에 적힌 주택(지금 사는 집)에서 생긴 사고면 법률상 배상책임으로 보상한다. 원인이 건물 하자라면 집주인의 책임이 된다(그림 2). 누수는 자기부담금이 따로 정해진 계약도 있다." },
+      bike: { t: "자전거로 보행자", kind: "대인", cov: true, L: 5e6, e: "자전거를 타다 보행자와 부딪혀 다치게 했다. 치료비·위자료·휴업손해 등 법률상 배상액을 보상한다. 대인 사고는 자기부담금이 없는 경우가 많다. 내 부상은 일배책이 아니라 상해보험의 영역이다." },
+      dog: { t: "반려견이 행인", kind: "대인", cov: true, L: 2e6, e: "기르는 개가 산책 중 행인을 물었다. 동물 점유자의 배상책임으로 보상한다. 다만 일부 상품은 맹견이나 사업 목적의 동물을 제외하니 약관을 확인한다." },
+      kid: { t: "아이가 친구 집 TV", kind: "대물", cov: "fam", L: 1.5e6, e: "초등학생 자녀가 친구 집에 놀러 가 TV를 깨뜨렸다. 미성년 자녀의 감독자인 부모가 배상책임을 지는 사고다. 자녀가 피보험자인 가족형이어야 보상된다. 본인형이면 보상되지 않는다." },
+      borrow: { t: "빌린 카메라", kind: "대물", cov: false, L: 1e6, e: "친구에게 빌린 카메라를 떨어뜨려 망가뜨렸다. 남에게 빌리거나 맡아 보관하던 물건의 손해는 일배책에서 대개 제외된다(수탁물 면책). 렌털·대여 물건도 마찬가지다." },
+      car: { t: "운전 중 접촉", kind: "대물", cov: false, L: 3e6, e: "자동차를 운전하다 남의 차를 긁었다. 자동차 사고는 일배책이 아니라 자동차보험(대물배상)이 보상한다. 일배책은 차량의 소유·사용·관리로 생긴 배상책임을 제외한다." },
+    };
+    let cur = "leak";
+    const redraw = () => cv && cv.redraw();
+    const Lr = IB.range("lc-l", (v) => won(v), redraw);
+    const Dr = IB.range("lc-d", (v) => won(v), redraw);
+    const famEl = document.getElementById("lc-fam");
+    famEl.addEventListener("change", redraw);
+    IB.seg("lc-case", (v) => { cur = v; Lr.set(CASES[v].L); });
+    let cv = null;
+    cv = IB.canvas("#lc-cv", (ctx, w, h) => {
+      const P = IB.palette(), c = CASES[cur], L = Lr();
+      const cov = c.cov === "fam" ? famEl.checked : c.cov;
+      const ded = c.kind === "대물" ? Math.min(Dr(), L) : 0, pay = cov ? Math.max(0, Math.min(L - ded, 1e8)) : 0, self = L - pay;
+      T(ctx, c.t, 16, 26, { size: 16, weight: 700, color: P.text });
+      T(ctx, c.kind + " 사고", w - 16, 26, { size: 12, color: P.dim, align: "right" });
+      const stamp = cov ? "보상" : c.cov === "fam" ? "본인형이면 보상 안 됨" : "보상 안 됨";
+      ctx.font = IB.font(13, false, 700); const sw = ctx.measureText(stamp).width + 22;
+      rrect(ctx, 16, 40, sw, 28, 14); ctx.fillStyle = cov ? P.ok : P.bad; ctx.globalAlpha = 0.15; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.lineWidth = 1.5; ctx.strokeStyle = cov ? P.ok : P.bad; ctx.stroke();
+      T(ctx, stamp, 16 + sw / 2, 55, { size: 13, weight: 700, color: cov ? P.ok : P.bad, align: "center", base: "middle" });
+      // 손해 막대: 보험금 / 자기부담 / 보상 안 됨
+      const bx = 16, bw = w - 32, by = 96, bh = 34, sc = L > 0 ? bw / L : 0;
+      rrect(ctx, bx, by, bw, bh, 6); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.stroke();
+      if (L > 0) {
+        ctx.fillStyle = P.ok; ctx.globalAlpha = 0.85; ctx.fillRect(bx, by, pay * sc, bh);
+        ctx.fillStyle = P.bad; ctx.globalAlpha = 0.6; ctx.fillRect(bx + pay * sc, by, (L - pay) * sc, bh); ctx.globalAlpha = 1;
+      }
+      T(ctx, "손해 " + IB.wonAxis(L), bx, by + bh + 18, { size: 12, mono: true, color: P.text });
+      T(ctx, "보험금 " + IB.wonAxis(pay) + " · 내 부담 " + IB.wonAxis(self), bx + bw, by + bh + 18, { size: 12, mono: true, color: P.dim, align: "right" });
+      // 판단 근거 키워드
+      const keys = [["남에게 끼친 손해", true], ["법률상 배상책임", true], ["피보험자의 사고", c.cov !== "fam" || famEl.checked], ["면책 사유 없음", cur !== "borrow" && cur !== "car"]];
+      keys.forEach(([k, ok], i) => {
+        const x = 16 + (i % 2) * ((w - 32) / 2), y = by + bh + 50 + Math.floor(i / 2) * 28;
+        ctx.beginPath(); ctx.arc(x + 7, y - 4, 6, 0, TAU); ctx.fillStyle = ok ? P.ok : P.bad; ctx.fill();
+        const fs = fitText(ctx, k, (w - 32) / 2 - 24, 12.5);
+        T(ctx, k, x + 20, y, { size: fs, color: ok ? P.text : P.bad });
+      });
+      IB.stat("lc-o-c", cov ? tone("ok-t", "보상") : tone("bad-t", "보상 안 됨"));
+      IB.stat("lc-o-p", won(pay));
+      IB.stat("lc-o-x", self > 0 ? tone(cov ? "warn-t" : "bad-t", won(self)) : "0원");
+      document.getElementById("lc-msg").innerHTML = "<b>" + c.t + "</b>. " + c.e + (c.kind === "대물" && cov ? " 이 사례에서는 대물 자기부담금 " + won(ded) + "을 뺐다." : "");
+    }, { aspect: 0.5, minHeight: 230, maxHeight: 280 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 할증 손익분기 */
+  const SC = {}; // 자차 시뮬레이터와 공유하는 할증 가정
+  (function () {
+    const XMAX = 3e6;
+    let L = 3e5, G = null;
+    const redraw = () => { cv && cv.redraw(); SC.onChange && SC.onChange(); };
+    const Pr = IB.range("sc-p", (v) => won(v), redraw);
+    const Sr = IB.range("sc-s", (v) => v + "%", redraw);
+    const th = IB.seg("sc-th", redraw);
+    // 보험 처리 시 3년간 더 내는 보험료
+    SC.extra = (loss) => { const big = loss > +th(); return Pr() * (Sr() / 100) * (big ? 1 : 0.5) * 3; };
+    SC.be = () => { for (let x = 0; x <= XMAX * 2; x += 1000) if (x >= SC.extra(x)) return x; return null; };
+    let cv = null;
+    cv = IB.canvas("#sc-cv", (ctx, w, h) => {
+      const P = IB.palette(), ins = [];
+      for (let i = 0; i <= 300; i++) { const x = (XMAX * i) / 300; ins.push([x, SC.extra(x)]); }
+      const ymax = Math.max(SC.extra(XMAX) * 1.6, 8e5);
+      const c = IB.chart(ctx, { x: 58, y: 18, w: w - 72, h: h - 76 }, {
+        x: [0, XMAX], y: [0, ymax], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: "사고 손해액(대물)", xTicks: [0, 5e5, 1e6, 1.5e6, 2e6, 2.5e6, 3e6],
+        series: [{ data: [[0, 0], [XMAX, XMAX]], color: P.bad, width: 2.4 }, { data: ins, color: P.accent, width: 2.8 }],
+      });
+      G = c;
+      const be = SC.be();
+      if (be != null && be < XMAX) { ctx.globalAlpha = 0.1; ctx.fillStyle = P.bad; ctx.fillRect(c.X(0), c.box.y, c.X(be) - c.X(0), c.box.h); ctx.globalAlpha = 1;
+        T(ctx, "직접 처리가 쌈", c.X(0) + 5, c.box.y + 12, { size: 11, color: P.bad }); }
+      vline(ctx, c.X(+th()), c.box.y, c.box.y + c.box.h, P.faint, [3, 3], 1);
+      T(ctx, "할증기준", c.X(+th()) + 4, c.box.y + 28, { size: 11, color: P.dim });
+      vline(ctx, c.X(L), c.box.y, c.box.y + c.box.h, P.dim, [4, 3], 1.4);
+      const ex = SC.extra(L);
+      [[L, P.bad], [ex, P.accent]].forEach(([v, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(L), c.Y(Math.min(v, ymax)), 4.5, 0, TAU); ctx.fill(); });
+      knob(ctx, c.X(L), c.box.y + c.box.h, P, P.text, 7);
+      IB.stat("sc-o-be", be != null ? "약 " + won(Math.round(be / 1e4) * 1e4) : "—");
+      IB.stat("sc-o-l", won(L));
+      IB.stat("sc-o-c", IB.wonAxis(L) + " / " + IB.wonAxis(ex));
+      IB.stat("sc-o-v", L < ex ? tone("warn-t", "직접 처리") : tone("ok-t", "보험 처리"));
+    }, { aspect: 0.6, minHeight: 290, maxHeight: 380 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; L = Math.round(IB.clamp(invX(G, x, 0, XMAX), 0, XMAX) / 1e4) * 1e4; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 자차 자기부담금 */
+  (function () {
+    const XMAX = 1e7, MIN = 2e5;
+    let L = 3e6, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Rr = IB.range("dd-r", (v) => v + "%", redraw);
+    const Mr = IB.range("dd-m", (v) => won(v), redraw);
+    const scEl = document.getElementById("dd-sc");
+    scEl.addEventListener("change", redraw);
+    SC.onChange = redraw;
+    const ded = (x) => Math.min(x, IB.clamp(x * Rr() / 100, MIN, Mr()));
+    const mine = (x) => ded(x) + (scEl.checked ? SC.extra(x) : 0);
+    let cv = null;
+    cv = IB.canvas("#dd-cv", (ctx, w, h) => {
+      const P = IB.palette(), dPts = [], mPts = [];
+      for (let i = 0; i <= 400; i++) { const x = (XMAX * i) / 400; dPts.push([x, ded(x)]); mPts.push([x, mine(x)]); }
+      const ymax = Math.max(1.6e6, mine(XMAX) * 1.4);
+      const c = IB.chart(ctx, { x: 58, y: 18, w: w - 72, h: h - 76 }, {
+        x: [0, XMAX], y: [0, ymax], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: "수리비", xTicks: [0, 2e6, 4e6, 6e6, 8e6, 1e7],
+        series: [{ data: [[0, 0], [XMAX, XMAX]], color: P.bad, width: 2.2 }, { data: dPts, color: P.accent2, width: 2.4, dash: scEl.checked ? [5, 4] : [] }].concat(scEl.checked ? [{ data: mPts, color: P.accent, width: 2.8 }] : []),
+      });
+      G = c;
+      let be = null; for (let x = 0; x <= XMAX; x += 1000) if (x > mine(x)) { be = x; break; }
+      if (be) { ctx.globalAlpha = 0.1; ctx.fillStyle = P.bad; ctx.fillRect(c.X(0), c.box.y, c.X(be) - c.X(0), c.box.h); ctx.globalAlpha = 1; }
+      vline(ctx, c.X(L), c.box.y, c.box.y + c.box.h, P.dim, [4, 3], 1.4);
+      [[Math.min(L, ymax), P.bad], [ded(L), P.accent2]].concat(scEl.checked ? [[mine(L), P.accent]] : []).forEach(([v, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(L), c.Y(v), 4.5, 0, TAU); ctx.fill(); });
+      knob(ctx, c.X(L), c.box.y + c.box.h, P, P.accent2, 7);
+      T(ctx, "최대 " + IB.wonAxis(Mr()), c.box.x + c.box.w - 4, c.Y(Mr()) - 6, { size: 11, color: P.accent2, align: "right" });
+      IB.stat("dd-o-l", won(L));
+      IB.stat("dd-o-d", won(ded(L)) + (scEl.checked ? " <small>+ 할증 " + IB.wonAxis(SC.extra(L)) + "</small>" : ""));
+      IB.stat("dd-o-p", tone("ok-t", won(L - ded(L))));
+      IB.stat("dd-o-be", be ? "약 " + won(Math.round(be / 1e4) * 1e4) + " 이상" : "—");
+    }, { aspect: 0.6, minHeight: 290, maxHeight: 380 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; L = Math.round(IB.clamp(invX(G, x, 0, XMAX), 0, XMAX) / 1e4) * 1e4; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 7. 갱신 할인 쌓기 */
+  (function () {
+    const BASE = 740000;
+    const TIERS = [[3000, 0.3], [5000, 0.25], [7000, 0.18], [10000, 0.12], [12000, 0.06]];
+    const redraw = () => cv && cv.redraw();
+    const Km = IB.range("dc-km", (v) => v.toLocaleString("ko-KR") + "km", redraw);
+    const ids = ["mi", "bb", "sd", "kid", "own"].map((k) => document.getElementById("dc-" + k));
+    ids.forEach((el) => el.addEventListener("change", redraw));
+    const mileRate = () => { const t = TIERS.find(([k]) => Km() <= k); return t ? t[1] : 0; };
+    let cv = null;
+    cv = IB.canvas("#dc-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const [mi, bb, sd, kid, own] = ids.map((e) => e.checked);
+      const steps = [["할인 전", BASE, 0]];
+      let cur = BASE;
+      const add = (on, lab, rate) => { if (!on || rate <= 0) return; const d = cur * rate; cur -= d; steps.push([lab, cur, d]); };
+      add(own, "자차 빼기", 0.3);
+      add(bb, "블랙박스", 0.03);
+      add(sd, "안전운전", 0.08);
+      add(kid, "자녀", 0.06);
+      add(mi, "마일리지", mileRate());
+      const n = steps.length + 1, box = { x: 58, y: 24, w: w - 72, h: h - 66 };
+      const c = IB.chart(ctx, box, { x: [0, n], y: [0, BASE * 1.12], xTicks: [], yFmt: IB.wonAxis });
+      const slot = box.w / n, bw = slot * 0.6;
+      steps.forEach(([lab, v, d], i) => {
+        const x = box.x + slot * i + (slot - bw) / 2;
+        if (i === 0) { ctx.fillStyle = P.accent; ctx.globalAlpha = 0.8; ctx.fillRect(x, c.Y(v), bw, c.Y(0) - c.Y(v)); }
+        else { ctx.fillStyle = P.ok; ctx.globalAlpha = 0.8; ctx.fillRect(x, c.Y(v + d), bw, c.Y(v) - c.Y(v + d)); }
+        ctx.globalAlpha = 1;
+        T(ctx, i === 0 ? IB.wonAxis(v) : "−" + IB.wonAxis(d), x + bw / 2, c.Y(i === 0 ? v : v + d) - 5, { size: w < 480 ? 9.5 : 11, mono: true, color: P.text, align: "center" });
+        const fs = fitText(ctx, lab, slot - 2, 11.5);
+        T(ctx, lab, x + bw / 2, box.y + box.h + 16, { size: fs, color: P.dim, align: "center" });
+      });
+      const x = box.x + slot * (n - 1) + (slot - bw) / 2;
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.85; ctx.fillRect(x, c.Y(cur), bw, c.Y(0) - c.Y(cur)); ctx.globalAlpha = 1;
+      T(ctx, IB.wonAxis(cur), x + bw / 2, c.Y(cur) - 5, { size: w < 480 ? 9.5 : 11, mono: true, color: P.text, align: "center", weight: 700 });
+      const fs = fitText(ctx, "할인 후", slot - 2, 11.5, 700);
+      T(ctx, "할인 후", x + bw / 2, box.y + box.h + 16, { size: fs, color: P.text, align: "center", weight: 700 });
+      IB.stat("dc-o-b", won(BASE));
+      IB.stat("dc-o-a", tone("ok-t", won(cur)));
+      IB.stat("dc-o-d", won(BASE - cur) + " <small>(" + Math.round((1 - cur / BASE) * 100) + "%)</small>");
+      IB.stat("dc-o-m", mi ? (mileRate() > 0 ? Math.round(mileRate() * 100) + "% 할인" : tone("warn-t", "할인 없음")) : "특약 없음");
+    }, { aspect: 0.56, minHeight: 270, maxHeight: 350 });
+  })();
+})();
+</script>
+</body>
+</html>
