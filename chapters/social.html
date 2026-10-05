@@ -5,6 +5,30 @@
 <html lang="ko">
 <head>
 <!--head:start {"desc": "월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사회보험: 이미 가진 보험 · InsureBook</title>
+<meta name="description" content="월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/social.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="사회보험: 이미 가진 보험 · InsureBook">
+<meta property="og:description" content="월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/social.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/social.html#chapter","name":"사회보험: 이미 가진 보험","headline":"사회보험: 이미 가진 보험 · InsureBook","description":"월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.","url":"https://insurebook.euiyun.com/chapters/social.html","position":13,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"13. 사회보험: 이미 가진 보험","item":"https://insurebook.euiyun.com/chapters/social.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
 <!--head:end-->
 </head>
 <body data-chapter="social">
@@ -520,7 +544,7 @@
     cv = IB.canvas("#ps-cv", (ctx, w, h) => {
       const P = IB.palette(), g = Gr(), pr = SOC.premiums(g), C = COLORS(P);
       // 위: 내 몫 / 회사 몫 막대 (같은 축척: 월급의 12%까지)
-      const bx = 64, bw = w - bx - 16, sc = bw / (GMAX * 0.12) * (GMAX / Math.max(g, 1)) * (g / GMAX);
+      const bx = 64, bw = w - bx - 16;
       const scale = bw / (g * 0.125);
       [["내 몫", pr.e, 18], ["회사 몫", pr.c, 54]].forEach(([lab, o, y]) => {
         T(ctx, lab, 12, y + 13, { size: 12, color: P.text, base: "middle", weight: 600 });
@@ -528,7 +552,6 @@
         ["pension", "health", "ltc", "emp", "sanjae"].forEach((k) => { const ww = o[k] * scale; seg(ctx, x, y, ww, 26, C[k], P, NAMES[k]); x += ww; });
         T(ctx, IB.wonAxis(Object.values(o).reduce((a, b) => a + b, 0)), Math.min(x + 4, w - 4), y + 13, { size: 11, mono: true, color: P.dim, base: "middle", align: x + 40 > w ? "right" : "left" });
       });
-      void sc;
       // 아래: 월급 대비 내 몫 비율 곡선
       const box = { x: 52, y: 110, w: w - 52 - 18, h: h - 110 - 44 };
       const data = [];
@@ -654,19 +677,18 @@
       return out;
     }
     cv = IB.canvas("#sj-cv", (ctx, w, h) => {
-      const P = IB.palette(), M = months(), g = Gr();
+      const P = IB.palette(), M = months();
       const box = { x: 52, y: 30, w: w - 52 - 14, h: h - 30 - 40 };
       const ymax = 8.4e6;
       const c = IB.chart(ctx, box, { x: [0, 12], y: [0, ymax], xTicks: [], yFmt: IB.wonAxis });
       const slot = box.w / 12, bw = slot * 0.7;
       const shown = Math.min(M.length, t);
-      let L = 0, Pp = 0;
       M.forEach((mm, i) => {
         const x = box.x + slot * i + (slot - bw) / 2;
         const f = IB.clamp(shown - i, 0, 1);
         T(ctx, mm.m + "", x + bw / 2, box.y + box.h + 14, { size: 11, mono: true, color: P.dim, align: "center", base: "middle" });
         ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = P.faint; ctx.strokeRect(x + 0.5, c.Y(mm.lost), bw - 1, c.Y(0) - c.Y(mm.lost)); ctx.restore();
-        if (f > 0) { const v = mm.pay * f; seg(ctx, x, c.Y(v), bw, c.Y(0) - c.Y(v), P.ok, P, null, 0.4); L += mm.lost * f; Pp += v; }
+        if (f > 0) { const v = mm.pay * f; seg(ctx, x, c.Y(v), bw, c.Y(0) - c.Y(v), P.ok, P, null, 0.4); }
       });
       T(ctx, "개월", box.x + box.w, box.y + box.h + 30, { size: 11, color: P.faint, align: "right", base: "middle" });
       const label = { work: "산재 휴업급여(평균임금 70%)", pilot: "상병수당(시범사업 가정)", none: "사회보험 소득 없음" }[CAUSE()];
@@ -677,7 +699,6 @@
       IB.stat("sj-o-p", tone("ok-t", won(totP)));
       IB.stat("sj-o-r", IB.pct(totP / totL, 0));
       IB.stat("sj-o-g", tone("bad-t", won(totL - totP)));
-      void L; void Pp; void g;
     }, { aspect: 0.6, minHeight: 260, maxHeight: 380 });
     IB.loop(cv.canvas, (dt) => {
       const n = Mr();

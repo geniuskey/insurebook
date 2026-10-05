@@ -5,6 +5,30 @@
 <html lang="ko">
 <head>
 <!--head:start {"desc": "좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설계사를 위한 장: 좋은 상담 · InsureBook</title>
+<meta name="description" content="좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/advisor.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="설계사를 위한 장: 좋은 상담 · InsureBook">
+<meta property="og:description" content="좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/advisor.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/advisor.html#chapter","name":"설계사를 위한 장: 좋은 상담","headline":"설계사를 위한 장: 좋은 상담 · InsureBook","description":"좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/advisor.html","position":19,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"19. 설계사를 위한 장: 좋은 상담","item":"https://insurebook.euiyun.com/chapters/advisor.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
 <!--head:end-->
 <style>
   .su-list { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); padding: 14px; }
@@ -147,7 +171,7 @@
         <div class="sim-controls">
           <label class="ctrl"><span>나이 <output id="su-age-out"></output></span><input type="range" id="su-age" min="20" max="75" step="1" value="32"></label>
           <label class="ctrl"><span>가구 월 실수령 <output id="su-inc-out"></output></span><input type="range" id="su-inc" min="1500000" max="15000000" step="100000" value="5900000"></label>
-          <div class="seg" id="su-dep"><button data-value="none">부양가족 없음</button><button data-value="spouse" class="on">배우자</button><button data-value="child">배우자+자녀</button></div>
+          <div class="seg" id="su-dep"><button data-value="none">부양가족 없음</button><button data-value="spouse">배우자</button><button data-value="child" class="on">배우자+자녀(계획)</button></div>
           <label class="ctrl"><span>이미 있는 사망보장 <output id="su-life-out"></output></span><input type="range" id="su-life" min="0" max="500000000" step="10000000" value="100000000"></label>
           <div class="seg" id="su-cov"><button data-value="none">기존 보장 없음</button><button data-value="silson">실손만</button><button data-value="both" class="on">실손+진단비</button></div>
           <label class="ctrl"><span>추가 보험료 예산(월) <output id="su-bud-out"></output></span><input type="range" id="su-bud" min="10000" max="1000000" step="10000" value="200000"></label>
@@ -159,7 +183,7 @@
         <div class="stat"><span class="k">부적합</span><span class="v" id="su-o-f">—</span></div>
         <div class="stat"><span class="k">사망보장 공백(모델)</span><span class="v" id="su-o-g">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기본값에서 정기보험은 공백보다 크다는 주의가, 실손은 이미 있어 부적합이 뜬다. ② 부양가족을 "없음"으로 바꾼다. 정기보험이 부적합으로 바뀌고, 종신보험에는 "목적 확인" 주의가 붙는다. ③ 나이를 65세 이상으로 올린다. 정기보험(60세 만기)은 성립하지 않고, 변액은 고령 투자성 상품이라 부적합, 보험료가 크게 오른 진단비는 예산을 넘기기 시작한다. ④ 예산을 3만원으로 내리면 거의 모든 제안이 예산 초과로 떨어진다. (보험료는 이 책의 교육용 모델 값. 필요 사망보장은 INS.needs로 계산했다: 배우자만이면 월 60만원 10년, 자녀가 있으면 월 120만원 20년과 교육비 5,000만원. 실제 적합성 판단은 회사의 진단 기준과 고객 면담을 따른다.)</div>
+      <div class="sim-note">해볼 것: ① 기본값(지우와 비슷한 고객, 아이 계획)에서 정기보험은 적합, 실손은 이미 있어 부적합, 종신은 예산의 대부분을 쓴다는 주의가 뜬다. ② 부양가족을 "배우자"로, 다시 "없음"으로 바꾼다. 사망보장 필요액이 기존 1억원보다 작아져 정기보험이 부적합으로 바뀌고, 종신보험에는 "목적 확인" 주의가 붙는다. ③ 나이를 65세 이상으로 올린다. 정기보험(60세 만기)은 성립하지 않고, 변액은 고령 투자성 상품이라 부적합, 종신은 납입이 80대까지 이어지면서 예산을 넘는다. ④ 예산을 3만원으로 내리면 거의 모든 제안이 예산 초과로 떨어진다. (보험료는 이 책의 교육용 모델 값. 필요 사망보장은 INS.needs로 계산했다: 배우자만이면 월 60만원 10년, 자녀가 있으면 월 120만원 20년과 교육비 5,000만원. 실제 적합성 판단은 회사의 진단 기준과 고객 면담을 따른다.)</div>
     </div>
 
     <p>진단 결과에서 "부적합"보다 중요한 칸은 "주의"다. 부적합은 대개 숫자로 분명하다(예산 초과, 이미 있는 실손, 만기까지 기간 부족). 주의는 <b>설명하고 확인받아야 하는</b> 칸이다. 부양가족 없는 고객의 종신보험은 상속 재원이나 장례 비용처럼 분명한 목적이 있으면 적합할 수 있다. 문제는 그 목적을 묻지 않고 "저축도 된다"로 넘어갈 때 생긴다. 적합성 원칙의 핵심은 판단 그 자체보다 <b>판단의 근거를 묻고 남기는 것</b>이다.</p>
@@ -245,7 +269,7 @@
         <div class="stat"><span class="k">결과</span><span class="v" id="dg-o-r">—</span></div>
         <div class="stat"><span class="k">13회차 유지 전망(모델)</span><span class="v" id="dg-o-p">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 네 번 모두 첫 번째 선택지(질문)를 고른다. 이해도와 신뢰도가 함께 오르고, 계약이 되든 안 되든 고객이 스스로 결정한다. ② 처음부터 다시, 모두 공포 선택지를 고른다. 신뢰도는 떨어지는데 압박 때문에 계약이 될 수 있다. 그 대신 이해도가 낮아 유지 전망이 떨어지고, 해피콜에서 문제가 될 위험이 표시된다. ③ 마지막 단계에서 "첫 달 보험료를 내 주겠다"를 고른다. 신뢰도가 잠깐 오르는 것처럼 보이지만 특별이익 제공으로 법 위반이다. (이해도·신뢰도 변화와 유지 전망은 이 책의 교육용 모델이다. 실제 고객의 반응은 사람마다 다르다.)</div>
+      <div class="sim-note">해볼 것: ① 네 번 모두 고객에게 묻는 선택지(질문)를 고른다. 선택지 순서는 단계마다 섞여 있다. 이해도와 신뢰도가 함께 오르고, 계약이 되든 안 되든 고객이 스스로 결정한다. ② 처음부터 다시, 모두 공포 선택지를 고른다. 신뢰도는 떨어지는데 압박 때문에 계약이 될 수 있다. 그 대신 이해도가 낮아 유지 전망이 떨어지고, 해피콜에서 문제가 될 위험이 표시된다. ③ 마지막 단계에서 "첫 달 보험료를 내 주겠다"를 고른다. 신뢰도가 잠깐 오르는 것처럼 보이지만 특별이익 제공으로 법 위반이다. (이해도·신뢰도 변화와 유지 전망은 이 책의 교육용 모델이다. 실제 고객의 반응은 사람마다 다르다.)</div>
     </div>
 
     <p>두 길의 차이는 계약 여부보다 <b>계약의 질</b>에서 크게 난다. 공포로 만든 계약은 고객이 왜 샀는지 설명하지 못한다. 그래서 첫 보험료 인상, 첫 생활비 압박, 다른 설계사의 한마디에 해지된다. 질문으로 만든 계약은 고객이 자기 숫자(소득, 생활비, 공백)로 이유를 안다. <a href="commission.html">15장</a>의 계산처럼 2년 안의 해지는 설계사에게 환수로 돌아오니, 이 차이는 고객만의 문제가 아니다.</p>
@@ -524,7 +548,7 @@
           it.m = P({ type: "term", age, S: 3e8, term: 60 - age, pay: 60 - age });
           if (d === "none") it.f.push("부양가족이 없어 사망보장 필요액이 거의 없다");
           else if (gap < 5e7) it.f.push("기존 사망보장으로 필요액이 대부분 채워져 있다");
-          else if (gap < 3e8 * 0.7) it.w.push("공백(" + won(gap) + ")보다 금액이 크다. 금액을 줄여 제안한다");
+          else if (gap < 3e8 * 0.75) it.w.push("공백(" + won(gap) + ")보다 금액이 크다. 금액을 줄여 제안한다");
           if (it.m > bud) it.f.push("예산 초과");
         }
         items.push(it);

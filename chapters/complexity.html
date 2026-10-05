@@ -5,6 +5,30 @@
 <html lang="ko">
 <head>
 <!--head:start {"desc": "보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보험은 왜 이렇게 복잡한가 · InsureBook</title>
+<meta name="description" content="보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/complexity.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="보험은 왜 이렇게 복잡한가 · InsureBook">
+<meta property="og:description" content="보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/complexity.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/complexity.html#chapter","name":"보험은 왜 이렇게 복잡한가","headline":"보험은 왜 이렇게 복잡한가 · InsureBook","description":"보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.","url":"https://insurebook.euiyun.com/chapters/complexity.html","position":5,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"5. 보험은 왜 이렇게 복잡한가","item":"https://insurebook.euiyun.com/chapters/complexity.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
 <!--head:end-->
 </head>
 <body data-chapter="complexity">
@@ -62,7 +86,7 @@
         <div class="stat"><span class="k">이 설계의 월 보험료</span><span class="v" id="rd-o-p">—</span></div>
         <div class="stat"><span class="k">가장 비싼 특약</span><span class="v" id="rd-o-m">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기본 설계에서 가짓수를 본다. 특약 16개와 기간·납입·환급형만으로도 10의 십몇 제곱 가지가 넘는다. 사람이 다 비교할 수 있는 수가 아니다. ② "뇌출혈" 카드를 끄고 "뇌혈관질환"을 켠다. 이름은 비슷한데 보험료가 몇 배로 뛴다. 이유는 뒤의 절에서 본다. ③ 전부 켜고 10년납·표준형으로 바꾼다. 월 보험료가 수십만원으로 치솟는다. 무해지형으로 바꾸면 내려가지만 납입 중 해지하면 한 푼도 못 받는다(<a href="renewal.html">7장</a>). (32세 남성, 진단비는 엔진의 발생률로, 수술·입원·골절·상해사망은 교육용 연 발생률로 계산했다. 유사암·고액암·암 수술·항암치료는 암 발생의 일부(각 20%, 12%, 60%, 45%)로 단순화했고, 실제 상품의 보험료와 다르다.)</div>
+      <div class="sim-note">해볼 것: ① 기본 설계에서 가짓수를 본다. 특약 16개와 기간·납입·환급형만으로도 약 500억(10의 10.7제곱) 가지다. 사람이 다 비교할 수 있는 수가 아니다. ② "뇌출혈" 카드를 끄고 "뇌혈관질환"을 켠다. 이름은 비슷한데 보험료가 몇 배로 뛴다. 이유는 뒤의 절에서 본다. ③ 전부 켜고 10년납·표준형으로 바꾼다. 월 보험료가 수십만원으로 치솟는다. 무해지형으로 바꾸면 내려가지만 납입 중 해지하면 한 푼도 못 받는다(<a href="renewal.html">7장</a>). (32세 남성, 진단비는 엔진의 발생률로, 수술·입원·골절·상해사망은 교육용 연 발생률로 계산했다. 유사암·고액암·암 수술·항암치료는 암 발생의 일부(각 20%, 12%, 60%, 45%)로 단순화했고, 실제 상품의 보험료와 다르다.)</div>
     </div>
 
     <p>특약을 하나 더할 때마다 가짓수가 몇 배씩 늘어난다. 특약 m개가 각각 \(k_i\)가지 선택지를 가지면 설계의 수는 이렇다.</p>
@@ -145,7 +169,7 @@
         <div class="stat"><span class="k">급성심근경색 → 허혈성</span><span class="v" id="df-o-h">—</span></div>
         <div class="stat"><span class="k">보험료 비(뇌 / 심장)</span><span class="v" id="df-o-p">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 32세 남성, 100세까지에서 뇌출혈만 보장하면 받을 확률은 약 7%, 뇌혈관질환 전체면 약 57%다. 같은 "뇌" 보장인데 여덟 배 가까이 차이 난다. ② 여성으로 바꾼다. 급성심근경색의 확률이 크게 낮아져 심장 보장의 범위 차이(약 3.8배)가 더 벌어진다. ③ 만기를 80세로 줄인다. 모든 확률이 내려가지만 넓은 정의와 좁은 정의의 비는 크게 변하지 않는다. 보험료 비도 확률 비와 비슷하게 움직인다. 넓은 보장이 비싼 것은 받을 일이 그만큼 많기 때문이다. (INS.prob, INS.price. 발생률은 국가 통계의 크기를 흉내 낸 교육용 근사이며 실제 통계와 다르다. 재발·재진단은 넣지 않았다.)</div>
+      <div class="sim-note">해볼 것: ① 32세 남성, 100세까지에서 뇌출혈만 보장하면 받을 확률은 약 7%, 뇌혈관질환 전체면 약 57%다. 같은 "뇌" 보장인데 여덟 배 가까이 차이 난다. ② 여성으로 바꾼다. 급성심근경색의 확률이 크게 낮아져 심장 보장의 범위 차이(약 3.7배)가 더 벌어진다. ③ 만기를 80세로 줄인다. 모든 확률이 내려가지만 넓은 정의와 좁은 정의의 비는 크게 변하지 않는다. 보험료 비도 확률 비와 비슷하게 움직인다. 넓은 보장이 비싼 것은 받을 일이 그만큼 많기 때문이다. (INS.prob, INS.price. 발생률은 국가 통계의 크기를 흉내 낸 교육용 근사이며 실제 통계와 다르다. 재발·재진단은 넣지 않았다.)</div>
     </div>
 
     <p>여기서 두 가지를 기억한다. 첫째, 좁은 정의의 보장이 싼 것은 할인이 아니라 받을 확률이 낮기 때문이다. "뇌 보장 1,000만원이 월 2천원"이라는 말은 사실이지만, 그것이 "뇌 질환이면 1,000만원"이라는 뜻은 아니다. 둘째, 넓은 정의가 항상 옳은 것도 아니다. 뇌혈관질환 진단비는 가벼운 진단에도 지급되는 만큼 비싸다. 목적이 큰 병의 소득 공백을 메우는 것이라면 어떤 범위가 필요한지는 <a href="fixed.html">9장</a>에서 따진다.</p>
