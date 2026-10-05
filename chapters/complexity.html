@@ -86,7 +86,7 @@
         <div class="stat"><span class="k">이 설계의 월 보험료</span><span class="v" id="rd-o-p">—</span></div>
         <div class="stat"><span class="k">가장 비싼 특약</span><span class="v" id="rd-o-m">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기본 설계에서 가짓수를 본다. 특약 16개와 기간·납입·환급형만으로도 약 500억(10의 10.7제곱) 가지다. 사람이 다 비교할 수 있는 수가 아니다. ② "뇌출혈" 카드를 끄고 "뇌혈관질환"을 켠다. 이름은 비슷한데 보험료가 몇 배로 뛴다. 이유는 뒤의 절에서 본다. ③ 전부 켜고 10년납·표준형으로 바꾼다. 월 보험료가 수십만원으로 치솟는다. 무해지형으로 바꾸면 내려가지만 납입 중 해지하면 한 푼도 못 받는다(<a href="renewal.html">7장</a>). (32세 남성, 진단비는 엔진의 발생률로, 수술·입원·골절·상해사망은 교육용 연 발생률로 계산했다. 유사암·고액암·암 수술·항암치료는 암 발생의 일부(각 20%, 12%, 60%, 45%)로 단순화했고, 실제 상품의 보험료와 다르다.)</div>
+      <div class="sim-note">해볼 것: ① 기본 설계에서 가짓수를 본다. 특약 16개와 기간·납입·환급형만으로도 약 500억(10의 10.7제곱) 가지다. 사람이 다 비교할 수 있는 수가 아니다. ② "뇌출혈" 카드를 끄고 "뇌혈관질환"을 켠다. 이름은 비슷한데 보험료가 몇 배로 뛴다. 이유는 뒤의 절에서 본다. ③ 전부 켜고 10년납·표준형으로 바꾼다. 월 보험료가 30만원 가까이로 치솟는다. 무해지형으로 바꾸면 내려가지만 납입 중 해지하면 한 푼도 못 받는다(<a href="renewal.html">7장</a>). (32세 남성, 진단비는 엔진의 발생률로, 수술·입원·골절·상해사망은 교육용 연 발생률로 계산했다. 유사암·고액암·암 수술·항암치료는 암 발생의 일부(각 20%, 12%, 60%, 45%)로 단순화했고, 실제 상품의 보험료와 다르다.)</div>
     </div>
 
     <p>특약을 하나 더할 때마다 가짓수가 몇 배씩 늘어난다. 특약 m개가 각각 \(k_i\)가지 선택지를 가지면 설계의 수는 이렇다.</p>
@@ -793,12 +793,12 @@
       });
       const ay = 112;
       ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(A.x, ay); ctx.lineTo(A.x + A.w, ay); ctx.stroke();
-      [0, 3, 12, 24, 36].forEach((m) => { ctx.beginPath(); ctx.moveTo(Xp(m), ay); ctx.lineTo(Xp(m), ay + 4); ctx.stroke(); T(ctx, m === 0 ? "가입" : m + "개월", Xp(m), ay + 16, { size: 10.5, color: P.faint, align: m === 0 ? "left" : m === 36 ? "right" : "center" }); });
+      (A.w < 400 ? [0, 12, 24, 36] : [0, 3, 12, 24, 36]).forEach((m) => { ctx.beginPath(); ctx.moveTo(Xp(m), ay); ctx.lineTo(Xp(m), ay + 4); ctx.stroke(); T(ctx, m === 0 ? "가입" : m + "개월", Xp(m), ay + 16, { size: 10.5, color: P.faint, align: m === 0 ? "left" : m === 36 ? "right" : "center" }); });
       vline(ctx, Xp(mon), 30, ay, P.text, [3, 3]);
       knob(ctx, Xp(mon), ay, P, P.bad, 8);
       // 결과 막대
       const px = pay(X, t, mon), py = pay(Y, t, mon);
-      const by0 = ay + 34, bh = Math.min(30, (h - by0 - 30) / 2 - 8), bw = w - 120;
+      const by0 = ay + 34, bh = Math.min(30, (h - by0 - 34) / 2 - 8), bw = w - 90;
       [[px, "X", P.accent], [py, "Y", P.accent2]].forEach(([v, k, col], i) => {
         const y = by0 + i * (bh + 14);
         T(ctx, "계약 " + k, 14, y + bh / 2, { size: 12, weight: 700, color: P.text, base: "middle" });
@@ -806,8 +806,7 @@
         ctx.fillStyle = v > 0 ? col : P.bad; ctx.globalAlpha = 0.85; ctx.fillRect(70, y, Math.max(v > 0 ? 2 : 0, (v / S) * bw), bh); ctx.globalAlpha = 1;
         T(ctx, v > 0 ? man(v) + "원" : "0원", 70 + Math.max(0, (v / S) * bw) + 6 > 70 + bw - 50 ? 70 + bw - 4 : 70 + (v / S) * bw + 6, y + bh / 2, { size: 12, weight: 800, mono: true, color: v > 0 && (v / S) * bw + 56 > bw ? P.bg : P.text, align: (v / S) * bw + 56 > bw ? "right" : "left", base: "middle" });
       });
-      T(ctx, TYPES[t] + " 진단, 가입 " + mon + "개월째", 14, h - 10, { size: 11, color: P.faint });
-      IB.stat("cx-o-t", mon + "<small>개월째</small>");
+      IB.stat("cx-o-t", mon + "<small>개월째 · " + TYPES[t] + "</small>");
       IB.stat("cx-o-x", px > 0 ? won(px) : tone("bad-t", "0원"));
       IB.stat("cx-o-y", py > 0 ? won(py) : tone("bad-t", "0원"));
     }, { get height() { const w = document.getElementById("cx-cv").parentElement.clientWidth || 600; return w < 480 ? 290 : 280; } });
@@ -851,7 +850,7 @@
     batch(60);
     cv = IB.canvas("#sc-cv", (ctx, w, h) => {
       const P = IB.palette(), ni = Nr();
-      const c = IB.chart(ctx, { x: 54, y: 18, w: w - 70, h: h - 86 }, {
+      const c = IB.chart(ctx, { x: 54, y: 18, w: w - 70, h: h - 100 }, {
         x: [2, 120], y: [-0.3 * SD, 2.8 * SD], logX: true, xTicks: [2, 5, 10, 20, 50, 100], xFmt: (v) => String(v),
         yFmt: (v) => (v >= 0 ? "+" : "") + +(v / 1e4).toFixed(1) + "만", xLabel: "시장의 상품 수(로그 눈금)",
         series: [
@@ -945,7 +944,7 @@
       const rowH = (h - 54) / AREAS.length;
       T(ctx, "필요를 채운 비율", x0, 14, { size: 11, color: P.dim, base: "middle" });
       [0, 0.5, 1].forEach((f) => { const x = x0 + f * bw * 0.8; vline(ctx, x, 24, h - 26, f === 1 ? P.text : P.grid, f === 1 ? [4, 3] : [], 1); T(ctx, Math.round(f * 100) + "%", x, h - 12, { size: 10.5, mono: true, color: P.faint, align: "center" }); });
-      T(ctx, "과잉 →", x0 + bw * 0.8 + 4, h - 12, { size: 10.5, color: P.faint });
+      T(ctx, "100% 넘으면 과잉", w - 8, 14, { size: 10.5, color: P.faint, align: "right", base: "middle" });
       AREAS.forEach((a, i) => {
         const y = 26 + i * rowH, n = need[a.k];
         fitT(ctx, a.n, lw, y + rowH * 0.42, lw - 4, { size: 12, weight: 600, color: P.text, align: "right", base: "middle" });
