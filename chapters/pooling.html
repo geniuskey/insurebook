@@ -1,0 +1,901 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험은 많은 사람이 위험을 나누는 수학이다. 빈도와 심도, 위험 관리 네 가지, 대수의 법칙과 그 한계인 상관된 위험, 기대손실과 부가보험료, 효용과 파산 회피, 보유 한도를 시뮬레이터로 직접 만져 본다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>위험을 나누는 수학 · InsureBook</title>
+<meta name="description" content="보험은 많은 사람이 위험을 나누는 수학이다. 빈도와 심도, 위험 관리 네 가지, 대수의 법칙과 그 한계인 상관된 위험, 기대손실과 부가보험료, 효용과 파산 회피, 보유 한도를 시뮬레이터로 직접 만져 본다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/pooling.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="위험을 나누는 수학 · InsureBook">
+<meta property="og:description" content="보험은 많은 사람이 위험을 나누는 수학이다. 빈도와 심도, 위험 관리 네 가지, 대수의 법칙과 그 한계인 상관된 위험, 기대손실과 부가보험료, 효용과 파산 회피, 보유 한도를 시뮬레이터로 직접 만져 본다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/pooling.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/pooling.html#chapter","name":"위험을 나누는 수학","headline":"위험을 나누는 수학 · InsureBook","description":"보험은 많은 사람이 위험을 나누는 수학이다. 빈도와 심도, 위험 관리 네 가지, 대수의 법칙과 그 한계인 상관된 위험, 기대손실과 부가보험료, 효용과 파산 회피, 보유 한도를 시뮬레이터로 직접 만져 본다.","url":"https://insurebook.euiyun.com/chapters/pooling.html","position":2,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"2. 위험을 나누는 수학","item":"https://insurebook.euiyun.com/chapters/pooling.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="pooling">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 02</div>
+    <h1>위험을 나누는 수학</h1>
+    <p class="lead">지우는 첫 상담 자리에서 도윤에게 물었다. "보험사는 결국 남는 장사잖아. 그럼 보험은 다 손해 아니야?" 맞는 말이다. 가입자 전체로 보면 보험은 평균적으로 손해 보는 거래다. 그런데도 사람들은 수백 년 동안 보험을 만들고, 사고, 지켜 왔다. 이 장은 그 이유를 감정이 아니라 수학으로 푼다. 왜 모이면 위험이 작아지는지, 왜 어떤 위험은 아무리 모여도 작아지지 않는지, 평균적으로 손해인 거래를 사는 것이 언제 합리적인지, 그리고 어디까지는 내 돈으로 버티고 어디부터 남에게 넘길지를 직접 끌고 돌려 보며 정한다.</p>
+    <ul class="objectives">
+      <li>위험을 빈도와 심도로 나누고, 회피·감소·보유·이전 가운데 알맞은 방법을 고른다.</li>
+      <li>대수의 법칙으로 가입자가 늘수록 1인당 부담의 흔들림이 \(1/\sqrt{N}\)로 줄어드는 것을 본다.</li>
+      <li>재해·전염병처럼 함께 터지는 위험은 왜 아무리 모아도 흔들림이 줄지 않는지 확인한다.</li>
+      <li>보험료를 기대손실과 부가보험료(사업비·안전 마진)로 나누고, 보험사가 적자를 피하는 원리를 본다.</li>
+      <li>효용 곡선으로 낼 용의가 있는 최대 보험료를 구하고, 비상금으로 보유 한도를 정한다.</li>
+    </ul>
+  </header>
+
+  <section id="history">
+    <h2>보험이라는 오래된 약속</h2>
+    <p>보험은 보험회사보다 훨씬 오래되었다. 마을 사람들이 곡식이나 돈을 조금씩 모아 두었다가 누군가 상을 당하거나 집이 무너지면 그 몫을 내주는 일은 거의 모든 사회에 있었다. 한국의 <span class="term">계</span>(契)와 두레, 상부상조의 약속이 그런 예다. 혼자서는 감당할 수 없는 일을 여럿이 나눠 감당하는 것, 이것이 보험의 뼈대다.</p>
+    <p>돈의 계약으로서 보험이 꼴을 갖춘 곳은 바다였다. 배 한 척이 가라앉으면 상인 한 사람이 망한다. 고대 지중해의 상인들은 폭풍 속에서 배를 살리려고 짐을 버렸을 때 그 손실을 모든 짐 주인이 나눠 지는 관습(공동해손)을 만들었고, 14세기 무렵 이탈리아 항구 도시에서는 돈을 받고 남의 배와 짐의 손실을 대신 떠안는 계약서가 나타났다. 17세기 런던에서는 상인들이 모이는 커피하우스에서 해상보험이 거래되었고, 1666년 대화재 뒤에는 화재보험 회사들이 생겼다. 비슷한 시기에 천문학자와 수학자들이 출생·사망 기록으로 생명표를 만들면서, 사람의 수명에 값을 매기는 생명보험의 수학이 시작되었다(<a href="pricing.html">3장</a>).</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 300" role="img" aria-label="보험의 역사: 상부상조, 공동해손, 해상보험 계약, 화재보험, 생명표">
+        <line x1="40" y1="24" x2="40" y2="282" class="s-axis"/>
+        <circle cx="40" cy="34" r="7" class="f-acc-soft"/>
+        <text x="60" y="30" class="lbl-b">상부상조 · 계 · 두레</text>
+        <text x="60" y="50" class="lbl-dim">모아 두었다가 어려운 이에게 내준다</text>
+        <circle cx="40" cy="92" r="7" class="f-acc-soft"/>
+        <text x="60" y="88" class="lbl-b">공동해손 (고대 지중해)</text>
+        <text x="60" y="108" class="lbl-dim">버린 짐의 손실을 모든 화주가 나눈다</text>
+        <circle cx="40" cy="150" r="7" class="f-acc2-soft"/>
+        <text x="60" y="146" class="lbl-b">해상보험 계약 (14세기 무렵)</text>
+        <text x="60" y="166" class="lbl-dim">돈을 받고 남의 손실을 떠안는다 → 보험료</text>
+        <circle cx="40" cy="208" r="7" class="f-acc2-soft"/>
+        <text x="60" y="204" class="lbl-b">화재보험 (17세기 런던)</text>
+        <text x="60" y="224" class="lbl-dim">대화재 뒤 집과 건물의 위험을 모은다</text>
+        <circle cx="40" cy="266" r="7" class="f-ok-soft"/>
+        <text x="60" y="262" class="lbl-b">생명표와 보험수리 (17~18세기)</text>
+        <text x="60" y="282" class="lbl-dim">사망 확률로 보험료를 계산한다 → 3장</text>
+      </svg>
+      <figcaption><b>그림 1. 보험의 오래된 뿌리.</b> 처음에는 이웃끼리 나누는 약속이었고, 그다음에는 돈을 받고 손실을 떠안는 계약이 되었으며, 확률로 값을 매기는 수학이 붙으면서 오늘날의 보험이 되었다. 연대는 대략적인 시기다.</figcaption>
+    </figure>
+
+    <p>이 역사에서 눈여겨볼 점은 두 가지다. 첫째, 보험은 처음부터 <b>드물지만 한 번 일어나면 한 사람을 무너뜨리는 일</b>을 위한 장치였다. 배의 침몰, 집의 화재, 가장의 죽음. 둘째, 보험이 커질수록 계약서와 수학이 복잡해졌다. 이웃끼리는 서로를 알지만, 모르는 사람끼리 위험을 나누려면 누가 얼마나 위험한지, 얼마를 걷어야 모자라지 않는지를 숫자로 정해야 하기 때문이다. 이 장은 그 숫자의 가장 밑바닥을 다룬다.</p>
+  </section>
+
+  <section id="four-ways">
+    <h2>빈도와 심도, 위험을 다루는 네 가지 방법</h2>
+    <p>보험은 위험을 다루는 여러 방법 가운데 하나일 뿐이다. 돈이나 건강을 잃을 수 있는 일을 <span class="term">위험</span><span class="en">(Risk)</span>이라고 하면, 위험은 두 숫자로 잴 수 있다. 얼마나 자주 일어나는가를 <span class="term">빈도</span><span class="en">(Frequency)</span>, 한 번 일어나면 얼마나 큰가를 <span class="term">심도</span><span class="en">(Severity)</span>라고 한다. 같은 '사고'라도 휴대폰 액정은 빈도가 높고 심도가 낮고, 운전 중 사람을 크게 다치게 하는 사고는 빈도가 낮고 심도가 매우 높다.</p>
+    <p>두 축으로 위험을 네 칸에 나누면 칸마다 알맞은 대응이 하나씩 정해진다.</p>
+    <ul>
+      <li><b>회피</b><span class="en">(Avoidance)</span>: 위험한 행동 자체를 하지 않는다. 자주 일어나고 크기까지 큰 위험은 보험료가 손실만큼 비싸져서 보험으로 막을 수도 없다.</li>
+      <li><b>감소</b><span class="en">(Reduction)</span>: 빈도나 심도를 줄인다. 소화기를 두고, 건강검진을 받고, 자세를 고친다.</li>
+      <li><b>보유</b><span class="en">(Retention)</span>: 내 돈으로 감당한다. 비상금이 이 방법을 가능하게 한다. 스스로 작은 보험사가 되는 셈이라 <span class="term">자가보험</span><span class="en">(Self-insurance)</span>이라고도 한다.</li>
+      <li><b>이전</b><span class="en">(Transfer)</span>: 돈을 내고 손실을 남에게 넘긴다. 보험이 대표적이고, 보증이나 계약 조항으로 넘기기도 한다.</li>
+    </ul>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 330" role="img" aria-label="빈도와 심도로 나눈 네 칸: 감소, 회피, 보유, 이전">
+        <defs><marker id="pl-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="52" y="12" width="186" height="134" rx="4" class="f-warn-soft"/>
+        <rect x="242" y="12" width="186" height="134" rx="4" class="f-bad-soft"/>
+        <rect x="52" y="150" width="186" height="134" rx="4" class="f-ok-soft"/>
+        <rect x="242" y="150" width="186" height="134" rx="4" class="f-acc-soft"/>
+        <text x="145" y="44" text-anchor="middle" class="lbl-b">감소</text>
+        <text x="145" y="66" text-anchor="middle" class="lbl-dim">잦고 작다</text>
+        <text x="145" y="98" text-anchor="middle" class="lbl">허리·손목 통증</text>
+        <text x="145" y="120" text-anchor="middle" class="lbl">잦은 감기 진료</text>
+        <text x="335" y="44" text-anchor="middle" class="lbl-bad">회피</text>
+        <text x="335" y="66" text-anchor="middle" class="lbl-dim">잦고 크다</text>
+        <text x="335" y="98" text-anchor="middle" class="lbl">음주 후 운전</text>
+        <text x="335" y="120" text-anchor="middle" class="lbl">수익 보장 투자 권유</text>
+        <text x="145" y="182" text-anchor="middle" class="lbl-b">보유</text>
+        <text x="145" y="204" text-anchor="middle" class="lbl-dim">드물고 작다</text>
+        <text x="145" y="236" text-anchor="middle" class="lbl">휴대폰 분실</text>
+        <text x="145" y="258" text-anchor="middle" class="lbl">노트북 고장</text>
+        <text x="335" y="182" text-anchor="middle" class="lbl-acc">이전 = 보험</text>
+        <text x="335" y="204" text-anchor="middle" class="lbl-dim">드물고 크다</text>
+        <text x="335" y="236" text-anchor="middle" class="lbl">소득 중단 · 배상책임</text>
+        <text x="335" y="258" text-anchor="middle" class="lbl">가장의 사망</text>
+        <line x1="52" y1="300" x2="428" y2="300" class="s-axis" marker-end="url(#pl-ar1)"/>
+        <text x="240" y="322" text-anchor="middle" class="lbl-dim">한 번 일어날 때의 크기(심도) →</text>
+        <line x1="34" y1="284" x2="34" y2="14" class="s-axis" marker-end="url(#pl-ar1)"/>
+        <text x="20" y="150" text-anchor="middle" class="lbl-dim" transform="rotate(-90 20 150)">일어나는 빈도 →</text>
+      </svg>
+      <figcaption><b>그림 2. 빈도-심도 지도.</b> 보험이 제값을 하는 곳은 오른쪽 아래, 드물지만 한 번 일어나면 감당할 수 없는 위험이다. 왼쪽 칸의 작은 위험을 보험으로 돌리면 보험사의 사업비만큼 돈이 샌다. 경계는 사람마다 다르다. 비상금이 많은 가구일수록 '작다'의 범위가 넓어진다.</figcaption>
+    </figure>
+
+    <p>지우와 민서도 도윤과 함께 자기 집의 위험을 적어 봤다. 아래 카드가 그 목록이다. 카드를 하나씩 끌어 알맞은 칸에 놓는다. 놓는 순간 도윤의 설명이 아래에 뜬다. 정답이 두 칸인 카드도 있다. 줄일 수 있는 만큼 줄이고 남는 것을 넘기는 식이다.</p>
+
+    <div class="sim" id="sim-rk">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>지우네 위험 카드 분류하기</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="rk-cv"></canvas><span class="hint">카드를 끌어 칸에 놓는다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row"><button class="btn" id="rk-reset">카드 되돌리기</button><button class="btn" id="rk-ans">도윤의 답 보기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">놓은 카드</span><span class="v" id="rk-o-n">—</span></div>
+        <div class="stat"><span class="k">맞게 놓은 카드</span><span class="v" id="rk-o-ok">—</span></div>
+        <div class="stat"><span class="k">이전(보험) 칸</span><span class="v" id="rk-o-t">—</span></div>
+      </div>
+      <div class="sim-note" id="rk-msg">해볼 것: ① 카드를 하나 끌어 칸 위에 놓는다. ② 휴대폰·노트북처럼 "보험 드시겠어요?"를 자주 듣는 위험이 어느 칸인지 본다. ③ "도윤의 답 보기"로 이전 칸에 무엇이 남는지 확인한다. (칸의 경계는 지우네의 비상금 3,000만원을 기준으로 잡은 교육용 분류다.)</div>
+    </div>
+
+    <p>해 보면 보험으로 넘길 카드가 생각보다 적다. 가게나 온라인 결제 화면에서 가장 자주 권유받는 보장(휴대폰 파손, 가전 연장 보증)은 대부분 왼쪽 아래 칸이다. 반대로 진짜 오른쪽 아래 칸인 소득 중단, 배상책임, 가장의 사망은 스스로 찾아 사는 사람이 드물다. 이 어긋남이 <a href="agent.html">14장</a>에서 다룰 "보험은 사는 것이 아니라 팔리는 상품"이라는 말의 출발점이다.</p>
+  </section>
+
+  <section id="large-numbers">
+    <h2>대수의 법칙: 모이면 무엇이 달라지는가</h2>
+    <p>전셋집에 사는 한 가구가 있다. 해마다 1% 확률로 불이나 누수로 1억원을 물어 줘야 하는 일이 생긴다고 하자. 이 가구의 1년은 둘 중 하나다. 99%의 해에는 0원, 1%의 해에는 1억원. 평균 손실은 1억원 × 1% = 100만원이지만 "100만원을 잃는 해"는 한 번도 오지 않는다. 0원 아니면 1억원이다.</p>
+    <p>같은 처지의 1만 가구가 모여 "누구 집에 사고가 나든 모두 똑같이 나눠 낸다"고 약속하면 이야기가 달라진다. 해마다 대략 100가구에 사고가 나고, 100억원을 1만 가구가 나누면 한 가구에 약 100만원이다. 어떤 해는 90가구, 어떤 해는 110가구겠지만 1인당 부담은 100만원 근처를 크게 벗어나지 않는다. 혼자서는 예측할 수 없던 손실이 모이면 예측할 수 있는 비용이 된다. 이것이 <span class="term">대수의 법칙</span><span class="en">(Law of large numbers)</span>이다.</p>
+    <p>아래 마을에서 함께 나누는 가구 수를 1부터 10만까지 바꿔 본다. 위쪽은 올해 사고가 난 집(빨간색), 아래쪽은 해마다 한 가구가 낸 몫을 시간 순서대로 쌓은 막대다.</p>
+
+    <div class="sim" id="sim-ll">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>대수의 법칙 마을</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ll-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>함께 나누는 가구 수 <output id="ll-n-out"></output></span><input type="range" id="ll-n" min="0" max="5" step="1" value="0"></label>
+          <label class="ctrl"><span>사고 확률(1년) <output id="ll-p-out"></output></span><input type="range" id="ll-p" min="0.2" max="5" step="0.1" value="1"></label>
+          <div class="btn-row"><button class="btn" id="ll-pause">일시정지</button><button class="btn" id="ll-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">올해 1가구 몫</span><span class="v" id="ll-o-c">—</span></div>
+        <div class="stat"><span class="k">평균(관측)</span><span class="v" id="ll-o-m">—</span></div>
+        <div class="stat"><span class="k">흔들림 σ(이론)</span><span class="v" id="ll-o-s">—</span></div>
+        <div class="stat"><span class="k">가장 나빴던 해</span><span class="v" id="ll-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 1가구일 때 막대를 본다. 거의 모든 해가 0원이고, 가끔 한 해가 1억원으로 화면을 뚫는다. ② 100가구로 올린다. 막대가 0원, 100만원, 200만원처럼 계단으로 흔들린다. ③ 1만 가구, 10만 가구로 올린다. 막대가 기대손실 선에 거의 붙는다. 평균은 그대로인데 흔들림만 줄었다. ④ 사고 확률을 바꿔도 같은 일이 일어난다. (집마다 서로 독립적으로 사고가 나고 피해는 1억원으로 같다고 가정했다. 큰 산불처럼 한꺼번에 나는 사고는 다음 절에서 다룬다.)</div>
+    </div>
+
+    <p>가구 수가 늘어도 평균은 그대로다. 바뀐 것은 흔들림이다. 한 가구 몫의 표준편차는 가구 수의 제곱근에 반비례해서 줄어든다.</p>
+    <div class="formula">$$\sigma_{\text{1인}} = L\sqrt{\frac{p(1-p)}{N}}$$<div class="where">\(L\): 사고 한 번의 피해액, \(p\): 한 가구의 1년 사고 확률, \(N\): 위험을 함께 나누는 가구 수. N이 100배가 되면 흔들림은 10분의 1이 된다.</div></div>
+    <p>이 책의 엔진(<code>INS.pool</code>)으로 계산하면 혼자일 때 흔들림은 약 995만원, 1만 가구면 약 10만원이다. 보험사가 한 사람에게 "1년에 100만원 남짓"이라는 확정된 값을 부를 수 있는 이유가 여기 있다. 보험료는 운이 아니라 평균을 기준으로 정해지고, 그 평균은 모인 사람이 많을수록 믿을 만해진다. 거꾸로 말하면 가입자가 적은 상품, 통계가 쌓이지 않은 새로운 위험은 보험료에 더 큰 여유를 붙일 수밖에 없다.</p>
+  </section>
+
+  <section id="correlation">
+    <h2>함께 터지는 위험은 왜 나눠지지 않는가</h2>
+    <p>대수의 법칙에는 숨은 조건이 있다. 사고가 <b>서로 따로따로</b> 일어나야 한다. 우리 집에 불이 났다고 옆 동네 집에 불이 날 확률이 올라가지는 않는다. 그런데 태풍, 홍수, 지진, 전염병은 다르다. 한 집이 피해를 입는 해에는 수만 집이 함께 피해를 입는다. 이런 위험을 <span class="term">상관된 위험</span><span class="en">(Correlated risk)</span>이라고 한다.</p>
+    <p>상관이 있으면 흔들림이 어디까지 줄어드는지 식으로 쓰면 이렇다. \(\rho\)는 두 가구의 사고가 얼마나 함께 움직이는지를 나타내는 상관계수다.</p>
+    <div class="formula">$$\sigma_{\text{1인}} = L\sqrt{p(1-p)}\,\sqrt{\frac{1}{N} + \rho\,\frac{N-1}{N}} \;\xrightarrow{N\to\infty}\; L\sqrt{\rho\,p(1-p)}$$<div class="where">\(\rho = 0\)이면 앞 절의 식과 같다. \(\rho\)가 조금이라도 있으면 N을 아무리 키워도 흔들림은 \(L\sqrt{\rho\,p(1-p)}\) 아래로 내려가지 않는다. 이것이 흔들림의 바닥이다.</div></div>
+    <p>아래 그래프의 가로축은 가구 수(로그 눈금), 세로축은 한 가구 몫의 흔들림이다. 점선은 서로 독립인 경우, 실선은 지금 고른 상관계수다. 손잡이를 좌우로 끌어 가구 수를 바꾸면 그 자리에서 30년을 무작위로 돌린 결과가 점으로 찍힌다.</p>
+
+    <div class="sim" id="sim-co">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>상관계수와 흔들림의 바닥</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="co-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="co-pre"><button data-value="fire" class="on">화재</button><button data-value="storm">태풍·홍수</button><button data-value="pandemic">전염병</button></div>
+          <label class="ctrl"><span>상관계수 ρ <output id="co-r-out"></output></span><input type="range" id="co-r" min="0" max="0.2" step="0.001" value="0.001"></label>
+          <div class="btn-row"><button class="btn" id="co-go">30년 다시 돌리기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가구 수</span><span class="v" id="co-o-n">—</span></div>
+        <div class="stat"><span class="k">σ · 독립이라면</span><span class="v" id="co-o-i">—</span></div>
+        <div class="stat"><span class="k">σ · 지금 ρ</span><span class="v" id="co-o-c">—</span></div>
+        <div class="stat"><span class="k">흔들림의 바닥</span><span class="v" id="co-o-f">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "화재"(ρ = 0.001)에서 손잡이를 오른쪽 끝까지 끈다. 1,000가구 근처까지는 점선을 따라 내려가다가 그 뒤로는 약 31만원에서 멈춘다. ② "태풍·홍수"를 누른다. 실선이 100가구 근처부터 평평해진다. 100만 가구를 모아도 흔들림은 약 222만원으로, 기대손실 100만원보다 크다. ③ ρ를 0.2까지 올리고 30년을 다시 돌린다. 대부분의 해는 0원 근처인데 몇 해가 수백만원으로 튄다. 모두가 같은 해에 함께 맞는 모양이다. (사고 확률 1%, 피해 1억원. 해마다 마을 전체의 사고 확률이 함께 오르내리는 베타-이항 모델이다. 세 버튼의 ρ는 설명을 위한 예시 값이며 실제 추정치가 아니다.)</div>
+    </div>
+
+    <p>점선은 끝없이 내려가지만 실선은 어느 지점에서 평평해진다. 아주 작은 상관이라도 가입자가 충분히 많아지면 그것이 흔들림의 대부분을 차지하기 때문이다. 그래서 보험사는 함께 터지는 위험에 세 가지로 대응한다. 약관에서 전쟁·지진·전염병 같은 대형 재해를 보장하지 않는다고 정하거나(면책 조항), 지역과 상품을 넓게 섞어 상관을 낮추거나, 큰 손실의 일부를 다른 보험사(<span class="term">재보험</span><span class="en">(Reinsurance)</span>)나 국가에 다시 넘긴다. 풍수해처럼 민간이 혼자 감당하기 어려운 위험에는 정부가 보험료를 보조하는 정책보험이 따로 있다.</p>
+    <p>이것이 이 책이 묻는 "보험은 왜 이렇게 복잡한가"의 첫 번째 답이다. 약관의 긴 면책 목록은 보험사가 보험금을 아끼려고 넣은 것처럼 보이지만, 그 가운데 상당수는 나눌 수 없는 위험을 떼어 내서 나머지 위험의 보험료를 감당할 만하게 만드는 장치다. 물론 모든 면책 조항이 이 이유로만 있는 것은 아니다. 어떤 조항이 어떤 이유로 들어갔는지는 <a href="contract.html">6장</a>에서 하나씩 읽는다.</p>
+    <div class="callout pro">
+      <strong>"이건 왜 안 나와요?"에 답하는 법</strong>
+      고객이 가장 화를 내는 순간은 보험금이 안 나온다는 말을 들을 때다. 면책 조항을 설명할 때 "약관에 그렇게 되어 있어서요"로 끝내면 불신만 남는다. "이 위험은 한 번 일어나면 가입자 모두가 동시에 청구해서, 이것까지 보장하면 보험료가 몇 배가 됩니다"처럼 <b>왜 빠졌는지</b>를 함께 말하면 받아들이는 정도가 다르다. 가입 단계에서 주요 면책 사항을 미리 짚어 두는 것은 설명의무이기도 하고, 나중의 분쟁을 줄이는 가장 싼 방법이기도 하다. 단, 모르는 것을 그럴듯하게 꾸며 설명하지 않는다. 조항의 취지가 확실하지 않으면 보험사에 확인한 뒤 답한다.
+    </div>
+  </section>
+
+  <section id="premium">
+    <h2>기대손실과 부가보험료</h2>
+    <p>1만 가구에게서 1인당 100만원을 걷으면 평균적으로 보험금을 낼 수 있다. 하지만 '평균적으로'는 보험사에게 충분하지 않다. 앞의 마을에서 봤듯이 어떤 해는 기대보다 사고가 많다. 게다가 보험사는 계약을 모집하고, 관리하고, 청구를 심사하는 데 돈을 쓴다. 그래서 내가 내는 보험료(<span class="term">영업보험료</span><span class="en">(Gross premium)</span>)는 세 부분으로 나뉜다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 280" role="img" aria-label="보험료의 구성: 기대손실, 안전 마진, 사업비">
+        <text x="12" y="22" class="lbl-b">한 사람이 내는 보험료</text>
+        <rect x="12" y="36" width="230" height="54" rx="4" class="f-acc-soft"/>
+        <rect x="242" y="36" width="58" height="54" rx="4" class="f-warn-soft"/>
+        <rect x="300" y="36" width="128" height="54" rx="4" class="f-bad-soft"/>
+        <text x="127" y="60" text-anchor="middle" class="lbl-acc">기대손실</text>
+        <text x="127" y="80" text-anchor="middle" class="lbl-dim">p × L</text>
+        <text x="271" y="60" text-anchor="middle" class="lbl">마진</text>
+        <text x="271" y="80" text-anchor="middle" class="lbl-dim">흔들림</text>
+        <text x="364" y="60" text-anchor="middle" class="lbl-bad">사업비</text>
+        <text x="364" y="80" text-anchor="middle" class="lbl-dim">모집·관리</text>
+        <path d="M12 104 h288 M12 98 v12 M300 98 v12" class="s-line"/>
+        <text x="156" y="128" text-anchor="middle" class="lbl">보험금으로 쓸 수 있는 돈</text>
+        <path d="M242 140 h186 M242 134 v12 M428 134 v12" class="s-bad"/>
+        <text x="335" y="164" text-anchor="middle" class="lbl-bad">부가보험료</text>
+        <text x="12" y="200" class="lbl">순보험료 = 기대손실 (+ 흔들림을 버틸 마진)</text>
+        <text x="12" y="224" class="lbl">부가보험료 = 사업비 + 마진(이익 포함)</text>
+        <text x="12" y="248" class="lbl-dim">부가율 = 보험료 ÷ 기대손실 − 1</text>
+        <text x="12" y="270" class="lbl-dim">칸의 길이는 개념용이며 실제 비율은 상품마다 다르다.</text>
+      </svg>
+      <figcaption><b>그림 3. 보험료는 세 덩어리다.</b> 기대손실은 가입자 전체에게 보험금으로 돌아간다. 마진은 사고가 많은 해를 버티는 완충재이고 남으면 보험사의 이익이 된다. 사업비는 설계사 수수료, 계약 관리, 손해사정에 쓰인다. 장기보험에서는 여기에 '저축'이 하나 더 끼어드는데, 그 이야기는 <a href="pricing.html">3장</a>에서 한다.</figcaption>
+    </figure>
+
+    <p>보험사 입장에서 마진은 얼마면 충분할까. 아래 시뮬레이터는 사고 확률 1%, 피해 1억원짜리 위험을 N명에게 파는 보험사의 1년이다. 막대는 한 사람 몫의 보험금이 해마다 어떻게 흩어지는지(분포), 초록 선은 보험료 가운데 보험금으로 쓸 수 있는 돈이다. 그 선을 넘는 빨간 영역이 보험사가 적자를 보는 해다. 가입자 수, 사업비율, 마진을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-ld">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보험료 한 장 뜯어보기: 보험사가 적자를 보는 해</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ld-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>가입자 수 <output id="ld-n-out"></output></span><input type="range" id="ld-n" min="0" max="3" step="1" value="2"></label>
+          <label class="ctrl"><span>안전 마진(기대손실 대비) <output id="ld-m-out"></output></span><input type="range" id="ld-m" min="0" max="30" step="1" value="5"></label>
+          <label class="ctrl"><span>사업비율(보험료 대비) <output id="ld-e-out"></output></span><input type="range" id="ld-e" min="0" max="40" step="1" value="15"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대손실 p×L</span><span class="v" id="ld-o-el">—</span></div>
+        <div class="stat"><span class="k">1인 보험료(연)</span><span class="v" id="ld-o-p">—</span></div>
+        <div class="stat"><span class="k">부가율</span><span class="v" id="ld-o-r">—</span></div>
+        <div class="stat"><span class="k">보험사 적자 확률</span><span class="v" id="ld-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(1만 명, 마진 5%, 사업비 15%)에서 보험료는 약 124만원, 적자 확률은 약 29%다. ② 마진을 0%로 내린다. 적자 확률이 거의 절반이 된다. 평균만 걷으면 두 해에 한 번은 모자란다. ③ 가입자를 10만 명으로 올린다. 같은 마진 5%로 적자 확률이 약 6%로 떨어진다. 큰 보험사가 같은 위험을 더 싸게 받을 수 있는 이유다. ④ 가입자를 100명으로 내린다. 마진을 30%까지 올려도 적자 확률이 약 26%에서 움직이지 않는다. 사고가 한 건만 더 나도 무너지는 작은 풀은 마진으로 지킬 수 없다. (사고 수는 포아송 분포, 사고 한 건 피해 1억원으로 고정. 사업비는 실제로 다 쓰인다고 보고, 투자 수익과 재보험은 빼고 계산했다.)</div>
+    </div>
+
+    <p>여기서 세 가지를 봤다. 첫째, 보험료는 기대손실보다 반드시 크다. 마진이 없으면 보험사는 버틸 수 없고, 사업비가 없으면 아무도 팔고 관리하지 않는다. 둘째, 같은 마진이라도 가입자가 많을수록 안전하다. 규모가 곧 가격 경쟁력이다. 셋째, 가입자 입장에서 부가보험료는 돌려받지 못하는 돈이다. 보험 전체로 보면 가입자는 평균적으로 부가보험료만큼 손해를 본다.</p>
+    <p>시뮬레이터 안의 계산은 한 줄이다. 보험료 = \(pL(1+m)/(1-e)\), 여기서 \(m\)은 안전 마진, \(e\)는 보험료 가운데 사업비로 쓰는 비율이다. 그리고 <span class="term">부가율</span> = 보험료 ÷ 기대손실 − 1이다. 마진 5%, 사업비 15%면 부가율은 약 24%, 기대손실 100원을 넘기는 데 124원을 내는 셈이다.</p>
+    <div class="callout pro">
+      <strong>"보험은 결국 손해 아니에요?"라는 질문</strong>
+      지우가 처음에 던진 이 질문은 현장에서 가장 흔하고, 정직하게 답해야 신뢰가 생긴다. 답은 "네, 평균적으로는 손해입니다"다. 그다음이 중요하다. "그 손해는 사업비와 마진만큼이고, 그 값을 내고 사는 것은 <b>감당할 수 없는 나쁜 해를 없애는 것</b>입니다. 그래서 감당할 수 있는 작은 위험까지 보험으로 사면 손해만 남습니다." 이렇게 말하면 고객은 설계사가 무엇이든 더 팔려는 사람이 아니라는 것을 안다. 작은 보장을 덜어 내자고 먼저 말하는 설계사가 결국 큰 보장의 상담을 맡는다.
+    </div>
+  </section>
+
+  <section id="utility">
+    <h2>평균적으로 손해인데 왜 사는가: 효용과 파산 회피</h2>
+    <p>평균적으로 손해라면 합리적인 사람은 보험을 사지 말아야 할까. 그렇지 않다. 돈의 무게는 금액에 정비례하지 않기 때문이다. 예금 3억원이 있는 가구에게 1,000만원은 아쉬운 돈이지만, 예금 1,000만원이 전부인 가구에게 1,000만원은 바닥이다. <b>같은 금액이라도 잃을 때의 아픔은 가진 것이 적을수록 커진다.</b></p>
+    <p>경제학은 이것을 <span class="term">효용</span><span class="en">(Utility)</span> 곡선으로 그린다. 자산이 늘수록 만족은 커지지만 커지는 폭은 점점 줄어드는, 위로 볼록한 곡선이다. 이 곡선 위에서는 평균이 같아도 흔들리는 쪽보다 확실한 쪽이 낫다. 그래서 사람은 기대손실보다 더 큰 돈을 내고라도 흔들림을 없애려 한다. 그 최대 금액 \(\pi^*\)는 이 식으로 구한다.</p>
+    <div class="formula">$$u(W - \pi^*) = (1-p)\,u(W) + p\,u(W - L)$$<div class="where">\(W\): 지금 자산, \(u\): 효용 함수(여기서는 \(u = \ln W\)), \(\pi^*\): 낼 용의가 있는 최대 보험료. 오른쪽은 보험 없이 맞는 기대 효용, 왼쪽은 보험료를 내고 확실하게 남는 자산의 효용이다. \(\pi^*\)와 기대손실 \(pL\)의 차이가 '확실성의 값'이다.</div></div>
+    <p>아래 그래프에서 자산과 사고 확률을 정하고, 곡선 위의 빨간 손잡이를 끌어 손실 크기를 바꾼다. 처음 값은 지우네 예금 3,000만원이다.</p>
+
+    <div class="sim" id="sim-ut">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>효용 곡선과 낼 용의가 있는 최대 보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ut-cv"></canvas><span class="hint">곡선 위 손잡이를 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>지금 자산 W <output id="ut-w-out"></output></span><input type="range" id="ut-w" min="1000" max="50000" step="500" value="3000"></label>
+          <label class="ctrl"><span>사고 확률 p <output id="ut-p-out"></output></span><input type="range" id="ut-p" min="0.5" max="20" step="0.5" value="5"></label>
+          <label class="ctrl"><span>시장 보험의 부가율 <output id="ut-l-out"></output></span><input type="range" id="ut-l" min="0" max="150" step="5" value="30"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">손실 L</span><span class="v" id="ut-o-l">—</span></div>
+        <div class="stat"><span class="k">기대손실 pL</span><span class="v" id="ut-o-e">—</span></div>
+        <div class="stat"><span class="k">최대 보험료 π*</span><span class="v" id="ut-o-m">—</span></div>
+        <div class="stat"><span class="k">시장 보험료와 비교</span><span class="v" id="ut-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 손실을 자산의 10%(300만원) 근처로 끈다. π*가 기대손실과 거의 같다(약 1.05배). 작은 위험에는 웃돈을 낼 이유가 없어서 부가율 30% 보험은 비싸다. ② 손실을 자산의 90%(2,700만원)로 키운다. π*가 기대손실의 약 2.4배로 뛴다. 같은 부가율 30% 보험이 이제는 살 만하다. ③ 손실은 그대로 두고 자산을 2억원으로 올린다. π*가 기대손실의 약 1.07배로 내려온다. 같은 위험도 부자에게는 보유가 맞다. ④ 손실을 자산의 끝까지 끌면 π*가 치솟는다. 파산 직전의 손실은 거의 무엇을 주고라도 피하고 싶다. (효용 u = ln W를 쓴 교육용 모델이다. 실제 사람의 위험 회피 정도는 저마다 다르다.)</div>
+    </div>
+
+    <p>곡선이 말해 주는 것은 두 가지다. 첫째, 보험의 값은 손실이 <b>내 자산에 비해</b> 클 때 생긴다. 같은 2,700만원짜리 위험도 예금 3,000만원인 지우네에게는 보험이 맞고, 예금 2억원인 가구에게는 보유가 맞을 수 있다. 둘째, 손실이 나를 0원 근처로 떨어뜨릴 수 있으면 기대손실의 몇 배를 내서라도 피할 이유가 생긴다. 보험이 파는 것은 평균이 아니라 <span class="term">파산 회피</span>다. 앞 절의 "평균적으로 손해"와 이 절의 "그래도 산다"는 서로 모순이 아니다. 부가보험료가 확실성의 값(π* − pL)보다 작으면 사는 것이 합리적이고, 크면 보유가 합리적이다.</p>
+  </section>
+
+  <section id="retention">
+    <h2>보유 한도 정하기: 어디까지 버티고 어디부터 넘길까</h2>
+    <p>지금까지의 이야기를 하나의 질문으로 줄이면 이렇다. <b>얼마짜리 손실까지는 내 돈으로 버티고, 얼마부터 보험으로 넘길 것인가.</b> 이 경계선이 <span class="term">보유 한도</span><span class="en">(Retention limit)</span>다. 보유 한도가 높을수록 보험료(부가보험료)를 아끼지만 운 나쁜 해에 내 돈이 크게 빠져나간다. 낮을수록 마음은 편하지만 작은 위험까지 부가보험료를 내게 된다.</p>
+    <p>보유 한도의 바탕은 비상금이다. 지우네의 예금 3,000만원은 둘의 월 생활비 360만원으로 나누면 약 8개월 치다. 이 돈이 지우네가 스스로 운영하는 작은 보험사의 '준비금'인 셈이다. 같은 생각이 보험 상품 안에서도 쓰인다. 실손보험의 자기부담금, 자동차보험 자차의 자기부담금처럼 손실의 첫 부분을 내가 내는 구조는 작은 손실을 보유하고 큰 손실만 넘기는 장치다(<a href="asymmetry.html">4장</a>, <a href="property.html">12장</a>).</p>
+    <p>아래는 지우네 위험 열 가지를 한 줄에 늘어놓은 것이다. 가로축은 한 번의 손실 크기(로그 눈금), 점의 크기는 1년에 일어날 확률이다. 세로선을 좌우로 끌어 보유 한도를 정한다. 선 왼쪽의 위험은 비상금으로 버티고, 오른쪽은 보험으로 넘긴다. 아래 막대는 그 선택으로 1년에 드는 돈을 4만 번 무작위로 돌려 본 결과다.</p>
+
+    <div class="sim" id="sim-rt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>지우네 보유 한도 긋기</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="rt-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>비상금 <output id="rt-f-out"></output></span><input type="range" id="rt-f" min="500" max="10000" step="100" value="3000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보유 한도</span><span class="v" id="rt-o-d">—</span></div>
+        <div class="stat"><span class="k">연 보험료(넘긴 위험)</span><span class="v" id="rt-o-p">—</span></div>
+        <div class="stat"><span class="k">평균 보유 손실(연)</span><span class="v" id="rt-o-m">—</span></div>
+        <div class="stat"><span class="k">비상금을 넘는 해</span><span class="v" id="rt-o-o">—</span></div>
+        <div class="stat"><span class="k">30년 중 한 번이라도</span><span class="v" id="rt-o-30">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 세로선을 맨 왼쪽(10만원)에 둔다. 모든 위험을 보험으로 넘기니 비상금을 넘는 해는 없지만 연 보험료가 약 294만원이다. ② 500만원 근처로 옮긴다. 휴대폰·노트북·자차 수리·입원비를 보유하자 보험료가 약 184만원으로 줄고, 나쁜 해(상위 1%)의 보유 손실도 600만원 안팎이라 비상금이 버틴다. ③ 선을 4,000만원 너머로 민다. '큰 병으로 소득 중단'이 보유로 넘어오면서 비상금을 넘는 해가 0%에서 약 0.5%로 뛰고, 30년 중 한 번이라도 겪을 확률은 약 14%가 된다. ④ 비상금을 줄이면 같은 선에서도 위험해진다. 보유 한도는 비상금의 크기를 따라 정해야 한다. (위험별 확률·피해액·부가율은 지우네 상황을 흉내 낸 교육용 가정이며 통계가 아니다. 피해액은 표시값의 0.5~1.5배로 흔들린다. 넘긴 위험은 전부 보상된다고 단순화했다.)</div>
+    </div>
+
+    <p>선을 오른쪽으로 밀수록 평균 총비용(보험료 + 보유 손실)은 줄어든다. 부가보험료를 덜 내기 때문이다. 그런데 비상금보다 큰 위험을 보유로 넘기는 순간 그래프의 꼬리가 비상금 선을 뚫는다. 평균은 좋아졌지만 '한 번에 무너지는 해'가 생긴다. 앞 절의 효용 곡선이 말한 바로 그 지점이다. 좋은 보유 한도는 <b>비상금으로 확실하게 버틸 수 있는 가장 큰 손실</b> 근처에 있다. 지우네라면 수백만원짜리까지는 보유하고, 수천만원 이상은 이전하는 것이 이 모델의 답이다.</p>
+
+    <div class="callout buyer">
+      <strong>내 보유 한도 정하기</strong>
+      <ul>
+        <li>예금·비상금을 월 생활비로 나눠 몇 개월 치인지 적는다. 3개월 미만이면 비상금부터 채우는 것이 보험 추가보다 먼저일 수 있다.</li>
+        <li>가진 보험을 "이 보장이 없으면 내 돈으로 낼 수 있나?"로 하나씩 묻는다. 답이 "그렇다"이고 보험료가 작지 않다면 보유로 돌릴 후보다.</li>
+        <li>반대로 "이 일이 생기면 비상금이 바닥난다"는 위험(소득 중단, 배상책임, 부양가족이 있는 사람의 사망)에 보장이 비어 있지 않은지 본다.</li>
+        <li>실손·자동차보험의 자기부담금 선택지가 있으면, 비상금으로 낼 수 있는 범위 안에서 높게 고를 때 보험료가 얼마나 내려가는지 비교한다.</li>
+      </ul>
+    </div>
+    <div class="callout warn">
+      <strong>수치와 제도는 해마다 바뀐다</strong>
+      이 장의 확률·피해액·부가율은 원리를 보여 주기 위한 교육용 가정이다. 실제 보험료와 사업비율은 상품·회사·가입 시기에 따라 크게 다르고, 해마다 다시 정해진다. 재해에 대한 정책보험의 지원 범위, 실손·자동차보험의 자기부담 구조도 바뀔 수 있다. 이 책의 수치는 2026년 무렵을 기준으로 삼았으며 특정 상품을 권하지 않는다. 가입 전에는 상품설명서와 약관에서 보장 범위와 면책 조항을 직접 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네의 위험 지도</h2>
+    <p>도윤은 첫 만남에서 약속한 대로 상품 이야기를 꺼내지 않았다. 대신 지우와 민서에게 집에서 일어날 수 있는 나쁜 일을 모두 적어 오라고 했고, 이 장의 도구로 그 목록을 정리했다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>위험</th><th>빈도</th><th>한 번의 크기</th><th>방법</th></tr></thead>
+      <tbody>
+        <tr><td>휴대폰·노트북 고장, 외래 진료비</td><td>잦거나 보통</td><td class="num">수십만~100만원대</td><td>보유(+감소)</td></tr>
+        <tr><td>입원·수술 본인부담, 내 차 수리</td><td>가끔</td><td class="num">수백만원</td><td>보유 가능, 일부는 기존 보험</td></tr>
+        <tr><td>아랫집 누수·전셋집 화재 배상</td><td>드묾</td><td class="num">수천만~1억원 이상</td><td>이전</td></tr>
+        <tr><td>지우·민서의 큰 병으로 소득 중단</td><td>드묾</td><td class="num">1년이면 3,000~4,000만원</td><td>이전</td></tr>
+        <tr><td>운전 중 대인 사고</td><td>드묾</td><td class="num">수억원</td><td>이전(자동차·운전자보험)</td></tr>
+        <tr><td>아이가 생긴 뒤 한 사람의 사망</td><td>매우 드묾</td><td class="num">수억원</td><td>이전(규모는 10장에서)</td></tr>
+        <tr><td>음주 후 운전, 수익 보장 투자 권유</td><td>선택의 문제</td><td class="num">상한 없음</td><td>회피</td></tr>
+      </tbody>
+    </table></div>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 2장</span></div>
+      <h4>보유와 이전의 선을 3,000만원에 긋다</h4>
+      <p>지우네가 스스로 버틸 수 있는 돈은 예금 3,000만원, 둘의 월 생활비 360만원으로 약 8개월 치다. 도윤은 이 금액을 보유 한도의 위쪽 끝으로 잡았다. 수십만~수백만원짜리 위험(기기 고장, 외래 진료비, 내 차 수리)은 비상금으로 버티고, 비상금을 한 번에 비울 수 있는 위험만 보험으로 넘긴다. 보유 한도 시뮬레이터에서 선을 500만원 근처에 두면 나쁜 해(상위 1%)에도 보유 손실이 600만원 안팎에 머물렀고, 선을 4,000만원 너머로 밀어 '소득 중단'까지 보유하면 비상금을 넘는 해가 생겼다.</p>
+      <p>그래서 남은 큰 위험은 세 가지로 좁혀졌다. 지우나 민서가 큰 병으로 일을 못 하게 되는 <b>소득 중단</b>, 남의 몸과 재산에 끼친 손해를 물어 주는 <b>배상책임</b>, 그리고 내년에 아이가 생기면 커지는 <b>사망</b>이다. 지우는 조금 놀랐다. "내 보험 서랍에서 제일 비싼 건 종신보험인데, 그게 막는 건 세 번째뿐이네." 도윤은 고개를 끄덕이면서도 서두르지 말자고 했다. "그 종신보험이 나쁜 계약이라는 뜻은 아니야. 2012년에 든 계약은 지금은 못 사는 조건일 수도 있어. 그건 보험료가 어떻게 만들어지는지 보고 나서 판단하자." 도윤은 수수료로 보면 작은 보장 여러 개를 새로 파는 쪽이 낫다는 것을 알지만, 오늘 상담에서는 휴대폰 보험이나 가전 보증 같은 작은 보장을 굳이 더하지 말라고 먼저 말했다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>보유 한도는 비상금 3,000만원(약 8개월 치) 안쪽. 큰 위험 세 가지: 소득 중단, 배상책임, (아이가 생기면) 사망.</div><div><b>아직 남은 문제</b>지우의 종신보험 월 12만원은 무엇에 얼마를 내고 있는가. 지금 해지하면, 지금 새로 들면 얼마인가.</div><div><b>다음 단계</b><a href="pricing.html">3장</a>에서 종신보험을 3이원방식으로 해부한다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>보험은 계·공동해손에서 시작된 오래된 약속이다. 드물지만 한 사람을 무너뜨리는 손실을 여럿이 나눈다.</li>
+      <li>위험은 빈도와 심도로 나눈다. 잦고 큰 위험은 회피, 잦고 작은 위험은 감소, 드물고 작은 위험은 보유, 드물고 큰 위험만 이전(보험)한다.</li>
+      <li>대수의 법칙: 서로 독립인 위험을 N명이 나누면 1인당 부담의 흔들림이 \(1/\sqrt{N}\)로 줄어 예측 가능한 비용이 된다.</li>
+      <li>함께 터지는 위험(재해·전염병)은 상관 때문에 흔들림에 바닥이 생긴다. 면책 조항, 재보험, 정책보험이 이 문제를 다룬다. 약관이 복잡한 이유 가운데 하나다.</li>
+      <li>보험료 = 기대손실 + 부가보험료(안전 마진 + 사업비). 가입자 전체로는 평균적으로 손해이고, 마진과 규모가 보험사를 적자에서 지킨다.</li>
+      <li>손실이 자산에 비해 클수록 낼 용의가 있는 최대 보험료가 기대손실보다 커진다. 보험은 평균이 아니라 파산 회피를 산다.</li>
+      <li>보유 한도는 비상금으로 확실히 버틸 수 있는 가장 큰 손실 근처에 긋는다. 그 아래는 보유, 그 위는 이전한다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>같은 위험을 나누는 가입자가 100명에서 1만 명으로 늘었다(사고는 서로 독립). 1인당 부담은 어떻게 변하는가?</p>
+        <div class="opts">
+          <button class="opt">평균 부담이 100분의 1로 준다</button>
+          <button class="opt">평균과 흔들림이 모두 그대로다</button>
+          <button class="opt" data-correct>평균은 그대로이고 흔들림(표준편차)이 10분의 1로 준다</button>
+          <button class="opt">흔들림이 100분의 1로 준다</button>
+        </div>
+        <div class="quiz-exp">대수의 법칙은 평균을 바꾸지 않는다. 1인당 부담의 표준편차가 \(1/\sqrt{N}\)에 비례하므로 N이 100배가 되면 흔들림은 \(1/\sqrt{100} = 1/10\)이 된다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>대형 지진이나 전염병 같은 위험을 민간 보험이 혼자 보장하기 어려운 가장 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt" data-correct>많은 가입자가 같은 해에 함께 피해를 입어, 가입자를 아무리 모아도 흔들림이 줄지 않기 때문이다</button>
+          <button class="opt">일어날 확률이 너무 낮아서 보험료를 매길 수 없기 때문이다</button>
+          <button class="opt">피해액이 작아서 보험으로 넘길 가치가 없기 때문이다</button>
+          <button class="opt">법으로 보장이 금지되어 있기 때문이다</button>
+        </div>
+        <div class="quiz-exp">상관된 위험은 \(\rho\)가 조금만 있어도 흔들림에 바닥 \(L\sqrt{\rho p(1-p)}\)가 생긴다. 그래서 면책 조항으로 떼어 내거나, 재보험·정책보험으로 더 큰 주체와 나눈다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>1년 사고 확률 0.5%, 피해액 4,000만원인 위험을 보장하는 보험의 연 보험료가 26만원이다. 부가율은?</p>
+        <div class="opts">
+          <button class="opt">0.65%</button>
+          <button class="opt">6%</button>
+          <button class="opt">130%</button>
+          <button class="opt" data-correct>30%</button>
+        </div>
+        <div class="quiz-exp">기대손실은 0.5% × 4,000만원 = 20만원이다. 보험료 26만원 ÷ 20만원 − 1 = 30%. 기대손실 100원을 넘기는 데 130원을 내는 셈이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>예금 3,000만원(생활비 약 8개월 치)을 가진 지우네에게 보험보다 보유가 더 알맞은 위험은?</p>
+        <div class="opts">
+          <button class="opt">운전 중 사람을 크게 다치게 해 수억원을 배상할 위험</button>
+          <button class="opt" data-correct>120만원짜리 노트북이 고장 날 위험</button>
+          <button class="opt">큰 병으로 1년 동안 일을 못 할 위험</button>
+          <button class="opt">아랫집에 누수 피해를 입혀 수천만원을 물어 줄 위험</button>
+        </div>
+        <div class="quiz-exp">노트북 수리비는 비상금으로 확실히 감당할 수 있는 크기다. 이런 위험을 보험으로 넘기면 부가보험료만큼 손해가 남는다. 나머지 셋은 비상금을 한 번에 비울 수 있어 이전할 가치가 크다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  const fmtN = (n) => Math.round(n).toLocaleString("ko-KR");
+  // 로그 감마(Lanczos): 포아송 확률 계산용
+  function lnG(z) {
+    const c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+    if (z < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * z)) - lnG(1 - z);
+    z -= 1; let x = c[0]; for (let i = 1; i < 9; i++) x += c[i] / (z + i);
+    const t = z + 7.5; return 0.5 * Math.log(TAU) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+  }
+  // 감마 난수(Marsaglia–Tsang), 베타 난수
+  function gammaR(a, r, g) {
+    if (a < 1) return gammaR(a + 1, r, g) * Math.pow(r(), 1 / a);
+    const d = a - 1 / 3, c = 1 / Math.sqrt(9 * d);
+    for (;;) { let x, v; do { x = g(); v = 1 + c * x; } while (v <= 0); v = v * v * v; const u = r(); if (u < 1 - 0.0331 * x * x * x * x) return d * v; if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v; }
+  }
+  function binom(N, p, r, g) {
+    if (N <= 60) { let k = 0; for (let i = 0; i < N; i++) if (r() < p) k++; return k; }
+    const m = N * p;
+    if (m < 30) { let k = 0, q = 1; const e = Math.exp(-m); do { k++; q *= r(); } while (q > e); return k - 1; }
+    return Math.max(0, Math.min(N, Math.round(m + Math.sqrt(m * (1 - p)) * g())));
+  }
+
+  /* ---------------------------------------------------------- 1. 위험 카드 분류 */
+  (function () {
+    const Q = { reduce: "감소", avoid: "회피", retain: "보유", transfer: "이전(보험)" };
+    const QS = { reduce: "잦고 작다", avoid: "잦고 크다", retain: "드물고 작다", transfer: "드물고 크다" };
+    const QC = { reduce: "warn", avoid: "bad", retain: "ok", transfer: "accent" };
+    const CARDS = [
+      { t: "회식 뒤 직접 운전", ok: ["avoid"], e: "선택하는 순간 사고 확률이 뛰고 피해에는 상한이 없다. 음주운전 사고는 보험으로도 상당 부분 막을 수 없다(자기부담금, 구상). 하지 않는 것이 유일한 답이다." },
+      { t: "'월 5% 보장' 투자 권유", ok: ["avoid"], e: "수익을 보장한다는 권유는 사기의 신호다. 원금 전체를 잃을 수 있고 이를 보장하는 보험은 없다. 피한다." },
+      { t: "하루 10시간 앉는 허리", ok: ["reduce"], e: "개발자 지우에게 매일 쌓이는 위험이다. 의자·모니터 높이, 스트레칭으로 빈도와 심도를 함께 줄이는 것이 먼저다. 생기는 진료비는 실손이 일부 덮는다." },
+      { t: "잦은 감기·치과 진료비", ok: ["reduce", "retain"], e: "자주 일어나지만 한 번에 몇만원이다. 생활비로 보유하고 건강 습관으로 줄인다. 이런 작은 지출만 따로 보험에 맡기면 사업비만큼 손해다." },
+      { t: "휴대폰 분실", ok: ["retain"], e: "드물고 크기는 수십만원이다. 비상금 3,000만원이면 충분히 버틴다. 휴대폰 보험료를 2년 모으면 수리비에 가까워지는 경우가 많다." },
+      { t: "노트북 고장 120만원", ok: ["retain"], e: "고장 확률은 낮고 수리비는 감당할 수 있는 크기다. 연장 보증 가격에는 판매 마진이 크게 붙는다. 보유가 낫다." },
+      { t: "택배 파손 5만원", ok: ["retain"], e: "드물고 작다. 그냥 감당한다. 따로 보험을 드는 것은 낭비다." },
+      { t: "아랫집 누수 배상", ok: ["transfer"], e: "드물지만 남의 집 천장과 가구까지 물어 줘야 한다. 일상생활배상책임 특약은 보험료가 작고 보장이 커서 이전의 효율이 높다." },
+      { t: "주방 화재로 전셋집 손상", ok: ["transfer", "reduce"], e: "소화기·가스 차단기로 줄이고(감소), 집주인에게 물어 줄 손해는 화재보험의 임차자 배상으로 넘긴다(이전)." },
+      { t: "전세보증금 미반환", ok: ["reduce", "transfer"], e: "보증금 3억원은 지우네 자산의 대부분이다. 등기부 확인·전입신고·확정일자로 줄이고(감소), 전세보증금 반환보증으로 넘길 수 있다(이전)." },
+      { t: "큰 병으로 1년 소득 중단", ok: ["transfer"], e: "드물지만 지우의 실수령 330만원이 1년이면 약 4,000만원이다. 비상금 8개월 치로는 모자란다. 이전할 가치가 크다." },
+      { t: "운전 중 대인 사고", ok: ["transfer"], e: "드물지만 배상액이 수억원에 이를 수 있다. 법도 자동차 책임보험을 의무로 둔다. 형사 비용은 운전자보험이 나눠 맡는다." },
+    ].map((c) => Object.assign(c, { at: null }));
+    let G = null, drag = null, last = null;
+    const el = document.getElementById("rk-cv");
+    const quadOf = (a) => (a.u < 0.5 ? (a.v < 0.5 ? "reduce" : "retain") : (a.v < 0.5 ? "avoid" : "transfer"));
+    const NARROW_ROWS = Math.ceil(CARDS.length / 2);
+    function layout(w, h) {
+      const ch = 32, gap = 8;
+      if (w >= 640) {
+        const M = { x: 40, y: 22, w: Math.round(w * 0.56) - 50, h: h - 62 };
+        const tx = M.x + M.w + 22, tw = w - tx - 12, cw = (tw - gap) / 2;
+        return { M, cw, ch, pw: Math.min(cw, M.w / 2 - 10), slots: CARDS.map((c, i) => [tx + (i % 2) * (cw + gap) + cw / 2, 34 + Math.floor(i / 2) * (ch + gap) + ch / 2]) };
+      }
+      const M = { x: 30, y: 18, w: w - 40, h: Math.round((w - 40) * 0.95) };
+      const ty = M.y + M.h + 40, cw = (w - 16 - gap) / 2;
+      return { M, cw, ch, pw: Math.min(cw, M.w / 2 - 6), slots: CARDS.map((c, i) => [8 + (i % 2) * (cw + gap) + cw / 2, ty + Math.floor(i / 2) * (ch + gap) + ch / 2]) };
+    }
+    const cwOf = (c) => (c.at && !(drag && drag.c === c) ? G.pw : G.cw);
+    function pos(c, i) {
+      if (drag && drag.c === c) return [drag.x, drag.y];
+      if (c.at) return [G.M.x + c.at.u * G.M.w, G.M.y + c.at.v * G.M.h];
+      return G.slots[i];
+    }
+    const cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      G = layout(w, h);
+      const M = G.M;
+      [["reduce", 0, 0], ["avoid", 1, 0], ["retain", 0, 1], ["transfer", 1, 1]].forEach(([k, i, j]) => {
+        const x = M.x + (i * M.w) / 2, y = M.y + (j * M.h) / 2;
+        ctx.globalAlpha = 0.12; ctx.fillStyle = P[QC[k]]; ctx.fillRect(x, y, M.w / 2, M.h / 2); ctx.globalAlpha = 1;
+        const ax = i ? x + M.w / 2 - 8 : x + 8, al = i ? "right" : "left";
+        if (j === 0) {
+          T(ctx, Q[k], ax, y + 18, { size: 14, weight: 700, color: P[QC[k]], align: al });
+          T(ctx, QS[k], ax, y + 34, { size: 11, color: P.dim, align: al });
+        } else {
+          T(ctx, QS[k], ax, y + M.h / 2 - 24, { size: 11, color: P.dim, align: al });
+          T(ctx, Q[k], ax, y + M.h / 2 - 8, { size: 14, weight: 700, color: P[QC[k]], align: al });
+        }
+      });
+      ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.strokeRect(M.x, M.y, M.w, M.h);
+      ctx.beginPath(); ctx.moveTo(M.x + M.w / 2, M.y); ctx.lineTo(M.x + M.w / 2, M.y + M.h); ctx.moveTo(M.x, M.y + M.h / 2); ctx.lineTo(M.x + M.w, M.y + M.h / 2); ctx.stroke();
+      T(ctx, "한 번의 크기(심도) →", M.x + M.w / 2, M.y + M.h + 18, { size: 12, color: P.dim, align: "center" });
+      ctx.save(); ctx.translate(M.x - 13, M.y + M.h / 2); ctx.rotate(-Math.PI / 2);
+      T(ctx, "빈도 →", 0, 0, { size: 12, color: P.dim, align: "center", base: "middle" }); ctx.restore();
+      if (w >= 640) T(ctx, "지우네 위험 카드", G.slots[0][0] - G.cw / 2, 14, { size: 12, color: P.dim, base: "middle" });
+      G.slots.forEach((s, i) => {
+        const c = CARDS[i];
+        if (!(c.at || (drag && drag.c === c))) return;
+        ctx.save(); ctx.setLineDash([4, 4]); ctx.strokeStyle = P.border; rrect(ctx, s[0] - G.cw / 2, s[1] - G.ch / 2, G.cw, G.ch, 8); ctx.stroke(); ctx.restore();
+      });
+      const drawCard = (c, i) => {
+        const [cx, cy] = pos(c, i), cw = cwOf(c), x = cx - cw / 2, y = cy - G.ch / 2;
+        const placed = c.at && !(drag && drag.c === c), good = placed && c.ok.includes(quadOf(c.at));
+        ctx.save();
+        if (drag && drag.c === c) { ctx.shadowColor = P.faint; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4; }
+        rrect(ctx, x, y, cw, G.ch, 8); ctx.fillStyle = P.surface; ctx.fill(); ctx.restore();
+        ctx.save(); rrect(ctx, x, y, cw, G.ch, 8);
+        ctx.lineWidth = placed ? 2 : 1; ctx.strokeStyle = placed ? (good ? P.ok : P.bad) : P.border; ctx.stroke();
+        if (placed) { ctx.beginPath(); ctx.arc(x + 9, cy, 3.5, 0, TAU); ctx.fillStyle = good ? P.ok : P.bad; ctx.fill(); }
+        let fs = 12.5; ctx.font = IB.font(fs);
+        while (ctx.measureText(c.t).width > cw - (placed ? 22 : 12) && fs > 8.5) { fs -= 0.5; ctx.font = IB.font(fs); }
+        T(ctx, c.t, cx + (placed ? 5 : 0), cy + 0.5, { size: fs, color: P.text, align: "center", base: "middle" });
+        ctx.restore();
+      };
+      CARDS.forEach((c, i) => { if (!(drag && drag.c === c)) drawCard(c, i); });
+      if (drag) drawCard(drag.c, drag.i);
+      const placed = CARDS.filter((c) => c.at), ok = placed.filter((c) => c.ok.includes(quadOf(c.at))).length;
+      IB.stat("rk-o-n", placed.length + " <small>/ " + CARDS.length + "</small>");
+      IB.stat("rk-o-ok", (placed.length ? tone(ok === placed.length ? "ok-t" : "warn-t", String(ok)) : "0") + " <small>/ " + placed.length + "</small>");
+      IB.stat("rk-o-t", placed.filter((c) => quadOf(c.at) === "transfer").length + "<small>장</small>");
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w >= 640 ? 420 : Math.round((w - 40) * 0.95) + 18 + 40 + NARROW_ROWS * 40 + 30; } });
+    function msg() {
+      const m = document.getElementById("rk-msg");
+      if (!last) return;
+      const q = quadOf(last.at), good = last.ok.includes(q);
+      m.innerHTML = "<b>" + last.t + "</b> → " + Q[q] + ". " + (good ? tone("ok-t", "<b>알맞다.</b> ") : tone("bad-t", "<b>다시 생각해 보자.</b> ") + "도윤은 " + last.ok.map((k) => Q[k]).join("·") + " 쪽으로 봤다. ") + last.e;
+    }
+    IB.drag(cv.canvas, {
+      start(x, y) {
+        if (!G) return;
+        for (let i = CARDS.length - 1; i >= 0; i--) {
+          const [cx, cy] = pos(CARDS[i], i);
+          if (Math.abs(x - cx) <= cwOf(CARDS[i]) / 2 && Math.abs(y - cy) <= G.ch / 2) { drag = { c: CARDS[i], i, dx: x - cx, dy: y - cy, x: cx, y: cy }; return; }
+        }
+      },
+      move(x, y) { if (!drag) return; drag.x = x - drag.dx; drag.y = y - drag.dy; cv.redraw(); },
+      end() {
+        if (!drag) return;
+        const M = G.M, c = drag.c;
+        if (drag.x > M.x && drag.x < M.x + M.w && drag.y > M.y && drag.y < M.y + M.h) {
+          const hw = Math.min(0.49, G.pw / 2 / M.w), hh = Math.min(0.49, G.ch / 2 / M.h);
+          const u = (drag.x - M.x) / M.w, v = (drag.y - M.y) / M.h;
+          const lo = (a, half) => (a < 0.5 ? IB.clamp(a, half, 0.5 - 0.01) : IB.clamp(a, 0.5 + 0.01, 1 - half));
+          c.at = { u: lo(u, hw), v: lo(v, hh) };
+          last = c;
+        } else c.at = null;
+        drag = null; cv.redraw(); msg();
+      },
+    });
+    document.getElementById("rk-reset").addEventListener("click", () => { CARDS.forEach((c) => (c.at = null)); last = null; cv.redraw(); document.getElementById("rk-msg").textContent = "카드를 모두 되돌렸다. 다시 하나씩 끌어 놓아 본다."; });
+    document.getElementById("rk-ans").addEventListener("click", () => {
+      const cnt = { reduce: 0, avoid: 0, retain: 0, transfer: 0 }, tot = { reduce: 0, avoid: 0, retain: 0, transfer: 0 };
+      CARDS.forEach((c) => tot[c.ok[0]]++);
+      CARDS.forEach((c) => {
+        const q = c.ok[0], k = cnt[q]++, n = tot[q];
+        const u = q === "reduce" || q === "retain" ? 0.25 : 0.75, top = q === "reduce" || q === "avoid";
+        const step = (G.ch + 4) / G.M.h, mid = top ? 0.3 : 0.7;
+        c.at = { u, v: IB.clamp(mid + (k - (n - 1) / 2) * step + (top ? 0.04 : -0.04), 0.03, 0.97) };
+      });
+      last = null; cv.redraw();
+      document.getElementById("rk-msg").innerHTML = "도윤의 답이다. 이전(보험) 칸에는 배상책임(누수·화재·대인 사고)과 소득 중단만 남는다. 감기 진료비는 감소와 보유 어느 쪽도 맞고, 화재와 전세보증금은 줄인 뒤 넘기는 두 칸짜리 카드다.";
+    });
+  })();
+
+  /* ---------------------------------------------------------- 2. 대수의 법칙 마을 */
+  (function () {
+    const NS = [1, 10, 100, 1000, 10000, 100000], L = 1e8, KEEP = 60;
+    let hist = [], sum = 0, years = 0, maxC = 0, flash = [], lastK = 0, tacc = 0, paused = false;
+    const r = IB.rng(5), g = IB.randnSeeded(22);
+    const reset = () => { hist = []; sum = 0; years = 0; maxC = 0; flash = []; lastK = 0; for (let i = 0; i < KEEP; i++) step(false); if (cv) cv.redraw(); };
+    const nI = IB.range("ll-n", (v) => fmtN(NS[v]) + "가구", reset);
+    const pI = IB.range("ll-p", (v) => v.toFixed(1) + "%", reset);
+    function step(show) {
+      const N = NS[nI()], p = pI() / 100, k = binom(N, p, r, g), c = (k * L) / N;
+      hist.push(c); if (hist.length > KEEP) hist.shift();
+      years++; sum += c; maxC = Math.max(maxC, c); lastK = k;
+      if (show) {
+        const Hn = Math.min(N, 200), m = N <= 200 ? k : Math.min(Hn, Math.max(k > 0 ? 1 : 0, Math.round((k * 200) / N)));
+        const s = new Set(); while (s.size < m) s.add(Math.floor(r() * Hn));
+        flash = [...s];
+      }
+    }
+    let cv = null;
+    reset();
+    cv = IB.canvas("#ll-cv", (ctx, w, h) => {
+      const P = IB.palette(), N = NS[nI()], p = pI() / 100, EL = p * L;
+      const vb = { x: 12, y: 28, w: w - 24, h: 70 };
+      T(ctx, fmtN(N) + "가구" + (N > 200 ? " (집 1채 = " + fmtN(N / 200) + "가구)" : ""), vb.x, 15, { size: 12, color: P.dim, base: "middle" });
+      T(ctx, "올해 사고 " + fmtN(lastK) + "건", vb.x + vb.w, 15, { size: 12, color: lastK ? P.bad : P.dim, align: "right", base: "middle", weight: 600 });
+      const Hn = Math.min(N, 200), cols = Math.max(1, Math.ceil(Math.sqrt((Hn * vb.w) / vb.h))), rows = Math.ceil(Hn / cols);
+      const cell = Math.min(vb.w / cols, vb.h / rows, 44), gx = vb.x + (vb.w - cols * cell) / 2;
+      for (let i = 0; i < Hn; i++) {
+        const cx = gx + (i % cols) * cell + cell / 2, cy = vb.y + Math.floor(i / cols) * cell + cell / 2, s = Math.max(2, cell * 0.7);
+        const hit = flash.includes(i);
+        ctx.fillStyle = hit ? P.bad : P.accent; ctx.globalAlpha = hit ? 1 : 0.42;
+        ctx.beginPath(); ctx.moveTo(cx - s / 2, cy + s / 2); ctx.lineTo(cx - s / 2, cy - s * 0.05); ctx.lineTo(cx, cy - s / 2); ctx.lineTo(cx + s / 2, cy - s * 0.05); ctx.lineTo(cx + s / 2, cy + s / 2); ctx.closePath(); ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+      const ymax = Math.max(EL * 4, 2e6);
+      const box = { x: 54, y: vb.y + vb.h + 26, w: w - 54 - 14, h: h - (vb.y + vb.h + 26) - 40 };
+      const c = IB.chart(ctx, box, { x: [0, KEEP], y: [0, ymax], xTicks: [], yFmt: IB.wonAxis, xLabel: "해마다 한 가구가 낸 몫 (최근 " + KEEP + "년)" });
+      const sig = L * Math.sqrt((p * (1 - p)) / N);
+      ctx.globalAlpha = 0.12; ctx.fillStyle = P.accent2;
+      const yTop = c.Y(Math.min(ymax, EL + sig)), yBot = c.Y(Math.max(0, EL - sig));
+      ctx.fillRect(box.x, yTop, box.w, yBot - yTop); ctx.globalAlpha = 1;
+      const bw = box.w / KEEP;
+      hist.forEach((v, i) => {
+        const x = box.x + (KEEP - hist.length + i) * bw, over = v > ymax, y = c.Y(Math.min(v, ymax));
+        ctx.fillStyle = over ? P.bad : P.accent; ctx.globalAlpha = i === hist.length - 1 ? 1 : 0.75;
+        ctx.fillRect(x + 0.5, y, Math.max(1, bw - 1), Math.max(2, c.Y(0) - y)); ctx.globalAlpha = 1;
+        if (over && bw > 5) { ctx.fillStyle = P.bad; ctx.beginPath(); ctx.moveTo(x + bw / 2, box.y - 6); ctx.lineTo(x + bw / 2 - 4, box.y + 1); ctx.lineTo(x + bw / 2 + 4, box.y + 1); ctx.closePath(); ctx.fill(); }
+      });
+      ctx.save(); ctx.strokeStyle = P.accent2; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(box.x, c.Y(EL)); ctx.lineTo(box.x + box.w, c.Y(EL)); ctx.stroke(); ctx.restore();
+      T(ctx, "기대손실 " + IB.wonAxis(EL) + " (띠 = ±σ)", box.x + 6, c.Y(EL) - 6, { size: 11, color: P.accent2 });
+      IB.stat("ll-o-c", won(hist[hist.length - 1] || 0));
+      IB.stat("ll-o-m", won(years ? sum / years : 0));
+      IB.stat("ll-o-s", won(sig));
+      IB.stat("ll-o-x", tone(maxC > EL * 3 ? "bad-t" : "", won(maxC)));
+    }, { aspect: 0.66, minHeight: 320, maxHeight: 430 });
+    IB.loop(cv.canvas, (dt) => {
+      if (paused) return;
+      tacc += dt;
+      if (tacc < 0.3) return;
+      tacc = 0; step(true); cv.redraw();
+    });
+    const pb = document.getElementById("ll-pause");
+    pb.addEventListener("click", () => { paused = !paused; pb.textContent = paused ? "재생" : "일시정지"; });
+    document.getElementById("ll-re").addEventListener("click", reset);
+  })();
+
+  /* ---------------------------------------------------------- 3. 상관계수와 흔들림의 바닥 */
+  (function () {
+    const p = 0.01, L = 1e8, NMIN = 1, NMAX = 1e6, YEARS = 30;
+    const PRE = { fire: 0.001, storm: 0.05, pandemic: 0.15 };
+    let logN = 4, G = null, seed = 5, pts = [];
+    const sigma = (N, rho) => L * Math.sqrt(p * (1 - p)) * Math.sqrt(1 / N + (rho * (N - 1)) / N);
+    function simulate() {
+      const r = IB.rng(seed), g = IB.randnSeeded(seed + 100), N = Math.round(Math.pow(10, logN)), rho = Rr();
+      pts = [];
+      for (let y = 0; y < YEARS; y++) {
+        let q = p;
+        if (rho > 0) { const a = (p * (1 - rho)) / rho, b = ((1 - p) * (1 - rho)) / rho; const x = gammaR(a, r, g), z = gammaR(b, r, g); q = x / (x + z); }
+        const k = binom(N, q, r, g);
+        pts.push((k * L) / N);
+      }
+    }
+    const redraw = () => { simulate(); if (cv) cv.redraw(); };
+    const pre = IB.seg("co-pre", (v) => Rr.set(PRE[v]));
+    const Rr = IB.range("co-r", (v) => v.toFixed(3), redraw);
+    simulate();
+    let cv = null;
+    cv = IB.canvas("#co-cv", (ctx, w, h) => {
+      const P = IB.palette(), rho = Rr(), N = Math.round(Math.pow(10, logN));
+      const box = { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - (w < 480 ? 68 : 48) };
+      const ind = [], cor = [];
+      for (let e = 0; e <= 6.0001; e += 0.05) { const n = Math.pow(10, e); ind.push([n, sigma(n, 0)]); cor.push([n, sigma(n, rho)]); }
+      const c = IB.chart(ctx, box, {
+        x: [NMIN, NMAX], y: [5e3, 3e7], logX: true, logY: true, xLabel: "함께 나누는 가구 수",
+        xFmt: (v) => (v >= 1e4 ? v / 1e4 + "만" : fmtN(v)), yFmt: IB.wonAxis,
+        series: [{ data: ind, color: P.dim, dash: [5, 4], width: 1.8 }, { data: cor, color: P.bad, width: 2.6 }],
+        hlines: rho > 0 ? [{ y: L * Math.sqrt(rho * p * (1 - p)), color: P.bad, label: "바닥 " + IB.wonAxis(L * Math.sqrt(rho * p * (1 - p))) }] : [],
+      });
+      G = c;
+      // 기대손실 기준선
+      ctx.save(); ctx.strokeStyle = P.accent2; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(box.x, c.Y(p * L)); ctx.lineTo(box.x + box.w, c.Y(p * L)); ctx.stroke(); ctx.restore();
+      T(ctx, "기대손실 100만", box.x + 6, c.Y(p * L) - 5, { size: 11, color: P.accent2 });
+      const x = c.X(N);
+      vline(ctx, x, box.y, box.y + box.h, P.faint, [3, 3]);
+      // 30년의 1인 몫과 기대손실의 차이를 같은 축에 |차이|로 찍는다
+      const r = IB.rng(seed + 7);
+      pts.forEach((v) => {
+        const dev = Math.abs(v - p * L);
+        if (dev < 5e3) return;
+        ctx.fillStyle = P.accent; ctx.globalAlpha = 0.7;
+        ctx.beginPath(); ctx.arc(x + (r() - 0.5) * 12, c.Y(Math.min(dev, 3e7)), 2.6, 0, TAU); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      knob(ctx, x, c.Y(sigma(N, rho)), P, P.bad, 7);
+      T(ctx, "점 = 30년 동안 해마다 평균에서 벗어난 크기", box.x + box.w - 4, box.y + box.h - 8, { size: 11, color: P.dim, align: "right" });
+      IB.stat("co-o-n", fmtN(N) + "<small>가구</small>");
+      IB.stat("co-o-i", won(sigma(N, 0)));
+      IB.stat("co-o-c", tone(sigma(N, rho) > p * L ? "bad-t" : "", won(sigma(N, rho))));
+      IB.stat("co-o-f", rho > 0 ? won(L * Math.sqrt(rho * p * (1 - p))) : "없음(0원까지)");
+    }, { aspect: 0.64, minHeight: 340, maxHeight: 420 });
+    IB.drag(cv.canvas, {
+      move(x) { if (!G) return; const b = G.box; logN = IB.clamp(((x - b.x) / b.w) * 6, 0, 6); logN = Math.round(logN * 10) / 10; simulate(); cv.redraw(); },
+    });
+    document.getElementById("co-go").addEventListener("click", () => { seed++; redraw(); });
+    void pre;
+  })();
+
+  /* ---------------------------------------------------------- 4. 부가보험료와 적자 확률 */
+  (function () {
+    const NS = [100, 1000, 10000, 100000], p = 0.01, L = 1e8;
+    const redraw = () => cv && cv.redraw();
+    const nI = IB.range("ld-n", (v) => fmtN(NS[v]) + "명", redraw);
+    const mI = IB.range("ld-m", (v) => v + "%", redraw);
+    const eI = IB.range("ld-e", (v) => v + "%", redraw);
+    let cv = null;
+    cv = IB.canvas("#ld-cv", (ctx, w, h) => {
+      const P = IB.palette(), N = NS[nI()], m = mI() / 100, e = eI() / 100, lam = N * p, EL = p * L;
+      const prem = (EL * (1 + m)) / (1 - e), avail = EL * (1 + m);
+      const kMax = Math.ceil(lam + 6 * Math.sqrt(lam) + 4), kMin = Math.max(0, Math.floor(lam - 6 * Math.sqrt(lam)));
+      const pmf = []; let deficit = 0, top = 0;
+      for (let k = kMin; k <= kMax; k++) { const q = Math.exp(k * Math.log(lam) - lam - lnG(k + 1)); pmf.push([k, q]); top = Math.max(top, q); if (k > lam * (1 + m) + 1e-9) deficit += q; }
+      // 상단: 보험료 띠
+      const sb = { x: 14, y: 26, w: w - 28, h: 22 };
+      T(ctx, "1인 보험료 " + won(prem), sb.x, 15, { size: 12, color: P.text, weight: 600, base: "middle" });
+      const sc = sb.w / prem;
+      [[EL, P.accent, "기대손실"], [EL * m, P.warn, "마진"], [prem * e, P.bad, "사업비"]].reduce((x0, [v, col, lab]) => {
+        ctx.fillStyle = col; ctx.globalAlpha = 0.75; ctx.fillRect(sb.x + x0 * sc, sb.y, Math.max(0, v * sc), sb.h); ctx.globalAlpha = 1;
+        if (v * sc > 46) T(ctx, lab, sb.x + (x0 + v / 2) * sc, sb.y + sb.h / 2 + 1, { size: 11, color: P.bg, align: "center", base: "middle", weight: 700 });
+        return x0 + v;
+      }, 0);
+      // 분포
+      const xs = (k) => (k * L) / N;
+      const x0 = xs(kMin), x1 = Math.max(xs(kMax), avail * 1.1);
+      const box = { x: 54, y: sb.y + sb.h + 30, w: w - 54 - 14, h: h - (sb.y + sb.h + 30) - 42 };
+      const c = IB.chart(ctx, box, { x: [x0, x1], y: [0, top * 1.15], yTicks: [], xFmt: IB.wonAxis, xLabel: "한 사람 몫의 1년 보험금(실제)" });
+      const bw = Math.max(1, Math.min(28, (box.w / (kMax - kMin + 1)) * 0.8));
+      pmf.forEach(([k, q]) => {
+        const x = c.X(xs(k)), over = k > lam * (1 + m) + 1e-9;
+        ctx.fillStyle = over ? P.bad : P.accent; ctx.globalAlpha = over ? 0.85 : 0.6;
+        ctx.fillRect(x - bw / 2, c.Y(q), bw, c.Y(0) - c.Y(q)); ctx.globalAlpha = 1;
+      });
+      vline(ctx, c.X(avail), box.y, box.y + box.h, P.ok, [], 2.2);
+      const lx = c.X(avail), right = lx > box.x + box.w * 0.62;
+      T(ctx, "보험금으로 쓸 돈 " + IB.wonAxis(avail), lx + (right ? -6 : 6), box.y + 12, { size: 11.5, color: P.ok, align: right ? "right" : "left", weight: 600 });
+      T(ctx, "적자 " + (deficit * 100).toFixed(1) + "%", lx + (right ? -6 : 6), box.y + 28, { size: 11.5, color: P.bad, align: right ? "right" : "left", weight: 600 });
+      IB.stat("ld-o-el", won(EL));
+      IB.stat("ld-o-p", won(prem));
+      IB.stat("ld-o-r", ((prem / EL - 1) * 100).toFixed(0) + "%");
+      IB.stat("ld-o-d", tone(deficit > 0.2 ? "bad-t" : deficit > 0.05 ? "warn-t" : "ok-t", (deficit * 100).toFixed(deficit < 0.01 ? 2 : 1) + "%"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 400 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 효용 곡선 */
+  (function () {
+    let Lf = 0.9, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Wr = IB.range("ut-w", (v) => won(v * 1e4), redraw);
+    const Pr = IB.range("ut-p", (v) => v + "%", redraw);
+    const Ld = IB.range("ut-l", (v) => v + "%", redraw);
+    let cv = null;
+    cv = IB.canvas("#ut-cv", (ctx, w, h) => {
+      const P = IB.palette(), W = Wr() * 1e4, p = Pr() / 100, L = Lf * W, lo = W * 0.012;
+      const EU = (1 - p) * Math.log(W) + p * Math.log(W - L), CE = Math.exp(EU), pis = W - CE, Ew = W - p * L;
+      const box = { x: 30, y: 26, w: w - 46, h: h - 26 - (w < 480 ? 140 : 126) };
+      const curve = []; for (let i = 0; i <= 160; i++) { const x = lo + ((W * 1.04 - lo) * i) / 160; curve.push([x, Math.log(x)]); }
+      const c = IB.chart(ctx, box, { x: [0, W * 1.04], y: [Math.log(lo), Math.log(W * 1.04)], yTicks: [], xTicks: [0, W / 4, W / 2, (3 * W) / 4, W], xFmt: IB.wonAxis, xLabel: "자산", series: [{ data: curve, color: P.accent, width: 2.5 }] });
+      G = { c, W };
+      ctx.save(); ctx.translate(13, box.y + box.h / 2); ctx.rotate(-Math.PI / 2); T(ctx, "만족(효용) →", 0, 0, { size: 12, color: P.dim, align: "center", base: "middle" }); ctx.restore();
+      const xA = c.X(W), yA = c.Y(Math.log(W)), xB = c.X(W - L), yB = c.Y(Math.log(W - L));
+      ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = P.dim; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(xB, yB); ctx.lineTo(xA, yA); ctx.stroke(); ctx.restore();
+      const xE = c.X(Ew), yE = c.Y(EU), xC = c.X(CE);
+      ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = P.bad; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(xC, yE); ctx.lineTo(xE, yE); ctx.stroke(); ctx.restore();
+      vline(ctx, xC, yE, box.y + box.h, P.bad, [2, 3]);
+      vline(ctx, xE, yE, box.y + box.h, P.dim, [2, 3]);
+      ctx.fillStyle = P.dim; ctx.beginPath(); ctx.arc(xE, yE, 4.5, 0, TAU); ctx.fill();
+      ctx.fillStyle = P.bad; ctx.beginPath(); ctx.arc(xC, yE, 4.5, 0, TAU); ctx.fill();
+      ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(xA, yA, 5, 0, TAU); ctx.fill();
+      T(ctx, "사고 없음", xA - 4, yA - 10, { size: 11.5, color: P.text, align: "right" });
+      T(ctx, "확실성 등가", xC - 8, yE + 16, { size: 11.5, color: P.bad, align: "right" });
+      knob(ctx, xB, yB, P, P.bad, 7);
+      const bR = xB > box.x + box.w * 0.6;
+      T(ctx, "사고 남 −" + IB.wonAxis(L), xB + (bR ? -11 : 11), yB + (bR ? 20 : 4), { size: 11.5, color: P.text, align: bR ? "right" : "left" });
+      // 아래 막대: pL, π*, 시장 보험료
+      const prem = p * L * (1 + Ld() / 100);
+      const bb = { x: 74, y: box.y + box.h + 50, w: w - 74 - 70, h: 40 };
+      const mx = Math.max(pis, prem, p * L) * 1.05, s = bb.w / mx;
+      [["기대손실", p * L, P.dim], ["최대 π*", pis, P.bad], ["시장 보험료", prem, P.accent]].forEach(([lab, v, col], i) => {
+        const y = bb.y + i * 14;
+        T(ctx, lab, bb.x - 6, y + 5, { size: 11, color: P.dim, align: "right", base: "middle" });
+        ctx.fillStyle = col; ctx.globalAlpha = 0.8; ctx.fillRect(bb.x, y, Math.max(2, v * s), 10); ctx.globalAlpha = 1;
+        T(ctx, IB.wonAxis(v), bb.x + Math.max(2, v * s) + 5, y + 5, { size: 10.5, mono: true, color: P.text, base: "middle" });
+      });
+      IB.stat("ut-o-l", won(L) + " <small>(" + Math.round(Lf * 100) + "%)</small>");
+      IB.stat("ut-o-e", won(p * L));
+      IB.stat("ut-o-m", won(pis) + " <small>(×" + (pis / (p * L)).toFixed(2) + ")</small>");
+      IB.stat("ut-o-v", prem <= pis ? tone("ok-t", "살 만하다") : tone("bad-t", "비싸다, 보유 쪽"));
+    }, { aspect: 0.72, minHeight: 380, maxHeight: 480 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.c.box, v = ((x - b.x) / b.w) * G.W * 1.04; Lf = IB.clamp((G.W - v) / G.W, 0.03, 0.985); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 보유 한도 */
+  (function () {
+    // 지우네 위험 열 가지: 1년 확률 p, 한 번의 피해 L(표시값), 넘길 때의 부가율 load — 교육용 가정
+    const RISKS = [
+      { t: "휴대폰 파손·분실", p: 0.15, L: 4e5, load: 1.0 },
+      { t: "외래 진료비(1년 합)", p: 0.9, L: 2e5, load: 0.4 },
+      { t: "노트북 고장", p: 0.06, L: 1.2e6, load: 0.8 },
+      { t: "내 차 수리(자차)", p: 0.1, L: 2e6, load: 0.4 },
+      { t: "입원·수술 본인부담", p: 0.06, L: 4e6, load: 0.35 },
+      { t: "아랫집 누수 배상", p: 0.01, L: 1.5e7, load: 0.4 },
+      { t: "큰 병, 1년 소득 중단", p: 0.006, L: 4e7, load: 0.35 },
+      { t: "전셋집 화재 배상", p: 0.002, L: 1e8, load: 0.4 },
+      { t: "운전 중 대인 배상", p: 0.002, L: 3e8, load: 0.35 },
+      { t: "아이가 생긴 뒤 사망", p: 0.00055, L: 3e8, load: 0.3 },
+    ];
+    const S = 40000, LO = 5, HI = 9; // log10 원
+    const draws = new Float64Array(S * RISKS.length);
+    (function () { const r = IB.rng(7); for (let s = 0; s < S; s++) RISKS.forEach((k, i) => { draws[s * RISKS.length + i] = r() < k.p ? k.L * (0.5 + r()) : 0; }); })();
+    let logD = Math.log10(5e6), G = null, cache = { key: "", v: null };
+    function evalD(D, F) {
+      const key = D + "|" + F; if (cache.key === key) return cache.v;
+      const ret = RISKS.map((k) => k.L <= D);
+      let prem = 0; RISKS.forEach((k, i) => { if (!ret[i]) prem += k.p * k.L * (1 + k.load); });
+      const arr = new Float64Array(S); let sum = 0, over = 0;
+      for (let s = 0; s < S; s++) { let x = 0; for (let i = 0; i < RISKS.length; i++) if (ret[i]) x += draws[s * RISKS.length + i]; arr[s] = x; sum += x; if (x > F) over++; }
+      arr.sort();
+      const v = { ret, prem, mean: sum / S, p99: arr[Math.floor(0.99 * S)], p999: arr[Math.floor(0.999 * S)], over: over / S };
+      cache = { key, v }; return v;
+    }
+    const redraw = () => cv && cv.redraw();
+    const Fr = IB.range("rt-f", (v) => won(v * 1e4), redraw);
+    const el = document.getElementById("rt-cv");
+    let cv = null;
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette(), F = Fr() * 1e4, D = Math.pow(10, logD), E = evalD(D, F);
+      const narrow = w < 560;
+      // 위: 위험 띠
+      const A = { x: 16, y: 30, w: w - 32, h: narrow ? 150 : 132 };
+      const X = (v) => A.x + ((Math.log10(v) - LO) / (HI - LO)) * A.w;
+      G = { A, X };
+      ctx.globalAlpha = 0.08; ctx.fillStyle = P.ok; ctx.fillRect(A.x, A.y, X(D) - A.x, A.h);
+      ctx.fillStyle = P.accent; ctx.fillRect(X(D), A.y, A.x + A.w - X(D), A.h); ctx.globalAlpha = 1;
+      T(ctx, "← 보유(비상금)", X(D) - 8, A.y - 10, { size: 12, color: P.ok, align: "right", weight: 600 });
+      T(ctx, "이전(보험) →", X(D) + 8, A.y - 10, { size: 12, color: P.accent, weight: 600 });
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(A.x, A.y + A.h); ctx.lineTo(A.x + A.w, A.y + A.h); ctx.stroke();
+      [[1e5, "10만"], [1e6, "100만"], [1e7, "1천만"], [1e8, "1억"], [1e9, "10억"]].forEach(([v, s], i) => {
+        const x = X(v); ctx.beginPath(); ctx.moveTo(x, A.y + A.h); ctx.lineTo(x, A.y + A.h + 4); ctx.stroke();
+        T(ctx, s, x, A.y + A.h + 15, { size: 10.5, color: P.faint, align: i === 0 ? "left" : i === 4 ? "right" : "center" });
+      });
+      // 비상금 표시
+      vline(ctx, X(F), A.y, A.y + A.h, P.warn, [3, 3], 1.4);
+      const rowH = (A.h - 10) / RISKS.length;
+      RISKS.forEach((k, i) => {
+        const x = X(k.L), y = A.y + 8 + rowH * (i + 0.5), rad = 2.2 + Math.sqrt(k.p) * 5.5, kept = E.ret[i];
+        ctx.fillStyle = kept ? P.ok : P.accent; ctx.globalAlpha = 0.85; ctx.beginPath(); ctx.arc(x, y, rad, 0, TAU); ctx.fill(); ctx.globalAlpha = 1;
+        const left = x > A.x + A.w * 0.6;
+        T(ctx, k.t, x + (left ? -rad - 5 : rad + 5), y + 0.5, { size: narrow ? 10 : 11, color: P.text, align: left ? "right" : "left", base: "middle" });
+      });
+      vline(ctx, X(D), A.y - 2, A.y + A.h, P.text, [], 2);
+      knob(ctx, X(D), A.y + A.h, P, P.text, 8);
+      // 아래: 1년 비용 막대
+      const B = { x: narrow ? 112 : 150, y: A.y + A.h + 38, w: w - (narrow ? 112 : 150) - 16, h: h - (A.y + A.h + 38) - (narrow ? 40 : 26) };
+      const rows = [["연 보험료(이전)", E.prem, P.accent], ["평균 보유 손실", E.mean, P.ok], ["나쁜 해(상위 1%)", E.p99, P.warn], ["최악(상위 0.1%)", E.p999, P.bad]];
+      const mx = Math.max(F * 1.25, ...rows.map((r) => r[1])), sc = (B.w - 54) / mx, rh = B.h / rows.length, bh = Math.min(18, rh * 0.6);
+      rows.forEach(([lab, v, col], i) => {
+        const y = B.y + rh * (i + 0.5);
+        T(ctx, lab, B.x - 8, y, { size: narrow ? 10.5 : 12, color: P.text, align: "right", base: "middle" });
+        ctx.fillStyle = col; ctx.globalAlpha = 0.8; ctx.fillRect(B.x, y - bh / 2, Math.max(2, v * sc), bh); ctx.globalAlpha = 1;
+        T(ctx, IB.wonAxis(v), B.x + Math.max(2, v * sc) + 5, y, { size: 11, mono: true, color: P.text, base: "middle" });
+      });
+      vline(ctx, B.x + F * sc, B.y - 6, B.y + B.h, P.warn, [4, 3], 1.5);
+      T(ctx, "비상금 " + IB.wonAxis(F), B.x + F * sc, B.y - 10, { size: 11, color: P.warn, align: "center" });
+      IB.stat("rt-o-d", won(D));
+      IB.stat("rt-o-p", won(E.prem));
+      IB.stat("rt-o-m", won(E.mean));
+      IB.stat("rt-o-o", tone(E.over > 0.001 ? "bad-t" : "ok-t", (E.over * 100).toFixed(2) + "%"));
+      const p30 = 1 - Math.pow(1 - E.over, 30);
+      IB.stat("rt-o-30", tone(p30 > 0.05 ? "bad-t" : p30 > 0 ? "warn-t" : "ok-t", (p30 * 100).toFixed(1) + "%"));
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 560 ? 420 : 380; } });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; logD = IB.clamp(LO + ((x - G.A.x) / G.A.w) * (HI - LO), LO, HI - 0.3); logD = Math.round(logD * 20) / 20; cv.redraw(); } });
+  })();
+})();
+</script>
+</body>
+</html>

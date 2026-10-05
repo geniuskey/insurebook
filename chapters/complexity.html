@@ -1,0 +1,968 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보험은 왜 이렇게 복잡한가 · InsureBook</title>
+<meta name="description" content="보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/complexity.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="보험은 왜 이렇게 복잡한가 · InsureBook">
+<meta property="og:description" content="보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/complexity.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/complexity.html#chapter","name":"보험은 왜 이렇게 복잡한가","headline":"보험은 왜 이렇게 복잡한가 · InsureBook","description":"보험 한 장에는 보장 종류·금액·기간·납입·갱신·환급형·특약의 차원이 겹쳐 있다. 특약 조합의 폭발, 묶음 판매가 가격 비교를 막는 원리, 같은 이름 다른 정의, 복잡함의 다섯 원천과 판매가 남긴 복잡함, 선택지가 많을수록 나빠지는 선택, 복잡함을 줄이는 제도를 시뮬레이터로 따져 본다.","url":"https://insurebook.euiyun.com/chapters/complexity.html","position":5,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"5. 보험은 왜 이렇게 복잡한가","item":"https://insurebook.euiyun.com/chapters/complexity.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="complexity">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 05</div>
+    <h1>보험은 왜 이렇게 복잡한가</h1>
+    <p class="lead">지우가 서랍의 증권을 모두 꺼내 특약을 세어 봤다. 서른 개를 넘기자 세는 것을 그만뒀다. 이름은 비슷한데 금액이 다르고, 같은 "암 3,000만원"인데 두 회사 설계서의 작은 글씨가 다르다. 휴대폰 요금제보다 복잡한 상품을 왜 평생 들고 있어야 할까. 이 장은 이 책 전체의 질문 하나를 정면으로 다룬다. 보험의 복잡함은 어디서 오는가. 그중 어떤 것은 위험 자체가 복잡해서 생긴 필요한 복잡함이고, 어떤 것은 파는 쪽에 유리해서 살아남은 복잡함이다. 둘을 가려 보는 것이 이 장의 목표다.</p>
+    <ul class="objectives">
+      <li>보험 한 장에 겹친 차원을 세고, 특약을 하나 더할 때마다 설계의 가짓수가 곱으로 늘어나는 것을 본다.</li>
+      <li>총액이 비슷한 두 묶음 중 어느 것이 더 싸게 산 것인지 맞혀 보고, 묶음이 가격 비교를 어렵게 만드는 원리를 안다.</li>
+      <li>뇌출혈·뇌졸중·뇌혈관질환, 급성심근경색·허혈성심장질환, 일반암·유사암의 정의 차이가 받을 확률을 몇 배 바꾸는지 계산한다.</li>
+      <li>복잡함의 다섯 원천을 나누고, 선택지가 많을수록 오히려 나쁜 선택을 하게 되는 탐색 비용을 시뮬레이션한다.</li>
+      <li>복잡함을 줄이는 제도와 맞춤 설계라는 복잡함의 쓸모, 그 사이에서 설계사가 할 일을 정리한다.</li>
+    </ul>
+  </header>
+
+  <section id="dimensions">
+    <h2>보험 한 장에 들어 있는 차원들</h2>
+    <p>휴대폰 요금제는 대체로 데이터, 통화, 가격의 세 숫자로 비교한다. 보험은 그렇지 않다. 같은 "건강보험" 한 장 안에도 서로 독립적으로 고를 수 있는 축이 여럿 겹쳐 있다. 무엇을 보장하는가(보장 종류), 얼마를 주는가(금액), 언제까지 보장하는가(<span class="term">보장기간</span>), 언제까지 내는가(<span class="term">납입기간</span>), 중간에 값이 바뀌는가(<span class="term">갱신형</span>·비갱신형), 해지하면 얼마를 돌려주는가(표준형·저해지·<span class="term">무해지</span>), 그리고 이 모든 것을 보장마다 따로 붙이는 <span class="term">특약</span><span class="en">(Rider)</span>이다. 특약은 주계약에 덧붙여 따로 고르는 보장이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 350" role="img" aria-label="보험 한 장에 겹친 일곱 차원과 각 차원의 선택지 수">
+        <rect x="10" y="10" width="420" height="330" rx="10" class="f-surface"/>
+        <text x="26" y="38" class="lbl-b">보험 설계서 한 장</text>
+        <text x="414" y="38" text-anchor="end" class="lbl-dim">선택지 예</text>
+        <line x1="26" y1="50" x2="414" y2="50" class="s-dash"/>
+        <rect x="26" y="62" width="250" height="32" rx="6" class="f-acc-soft"/><text x="38" y="83" class="lbl">보장 종류: 암·뇌·심장·수술…</text><text x="414" y="83" text-anchor="end" class="t-mono">수십~100+</text>
+        <rect x="26" y="102" width="200" height="32" rx="6" class="f-acc-soft"/><text x="38" y="123" class="lbl">보장마다 금액</text><text x="414" y="123" text-anchor="end" class="t-mono">3~5</text>
+        <rect x="26" y="142" width="200" height="32" rx="6" class="f-acc2-soft"/><text x="38" y="163" class="lbl">보장기간: 80·90·100세</text><text x="414" y="163" text-anchor="end" class="t-mono">3~4</text>
+        <rect x="26" y="182" width="200" height="32" rx="6" class="f-acc2-soft"/><text x="38" y="203" class="lbl">납입기간: 10·20·30년</text><text x="414" y="203" text-anchor="end" class="t-mono">3~5</text>
+        <rect x="26" y="222" width="200" height="32" rx="6" class="f-warn-soft"/><text x="38" y="243" class="lbl">갱신형 · 비갱신형</text><text x="414" y="243" text-anchor="end" class="t-mono">2</text>
+        <rect x="26" y="262" width="200" height="32" rx="6" class="f-warn-soft"/><text x="38" y="283" class="lbl">표준형 · 저해지 · 무해지</text><text x="414" y="283" text-anchor="end" class="t-mono">2~3</text>
+        <text x="26" y="324" class="lbl-dim">축마다 고르면 가짓수는 더하기가 아니라 곱하기다.</text>
+      </svg>
+      <figcaption><b>그림 1. 보험 한 장의 차원.</b> 각 축의 선택지는 많지 않지만 축이 서로 독립이라 조합은 곱으로 늘어난다. 보장 종류마다 금액을 따로 고르고, 회사에 따라 특약마다 갱신 여부나 보장기간도 다르게 붙는다. 선택지 수는 상품마다 다른 대략의 예다.</figcaption>
+    </figure>
+
+    <p>곱하기가 얼마나 빨리 커지는지 직접 본다. 아래 카드 하나가 특약 하나다. 카드를 누를 때마다 금액이 바뀌고(꺼짐 → 금액1 → 금액2 → …), 오른쪽 위에 이 화면의 선택지로 만들 수 있는 설계의 가짓수가, 아래에 지금 고른 설계의 월 보험료가 나온다. 보험료는 32세 남성을 기준으로 이 책의 엔진으로 계산한다.</p>
+
+    <div class="sim" id="sim-rd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>특약 조합의 폭발</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rd-cv"></canvas><span class="hint">카드를 눌러 금액을 바꾼다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="rd-until"><button data-value="80">80세 만기</button><button data-value="90">90세</button><button data-value="100" class="on">100세</button></div>
+          <div class="seg" id="rd-pay"><button data-value="10">10년납</button><button data-value="20" class="on">20년납</button><button data-value="30">30년납</button></div>
+          <div class="seg" id="rd-ref"><button data-value="std" class="on">표준형</button><button data-value="nl">무해지형</button></div>
+          <div class="btn-row"><button class="btn" id="rd-all">전부 켜기</button><button class="btn" id="rd-none">전부 끄기</button><button class="btn" id="rd-def">기본 설계</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">켠 특약</span><span class="v" id="rd-o-n">—</span></div>
+        <div class="stat"><span class="k">만들 수 있는 설계</span><span class="v" id="rd-o-c">—</span></div>
+        <div class="stat"><span class="k">이 설계의 월 보험료</span><span class="v" id="rd-o-p">—</span></div>
+        <div class="stat"><span class="k">가장 비싼 특약</span><span class="v" id="rd-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본 설계에서 가짓수를 본다. 특약 16개와 기간·납입·환급형만으로도 약 500억(10의 10.7제곱) 가지다. 사람이 다 비교할 수 있는 수가 아니다. ② "뇌출혈" 카드를 끄고 "뇌혈관질환"을 켠다. 이름은 비슷한데 보험료가 몇 배로 뛴다. 이유는 뒤의 절에서 본다. ③ 전부 켜고 10년납·표준형으로 바꾼다. 월 보험료가 30만원 가까이로 치솟는다. 무해지형으로 바꾸면 내려가지만 납입 중 해지하면 한 푼도 못 받는다(<a href="renewal.html">7장</a>). (32세 남성, 진단비는 엔진의 발생률로, 수술·입원·골절·상해사망은 교육용 연 발생률로 계산했다. 유사암·고액암·암 수술·항암치료는 암 발생의 일부(각 20%, 12%, 60%, 45%)로 단순화했고, 실제 상품의 보험료와 다르다.)</div>
+    </div>
+
+    <p>특약을 하나 더할 때마다 가짓수가 몇 배씩 늘어난다. 특약 m개가 각각 \(k_i\)가지 선택지를 가지면 설계의 수는 이렇다.</p>
+    <div class="formula">$$N_{\text{설계}} = \prod_{i=1}^{m} k_i \;=\; k_1 \times k_2 \times \cdots \times k_m$$<div class="where">\(k_i\): i번째 차원(또는 특약)의 선택지 수(꺼짐 포함). 선택지가 4개인 특약 30개면 \(4^{30} \approx 10^{18}\)이다. 판매 현장의 상품 중에는 고를 수 있는 특약이 수십 개에서 100개를 넘는 것도 있다.</div></div>
+    <p>이 숫자가 말하는 것은 "똑같은 설계를 두 회사에서 받아 비교하는 일은 거의 일어나지 않는다"는 사실이다. 두 설계사가 가져온 두 장의 설계서는 거의 확실히 서로 다른 조합이고, 그래서 총액만 보고는 무엇이 싼지 말할 수 없다.</p>
+  </section>
+
+  <section id="bundle">
+    <h2>묶음 판매가 비교를 어렵게 만드는 원리</h2>
+    <p>마트에서 라면 다섯 개 묶음과 낱개의 값을 비교하는 일은 쉽다. 단위 가격(1개당)이 적혀 있기 때문이다. 보험의 단위 가격은 어디에도 적혀 있지 않다. 진단비 1,000만원의 보험료가 1만원이라는 것은 알 수 있지만, 그것이 싼지 비싼지는 그 진단을 받을 확률을 알아야 판단할 수 있다. 그래서 보험의 공정한 단가는 이렇게 생각해야 한다.</p>
+    <div class="formula">$$\text{환원율} = \frac{\text{앞으로 받을 것으로 기대되는 보험금(현재가치)}}{\text{앞으로 낼 보험료(현재가치)}}$$<div class="where">보험료 1원당 평균적으로 돌아오는 보험금. 사업비가 있으니 1보다 작다. 같은 보장이라도 회사와 특약마다 이 값이 다르고, 설계서에는 나오지 않는다.</div></div>
+    <p>아래는 총액이 비슷한 두 묶음이다. 왼쪽은 A생명, 오른쪽은 B손해보험이 낸 설계서다. 설계서에 적힌 대로 보장, 금액, 특약별 보험료만 보고 어느 쪽이 "더 싸게 산 것"인지 먼저 골라 본다. 그다음 "답 보기"를 누르면 이 책의 엔진으로 계산한 공정 보험료 대비 각 특약의 값(단가 지수)과 묶음 전체의 환원율이 드러난다.</p>
+
+    <div class="sim" id="sim-bd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>어느 묶음이 더 싸게 산 것인가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bd-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="bd-q"><button data-value="0" class="on">문제 1</button><button data-value="1">문제 2</button><button data-value="2">문제 3</button></div>
+          <div class="btn-row"><button class="btn" id="bd-a">A가 낫다</button><button class="btn" id="bd-b">B가 낫다</button><button class="btn" id="bd-s">비슷하다</button></div>
+          <div class="btn-row"><button class="btn primary" id="bd-show">답 보기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보험료 A / B</span><span class="v" id="bd-o-t">—</span></div>
+        <div class="stat"><span class="k">환원율 A / B</span><span class="v" id="bd-o-r">—</span></div>
+        <div class="stat"><span class="k">특약마다 싼 쪽에서 샀다면</span><span class="v" id="bd-o-m">—</span></div>
+      </div>
+      <div class="sim-note" id="bd-msg">해볼 것: ① 문제 1에서 총액은 거의 같다. 보장 이름만 보고 하나를 고른 뒤 답을 본다. ② 문제 2는 보장이 똑같은데 특약마다 싼 회사가 다르다. 묶음으로만 사면 두 회사의 비싼 특약을 함께 산다. ③ 문제 3은 월 보험료가 확연히 다르다. 싼 쪽이 정말 싼지 환원율로 확인한다. (32세 남성, 100세 만기 20년납. 공정 보험료는 이 책의 엔진 값이고, 회사별 단가 지수는 원리를 보이기 위한 가상 값이다.)</div>
+    </div>
+
+    <p>총액이 비슷한 두 설계서는 보통 "어떤 특약은 싸게, 어떤 특약은 비싸게" 섞여 있다. 묶음은 그 차이를 평균 속에 감춘다. 가입자가 비교하는 것은 총액과 보장의 이름이고, 이름이 비슷하면 같은 것으로 보기 쉽다. 그 틈에서 회사는 사람들이 잘 따지지 않는 특약에 더 많은 마진을 붙일 수 있다. 이것은 보험만의 일이 아니다. 통신 결합 상품이나 자동차 옵션 패키지처럼 여러 상품을 묶어 파는 시장에서 반복해 나타나는 현상이다.</p>
+
+    <div class="callout pro">
+      <strong>비교 설계서를 보여 줄 때의 원칙</strong>
+      고객에게 두 회사의 설계서를 비교해 보여 줄 때는 총액이 아니라 같은 보장끼리 줄을 맞춰 놓는다. 보장 이름이 같아도 정의(지급 사유의 범위), 감액·면책, 보장기간, 갱신 여부가 다르면 같은 줄에 놓지 말고 차이를 표시한다. 설계사에게 유리한 쪽으로 비교를 기울이기 쉬운 지점이 바로 여기다. 기존 계약을 해지하고 새 계약을 권하는 경우라면 비교안내 확인서처럼 두 계약의 보험료·보장·해지환급금 차이를 설명하는 절차가 따로 있다. 고객이 "그래서 어느 게 더 싸요?"라고 물으면 "어느 보장을 기준으로 보시느냐에 따라 다르다"고 답하고, 그 기준을 함께 정하는 데서 상담이 시작된다.
+    </div>
+  </section>
+
+  <section id="definitions">
+    <h2>같은 이름, 다른 정의</h2>
+    <p>"뇌 질환을 보장한다"는 설계서의 말은 적어도 세 가지 다른 계약을 뜻할 수 있다. 보험금을 주는 조건, 즉 <span class="term">지급 사유</span>는 질병분류 코드의 범위로 정해지는데, 그 범위가 보장마다 다르다. 뇌출혈은 뇌졸중의 일부이고, 뇌졸중은 뇌혈관질환의 일부다. 심장도 마찬가지로 급성심근경색은 허혈성심장질환의 일부다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 290" role="img" aria-label="뇌출혈은 뇌졸중에, 뇌졸중은 뇌혈관질환에 포함된다. 급성심근경색은 허혈성심장질환에 포함된다">
+        <ellipse cx="120" cy="150" rx="112" ry="128" class="f-acc-soft"/>
+        <ellipse cx="120" cy="180" rx="80" ry="90" class="f-acc2-soft"/>
+        <ellipse cx="120" cy="212" rx="50" ry="50" class="f-bad-soft"/>
+        <text x="120" y="48" text-anchor="middle" class="lbl-acc">뇌혈관질환</text>
+        <text x="120" y="68" text-anchor="middle" class="t-mono">I60~I69</text>
+        <text x="120" y="112" text-anchor="middle" class="lbl-acc2">뇌졸중</text>
+        <text x="120" y="132" text-anchor="middle" class="t-mono">I60~I63 등</text>
+        <text x="120" y="208" text-anchor="middle" class="lbl-bad">뇌출혈</text>
+        <text x="120" y="228" text-anchor="middle" class="t-mono">I60~I62</text>
+        <ellipse cx="330" cy="160" rx="100" ry="112" class="f-acc-soft"/>
+        <ellipse cx="330" cy="196" rx="58" ry="62" class="f-bad-soft"/>
+        <text x="330" y="74" text-anchor="middle" class="lbl-acc">허혈성심장질환</text>
+        <text x="330" y="94" text-anchor="middle" class="t-mono">I20~I25</text>
+        <text x="330" y="192" text-anchor="middle" class="lbl-bad">급성심근경색</text>
+        <text x="330" y="212" text-anchor="middle" class="t-mono">I21~I23</text>
+        <text x="330" y="132" text-anchor="middle" class="lbl-dim">협심증 등 포함</text>
+      </svg>
+      <figcaption><b>그림 2. 이름은 비슷해도 범위는 포개져 있다.</b> 안쪽 원일수록 좁은 정의라 보험료가 싸고 받을 확률도 낮다. 괄호의 질병분류 코드는 흔히 쓰이는 대략의 범위이며, 정확한 범위(예를 들어 뇌졸중에 어떤 뇌경색 코드를 넣는지)는 약관마다 다르다.</figcaption>
+    </figure>
+
+    <p>범위가 다르면 받을 확률은 얼마나 다를까. 아래 막대는 이 책의 교육용 발생률로 계산한, 지금 가입한 사람이 만기까지 살아 있는 동안 그 진단을 처음 받을 확률이다. 막대 오른쪽 숫자는 그 보장 1,000만원의 월 보험료다. 나이와 성별, 만기를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-df">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>정의가 넓으면 몇 배 더 받나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="df-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="df-sex"><button data-value="m" class="on">남성</button><button data-value="f">여성</button></div>
+          <div class="seg" id="df-until"><button data-value="80">80세까지</button><button data-value="100" class="on">100세까지</button></div>
+          <label class="ctrl"><span>가입 나이 <output id="df-age-out"></output></span><input type="range" id="df-age" min="20" max="60" step="1" value="32"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">뇌출혈 → 뇌혈관질환</span><span class="v" id="df-o-b">—</span></div>
+        <div class="stat"><span class="k">급성심근경색 → 허혈성</span><span class="v" id="df-o-h">—</span></div>
+        <div class="stat"><span class="k">보험료 비(뇌 / 심장)</span><span class="v" id="df-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세 남성, 100세까지에서 뇌출혈만 보장하면 받을 확률은 약 7%, 뇌혈관질환 전체면 약 57%다. 같은 "뇌" 보장인데 여덟 배 가까이 차이 난다. ② 여성으로 바꾼다. 급성심근경색의 확률이 크게 낮아져 심장 보장의 범위 차이(약 3.7배)가 더 벌어진다. ③ 만기를 80세로 줄인다. 모든 확률이 내려가지만 넓은 정의와 좁은 정의의 비는 크게 변하지 않는다. 보험료 비도 확률 비와 비슷하게 움직인다. 넓은 보장이 비싼 것은 받을 일이 그만큼 많기 때문이다. (INS.prob, INS.price. 발생률은 국가 통계의 크기를 흉내 낸 교육용 근사이며 실제 통계와 다르다. 재발·재진단은 넣지 않았다.)</div>
+    </div>
+
+    <p>여기서 두 가지를 기억한다. 첫째, 좁은 정의의 보장이 싼 것은 할인이 아니라 받을 확률이 낮기 때문이다. "뇌 보장 1,000만원이 월 2천원"이라는 말은 사실이지만, 그것이 "뇌 질환이면 1,000만원"이라는 뜻은 아니다. 둘째, 넓은 정의가 항상 옳은 것도 아니다. 뇌혈관질환 진단비는 가벼운 진단에도 지급되는 만큼 비싸다. 목적이 큰 병의 소득 공백을 메우는 것이라면 어떤 범위가 필요한지는 <a href="fixed.html">9장</a>에서 따진다.</p>
+
+    <h3>암도, 수술도 이름이 같지 않다</h3>
+    <p>암 진단비 역시 하나가 아니다. 많은 상품이 암을 몇 갈래로 나누고 갈래마다 다른 금액을 준다. 갑상선암·기타피부암·제자리암·경계성종양은 흔히 <span class="term">유사암</span>으로 묶여 일반암 진단비의 10~20% 정도만 받는다. 상품에 따라 전립선암·유방암 등을 <span class="term">소액암</span>으로 따로 줄이거나, 치료비가 큰 일부 암을 <span class="term">고액암</span>으로 더 주기도 한다. 어디에 넣는지는 약관마다 다르다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 280" role="img" aria-label="암 진단비의 갈래: 일반암, 고액암, 소액암, 유사암과 지급 비율의 예">
+        <text x="20" y="28" class="lbl-b">"암 진단비 3,000만원"의 실제 모습(예)</text>
+        <rect x="20" y="46" width="400" height="40" rx="6" class="f-acc-soft"/>
+        <text x="32" y="71" class="lbl">일반암 · 위·폐·대장 등</text><text x="408" y="71" text-anchor="end" class="lbl-acc">3,000만 (100%)</text>
+        <rect x="20" y="96" width="400" height="40" rx="6" class="f-acc2-soft"/>
+        <text x="32" y="121" class="lbl">고액암 · 췌장·뇌 등(별도 특약)</text><text x="408" y="121" text-anchor="end" class="lbl-acc2">+ 추가 지급</text>
+        <rect x="20" y="146" width="160" height="40" rx="6" class="f-warn-soft"/>
+        <text x="32" y="171" class="lbl">소액암(상품마다)</text><text x="408" y="171" text-anchor="end" class="lbl-dim">10~50% 등</text>
+        <rect x="20" y="196" width="80" height="40" rx="6" class="f-bad-soft"/>
+        <text x="112" y="214" class="lbl">유사암 · 갑상선·제자리암</text>
+        <text x="112" y="232" class="lbl-dim">기타피부암·경계성종양</text>
+        <text x="408" y="221" text-anchor="end" class="lbl-bad">10~20%</text>
+        <text x="20" y="266" class="lbl-dim">막대 길이는 지급 비율의 대략. 분류와 비율은 약관마다 다르다.</text>
+      </svg>
+      <figcaption><b>그림 3. 같은 "암"이라도 받는 돈이 다르다.</b> 특히 갑상선암은 발생이 많은 암이라 어느 갈래에 넣느냐가 실제 받을 돈을 크게 바꾼다. 대장점막내암처럼 계약마다 일반암 또는 유사암으로 다르게 분류되어 분쟁이 잦았던 경우도 있다.</figcaption>
+    </figure>
+
+    <p>수술비도 비슷하다. 오래된 상품은 수술을 1종부터 5종까지 난이도별로 나누어 종마다 다른 금액을 주는 방식이 많고, 요즘 상품은 "N대 수술", "N대 질병 수술"처럼 특정 질병이나 수술 목록을 정해 그 목록에 들 때만 주는 방식이 많다. 목록의 이름이 크게 들려도 실제로 내가 받을 수술이 목록에 있는지는 약관의 별표를 봐야 안다.</p>
+    <p>정의 차이가 실제로 어떤 차이를 만드는지 계약 두 개로 확인한다. 둘 다 설계서 첫 줄에는 "암 진단 3,000만원"이라고 적혀 있다. 계약 X는 지우가 2020년에 든 암보험을 단순화한 것이고, 계약 Y는 가상의 B손해보험 비교안이다. 암의 종류를 고르고, 시간표의 점을 끌어 가입 후 언제 진단받는지 바꿔 본다.</p>
+
+    <div class="sim" id="sim-cx">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>같은 "암 3,000만원", 두 계약이 주는 돈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cx-cv"></canvas><span class="hint">점을 끌어 진단 시점을 바꾼다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="cx-type"><button data-value="gen" class="on">위암 등 일반암</button><button data-value="thy">갑상선암</button><button data-value="cis">제자리암</button><button data-value="bor">경계성종양</button><button data-value="skin">기타피부암</button><button data-value="col">대장점막내암</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">진단 시점</span><span class="v" id="cx-o-t">—</span></div>
+        <div class="stat"><span class="k">계약 X가 주는 돈</span><span class="v" id="cx-o-x">—</span></div>
+        <div class="stat"><span class="k">계약 Y가 주는 돈</span><span class="v" id="cx-o-y">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 일반암을 2년째에 둔다. 둘 다 3,000만원이다. 설계서 첫 줄이 같은 이유다. ② 진단을 8개월째로 옮긴다. X는 1년 내 50% 감액이라 1,500만원, 감액이 없는 Y는 3,000만원이다. 2개월째로 옮기면 둘 다 면책이다. ③ 갑상선암과 대장점막내암을 눌러 본다. X는 300만원, Y는 600만원과 3,000만원이다. 같은 "암 3,000만원"이 사건에 따라 열 배까지 갈린다. (두 계약의 분류와 비율은 원리를 보이기 위한 가상 조건이다. 실제 약관은 회사·상품·가입 시기에 따라 다르다.)</div>
+    </div>
+
+    <p>계약 Y가 무조건 좋은 것은 아니다. 감액이 없고 분류가 넓은 만큼 같은 조건이면 보험료가 더 비쌀 것이다. 요점은 설계서 첫 줄만으로는 두 계약이 같은 상품인지 알 수 없다는 것이다. 차이는 정의, 분류표, 감액·면책 조건에 숨어 있고, 그것들은 약관 뒤쪽에 있다. 약관을 읽는 구체적인 방법은 <a href="contract.html">6장</a>에서 다룬다.</p>
+
+    <div class="callout buyer">
+      <strong>"암 ○○만원" 설계서에서 확인할 것</strong>
+      ① 유사암·소액암에 무엇이 들어가고 각각 몇 %를 주는지. 특히 갑상선암, 제자리암, 대장점막내암의 분류. ② 면책 기간(보장개시일)과 감액 기간·비율. ③ 진단비가 한 번만 나오는지, 재진단암·다른 부위 암에도 다시 나오는지. ④ 뇌·심장 보장이라면 뇌출혈·뇌졸중·뇌혈관질환, 급성심근경색·허혈성심장질환 중 어느 범위인지. ⑤ 수술비라면 1~5종 방식인지 N대 수술 목록 방식인지, 목록은 약관 어디에 있는지.
+    </div>
+  </section>
+
+  <section id="sources">
+    <h2>복잡함의 다섯 원천</h2>
+    <p>지금까지 본 복잡함이 모두 같은 뿌리에서 나온 것은 아니다. 이 책은 보험의 복잡함을 다섯 원천으로 나눈다. 그리고 각 원천에서 나온 복잡함이 위험을 다루는 데 꼭 필요한 것인지, 아니면 파는 쪽에 유리해서 살아남은 것인지를 따로 본다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 400" role="img" aria-label="복잡함의 다섯 원천과 필요한 복잡함, 판매가 남긴 복잡함의 구분">
+        <text x="150" y="24" text-anchor="middle" class="lbl-b">원천</text>
+        <text x="370" y="24" text-anchor="middle" class="lbl-b">어느 쪽에 가까운가</text>
+        <rect x="10" y="38" width="280" height="62" rx="8" class="f-acc-soft"/>
+        <text x="22" y="62" class="lbl-acc">1. 위험 자체의 다양성</text>
+        <text x="22" y="86" class="lbl-dim">질병·사고·사망마다 빈도·크기가 다르다</text>
+        <rect x="10" y="108" width="280" height="62" rx="8" class="f-acc-soft"/>
+        <text x="22" y="132" class="lbl-acc">2. 정보 비대칭</text>
+        <text x="22" y="156" class="lbl-dim">고지·심사·면책·자기부담(4장)</text>
+        <rect x="10" y="178" width="280" height="62" rx="8" class="f-acc2-soft"/>
+        <text x="22" y="202" class="lbl-acc2">3. 장기 계약과 금리</text>
+        <text x="22" y="226" class="lbl-dim">평준보험료·준비금·해지환급금(3장)</text>
+        <rect x="10" y="248" width="280" height="62" rx="8" class="f-acc2-soft"/>
+        <text x="22" y="272" class="lbl-acc2">4. 규제와 세제</text>
+        <text x="22" y="296" class="lbl-dim">설명의무·비과세 요건·표준약관</text>
+        <rect x="10" y="318" width="280" height="62" rx="8" class="f-bad-soft"/>
+        <text x="22" y="342" class="lbl-bad">5. 판매 경쟁과 차별화</text>
+        <text x="22" y="366" class="lbl-dim">비슷한 특약, 이름 마케팅, 묶음</text>
+        <rect x="310" y="38" width="120" height="132" rx="8" class="f-ok-soft"/>
+        <text x="370" y="96" text-anchor="middle" class="lbl-b">필요한</text>
+        <text x="370" y="118" text-anchor="middle" class="lbl-b">복잡함</text>
+        <rect x="310" y="178" width="120" height="132" rx="8" class="f-warn-soft"/>
+        <text x="370" y="236" text-anchor="middle" class="lbl-b">섞여 있다</text>
+        <text x="370" y="258" text-anchor="middle" class="lbl-dim">필요 + 판매</text>
+        <rect x="310" y="318" width="120" height="62" rx="8" class="f-bad-soft"/>
+        <text x="370" y="346" text-anchor="middle" class="lbl-b">판매가</text>
+        <text x="370" y="368" text-anchor="middle" class="lbl-b">남긴 복잡함</text>
+      </svg>
+      <figcaption><b>그림 4. 복잡함의 다섯 원천.</b> 위 두 칸은 위험을 나누려면 피할 수 없는 복잡함이다. 가운데 두 칸은 필요해서 생겼지만 판매에 이용되기도 한다(환급률 마케팅, 비과세를 앞세운 저축성 판매). 맨 아래 칸은 주로 경쟁과 판매에서 나온다. 칸의 경계는 칼로 자른 듯 나뉘지 않는다.</figcaption>
+    </figure>
+
+    <p><b>필요한 복잡함.</b> 암과 교통사고와 사망은 일어나는 빈도도, 피해의 크기도, 피해의 모양도 다르다. 이것들을 한 가격에 묶을 수는 없으니 보장이 나뉜다(1). 4장에서 본 고지·심사·면책·자기부담은 정보 비대칭 아래에서 보험이 무너지지 않게 하는 장치다(2). 이 두 칸의 복잡함을 걷어 내면 보험은 더 단순해지는 것이 아니라 더 비싸지거나 사라진다.</p>
+    <p><b>섞여 있는 복잡함.</b> 수십 년짜리 계약이라 보험료를 평준화하고 준비금을 쌓아야 하고, 그 결과 해지환급금이라는 개념이 생긴다(3). 소비자를 보호하려는 규제와 세제 혜택도 조건과 서류를 만든다(4). 둘 다 필요해서 생겼지만, 판매 현장에서는 "해지하면 손해", "10년 유지하면 비과세" 같은 말로 판매 논리가 되기도 한다.</p>
+    <p><b>판매가 남긴 복잡함.</b> 회사들은 비슷한 보장을 조금씩 다른 이름과 조건으로 내놓아 차별화한다. 소비자는 차이를 비교하기 어렵고, 비교가 어려운 시장에서는 가격 경쟁이 약해진다. 경제학에서는 이렇게 일부러 비교를 어렵게 만들어 이익을 지키는 시장을 혼란(confusion)과 독점(monopoly)을 합쳐 <span class="term">컨퓨저폴리</span><span class="en">(Confusopoly)</span>라고 부르기도 한다. 다만 공정하게 말하면, 새로운 보장을 만드는 혁신과 비교를 피하려는 차별화는 겉으로 구분하기 어렵다. 새 특약이 정말 새로운 위험을 덮는지, 기존 보장을 이름만 바꿔 쪼갠 것인지는 하나씩 따져야 한다.</p>
+    <p>"비교가 어려우면 왜 나쁜가"를 숫자로 본다. 보험 상품이 N개 있고, 각 상품의 진짜 가치(같은 보험료로 얻는 보장의 값)는 서로 다르다. 소비자는 시간과 지식이 한정되어 그중 몇 개만 자세히 살펴보고, 살펴본 것 중 가장 좋아 보이는 것을 고른다. 그런데 상품이 복잡할수록 "좋아 보이는 것"과 "진짜 좋은 것"이 어긋난다. 아래에서 1,000명의 소비자가 쇼핑하는 장면을 돌린다.</p>
+
+    <div class="sim" id="sim-sc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>선택지가 많을수록 나빠지는 선택</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">세로선을 끌어 상품 수를 바꾼다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>시장의 상품 수 <output id="sc-n-out"></output></span><input type="range" id="sc-n" min="0" max="9" step="1" value="6"></label>
+          <label class="ctrl"><span>자세히 살펴볼 수 있는 상품 수 <output id="sc-k-out"></output></span><input type="range" id="sc-k" min="1" max="10" step="1" value="3"></label>
+          <label class="ctrl"><span>상품의 복잡도(겉과 속의 어긋남) <output id="sc-c-out"></output></span><input type="range" id="sc-c" min="0" max="2" step="0.1" value="1.2"></label>
+          <label class="check"><input type="checkbox" id="sc-std"> 표준화·비교공시(어긋남을 70% 줄인다)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>시장의 최선</span><span><i style="background:var(--accent)"></i>소비자가 고른 것(평균)</span><span><i style="background:var(--bad)"></i>놓친 가치</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시장의 최선(월 가치)</span><span class="v" id="sc-o-b">—</span></div>
+        <div class="stat"><span class="k">고른 것의 평균</span><span class="v" id="sc-o-c">—</span></div>
+        <div class="stat"><span class="k">놓친 가치(20년)</span><span class="v" id="sc-o-l">—</span></div>
+        <div class="stat"><span class="k">최선을 고른 사람</span><span class="v" id="sc-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 상품 수를 늘리며 초록 선(시장의 최선)과 파란 선(실제로 고른 것)의 간격을 본다. 상품이 많아질수록 최선은 좋아지지만 소비자가 고른 것은 거의 그대로라 놓친 가치가 커진다. ② 복잡도를 0으로 내린다. 살펴본 것 중에서는 정확히 고르니 파란 선이 올라간다. 2로 올리면 살펴본 것 안에서도 엉뚱한 것을 골라 파란 선이 0(평균 상품) 근처로 내려간다. ③ 표준화·비교공시를 켠다. 어긋남이 줄어 같은 노력으로 더 좋은 것을 고른다. 살펴볼 수 있는 상품 수를 10으로 올리는 것은 설계사나 비교 서비스가 탐색을 대신해 주는 경우에 가깝다. (상품의 진짜 가치는 평균 0, 표준편차 월 1만원의 정규분포, 겉보기 가치는 진짜 가치에 복잡도만큼의 잡음을 더했다. 교육용 모델이다.)</div>
+    </div>
+
+    <p>선택지가 많은 것 자체가 나쁜 것은 아니다. 시장의 최선은 분명 좋아진다. 문제는 그 최선에 닿을 수 있느냐다. 비교가 쉬우면 선택지가 늘수록 소비자가 이득을 보고, 비교가 어려우면 선택지가 늘수록 놓치는 것만 커진다. 이 차이가 "탐색을 대신해 줄 사람"의 존재 이유 하나를 만든다. 동시에 탐색을 대신해 주는 사람이 자기에게 유리한 쪽으로 기울면 그 이득은 사라진다. 이 긴장은 <a href="agent.html">14장</a>과 <a href="commission.html">15장</a>의 주제다.</p>
+  </section>
+
+  <section id="reduce">
+    <h2>복잡함을 줄이려는 장치</h2>
+    <p>제도도 이 문제를 알고 있다. 한국의 보험 제도에는 비교를 쉽게 하고 어긋남을 줄이려는 장치가 여럿 있다. 시뮬레이터에서 "표준화·비교공시"를 켰을 때 일어난 일을 현실에서 하려는 것들이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>장치</th><th>무엇을 줄이나</th><th>한계</th></tr></thead>
+      <tbody>
+        <tr><td><b>표준약관</b></td><td>회사마다 다른 기본 조항(청약철회, 고지의무, 보험금 청구 절차 등)을 같은 문구로 맞춘다</td><td>상품별 특약과 지급 사유의 세부까지 맞추지는 못한다</td></tr>
+        <tr><td><b>표준화 실손보험</b></td><td>실손의료보험의 보장 구조를 회사와 상관없이 같게 만든다(2009년 이후)</td><td>같은 세대 안에서는 비교가 쉽지만 세대 간 차이는 크다(<a href="health.html">8장</a>)</td></tr>
+        <tr><td><b>상품설명서·상품요약서</b></td><td>보장 내용, 보험료, 해지환급금, 유의사항을 정해진 형식으로 요약한다</td><td>분량이 많아 끝까지 읽는 사람이 적다</td></tr>
+        <tr><td><b>보험다모아</b></td><td>여러 회사의 단순한 상품(실손, 정기, 암, 자동차 등)의 보험료를 한곳에서 비교한다(생명보험협회·손해보험협회 운영)</td><td>복잡한 특약 묶음은 비교 대상에서 빠지기 쉽다</td></tr>
+        <tr><td><b>협회 비교공시</b></td><td>상품별 보험료, 사업비 수준, 공시이율 등을 공개한다</td><td>찾아보는 사람이 많지 않다</td></tr>
+        <tr><td><b>내보험다보여</b></td><td>내가 가입한 모든 보험 계약을 한 화면에서 조회한다(한국신용정보원)</td><td>계약 목록은 보여 주지만 보장의 겹침·빈칸은 스스로 판단해야 한다</td></tr>
+        <tr><td><b>쉬운 약관·설명의무</b></td><td>약관 문구를 쉽게 쓰게 하고, 판매자가 중요 사항을 설명하고 확인받게 한다</td><td>설명을 들었다는 서명과 이해한 것은 다르다</td></tr>
+      </tbody>
+    </table></div>
+    <p>이 장치들의 공통점은 "같은 것을 같은 모양으로" 만들려는 것이다. 정의가 같으면 단가를 비교할 수 있고, 형식이 같으면 차이가 보인다. 반대로 장치가 닿지 않는 곳, 즉 특약 묶음의 구성과 세부 정의에는 여전히 복잡함이 남는다. 실손보험이 표준화된 뒤 실손 보험료 비교가 쉬워진 것과, 진단비·수술비 특약 묶음은 여전히 비교가 어려운 것을 나란히 놓으면 표준화의 힘과 한계가 함께 보인다.</p>
+
+    <div class="callout warn">
+      <strong>상품과 제도는 해마다 바뀐다</strong>
+      이 장의 특약 구성, 질병분류 코드의 범위, 유사암·소액암의 분류, 수술비 방식은 2026년 무렵 흔히 보이는 모습을 단순화한 예시다. 회사와 상품, 판매 시기에 따라 다르고, 감독기관의 지침으로 특약 구조나 판매 방식이 바뀌기도 한다. 보험다모아·내보험다보여 같은 서비스의 이름, 운영 기관, 제공 범위도 바뀔 수 있다. 실제 판단은 그 상품의 약관과 공시 자료를 기준으로 한다.
+    </div>
+  </section>
+
+  <section id="tailor">
+    <h2>복잡함의 쓸모: 맞춤 설계와 조언의 자리</h2>
+    <p>복잡함을 모두 걷어 낸 보험을 상상해 본다. 모든 사람이 같은 묶음 하나를 같은 값에 산다. 비교는 쉽다. 그러나 1인 가구 사회초년생과 아이 둘을 키우는 외벌이 가장은 필요한 것이 다르다. 한쪽에는 사망보장이 거의 필요 없고, 다른 쪽에는 가장 중요하다. 한 가지 묶음은 어떤 사람에게는 과잉이고 어떤 사람에게는 공백이다. 복잡함은 맞춤을 가능하게 하는 값이기도 하다.</p>
+    <p>아래는 같은 월 예산으로 "누구에게나 같은 표준 묶음"을 산 경우와, 그 가구의 필요에 맞춰 보장을 고른 경우를 비교한다. 막대는 보장 영역마다 필요한 만큼 채운 비율이다. 가구와 예산을 바꾸고, 마지막 체크를 켜서 맞춤 설계가 판매자의 이익 쪽으로 기울면 어떻게 되는지도 본다.</p>
+
+    <div class="sim" id="sim-tl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>표준 묶음 vs 맞춤 설계</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tl-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="tl-who"><button data-value="single">1인 가구</button><button data-value="couple" class="on">맞벌이 신혼</button><button data-value="kids">외벌이·자녀 둘</button></div>
+          <label class="ctrl"><span>월 보험료 예산(한 사람) <output id="tl-b-out"></output></span><input type="range" id="tl-b" min="30000" max="300000" step="10000" value="120000"></label>
+          <label class="check"><input type="checkbox" id="tl-com"> 맞춤 설계가 수수료 높은 보장 쪽으로 기운다</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-faint)"></i>표준 묶음</span><span><i style="background:var(--accent)"></i>맞춤 설계</span><span><i style="background:var(--bad)"></i>수수료 쪽으로 기운 맞춤</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필요 충족도 · 표준 묶음</span><span class="v" id="tl-o-p">—</span></div>
+        <div class="stat"><span class="k">필요 충족도 · 맞춤</span><span class="v" id="tl-o-t">—</span></div>
+        <div class="stat"><span class="k">필요 넘게 산 보험료(맞춤)</span><span class="v" id="tl-o-w">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 맞벌이 신혼, 월 12만원에서 두 막대를 비교한다. 같은 돈인데 맞춤 쪽이 큰 위험(소득 공백·배상·실손)을 먼저 채워 충족도가 높다. ② 1인 가구로 바꾼다. 표준 묶음의 사망보장 몫이 거의 통째로 낭비된다. 외벌이·자녀 둘에서는 반대로 표준 묶음의 사망보장이 턱없이 모자란다. ③ 체크를 켠다. 같은 "맞춤"이라도 수수료가 높은 보장(환급형·종신형 사망, 수술·입원 정액)을 먼저 채우면 충족도가 표준 묶음보다도 낮아질 수 있다. 맞춤의 가치는 누구의 이익에 맞추느냐에 달려 있다. (영역별 필요액, 단가, 중요도, 수수료 수준은 원리를 보이기 위한 교육용 가정이다. 충족도는 영역별 충족 비율을 중요도로 가중 평균했다.)</div>
+    </div>
+
+    <p>맞춤 설계는 복잡함이 주는 선물이지만, 그 선물을 받으려면 복잡함을 대신 헤쳐 줄 누군가가 필요하다. 그것이 조언자, 현장에서는 보험설계사가 가치를 만드는 자리다. 필요를 묻고, 수백 경우의 수에서 그 가구에 맞는 몇 개를 고르고, 같은 이름 다른 정의를 가려 주는 일이다. 동시에 시뮬레이터의 ③처럼, 복잡함은 조언자가 고객 대신 자기 이익을 고르기도 쉽게 만든다. 고객이 비교할 수 없는 곳에서는 기울어도 티가 나지 않기 때문이다. 설계사가 왜 존재하고, 그 가치와 이해상충을 어떻게 다룰지는 <a href="agent.html">14장</a>에서 이어진다.</p>
+
+    <div class="callout pro">
+      <strong>"그래서 저한테 필요한 게 뭐예요?"에 답하는 순서</strong>
+      복잡한 상품 앞에서 고객이 원하는 것은 더 많은 설명이 아니라 정리다. 상품 이야기를 꺼내기 전에 ① 가족, 소득, 비상금, 이미 가진 보험(사회보험 포함)을 듣고 ② 큰 위험부터 순서를 정하고(소득 공백, 배상책임, 큰 병의 치료비, 부양가족이 있으면 사망) ③ 이미 가진 보험의 보장을 영역별로 한 장에 펼쳐 겹침과 빈칸을 표시한 뒤 ④ 빈칸에만 상품을 붙인다. 이 순서를 지키면 특약 수가 줄고 고객이 설계서를 설명할 수 있게 된다. 고객이 자기 설계서를 남에게 설명할 수 있으면 그 계약은 오래 유지되고, 유지율은 결국 설계사의 소득이기도 하다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우 서랍의 특약을 세다</h2>
+    <p>지우와 도윤이 서랍의 증권을 펼쳐 놓고 담보(보장 항목)를 하나씩 셌다. 주계약과 특약, 자동차보험의 담보까지 모두 센 결과다. 담보의 이름과 구성은 가상의 예시다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>계약</th><th>담보 예</th><th class="num">개수</th></tr></thead>
+      <tbody>
+        <tr><td>종신보험(2012)</td><td>사망 1억원(주계약), 재해사망, 재해장해, 재해골절, 질병입원일당, 재해입원일당, 수술(1~5종), 중환자실입원</td><td class="num">8</td></tr>
+        <tr><td>실손의료보험(2세대)</td><td>질병입원, 질병통원, 상해입원, 상해통원</td><td class="num">4</td></tr>
+        <tr><td>암보험(갱신형, 2020)</td><td>암 진단 3,000만원, 유사암 300만원, 암 수술, 암 입원일당, 항암방사선치료, 뇌출혈 진단 1,000만원, 급성심근경색 진단 1,000만원, 질병수술, 질병입원일당</td><td class="num">9</td></tr>
+        <tr><td>운전자보험(2023)</td><td>교통사고처리지원금, 벌금(대인), 벌금(대물), 변호사선임비용, 자동차사고부상, 면허정지위로금, 일상생활배상책임</td><td class="num">7</td></tr>
+        <tr><td>주택화재보험(2025)</td><td>가재도구 화재손해, 임차자 화재배상책임, 화재벌금, 급배수설비 누출손해, 일상생활배상책임</td><td class="num">5</td></tr>
+        <tr><td>자동차보험</td><td>대인배상Ⅰ·Ⅱ, 대물배상, 자기신체사고, 무보험차상해, 자기차량손해, 긴급출동</td><td class="num">7</td></tr>
+        <tr><td colspan="2"><b>지우 몫 합계</b></td><td class="num"><b>40</b></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 5장</span></div>
+      <h4>마흔 개의 담보를 한 장으로</h4>
+      <p>지우 몫만 담보가 40개였다. 민서의 실손과 단체보험까지 더하면 더 많다. 지우는 "이렇게 많은데 왜 늘 뭔가 빠진 것 같지?"라고 물었다. 도윤의 답은 "많은 것과 맞는 것은 다르다"였다. 40개를 영역별로 다시 모으니 같은 영역이 여러 계약에 흩어져 있었다. 수술비와 입원일당은 종신보험과 암보험 양쪽에, 일상생활배상책임은 운전자보험과 화재보험 양쪽에 있었다. 반대로 뇌와 심장은 가장 좁은 정의(뇌출혈, 급성심근경색)만 있었다.</p>
+      <p>같은 "암 3,000만원"도 따져 봤다. 지우의 암보험은 1년 안에 진단되면 50%를 주고, 갑상선암은 유사암으로 300만원만 준다. 도윤이 다른 회사 상품으로 뽑아 본 비교안은 감액이 없고 갑상선암을 600만원 주는 대신 보험료가 달랐다. 도윤은 여기서 결론을 내리지 않았다. 지금 계약을 바꾸면 새 면책·감액이 다시 시작되고(<a href="asymmetry.html">4장</a>), 갱신 때 보험료가 어떻게 되는지(<a href="renewal.html">7장</a>)도 봐야 하기 때문이다. 대신 도윤은 아래와 같은 한 장짜리 보장 요약표를 만들어 지우에게 건넸다.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>영역</th><th>지금 있는 보장</th><th>메모</th></tr></thead>
+        <tbody>
+          <tr><td>사망</td><td>1억원(종신, 2032년 납입 완료)</td><td>아이 계획 후 다시 계산</td></tr>
+          <tr><td>암</td><td>3,000만원, 유사암 300만원(20년 갱신)</td><td>1년 50% 감액, 46세 갱신</td></tr>
+          <tr><td>뇌·심장</td><td>뇌출혈 1,000만원, 급성심근경색 1,000만원</td><td><span class="warn-t">가장 좁은 정의만</span></td></tr>
+          <tr><td>실손</td><td>2세대 실손</td><td>세대 전환 여부 검토</td></tr>
+          <tr><td>수술·입원 정액</td><td>종신 특약 + 암보험 특약</td><td><span class="warn-t">두 계약에 겹침</span></td></tr>
+          <tr><td>배상책임</td><td>운전자보험 + 화재보험</td><td><span class="warn-t">두 계약에 겹침</span></td></tr>
+          <tr><td>운전·자동차</td><td>운전자보험, 자동차보험</td><td>자동차는 매년 갱신</td></tr>
+          <tr><td>소득 공백</td><td>—</td><td><span class="bad-t">빈칸</span></td></tr>
+        </tbody>
+      </table></div>
+      <p>지우는 처음으로 자기 보험을 한 장으로 봤다. 서랍 속 40개는 머릿속에 남지 않지만 여덟 줄은 남는다. 도윤에게 이 표는 판매 도구가 아니라 상담의 출발점이다. 빈칸과 겹침 중 무엇을 먼저 다룰지는 표를 근거로 하나씩 정하기로 했다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>담보 40개를 영역 8개로 묶은 한 장짜리 요약표. 겹침 둘(수술·입원, 배상), 좁은 정의(뇌·심장), 빈칸(소득 공백)을 표시했다.</div><div><b>아직 남은 문제</b>표의 각 줄이 약관에서 정확히 무엇을 뜻하는가. 감액·면책·유사암 조건을 원문으로 확인해야 한다.</div><div><b>다음 단계</b><a href="contract.html">6장</a>에서 지우의 암보험 약관과 도윤의 새 설계서를 직접 읽는다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>보험 한 장에는 보장 종류·금액·보장기간·납입기간·갱신·환급형·특약의 차원이 겹쳐 있고, 설계의 가짓수는 선택지의 곱으로 늘어난다. 같은 설계를 두 곳에서 비교하는 일은 거의 없다.</li>
+      <li>보험의 단가는 보험료가 아니라 받을 확률에 비춘 값(환원율)으로 봐야 하는데, 설계서에는 나오지 않는다. 묶음은 특약별 가격 차이를 총액 속에 감춘다.</li>
+      <li>뇌출혈 ⊂ 뇌졸중 ⊂ 뇌혈관질환, 급성심근경색 ⊂ 허혈성심장질환. 이 책의 모델에서 32세 남성이 100세까지 뇌출혈 진단을 받을 확률은 약 7%, 뇌혈관질환은 약 57%다. 좁은 정의가 싼 것은 받을 확률이 낮기 때문이다.</li>
+      <li>같은 "암 3,000만원"도 유사암·소액암 분류, 면책·감액 조건에 따라 받는 돈이 열 배까지 다를 수 있다.</li>
+      <li>복잡함의 원천은 위험의 다양성, 정보 비대칭, 장기 계약과 금리, 규제와 세제, 판매 경쟁이다. 앞의 둘은 필요한 복잡함, 마지막은 비교를 피하려는 판매가 남긴 복잡함에 가깝다.</li>
+      <li>비교가 어려운 시장에서는 선택지가 늘수록 시장의 최선과 소비자의 선택 사이의 간격이 커진다. 표준약관, 표준화 실손, 상품요약서, 보험다모아, 내보험다보여가 이 간격을 줄이려는 장치다.</li>
+      <li>복잡함은 맞춤 설계를 가능하게 한다. 조언자는 그 복잡함을 대신 헤쳐 가치를 만들지만, 비교할 수 없는 곳에서는 자기 이익 쪽으로 기울기도 쉽다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>보장기간 3가지, 납입기간 3가지, 환급형 2가지에 특약 10개가 각각 "꺼짐 포함 4가지" 선택지를 가진다. 만들 수 있는 설계의 수는?</p>
+        <div class="opts">
+          <button class="opt">3 + 3 + 2 + 10 × 4 = 48가지</button>
+          <button class="opt">3 × 3 × 2 × 10 × 4 = 720가지</button>
+          <button class="opt" data-correct>3 × 3 × 2 × 4¹⁰ ≈ 1,900만 가지</button>
+          <button class="opt">4¹⁰ ≈ 100만 가지</button>
+        </div>
+        <div class="quiz-exp">독립적인 선택은 곱해진다. 18 × 4¹⁰ = 18 × 1,048,576 ≈ 1,887만 가지다. 특약이 늘수록 가짓수는 기하급수로 커진다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>"뇌 보장 1,000만원이 월 2천원밖에 안 한다"는 설계서를 받았다. 가장 먼저 확인할 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>지급 사유가 뇌출혈인지, 뇌졸중인지, 뇌혈관질환인지</button>
+          <button class="opt">보험사의 브랜드 인지도</button>
+          <button class="opt">월 보험료를 자동이체로 낼 수 있는지</button>
+          <button class="opt">같은 보장을 친구도 가입했는지</button>
+        </div>
+        <div class="quiz-exp">좁은 정의(뇌출혈)는 받을 확률이 낮아 싸다. 이 책의 모델에서 뇌출혈과 뇌혈관질환의 평생 진단 확률은 여덟 배 가까이 차이 난다. 싼 이유가 할인인지 범위인지를 먼저 본다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>다음 중 "판매가 남긴 복잡함"에 가장 가까운 것은?</p>
+        <div class="opts">
+          <button class="opt">가입 직후 일정 기간 암 진단비를 주지 않는 면책 기간</button>
+          <button class="opt">장기 계약이라 해지환급금이 생기는 구조</button>
+          <button class="opt">질병과 사고의 보장을 나누는 것</button>
+          <button class="opt" data-correct>사실상 같은 보장을 이름과 조건만 조금씩 바꿔 여러 특약으로 쪼개 파는 것</button>
+        </div>
+        <div class="quiz-exp">면책 기간은 정보 비대칭, 해지환급금은 장기 계약, 보장 구분은 위험의 다양성에서 나온 필요한 복잡함이다. 비교를 어렵게 하는 차별화와 쪼개기는 주로 판매 경쟁에서 나온다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>상품이 복잡해 겉보기 가치와 진짜 가치가 크게 어긋나는 시장에서 상품 수가 늘어나면?</p>
+        <div class="opts">
+          <button class="opt">소비자가 고르는 상품의 가치도 상품 수에 비례해 좋아진다</button>
+          <button class="opt" data-correct>시장의 최선은 좋아지지만 소비자가 고른 것은 거의 그대로라 놓친 가치가 커진다</button>
+          <button class="opt">시장의 최선도 소비자의 선택도 모두 나빠진다</button>
+          <button class="opt">아무 변화가 없다</button>
+        </div>
+        <div class="quiz-exp">살펴볼 수 있는 상품 수가 한정되어 있고 겉과 속이 어긋나면, 선택지가 늘어도 소비자의 선택은 개선되지 않는다. 최선과의 간격, 즉 놓친 가치만 커진다. 표준화와 비교공시, 믿을 만한 탐색 대행이 이 간격을 줄인다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h / 2));
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function fitT(ctx, s, x, y, maxW, o) {
+    let fs = o.size || 12; ctx.font = IB.font(fs, o.mono, o.weight);
+    while (ctx.measureText(s).width > maxW && fs > 8.5) { fs -= 0.5; ctx.font = IB.font(fs, o.mono, o.weight); }
+    T(ctx, s, x, y, Object.assign({}, o, { size: fs }));
+  }
+  const man = (v) => (v >= 1e8 ? +(v / 1e8).toFixed(1) + "억" : Math.round(v / 1e4).toLocaleString("ko-KR") + "만");
+
+  /* ---------------------------------------------------------- 공통: 보장별 보험료(32세 남성 기준) */
+  const AGE = 32, SEX = "m";
+  // 진단 1회 지급형: 엔진 INS.price. 반복 지급형(수술·입원·골절·상해사망): 생존·할인만 반영한 평준 보험료(장 고유 근사)
+  function single(type, S, cfg) {
+    return INS.price({ type, age: AGE, sex: SEX, S, term: cfg.until - AGE, pay: Math.min(cfg.pay, cfg.until - AGE), refund: cfg.nl ? 0 : 1, lapse: cfg.nl ? 0.04 : 0 });
+  }
+  const nlCache = {};
+  function nlRatio(cfg) {
+    const k = cfg.until + "|" + cfg.pay;
+    if (!nlCache[k]) nlCache[k] = single("cancer", 1e7, Object.assign({}, cfg, { nl: true })).monthly / single("cancer", 1e7, Object.assign({}, cfg, { nl: false })).monthly;
+    return nlCache[k];
+  }
+  function repeat(rate, amt, cfg) {
+    const n = cfg.until - AGE, v = 1 / 1.025, s = INS.survival(AGE, n, SEX), pay = Math.min(cfg.pay, n);
+    let A = 0, a = 0;
+    for (let k = 0; k < n; k++) { A += Math.pow(v, k + 1) * s[k] * rate(AGE + k) * amt; if (k < pay) a += Math.pow(v, k) * s[k]; }
+    let g = A / a / (1 - 0.25);
+    if (cfg.nl) g *= nlRatio(cfg);
+    return { monthly: g / 12, epv: A, ann: a, annual: g };
+  }
+  const hospR = (a) => INS.incidence("hosp", a, SEX);
+
+  /* ---------------------------------------------------------- 1. 특약 조합의 폭발 */
+  (function () {
+    const R = [
+      { n: "암 진단", a: [1e7, 2e7, 3e7, 5e7], f: (S, c) => single("cancer", S, c).monthly },
+      { n: "유사암 진단", a: [1e6, 3e6, 6e6], f: (S, c) => single("cancer", S * 0.2, c).monthly },
+      { n: "고액암 진단", a: [1e7, 2e7, 3e7], f: (S, c) => single("cancer", S * 0.12, c).monthly },
+      { n: "암 수술비", a: [1e6, 3e6, 5e6], f: (S, c) => single("cancer", S * 0.6, c).monthly },
+      { n: "항암치료비", a: [5e6, 1e7, 2e7], f: (S, c) => single("cancer", S * 0.45, c).monthly },
+      { n: "뇌출혈", a: [1e7, 2e7, 3e7], f: (S, c) => single("hemorrhage", S, c).monthly },
+      { n: "뇌졸중", a: [1e7, 2e7, 3e7], f: (S, c) => single("stroke", S, c).monthly },
+      { n: "뇌혈관질환", a: [5e6, 1e7, 2e7], f: (S, c) => single("cerebro", S, c).monthly },
+      { n: "급성심근경색", a: [1e7, 2e7, 3e7], f: (S, c) => single("ami", S, c).monthly },
+      { n: "허혈성심장", a: [5e6, 1e7, 2e7], f: (S, c) => single("ischemic", S, c).monthly },
+      { n: "질병사망(80세)", a: [3e7, 5e7, 1e8], f: (S, c) => single("term", S, Object.assign({}, c, { until: 80 })).monthly },
+      { n: "상해사망", a: [5e7, 1e8, 2e8], f: (S, c) => repeat(() => 0.00035, S, c).monthly },
+      { n: "질병 수술비", a: [3e5, 5e5, 1e6], f: (S, c) => repeat((x) => hospR(x) * 0.35, S, c).monthly },
+      { n: "입원일당", a: [1e4, 2e4, 3e4], f: (S, c) => repeat((x) => hospR(x) * 7, S, c).monthly, unit: "/일" },
+      { n: "골절 진단", a: [1e5, 3e5, 5e5], f: (S, c) => repeat(() => 0.012, S, c).monthly },
+      { n: "일상배상책임", a: [1e8], f: () => 1000 },
+    ];
+    const DEF = [3, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0]; // 0=꺼짐, i=금액 i번째
+    let sel = DEF.slice(), shown = 0, G = null, flash = -1, flashT = 0;
+    const redraw = () => cv && cv.redraw();
+    const until = IB.seg("rd-until", () => redraw());
+    const pay = IB.seg("rd-pay", () => redraw());
+    const ref = IB.seg("rd-ref", () => redraw());
+    const cfg = () => ({ until: +until(), pay: +pay(), nl: ref() === "nl" });
+    const cache = {};
+    function prem(i, lvl) {
+      if (!lvl) return 0;
+      const c = cfg(), k = i + "|" + lvl + "|" + c.until + "|" + c.pay + "|" + c.nl;
+      if (cache[k] == null) cache[k] = R[i].f(R[i].a[lvl - 1], c);
+      return cache[k];
+    }
+    function count() {
+      let lg = Math.log10(3 * 3 * 2);
+      R.forEach((r) => (lg += Math.log10(r.a.length + 1)));
+      return lg;
+    }
+    let cv = null;
+    cv = IB.canvas("#rd-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const cols = w >= 520 ? 4 : 2, gap = 6, top = 34;
+      const cw = (w - 16 - gap * (cols - 1)) / cols, ch = 40;
+      const rows = Math.ceil(R.length / cols);
+      G = { cols, cw, ch, gap, top, x0: 8 };
+      const lg = count();
+      T(ctx, "만들 수 있는 설계", 8, 18, { size: 11.5, color: P.dim, base: "middle" });
+      T(ctx, "약 " + Math.pow(10, lg - Math.floor(lg)).toFixed(1) + " × 10^" + Math.floor(lg) + "가지", w - 8, 18, { size: 13, weight: 800, color: P.bad, align: "right", base: "middle", mono: false });
+      const total = R.reduce((s, r, i) => s + prem(i, sel[i]), 0);
+      let maxI = -1, maxV = 0;
+      R.forEach((r, i) => {
+        const cx = 8 + (i % cols) * (cw + gap), cy = top + Math.floor(i / cols) * (ch + gap);
+        const on = sel[i] > 0, p = prem(i, sel[i]);
+        if (p > maxV) { maxV = p; maxI = i; }
+        rrect(ctx, cx, cy, cw, ch, 7);
+        ctx.fillStyle = on ? P.accent : P.surface; ctx.globalAlpha = on ? 0.16 : 1; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.strokeStyle = i === flash && flashT > 0 ? P.accent2 : on ? P.accent : P.border; ctx.lineWidth = on ? 1.6 : 1; ctx.stroke();
+        fitT(ctx, R[i].n, cx + 8, cy + 15, cw - 16, { size: 12, weight: on ? 700 : 400, color: on ? P.text : P.dim, base: "middle" });
+        const sub = on ? man(R[i].a[sel[i] - 1]) + (R[i].unit || "") + " · " + IB.wonAxis(p) + "원" : "꺼짐 · " + (R[i].a.length + 1) + "가지";
+        fitT(ctx, sub, cx + 8, cy + 30, cw - 16, { size: 10.5, color: on ? P.accent : P.faint, base: "middle", mono: on });
+      });
+      // 아래: 쌓인 보험료 막대(애니메이션)
+      const by = top + rows * (ch + gap) + 22, bw = w - 16, bh = 22;
+      T(ctx, "이 설계의 월 보험료", 8, by - 8, { size: 11.5, color: P.dim });
+      T(ctx, won(shown), w - 8, by - 8, { size: 13, weight: 800, mono: true, color: P.text, align: "right" });
+      rrect(ctx, 8, by, bw, bh, 6); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.border; ctx.stroke();
+      const scale = bw / 400000;
+      let x = 8;
+      const frac = total > 0 ? shown / total : 0;
+      R.forEach((r, i) => {
+        const p = prem(i, sel[i]) * frac; if (p <= 0) return;
+        const ww = Math.min(p * scale, 8 + bw - x); if (ww <= 0) return;
+        ctx.fillStyle = P.series[i % 5]; ctx.globalAlpha = 0.85; ctx.fillRect(x, by + 1, ww, bh - 2); ctx.globalAlpha = 1;
+        ctx.strokeStyle = P.bg; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + ww, by + 1); ctx.lineTo(x + ww, by + bh - 1); ctx.stroke();
+        x += ww;
+      });
+      [1e5, 2e5, 3e5].forEach((v) => { const xx = 8 + v * scale; vline(ctx, xx, by + bh, by + bh + 5, P.axis); T(ctx, IB.wonAxis(v), xx, by + bh + 16, { size: 10, mono: true, color: P.faint, align: "center" }); });
+      if (total * scale > bw) T(ctx, "40만원 넘음 →", w - 10, by + bh / 2, { size: 11, weight: 700, color: P.bg, align: "right", base: "middle" });
+      const nOn = sel.filter((v) => v > 0).length;
+      IB.stat("rd-o-n", nOn + "<small> / " + R.length + "</small>");
+      IB.stat("rd-o-c", "10<sup>" + lg.toFixed(1) + "</sup><small>가지</small>");
+      IB.stat("rd-o-p", won(total));
+      IB.stat("rd-o-m", maxI >= 0 ? R[maxI].n + " <small>" + IB.wonAxis(maxV) + "</small>" : "—");
+      G.target = total;
+    }, { get height() { const w = document.getElementById("rd-cv").parentElement.clientWidth || 600; const cols = w >= 520 ? 4 : 2; return 34 + Math.ceil(16 / cols) * 46 + 22 + 22 + 50; } });
+    IB.loop(cv.canvas, (dt) => {
+      if (!G) return;
+      let ch = false;
+      if (Math.abs(G.target - shown) > 1) { shown += (G.target - shown) * Math.min(1, dt * 7); ch = true; } else if (shown !== G.target) { shown = G.target; ch = true; }
+      if (flashT > 0) { flashT -= dt; ch = true; }
+      if (ch) cv.redraw();
+    });
+    IB.drag(cv.canvas, {
+      start(x, y) {
+        if (!G) return;
+        const c = Math.floor((x - G.x0) / (G.cw + G.gap)), r = Math.floor((y - G.top) / (G.ch + G.gap));
+        if (c < 0 || c >= G.cols || r < 0) return;
+        const i = r * G.cols + c; if (i >= R.length) return;
+        const lx = x - G.x0 - c * (G.cw + G.gap), ly = y - G.top - r * (G.ch + G.gap);
+        if (lx > G.cw || ly > G.ch) return;
+        sel[i] = (sel[i] + 1) % (R[i].a.length + 1); flash = i; flashT = 0.4; redraw();
+      },
+    });
+    document.getElementById("rd-all").addEventListener("click", () => { sel = R.map((r) => Math.min(2, r.a.length)); redraw(); });
+    document.getElementById("rd-none").addEventListener("click", () => { sel = R.map(() => 0); redraw(); });
+    document.getElementById("rd-def").addEventListener("click", () => { sel = DEF.slice(); redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 2. 묶음 비교 */
+  (function () {
+    const cfg = { until: 100, pay: 20, nl: false };
+    const ITEM = {
+      cancer: { n: "암 진단", g: (S) => single("cancer", S, cfg) },
+      hem: { n: "뇌출혈 진단", g: (S) => single("hemorrhage", S, cfg) },
+      cer: { n: "뇌혈관질환 진단", g: (S) => single("cerebro", S, cfg) },
+      ami: { n: "급성심근경색 진단", g: (S) => single("ami", S, cfg) },
+      isc: { n: "허혈성심장질환 진단", g: (S) => single("ischemic", S, cfg) },
+      surg: { n: "질병 수술비", g: (S) => repeat((x) => hospR(x) * 0.35, S, cfg) },
+      day: { n: "입원일당", g: (S) => repeat((x) => hospR(x) * 7, S, cfg), unit: "/일" },
+      sim: { n: "유사암 진단", g: (S) => single("cancer", S * 0.2, cfg) },
+    };
+    // 문제별 두 묶음: [항목, 금액, 단가지수(공정 보험료 대비)]
+    const QS = [
+      {
+        A: [["cancer", 3e7, 0.9], ["hem", 1e7, 1.35], ["ami", 1e7, 1.35], ["surg", 5e5, 1.6], ["day", 3e4, 1.7]],
+        B: [["cancer", 2e7, 1.15], ["cer", 1e7, 0.95], ["isc", 1e7, 0.95], ["surg", 3e5, 1.0]],
+      },
+      {
+        A: [["cancer", 3e7, 0.85], ["cer", 1e7, 1.3], ["isc", 1e7, 1.25], ["surg", 3e5, 1.4]],
+        B: [["cancer", 3e7, 1.2], ["cer", 1e7, 0.9], ["isc", 1e7, 0.85], ["surg", 3e5, 0.9]],
+      },
+      {
+        A: [["cancer", 2e7, 1.1], ["sim", 2e6, 1.4], ["hem", 1e7, 1.3], ["ami", 1e7, 1.3], ["day", 2e4, 1.5]],
+        B: [["cancer", 3e7, 1.0], ["sim", 3e6, 1.0], ["cer", 1e7, 1.0], ["isc", 1e7, 1.0]],
+      },
+    ];
+    const ANS = [
+      "답: 총액은 비슷하지만 B가 더 싸게 샀다. A는 암 진단을 싸게 주는 대신 사람들이 잘 따지지 않는 입원일당·수술비와 좁은 뇌·심장 보장에 높은 마진이 붙어 있다. 보장 이름이 비슷해 보여도 A의 뇌·심장은 가장 좁은 정의다.",
+      "답: 비슷하다. 총액도 환원율도 거의 같다. 그러나 특약마다 싼 회사가 다르다. 암은 A에서, 나머지는 B에서 샀다면 같은 보장을 더 싸게 살 수 있었다. 묶음은 이 선택을 막는다.",
+      "답: B가 낫다. A는 월 보험료가 낮아 싸 보이지만, 좁은 정의(뇌출혈·급성심근경색)와 작은 금액 때문이고 환원율은 B보다 낮다. 싼 설계와 싸게 산 설계는 다르다.",
+    ];
+    const BEST = ["B", "S", "B"];
+    let revealed = false, guess = null;
+    const redraw = () => cv && cv.redraw();
+    const q = IB.seg("bd-q", () => { revealed = false; guess = null; msg(); redraw(); });
+    function calc(list) {
+      return list.map(([k, S, load]) => {
+        const r = ITEM[k].g(S), fair = r.monthly, ann = r.epv && r.epv.premiumAnnuity != null ? r.epv.premiumAnnuity : r.ann;
+        const ben = r.epv && r.epv.benefit != null ? r.epv.benefit : r.epv;
+        return { k, n: ITEM[k].n, S, unit: ITEM[k].unit || "", load, fair, m: fair * load, ben, ann };
+      });
+    }
+    function summary(items) {
+      const m = items.reduce((s, it) => s + it.m, 0);
+      const ben = items.reduce((s, it) => s + it.ben, 0), pv = items.reduce((s, it) => s + it.m * 12 * it.ann, 0);
+      return { m, ratio: ben / pv };
+    }
+    function msg() {
+      const el = document.getElementById("bd-msg");
+      if (!revealed) {
+        el.innerHTML = guess ? "골랐다: <b>" + (guess === "S" ? "비슷하다" : guess + "가 낫다") + "</b>. 이제 ‘답 보기’를 누른다." : el.dataset.base;
+        return;
+      }
+      const i = +q(), ok = guess == null ? "" : guess === BEST[i] ? tone("ok-t", "<b>맞혔다.</b> ") : tone("bad-t", "<b>아쉽다.</b> ");
+      el.innerHTML = ok + ANS[i] + " (공정 보험료는 이 책의 엔진 값, 단가 지수는 가상 값이다.)";
+    }
+    let cv = null;
+    cv = IB.canvas("#bd-cv", (ctx, w, h) => {
+      const P = IB.palette(), i = +q();
+      const A = calc(QS[i].A), B = calc(QS[i].B), sA = summary(A), sB = summary(B);
+      const narrow = w < 520;
+      const colW = (w - 30) / 2;
+      [[A, sA, "A생명", 10], [B, sB, "B손해보험", 20 + colW]].forEach(([items, s, name, x0]) => {
+        rrect(ctx, x0, 8, colW, h - 16, 8); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.stroke();
+        T(ctx, name, x0 + 10, 28, { size: 13, weight: 800, color: P.text, base: "middle" });
+        T(ctx, won(s.m), x0 + colW - 10, 28, { size: 12.5, weight: 800, mono: true, color: P.bad, align: "right", base: "middle" });
+        const rh = Math.min(revealed ? 52 : 40, (h - 92) / items.length);
+        items.forEach((it, j) => {
+          const y = 48 + j * rh;
+          ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(x0 + 8, y - 4); ctx.lineTo(x0 + colW - 8, y - 4); ctx.stroke();
+          fitT(ctx, it.n, x0 + 10, y + 10, colW * 0.62, { size: narrow ? 11 : 12, color: P.text, base: "middle" });
+          T(ctx, man(it.S) + it.unit, x0 + 10, y + 26, { size: 10.5, mono: true, color: P.dim, base: "middle" });
+          T(ctx, IB.wonAxis(it.m), x0 + colW - 10, y + 10, { size: 11.5, mono: true, color: P.text, align: "right", base: "middle" });
+          if (revealed) {
+            const bx = x0 + 10, bw = colW - 20, by = y + 38, sc = bw / 2;
+            ctx.fillStyle = P.grid; ctx.fillRect(bx, by - 4, bw, 8);
+            ctx.fillStyle = it.load > 1.05 ? P.bad : it.load < 0.95 ? P.ok : P.accent; ctx.globalAlpha = 0.85; ctx.fillRect(bx, by - 4, Math.min(bw, it.load * sc), 8); ctx.globalAlpha = 1;
+            vline(ctx, bx + sc, by - 7, by + 7, P.text, [], 1.2);
+            T(ctx, "단가 " + Math.round(it.load * 100), x0 + colW - 10, y + 26, { size: 10.5, mono: true, weight: 700, color: it.load > 1.05 ? P.bad : it.load < 0.95 ? P.ok : P.dim, align: "right", base: "middle" });
+          }
+        });
+        const fy = h - 30;
+        ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(x0 + 8, fy - 14); ctx.lineTo(x0 + colW - 8, fy - 14); ctx.stroke();
+        if (revealed) {
+          T(ctx, "환원율", x0 + 10, fy, { size: 11.5, color: P.dim, base: "middle" });
+          T(ctx, Math.round(s.ratio * 100) + "%", x0 + colW - 10, fy, { size: 14, weight: 800, mono: true, color: P.text, align: "right", base: "middle" });
+        } else T(ctx, "환원율 ?", x0 + 10, fy, { size: 11.5, color: P.faint, base: "middle" });
+      });
+      // 특약마다 싼 쪽에서 샀다면(같은 항목·금액끼리)
+      let mix = 0, same = true;
+      A.forEach((a) => { const b = B.find((x) => x.k === a.k && x.S === a.S); if (b) mix += Math.min(a.m, b.m); else same = false; });
+      IB.stat("bd-o-t", IB.wonAxis(sA.m) + " / " + IB.wonAxis(sB.m));
+      IB.stat("bd-o-r", revealed ? Math.round(sA.ratio * 100) + "% / " + Math.round(sB.ratio * 100) + "%" : "<small>답을 보면 나온다</small>");
+      IB.stat("bd-o-m", revealed && same && A.length === B.length ? tone("ok-t", won(mix)) : "<small>" + (revealed ? "보장 구성이 달라 계산 불가" : "—") + "</small>");
+    }, { get height() { const w = document.getElementById("bd-cv").parentElement.clientWidth || 600; return w < 520 ? 400 : 380; } });
+    const el = document.getElementById("bd-msg"); el.dataset.base = el.innerHTML;
+    [["bd-a", "A"], ["bd-b", "B"], ["bd-s", "S"]].forEach(([id, v]) => document.getElementById(id).addEventListener("click", () => { guess = v; msg(); }));
+    document.getElementById("bd-show").addEventListener("click", () => { revealed = true; msg(); redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 정의의 범위와 확률 */
+  (function () {
+    const redraw = () => cv && cv.redraw();
+    const sex = IB.seg("df-sex", redraw);
+    const until = IB.seg("df-until", redraw);
+    const Ar = IB.range("df-age", (v) => v + "세", redraw);
+    const GROUPS = [
+      { t: "뇌", ks: ["hemorrhage", "stroke", "cerebro"] },
+      { t: "심장", ks: ["ami", "ischemic"] },
+    ];
+    const cache = {};
+    function val(k) {
+      const a = Ar(), s = sex(), u = Math.max(+until(), a + 10), key = k + a + s + u;
+      if (!cache[key]) cache[key] = { p: INS.prob(k, a, u - a, s), m: INS.price({ type: k, age: a, sex: s, S: 1e7, term: u - a, pay: Math.min(20, u - a) }).monthly };
+      return cache[key];
+    }
+    let cv = null;
+    cv = IB.canvas("#df-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const lw = w < 480 ? 92 : 120, x0 = lw + 10, bw = w - x0 - (w < 480 ? 64 : 84);
+      const cols = [P.bad, P.accent2, P.accent];
+      let y = 20;
+      const rowH = (h - 20 - 30 - 26) / 5;
+      T(ctx, "만기까지 진단받을 확률", x0, 12, { size: 11, color: P.dim, base: "middle" });
+      T(ctx, "1,000만원 월 보험료", w - 6, 12, { size: 11, color: P.dim, align: "right", base: "middle" });
+      GROUPS.forEach((g, gi) => {
+        y += gi ? 26 : 8;
+        g.ks.forEach((k, j) => {
+          const v = val(k), col = g.ks.length === 2 ? [P.bad, P.accent][j] : cols[j];
+          const by = y + rowH * 0.18, bh = rowH * 0.6;
+          fitT(ctx, INS.INC_KINDS[k], lw, by + bh / 2, lw - 4, { size: 12, color: P.text, align: "right", base: "middle", weight: 600 });
+          ctx.fillStyle = P.grid; ctx.fillRect(x0, by, bw, bh);
+          ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(x0, by, bw * Math.min(1, v.p), bh); ctx.globalAlpha = 1;
+          const lab = (v.p * 100).toFixed(1) + "%";
+          ctx.font = IB.font(11.5, true, 700);
+          const inside = bw * v.p > ctx.measureText(lab).width + 12;
+          T(ctx, lab, inside ? x0 + bw * v.p - 6 : x0 + bw * v.p + 6, by + bh / 2, { size: 11.5, mono: true, weight: 700, color: inside ? P.bg : P.text, align: inside ? "right" : "left", base: "middle" });
+          T(ctx, IB.wonAxis(v.m), w - 6, by + bh / 2, { size: 11.5, mono: true, color: P.dim, align: "right", base: "middle" });
+          y += rowH;
+        });
+      });
+      const a = Ar(), u = Math.max(+until(), a + 10);
+      T(ctx, (sex() === "m" ? "남성" : "여성") + " " + a + "세 가입, " + u + "세까지 (교육용 발생률)", x0, h - 10, { size: 11, color: P.faint });
+      const b1 = val("hemorrhage"), b3 = val("cerebro"), h1 = val("ami"), h2 = val("ischemic");
+      IB.stat("df-o-b", (b3.p / b1.p).toFixed(1) + "<small>배 (" + (b1.p * 100).toFixed(1) + "% → " + (b3.p * 100).toFixed(1) + "%)</small>");
+      IB.stat("df-o-h", (h2.p / h1.p).toFixed(1) + "<small>배 (" + (h1.p * 100).toFixed(1) + "% → " + (h2.p * 100).toFixed(1) + "%)</small>");
+      IB.stat("df-o-p", (b3.m / b1.m).toFixed(1) + "배 / " + (h2.m / h1.m).toFixed(1) + "배");
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 360 });
+  })();
+
+  /* ---------------------------------------------------------- 4. 두 계약의 암 3,000만원 */
+  (function () {
+    const S = 3e7, MAXM = 36;
+    const TYPES = { gen: "일반암", thy: "갑상선암", cis: "제자리암", bor: "경계성종양", skin: "기타피부암", col: "대장점막내암" };
+    const X = { name: "계약 X (지우의 2020 암보험)", wait: 3, red: 12, redRate: 0.5, rate: { gen: 1, thy: 0.1, cis: 0.1, bor: 0.1, skin: 0.1, col: 0.1 }, simWait: false };
+    const Y = { name: "계약 Y (B손해보험 비교안)", wait: 3, red: 0, redRate: 1, rate: { gen: 1, thy: 0.2, cis: 0.2, bor: 0.2, skin: 0.2, col: 1 }, simWait: false };
+    let mon = 24, G = null;
+    const redraw = () => cv && cv.redraw();
+    const type = IB.seg("cx-type", redraw);
+    function pay(c, t, m) {
+      const general = c.rate[t] === 1;
+      // 면책은 일반암에 적용(유사암은 가입 즉시 보장하는 경우가 많아 면책 없음으로 단순화)
+      if (general && m < c.wait) return 0;
+      let v = S * c.rate[t];
+      if (m < c.red) v *= c.redRate;
+      return v;
+    }
+    let cv = null;
+    cv = IB.canvas("#cx-cv", (ctx, w, h) => {
+      const P = IB.palette(), t = type();
+      const A = { x: 18, w: w - 36 };
+      const Xp = (m) => A.x + (m / MAXM) * A.w;
+      G = { A, Xp };
+      const rows = [[X, 36], [Y, 84]];
+      rows.forEach(([c, y]) => {
+        fitT(ctx, c.name, A.x, y - 12, A.w, { size: 11.5, weight: 700, color: P.text });
+        ctx.fillStyle = P.grid; ctx.fillRect(A.x, y, A.w, 14);
+        if (c.rate[t] === 1) { ctx.fillStyle = P.bad; ctx.globalAlpha = 0.5; ctx.fillRect(Xp(0), y, Xp(c.wait) - Xp(0), 14); ctx.globalAlpha = 1; }
+        if (c.red > 0) { ctx.fillStyle = P.warn; ctx.globalAlpha = 0.45; ctx.fillRect(Xp(c.rate[t] === 1 ? c.wait : 0), y, Xp(c.red) - Xp(c.rate[t] === 1 ? c.wait : 0), 14); ctx.globalAlpha = 1; }
+        ctx.fillStyle = P.ok; ctx.globalAlpha = 0.35; ctx.fillRect(Xp(c.red || (c.rate[t] === 1 ? c.wait : 0)), y, A.x + A.w - Xp(c.red || (c.rate[t] === 1 ? c.wait : 0)), 14); ctx.globalAlpha = 1;
+      });
+      const ay = 112;
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(A.x, ay); ctx.lineTo(A.x + A.w, ay); ctx.stroke();
+      (A.w < 400 ? [0, 12, 24, 36] : [0, 3, 12, 24, 36]).forEach((m) => { ctx.beginPath(); ctx.moveTo(Xp(m), ay); ctx.lineTo(Xp(m), ay + 4); ctx.stroke(); T(ctx, m === 0 ? "가입" : m + "개월", Xp(m), ay + 16, { size: 10.5, color: P.faint, align: m === 0 ? "left" : m === 36 ? "right" : "center" }); });
+      vline(ctx, Xp(mon), 30, ay, P.text, [3, 3]);
+      knob(ctx, Xp(mon), ay, P, P.bad, 8);
+      // 결과 막대
+      const px = pay(X, t, mon), py = pay(Y, t, mon);
+      const by0 = ay + 34, bh = Math.min(30, (h - by0 - 34) / 2 - 8), bw = w - 90;
+      [[px, "X", P.accent], [py, "Y", P.accent2]].forEach(([v, k, col], i) => {
+        const y = by0 + i * (bh + 14);
+        T(ctx, "계약 " + k, 14, y + bh / 2, { size: 12, weight: 700, color: P.text, base: "middle" });
+        ctx.fillStyle = P.grid; ctx.fillRect(70, y, bw, bh);
+        ctx.fillStyle = v > 0 ? col : P.bad; ctx.globalAlpha = 0.85; ctx.fillRect(70, y, Math.max(v > 0 ? 2 : 0, (v / S) * bw), bh); ctx.globalAlpha = 1;
+        T(ctx, v > 0 ? man(v) + "원" : "0원", 70 + Math.max(0, (v / S) * bw) + 6 > 70 + bw - 50 ? 70 + bw - 4 : 70 + (v / S) * bw + 6, y + bh / 2, { size: 12, weight: 800, mono: true, color: v > 0 && (v / S) * bw + 56 > bw ? P.bg : P.text, align: (v / S) * bw + 56 > bw ? "right" : "left", base: "middle" });
+      });
+      IB.stat("cx-o-t", mon + "<small>개월째 · " + TYPES[t] + "</small>");
+      IB.stat("cx-o-x", px > 0 ? won(px) : tone("bad-t", "0원"));
+      IB.stat("cx-o-y", py > 0 ? won(py) : tone("bad-t", "0원"));
+    }, { get height() { const w = document.getElementById("cx-cv").parentElement.clientWidth || 600; return w < 480 ? 290 : 280; } });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; mon = IB.clamp(Math.round(((x - G.A.x) / G.A.w) * MAXM), 0, MAXM); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 5. 탐색 비용 */
+  (function () {
+    const NS = [2, 3, 5, 8, 12, 20, 30, 50, 80, 120], SD = 10000, MAXT = 3000;
+    let acc, trials, G = null, gauss = IB.randnSeeded(5);
+    const redraw = () => cv && cv.redraw();
+    const Nr = IB.range("sc-n", (v) => NS[v] + "개", redraw);
+    const Kr = IB.range("sc-k", (v) => v + "개", () => reset());
+    const Cr = IB.range("sc-c", (v) => v.toFixed(1), () => reset());
+    const stdEl = document.getElementById("sc-std");
+    stdEl.addEventListener("change", () => reset());
+    // 시장의 최선 E[max of N] (정규분포, 수치 적분)
+    const bestE = NS.map((n) => {
+      let s = 0; const steps = 600;
+      for (let i = 0; i < steps; i++) { const x = -6 + (12 * (i + 0.5)) / steps, pdf = Math.exp(-x * x / 2) / Math.sqrt(TAU), cdf = 0.5 * (1 + IB.erf(x / Math.SQRT2)); s += x * n * pdf * Math.pow(cdf, n - 1) * (12 / steps); }
+      return s;
+    });
+    function reset() { acc = NS.map(() => ({ v: 0, best: 0 })); trials = 0; gauss = IB.randnSeeded(5); anim && anim.start(); redraw(); }
+    function batch(m) {
+      const noise = Cr() * (stdEl.checked ? 0.3 : 1), k = Kr();
+      for (let t = 0; t < m; t++) {
+        NS.forEach((n, j) => {
+          // n개의 진짜 가치, k개를 무작위로 살펴 겉보기 최대를 고른다
+          let bestTrue = -Infinity, pickTrue = 0, pickSeen = -Infinity;
+          const vals = new Array(n);
+          for (let i = 0; i < n; i++) { vals[i] = gauss(); if (vals[i] > bestTrue) bestTrue = vals[i]; }
+          const kk = Math.min(k, n);
+          for (let i = 0; i < kk; i++) { const v = vals[i], seen = v + noise * gauss(); if (seen > pickSeen) { pickSeen = seen; pickTrue = v; } }
+          acc[j].v += pickTrue; if (pickTrue === bestTrue) acc[j].best++;
+        });
+      }
+      trials += m;
+    }
+    let anim = null, cv = null;
+    acc = NS.map(() => ({ v: 0, best: 0 })); trials = 0;
+    batch(60);
+    cv = IB.canvas("#sc-cv", (ctx, w, h) => {
+      const P = IB.palette(), ni = Nr();
+      const c = IB.chart(ctx, { x: 54, y: 18, w: w - 70, h: h - 100 }, {
+        x: [2, 120], y: [-0.3 * SD, 2.8 * SD], logX: true, xTicks: [2, 5, 10, 20, 50, 100], xFmt: (v) => String(v),
+        yFmt: (v) => (v >= 0 ? "+" : "") + +(v / 1e4).toFixed(1) + "만", xLabel: "시장의 상품 수(로그 눈금)",
+        series: [
+          { data: NS.map((n, j) => [n, bestE[j] * SD]), color: P.ok, width: 2.5 },
+          { data: NS.map((n, j) => [n, trials ? (acc[j].v / trials) * SD : 0]), color: P.accent, width: 2.5 },
+        ],
+      });
+      G = c;
+      // 놓친 가치 띠
+      ctx.save(); ctx.beginPath();
+      NS.forEach((n, j) => { const x = c.X(n), y = c.Y(bestE[j] * SD); j ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      for (let j = NS.length - 1; j >= 0; j--) ctx.lineTo(c.X(NS[j]), c.Y(trials ? (acc[j].v / trials) * SD : 0));
+      ctx.closePath(); ctx.fillStyle = P.bad; ctx.globalAlpha = 0.12; ctx.fill(); ctx.restore();
+      const n = NS[ni], b = bestE[ni] * SD, ch = trials ? (acc[ni].v / trials) * SD : 0;
+      vline(ctx, c.X(n), c.box.y, c.box.y + c.box.h, P.dim, [4, 3], 1.4);
+      [[b, P.ok], [ch, P.accent]].forEach(([v, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(n), c.Y(v), 4.5, 0, TAU); ctx.fill(); });
+      knob(ctx, c.X(n), c.box.y + c.box.h, P, P.text, 7);
+      T(ctx, "같은 보험료로 얻는 가치(월, 평균 상품 = 0)", c.box.x, 10, { size: 11, color: P.dim, base: "middle" });
+      T(ctx, trials.toLocaleString("ko-KR") + "명 쇼핑", c.box.x + c.box.w, c.box.y + c.box.h - 8, { size: 11, mono: true, color: P.faint, align: "right" });
+      IB.stat("sc-o-b", "+" + won(b));
+      IB.stat("sc-o-c", (ch >= 0 ? "+" : "−") + won(Math.abs(ch)));
+      IB.stat("sc-o-l", tone("bad-t", won(Math.max(0, b - ch) * 240)));
+      IB.stat("sc-o-p", trials ? IB.pct(acc[ni].best / trials, 0) : "—");
+    }, { aspect: 0.66, minHeight: 320, maxHeight: 420 });
+    anim = IB.loop(cv.canvas, () => {
+      if (trials >= MAXT) { anim.stop(); return; }
+      batch(60);
+      cv.redraw();
+    });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const lx = Math.log10(2) + ((x - G.box.x) / G.box.w) * (Math.log10(120) - Math.log10(2)); const v = Math.pow(10, lx); let bi = 0; NS.forEach((n, j) => { if (Math.abs(Math.log(n / v)) < Math.abs(Math.log(NS[bi] / v))) bi = j; }); if (bi !== Nr()) Nr.set(bi); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 표준 묶음 vs 맞춤 */
+  (function () {
+    // 영역: 필요(단위), 단위당 월 보험료, 중요도, 수수료 수준(상대)
+    const AREAS = [
+      { k: "death", n: "사망보장" },
+      { k: "dx", n: "진단비(암·뇌·심)" },
+      { k: "silson", n: "실손" },
+      { k: "liab", n: "배상책임" },
+      { k: "fixed", n: "수술·입원 정액" },
+    ];
+    // 단위: death 1억, dx 1,000만원 묶음, silson 1(가입), liab 1, fixed 1(기본 묶음)
+    const COST = { death: 13000, dx: 30000, silson: 15000, liab: 1000, fixed: 12000 };
+    const COM = { death: 3, dx: 1.5, silson: 0.3, liab: 0.2, fixed: 2.5 };      // 수수료 성향(가상)
+    const DEATH_PREM = 3.5;                                                   // 수수료 쪽으로 기울면 사망보장을 환급형·종신형으로(단위당 3.5배)
+    const NEED = {
+      single: { death: 0.1, dx: 4, silson: 1, liab: 1, fixed: 0.5 },
+      couple: { death: 2, dx: 5, silson: 1, liab: 1, fixed: 0.5 },
+      kids: { death: 5, dx: 5, silson: 1, liab: 1, fixed: 0.5 },
+    };
+    const W = {
+      single: { death: 0.3, dx: 3, silson: 3, liab: 2, fixed: 0.5 },
+      couple: { death: 2, dx: 3, silson: 3, liab: 2, fixed: 0.5 },
+      kids: { death: 4, dx: 3, silson: 3, liab: 2, fixed: 0.5 },
+    };
+    const PKG = { death: 0.38, dx: 0.32, silson: 0.12, liab: 0.01, fixed: 0.17 }; // 표준 묶음의 예산 비율(가상)
+    const redraw = () => cv && cv.redraw();
+    const who = IB.seg("tl-who", redraw);
+    const Br = IB.range("tl-b", (v) => won(v), redraw);
+    const comEl = document.getElementById("tl-com");
+    comEl.addEventListener("change", redraw);
+    function score(buy, need, wt) {
+      let s = 0, ws = 0; AREAS.forEach((a) => { const n = need[a.k]; if (n <= 0) return; s += wt[a.k] * Math.min(1, buy[a.k] / n); ws += wt[a.k]; });
+      return s / ws;
+    }
+    function waste(buy, need, cost) { let x = 0; AREAS.forEach((a) => (x += Math.max(0, buy[a.k] - need[a.k]) * cost[a.k])); return x; }
+    function pkg(budget) { const b = {}; AREAS.forEach((a) => (b[a.k] = (budget * PKG[a.k]) / COST[a.k])); return b; }
+    function tailor(budget, need, wt, biased) {
+      const cost = Object.assign({}, COST); if (biased) cost.death *= DEATH_PREM;
+      const b = {}; AREAS.forEach((a) => (b[a.k] = 0));
+      let left = budget;
+      const step = 0.05;
+      for (let it = 0; it < 4000 && left > 1; it++) {
+        let bi = null, bv = -1;
+        AREAS.forEach((a) => {
+          const n = need[a.k]; const c = cost[a.k] * step; if (c > left) return;
+          const gain = biased ? COM[a.k] * (b[a.k] < Math.max(n, 0.5) * 1.6 ? 1 : 0.1) : (b[a.k] < n ? wt[a.k] / n : 0);
+          const v = gain / c; if (v > bv) { bv = v; bi = a.k; }
+        });
+        if (!bi || bv <= 0) break;
+        b[bi] += step; left -= cost[bi] * step;
+      }
+      return { b, cost, left };
+    }
+    let cv = null;
+    cv = IB.canvas("#tl-cv", (ctx, w, h) => {
+      const P = IB.palette(), wh = who(), need = NEED[wh], wt = W[wh], budget = Br();
+      const p = pkg(budget), t = tailor(budget, need, wt, false), tb = comEl.checked ? tailor(budget, need, wt, true) : null;
+      const lw = w < 480 ? 96 : 124, x0 = lw + 8, bw = w - x0 - 16;
+      const rowH = (h - 54) / AREAS.length;
+      T(ctx, "필요를 채운 비율", x0, 14, { size: 11, color: P.dim, base: "middle" });
+      [0, 0.5, 1].forEach((f) => { const x = x0 + f * bw * 0.8; vline(ctx, x, 24, h - 26, f === 1 ? P.text : P.grid, f === 1 ? [4, 3] : [], 1); T(ctx, Math.round(f * 100) + "%", x, h - 12, { size: 10.5, mono: true, color: P.faint, align: "center" }); });
+      T(ctx, "100% 넘으면 과잉", w - 8, 14, { size: 10.5, color: P.faint, align: "right", base: "middle" });
+      AREAS.forEach((a, i) => {
+        const y = 26 + i * rowH, n = need[a.k];
+        fitT(ctx, a.n, lw, y + rowH * 0.42, lw - 4, { size: 12, weight: 600, color: P.text, align: "right", base: "middle" });
+        T(ctx, n <= 0.1 ? "필요 거의 없음" : "중요도 " + wt[a.k], lw, y + rowH * 0.42 + 14, { size: 10, color: P.faint, align: "right", base: "middle" });
+        const bars = [[p[a.k], P.faint], [t.b[a.k], P.accent]].concat(tb ? [[tb.b[a.k], P.bad]] : []);
+        const bh = Math.min(10, (rowH - 10) / bars.length - 2);
+        bars.forEach(([v, col], j) => {
+          const r = n > 0 ? v / n : 0, len = Math.min(bw, (n > 0 ? r : v > 0 ? 1.25 : 0) * bw * 0.8);
+          ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(x0, y + 4 + j * (bh + 2), Math.max(v > 0 ? 2 : 0, len), bh); ctx.globalAlpha = 1;
+        });
+      });
+      const sp = score(p, need, wt), st = score(t.b, need, wt), sb = tb ? score(tb.b, need, wt) : null;
+      IB.stat("tl-o-p", Math.round(sp * 100) + "%");
+      IB.stat("tl-o-t", tone("ok-t", Math.round(st * 100) + "%") + (tb ? " <small>/ 기운 맞춤 </small>" + tone("bad-t", Math.round(sb * 100) + "%") : ""));
+      IB.stat("tl-o-w", won(waste(t.b, need, COST)) + (tb ? " <small>/ " + won(waste(tb.b, need, tb.cost)) + "</small>" : ""));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 380 });
+  })();
+})();
+</script>
+</body>
+</html>

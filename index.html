@@ -1,0 +1,289 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see LICENSE.md). -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InsureBook · 보험이 복잡한 이유를 푸는 교과서</title>
+<meta name="description" content="보험은 왜 이렇게 복잡하고, 보험설계사는 왜 존재하는가. 위험을 나누는 수학과 보험료 계산, 약관과 갱신, 실손·진단비·종신·저축성·자동차보험, 수수료와 보험회사의 속사정, 청구와 분쟁, 보장 설계까지 직접 만지며 배우는 인터랙티브 교과서.">
+<link rel="canonical" href="https://insurebook.euiyun.com/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="InsureBook · 보험이 복잡한 이유를 푸는 교과서">
+<meta property="og:description" content="보험은 왜 이렇게 복잡하고, 설계사는 왜 존재하는가. 보험료 계산에서 약관, 갱신, 실손, 수수료, 청구, 보장 설계까지 시뮬레이터로 배우는 보험 교과서.">
+<meta property="og:url" content="https://insurebook.euiyun.com/">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://insurebook.euiyun.com/#site","name":"InsureBook","alternateName":"인슈어북","url":"https://insurebook.euiyun.com/","inLanguage":"ko","description":"보험의 원리와 구조를 만져 보며 배우는 인터랙티브 교과서"},{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/","inLanguage":"ko","isAccessibleForFree":true,"educationalLevel":"일반 성인","about":["보험","위험 관리","보험료 산출","실손보험","생명보험","보험설계사","보험 수수료","보험금 청구","보장 설계"],"description":"보험은 왜 이렇게 복잡하고, 보험설계사는 왜 존재하는가. 일반인부터 설계사까지를 위한 인터랙티브 보험 교과서.","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","hasPart":[{"@type":"Chapter","name":"보험의 지도","position":1,"url":"https://insurebook.euiyun.com/chapters/overview.html"},{"@type":"Chapter","name":"위험을 나누는 수학","position":2,"url":"https://insurebook.euiyun.com/chapters/pooling.html"},{"@type":"Chapter","name":"보험료는 어떻게 만들어지는가","position":3,"url":"https://insurebook.euiyun.com/chapters/pricing.html"},{"@type":"Chapter","name":"정보의 비대칭","position":4,"url":"https://insurebook.euiyun.com/chapters/asymmetry.html"},{"@type":"Chapter","name":"보험은 왜 이렇게 복잡한가","position":5,"url":"https://insurebook.euiyun.com/chapters/complexity.html"},{"@type":"Chapter","name":"약관과 설계서 읽는 법","position":6,"url":"https://insurebook.euiyun.com/chapters/contract.html"},{"@type":"Chapter","name":"갱신형·비갱신형·무해지","position":7,"url":"https://insurebook.euiyun.com/chapters/renewal.html"},{"@type":"Chapter","name":"국민건강보험과 실손보험","position":8,"url":"https://insurebook.euiyun.com/chapters/health.html"},{"@type":"Chapter","name":"진단비·수술비·입원비","position":9,"url":"https://insurebook.euiyun.com/chapters/fixed.html"},{"@type":"Chapter","name":"생명보험: 정기와 종신","position":10,"url":"https://insurebook.euiyun.com/chapters/life.html"},{"@type":"Chapter","name":"저축성·연금·변액보험","position":11,"url":"https://insurebook.euiyun.com/chapters/savings.html"},{"@type":"Chapter","name":"손해보험: 자동차·화재·배상","position":12,"url":"https://insurebook.euiyun.com/chapters/property.html"},{"@type":"Chapter","name":"사회보험: 이미 가진 보험","position":13,"url":"https://insurebook.euiyun.com/chapters/social.html"},{"@type":"Chapter","name":"보험설계사는 왜 존재하는가","position":14,"url":"https://insurebook.euiyun.com/chapters/agent.html"},{"@type":"Chapter","name":"수수료와 사업비의 경제학","position":15,"url":"https://insurebook.euiyun.com/chapters/commission.html"},{"@type":"Chapter","name":"보험회사의 속사정","position":16,"url":"https://insurebook.euiyun.com/chapters/company.html"},{"@type":"Chapter","name":"보험금 청구와 분쟁","position":17,"url":"https://insurebook.euiyun.com/chapters/claim.html"},{"@type":"Chapter","name":"보장 설계의 기술","position":18,"url":"https://insurebook.euiyun.com/chapters/planning.html"},{"@type":"Chapter","name":"설계사를 위한 장: 좋은 상담","position":19,"url":"https://insurebook.euiyun.com/chapters/advisor.html"},{"@type":"Chapter","name":"보장 설계 실험실","position":20,"url":"https://insurebook.euiyun.com/chapters/lab.html"},{"@type":"Chapter","name":"용어집 & 종합 퀴즈","position":21,"url":"https://insurebook.euiyun.com/chapters/glossary.html"}]}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/common.js"></script>
+<script src="js/insure.js"></script>
+<style>
+  .paths { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .path { padding: 18px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elev); }
+  .path h3 { margin: 0 0 6px; font-size: 17px; }
+  .path p { margin: 0 0 10px; color: var(--text-dim); font-size: 14.5px; }
+  .path .steps, .trail .steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .path .steps a, .trail .steps a { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .path .steps a:hover, .trail .steps a:hover { text-decoration: none; filter: brightness(1.1); }
+  .numbers { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .numbers div { background: var(--bg-elev); padding: 18px 20px; }
+  .numbers b { display: block; font-family: var(--mono); font-size: 26px; letter-spacing: -0.02em; color: var(--text); }
+  .numbers span { color: var(--text-dim); font-size: 14px; }
+  .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .hero-badges span { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-elev); }
+  .hero-sim { border-radius: 20px; border: 1px solid var(--border); background: var(--bg-elev); overflow: hidden; box-shadow: var(--shadow); }
+  .hero-sim canvas { display: block; width: 100%; }
+  .hero-sim .ctl { display: grid; gap: 10px; padding: 14px 16px 16px; border-top: 1px solid var(--border); }
+  .hero-sim .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero-sim .row .ctrl { flex: 1 1 160px; margin: 0; }
+  .hero-sim .cap { font-size: 14px; color: var(--text-dim); min-height: 44px; line-height: 1.5; }
+  .hero-sim .cap b { color: var(--text); }
+  .questions { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .questions > div { padding: 20px 22px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elev); }
+  .questions h3 { margin: 0 0 8px; font-size: 18px; }
+  .questions p { margin: 0 0 10px; color: var(--text-dim); font-size: 15px; line-height: 1.6; }
+  .questions .steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .questions .steps a { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .trail { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); counter-reset: tr; }
+  .trail > div { counter-increment: tr; padding: 16px; border-radius: 12px; background: var(--bg-elev); border: 1px solid var(--border); }
+  .trail > div::before { content: "PART " counter(tr); font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 700; }
+  .trail b { display: block; font-size: 16px; margin: 4px 0 2px; }
+  .trail small { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
+  .trail p { margin: 0 0 10px; font-size: 14px; color: var(--text-dim); line-height: 1.55; }
+  .series { display: flex; flex-wrap: wrap; gap: 10px; }
+  .series a { padding: 10px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-elev); color: var(--text); font-weight: 600; font-size: 15px; }
+  .series a small { display: block; font-weight: 400; color: var(--text-dim); font-size: 13px; }
+  .series a:hover { text-decoration: none; border-color: var(--accent); }
+  .game-cta { display: grid; gap: 18px; align-items: center; grid-template-columns: minmax(0, 1fr); padding: 24px; border-radius: var(--radius); border: 1px solid var(--accent); background: linear-gradient(120deg, var(--accent-soft), var(--accent-2-soft)); }
+  @media (min-width: 760px) { .game-cta { grid-template-columns: minmax(0, 1fr) auto; } }
+  .game-cta h2 { margin: 0 0 6px; font-size: 24px; }
+  .game-cta p { margin: 0; color: var(--text-dim); font-size: 15.5px; }
+  .game-cta a { justify-self: start; padding: 12px 20px; border-radius: 12px; font-weight: 700; background: var(--accent); color: var(--on-accent); white-space: nowrap; }
+  .game-cta a:hover { text-decoration: none; filter: brightness(1.05); }
+  .persona { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); padding: 22px; border-radius: var(--radius); border: 1px solid var(--border); border-left: 4px solid var(--accent-2); background: var(--bg-elev); }
+  @media (min-width: 760px) { .persona { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+  .persona p { margin: 0 0 10px; color: var(--text-dim); }
+  .persona .slip { margin: 0; }
+  .disclaimer { font-size: 14px; color: var(--text-dim); }
+</style>
+</head>
+<body data-root="">
+<section class="home-hero">
+  <div class="inner">
+    <div>
+      <div class="eyebrow">Interactive Insurance Textbook</div>
+      <h1>보험은 왜<br><span class="grad">이렇게 복잡할까</span></h1>
+      <p>매달 보험료는 빠져나가는데, 무엇이 무엇을 지켜 주는지 한 줄로 말하기 어렵다. 약관은 수백 쪽이고, 같은 '암 진단비'도 계약마다 조건이 다르다. 이 교과서는 위험을 나누는 수학에서 시작해 보험료가 만들어지는 방식, 약관과 갱신, 실손·진단비·종신·저축성·자동차보험, 설계사와 수수료, 보험회사의 속사정, 청구와 분쟁, 보장 설계까지 <strong>숫자를 직접 끌고 바꿔 보며</strong> 배운다. 처음 보험을 드는 사람부터 현장의 보험설계사까지를 위한 책이다.</p>
+      <div class="cta">
+        <a class="primary" href="chapters/overview.html">1장부터 시작하기 →</a>
+        <a class="ghost" href="chapters/lab.html">보장 설계 실험실</a>
+      </div>
+      <div class="hero-badges">
+        <span>21개 챕터</span><span>100여 개 시뮬레이터</span><span>이어지는 케이스: 지우네 상담 노트</span><span>설계사 노트 · 가입자 체크</span><span>2026년 한국 제도 기준</span>
+      </div>
+    </div>
+    <div class="hero-sim" id="hero">
+      <canvas id="hero-cv"></canvas>
+      <div class="ctl">
+        <div class="row">
+          <label class="ctrl"><span>지금 나이 <output id="hero-age-out"></output></span><input type="range" id="hero-age" min="20" max="70" step="1" value="32"></label>
+          <div class="seg" id="hero-sex"><button data-value="m" class="on">남</button><button data-value="f">여</button></div>
+        </div>
+        <div class="cap" id="hero-cap"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>이 책이 답하는 두 가지 질문</h2>
+  <p class="sub">보험을 어렵게 만드는 것은 상품 하나하나가 아니라, 그 밑에 깔린 원리와 판매 구조입니다.</p>
+  <div class="questions">
+    <div>
+      <h3>보험은 왜 이렇게 복잡한가</h3>
+      <p>병과 사고는 제각각이고, 가입자는 자기 위험을 보험사보다 잘 알고, 계약은 수십 년 동안 금리와 의료 환경의 변화를 견뎌야 한다. 여기에 규제와 세제, 그리고 팔기 위한 차별화가 겹친다. 필요한 복잡함과 팔기 위해 덧붙은 복잡함을 가르는 눈을 기른다.</p>
+      <div class="steps"><a href="chapters/pooling.html">02</a><a href="chapters/pricing.html">03</a><a href="chapters/asymmetry.html">04</a><a href="chapters/complexity.html">05</a><a href="chapters/contract.html">06</a><a href="chapters/renewal.html">07</a></div>
+    </div>
+    <div>
+      <h3>보험설계사는 왜 존재하는가</h3>
+      <p>사람은 드물고 큰 위험을 작게 느끼고, 먼 손실을 깎아 본다. 상품을 찾고 해석하고 청구하는 데에도 비용이 든다. 설계사는 그 비용을 대신 지고 보수를 받는다. 그런데 보수는 보험사가 준다. 설계사가 주는 가치와 이해상충을 함께, 정직하게 본다.</p>
+      <div class="steps"><a href="chapters/agent.html">14</a><a href="chapters/commission.html">15</a><a href="chapters/company.html">16</a><a href="chapters/advisor.html">19</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>숫자로 보는 보험</h2>
+  <p class="sub">이 교과서를 끝내면 아래 숫자가 어디서 나오는지, 내 계약에서 무엇을 뜻하는지 설명할 수 있게 됩니다.</p>
+  <div class="numbers">
+    <div><b>1/√N</b><span>위험을 나누는 사람이 100배 늘면 한 사람의 부담이 흔들리는 폭은 10분의 1로 준다. 보험이 서 있는 바닥</span></div>
+    <div><b>3이원</b><span>예정위험률·예정이율·예정사업비율. 보험료는 이 세 가지 가정으로 만들어진다</span></div>
+    <div><b>90일 · 50%</b><span>암 보장의 흔한 면책 기간과 첫해 감액. 가입 직후 서둘러 청구하는 역선택을 막는 장치</span></div>
+    <div><b>15일 · 30일</b><span>청약철회 기간. 증권을 받은 날부터 15일, 청약한 날부터 30일 안에는 이유 없이 되돌릴 수 있다</span></div>
+    <div><b>1200%</b><span>첫해 판매 수수료의 상한(월 보험료의 12배). 판매 비용이 계약 초기에 몰리는 구조와 초기 해지 손실의 원인</span></div>
+    <div><b>3년</b><span>보험금 청구권의 소멸시효. 잊고 있던 보험금도 3년 안에는 청구할 수 있다</span></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>다섯 부의 구성</h2>
+  <p class="sub">1장은 전체 지도, 20장은 실험실, 21장은 용어집입니다. 나머지 장은 다섯 부로 나뉩니다.</p>
+  <div class="trail" id="trail"></div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>이어지는 케이스: 지우네 상담 노트</h2>
+  <div class="persona">
+    <div>
+      <p><strong style="color:var(--text)">서지우(32)와 윤민서(31), 결혼 1년차.</strong> 둘의 서랍에는 보험증권이 여덟 장 있다. 부모님이 고등학생 때 들어 준 종신보험, 대학 선배에게 가입한 갱신형 암보험, 차를 사면서 든 운전자보험, 회사 단체보험. 매달 28만원이 빠져나가는데 무엇이 무엇을 막는지 모른다. 2027년에는 첫 아이를 계획하고 있다.</p>
+      <p><strong style="color:var(--text)">한도윤(29), GA 소속 3년차 설계사.</strong> 지우의 대학 동기다. 원칙은 "팔기 전에 분석". 하지만 종신보험을 새 상품으로 바꾸게 하면 자기 수입이 크게 는다는 것도 안다.</p>
+      <p>책의 모든 장이 셋의 상담을 한 걸음씩 진전시킨다. 가입자의 시각과 설계사의 시각이 함께 나온다. 모두 가상의 인물이며 실제 인물과 무관하다.</p>
+    </div>
+    <div class="slip" id="case-slip"></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <div class="game-cta">
+    <div>
+      <h2>보장 설계 실험실</h2>
+      <p>가족, 소득, 자산, 가지고 있는 보험을 넣으면 필요한 보장과 지금 보장의 차이, 평생 내게 될 보험료, 수천 번의 인생에서 보험이 있을 때와 없을 때의 결과를 보여 준다. 지우네로 시작해 내 가족으로 바꿔 본다.</p>
+    </div>
+    <a href="chapters/lab.html">실험실 열기 →</a>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>전체 챕터</h2>
+  <p class="sub">각 장은 일상의 질문 → 만져 보는 그림 → 원리 → 시뮬레이터 → 실제 제도 → 지우네 상담 노트 → 퀴즈 순서로 구성됩니다.</p>
+  <div class="ch-grid" id="chgrid"></div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>독자별 추천 경로</h2>
+  <p class="sub">지금 필요한 것부터 읽어도 됩니다.</p>
+  <div class="paths">
+    <div class="path"><h3>처음 보험을 든다면</h3><p>원리 하나, 함정 하나, 그리고 꼭 필요한 보장부터.</p><div class="steps"><a href="chapters/overview.html">01</a><a href="chapters/pooling.html">02</a><a href="chapters/complexity.html">05</a><a href="chapters/health.html">08</a><a href="chapters/fixed.html">09</a><a href="chapters/planning.html">18</a></div></div>
+    <div class="path"><h3>가족 보험을 정리한다면</h3><p>공백과 중복을 찾고, 유지와 교체를 판단한다.</p><div class="steps"><a href="chapters/renewal.html">07</a><a href="chapters/health.html">08</a><a href="chapters/life.html">10</a><a href="chapters/social.html">13</a><a href="chapters/planning.html">18</a><a href="chapters/lab.html">20</a></div></div>
+    <div class="path"><h3>설계서를 받았다면</h3><p>서명하기 전에 읽을 것과 되돌릴 권리.</p><div class="steps"><a href="chapters/contract.html">06</a><a href="chapters/renewal.html">07</a><a href="chapters/commission.html">15</a></div></div>
+    <div class="path"><h3>사고가 났다면</h3><p>청구 서류, 소멸시효, 분쟁 절차.</p><div class="steps"><a href="chapters/contract.html">06</a><a href="chapters/health.html">08</a><a href="chapters/claim.html">17</a></div></div>
+    <div class="path"><h3>저축·연금 보험을 권유받았다면</h3><p>해지환급금 곡선과 실질 수익률을 먼저 본다.</p><div class="steps"><a href="chapters/pricing.html">03</a><a href="chapters/savings.html">11</a><a href="chapters/life.html">10</a></div></div>
+    <div class="path"><h3>보험설계사라면</h3><p>원리를 고객의 언어로, 수수료와 유지율의 경제학, 좋은 상담의 원칙.</p><div class="steps"><a href="chapters/pricing.html">03</a><a href="chapters/agent.html">14</a><a href="chapters/commission.html">15</a><a href="chapters/company.html">16</a><a href="chapters/claim.html">17</a><a href="chapters/advisor.html">19</a></div></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>이 사이트 사용법</h2>
+  <div class="flow">
+    <div><b>읽기</b>일상의 질문에서 시작합니다. 보험 용어는 처음 나올 때 풀어 씁니다.</div>
+    <div><b>만지기</b>슬라이더를 밀고 그래프의 점을 끌어 보세요. 대부분의 그림은 움직입니다.</div>
+    <div><b>무너뜨리기</b>값을 끝까지 밀어 보세요. 갱신 보험료가 치솟고 해지환급금이 사라지는 지점이 배울 점입니다.</div>
+    <div><b>골라 읽기</b>설계사 노트는 현장 실무를, 가입자 체크는 바로 확인할 항목을 담습니다.</div>
+    <div><b>내 숫자 넣기</b>20장 실험실에 내 가족과 내 보험을 넣어 봅니다.</div>
+  </div>
+  <p class="disclaimer" style="margin-top:20px">이 사이트의 제도 수치는 2026년 한국 제도를 바탕으로 한 교육용 대표값이며 해마다 바뀝니다. 보험료와 확률은 실제 통계와 상품의 크기를 흉내 낸 교육용 모델로 계산했고, 실제 보험료는 나이·성별·직업·병력·회사·가입 시기에 따라 크게 다릅니다. 특정 보험사나 상품을 권하지 않으며 보험 상담·법률 자문이 아닙니다.</p>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>함께 읽으면 좋은 교과서</h2>
+  <p class="sub">같은 방식으로 만든 인터랙티브 교과서 시리즈입니다.</p>
+  <div class="series">
+    <a href="https://moneybook.euiyun.com/">MoneyBook<small>돈 교과서 · 월급 명세서에서 은퇴 설계까지</small></a>
+    <a href="https://carbook.euiyun.com/">CarBook<small>자동차 공학 · 엔진에서 자율주행까지</small></a>
+    <a href="https://aibook.euiyun.com/">AIBook<small>인공지능 · 만져 보며 배우는 AI</small></a>
+    <a href="https://sensorbook.euiyun.com/">SensorBook<small>이미지 센서 · 빛이 숫자가 되기까지</small></a>
+  </div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  document.getElementById("chgrid").innerHTML = IB.CHAPTERS.map(function (c) {
+    return '<a class="ch-card" href="chapters/' + c.slug + '.html"><span class="num">CHAPTER ' + c.num + "</span><h3>" + c.title + "</h3><p>" + c.desc + '</p><span class="tags">' +
+      c.tags.map(function (t) { return '<span class="' + (t === "sim" ? "sim" : "") + '">' + (t === "sim" ? "시뮬레이터" : t) + "</span>"; }).join("") + "</span></a>";
+  }).join("");
+
+  var about = [
+    "위험을 나누는 수학, 보험료가 만들어지는 방식, 정보 비대칭.",
+    "복잡함의 원천, 약관과 설계서, 갱신과 환급형.",
+    "실손, 진단비, 생명·저축성·손해보험, 그리고 사회보험.",
+    "설계사와 판매채널, 수수료, 보험회사, 청구와 분쟁.",
+    "보장을 짜는 기술과 좋은 상담의 원칙.",
+  ];
+  document.getElementById("trail").innerHTML = IB.PARTS.map(function (s, i) {
+    var chs = IB.CHAPTERS.filter(function (c) { return c.part === i; });
+    return "<div><b>" + s.name + "</b><small>" + s.en + "</small><p>" + about[i] + '</p><span class="steps">' +
+      chs.map(function (c) { return '<a href="chapters/' + c.slug + '.html" title="' + c.title + '">' + c.num + "</a>"; }).join("") + "</span></div>";
+  }).join("");
+
+  var C = INS.CASE;
+  document.getElementById("case-slip").innerHTML = C.policies.map(function (p) {
+    return '<div class="row"><span>' + (p.who === "jiwoo" ? "지우 · " : "민서 · ") + p.name + "</span><span>" + (p.monthly ? p.monthly.toLocaleString("ko-KR") : "회사 부담") + "</span></div>";
+  }).join("") + '<div class="row total"><span>월 보험료 합계</span><span>' + C.total.toLocaleString("ko-KR") + "</span></div>";
+
+  // 히어로: 지금 나이에서 100세까지, 보험이 대비하는 사건이 일어날 누적 확률
+  var KINDS = [
+    { k: "cancer", name: "암", color: "accent" },
+    { k: "stroke", name: "뇌졸중", color: "accent2" },
+    { k: "ami", name: "급성심근경색", color: "ok" },
+    { k: "death", name: "사망", color: "bad" },
+  ];
+  var ageG = IB.range("hero-age", function (v) { return v + "세"; }, draw);
+  var sexG = IB.seg("hero-sex", draw);
+  var cap = document.getElementById("hero-cap");
+  var anim = 0, horizon = 65, box = null;
+  function curve(kind, a0, sex) {
+    var out = [[a0, 0]];
+    for (var y = 1; a0 + y <= 100; y++) out.push([a0 + y, INS.prob(kind, a0, y, sex, "pop")]);
+    return out;
+  }
+  var cv = IB.canvas("#hero-cv", function (ctx, w, h) {
+    var P = IB.palette(), a0 = ageG(), sex = sexG();
+    if (horizon <= a0) horizon = Math.min(100, a0 + 10);
+    var c = IB.chart(ctx, { x: 46, y: 18, w: w - 62, h: h - 56 }, {
+      x: [20, 100], y: [0, 1], xFmt: function (v) { return v + "세"; }, yFmt: function (v) { return Math.round(v * 100) + "%"; },
+      xTicks: [20, 40, 60, 80, 100], yTicks: [0, 0.25, 0.5, 0.75, 1],
+      series: KINDS.map(function (K) {
+        var d = curve(K.k, a0, sex), n = Math.max(2, Math.round(d.length * anim));
+        return { data: d.slice(0, n), color: P[K.color], width: 2.4 };
+      }),
+      bands: [{ x0: 20, x1: a0, color: P.grid }],
+    });
+    box = c;
+    var hx = c.X(horizon);
+    ctx.save(); ctx.strokeStyle = P.text; ctx.globalAlpha = 0.6; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(hx, c.box.y); ctx.lineTo(hx, c.box.y + c.box.h); ctx.stroke(); ctx.restore();
+    ctx.beginPath(); ctx.arc(hx, c.box.y + c.box.h, 7, 0, Math.PI * 2); ctx.fillStyle = P.text; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.font = IB.font(11); ctx.textBaseline = "middle";
+    KINDS.forEach(function (K, i) {
+      var p = INS.prob(K.k, a0, horizon - a0, sex, "pop");
+      ctx.fillStyle = P[K.color]; ctx.beginPath(); ctx.arc(hx, c.Y(p), 4, 0, Math.PI * 2); ctx.fill();
+      var lx = c.box.x + 8, ly = c.box.y + 10 + i * 16;
+      ctx.fillRect(lx, ly - 4, 10, 3);
+      ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.fillText(K.name + " " + Math.round(p * 100) + "%", lx + 16, ly);
+    });
+    ctx.fillStyle = P.text; ctx.textAlign = hx > c.box.x + c.box.w - 70 ? "right" : "left"; ctx.font = IB.font(12, false, 700);
+    ctx.fillText(horizon + "세까지", hx + (ctx.textAlign === "right" ? -8 : 8), c.box.y + c.box.h - 14);
+  }, { aspect: 0.66, minHeight: 260, maxHeight: 380 });
+  IB.drag(cv.canvas, { move: function (x) { if (!box) return; var a = Math.round(20 + (x - box.box.x) / box.box.w * 80); horizon = IB.clamp(a, ageG() + 1, 100); draw(); } });
+  function draw() {
+    var a0 = ageG(), sex = sexG();
+    if (horizon <= a0) horizon = Math.min(100, a0 + 10);
+    var pc = INS.prob("cancer", a0, horizon - a0, sex, "pop"), pd = INS.prob("death", a0, horizon - a0, sex, "pop");
+    cap.innerHTML = "<b>" + a0 + "세 " + (sex === "m" ? "남성" : "여성") + "이 " + horizon + "세가 될 때까지</b> 암을 진단받을 확률은 약 " + Math.round(pc * 100) + "%, 그 전에 사망할 확률은 약 " + Math.round(pd * 100) + "%다. 그래프 아래의 손잡이를 끌어 나이를 옮겨 본다. 보험은 이 곡선들에 값을 매기는 일이다. (교육용 모델, 실제 통계와 다르다)";
+    cv.redraw();
+  }
+  IB.loop(document.getElementById("hero"), function (dt) { if (anim < 1) { anim = Math.min(1, anim + dt * 0.8); cv.redraw(); } });
+  draw();
+})();
+</script>
+</body>
+</html>

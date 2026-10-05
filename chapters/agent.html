@@ -1,0 +1,821 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험은 사람들이 스스로 잘 사지 않는 상품이다. 위험 과소평가와 현재 편향, 탐색 비용, 판매채널별 가격과 상담 깊이, 설계사가 주는 가치와 이해상충, 신뢰재와 평판, 좋은 설계사를 고르는 법을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보험설계사는 왜 존재하는가 · InsureBook</title>
+<meta name="description" content="보험은 사람들이 스스로 잘 사지 않는 상품이다. 위험 과소평가와 현재 편향, 탐색 비용, 판매채널별 가격과 상담 깊이, 설계사가 주는 가치와 이해상충, 신뢰재와 평판, 좋은 설계사를 고르는 법을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/agent.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="보험설계사는 왜 존재하는가 · InsureBook">
+<meta property="og:description" content="보험은 사람들이 스스로 잘 사지 않는 상품이다. 위험 과소평가와 현재 편향, 탐색 비용, 판매채널별 가격과 상담 깊이, 설계사가 주는 가치와 이해상충, 신뢰재와 평판, 좋은 설계사를 고르는 법을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/agent.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/agent.html#chapter","name":"보험설계사는 왜 존재하는가","headline":"보험설계사는 왜 존재하는가 · InsureBook","description":"보험은 사람들이 스스로 잘 사지 않는 상품이다. 위험 과소평가와 현재 편향, 탐색 비용, 판매채널별 가격과 상담 깊이, 설계사가 주는 가치와 이해상충, 신뢰재와 평판, 좋은 설계사를 고르는 법을 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/agent.html","position":14,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"14. 보험설계사는 왜 존재하는가","item":"https://insurebook.euiyun.com/chapters/agent.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="agent">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 14</div>
+    <h1>보험설계사는 왜 존재하는가</h1>
+    <p class="lead">보험 업계에는 오래된 말이 있다. "보험은 사는 것이 아니라 팔리는 것이다." 라면이나 휴대폰은 사람들이 스스로 찾아가서 사지만, 보험은 누군가 찾아와 이야기를 꺼내야 비로소 가입하는 경우가 많다. 그래서 수십만 명의 보험설계사가 있고, 보험료의 적지 않은 몫이 판매에 쓰인다. 이 장은 그 말이 정말인지, 왜 그런지를 숫자로 따져 본다. 그리고 설계사가 실제로 주는 가치와, 수수료 구조 때문에 생기는 이해상충을 함께 저울에 올린다. 결론은 "설계사는 필요 없다"도 "설계사를 믿어라"도 아니다. 어떤 일에서는 설계사가 값을 하고, 어떤 일에서는 혼자 하는 편이 낫다. 그 경계를 긋는 것이 이 장의 목표다.</p>
+    <ul class="objectives">
+      <li>사람들이 큰 위험을 스스로 대비하지 않는 이유(드문 위험의 과소평가, 현재 편향, 미루기)를 시뮬레이터로 확인하고 보장 공백의 크기를 본다.</li>
+      <li>상품을 직접 비교하는 데 드는 시간과 이해 비용을 계산해, 혼자 고르기와 맡기기의 손익분기를 찾는다.</li>
+      <li>전속설계사·GA·방카슈랑스·TM·CM·비교 플랫폼의 비용, 상담 깊이, 상품 범위, 책임 소재를 비교한다.</li>
+      <li>설계사의 가치(니즈 환기·설계·관리·청구 지원)와 이해상충, 그리고 신뢰재 시장에서 평판과 감독이 하는 역할을 이해한다.</li>
+      <li>e-클린보험서비스와 질문 목록, 경고 신호로 좋은 설계사를 고르는 법을 익히고, 설계사라는 직업의 구조를 본다.</li>
+    </ul>
+  </header>
+
+  <section id="sold">
+    <h2>보험은 왜 '팔려야' 하는가</h2>
+    <p><a href="pooling.html">2장</a>에서 보험이 가장 빛나는 곳은 드물지만 한 번 일어나면 감당할 수 없는 위험이라는 것을 봤다. 문제는 바로 그 "드물다"는 성질이 사람의 머리와 잘 맞지 않는다는 데 있다. 행동경제학은 보험을 스스로 사지 않게 만드는 습관을 세 가지로 정리한다.</p>
+    <ul>
+      <li><b>드문 위험의 과소평가.</b> 주변에서 본 적이 없는 일은 일어나지 않을 일처럼 느껴진다. 32세 남성이 20년 안에 암을 진단받을 확률은 이 책의 교육용 모델로 약 7.7%다. 열세 명 중 한 명꼴인데, 대부분은 "나는 아니겠지"라고 생각한다. 사람이 확률을 머릿속에서 줄여서 느끼는 정도를 여기서는 <span class="term">확률 체감 배율</span>이라고 부른다.</li>
+      <li><b>현재 편향</b><span class="en">(Present bias)</span>. 보험료는 오늘 확실하게 나가고, 보험금은 언젠가 불확실하게 들어온다. 사람은 지금의 확실한 손실을 미래의 불확실한 이득보다 훨씬 크게 느낀다. 미래 가치에 곱해지는 할인 계수를 β라고 쓴다. β = 1이면 미래를 지금과 똑같이 대하고, β = 0.5면 미래의 이득을 절반으로 깎아서 느낀다.</li>
+      <li><b>미루기</b><span class="en">(Procrastination)</span>. 필요하다고 생각해도 약관을 읽고, 비교하고, 건강 고지를 하는 귀찮은 일은 "다음 달에" 하기 쉽다. 그 사이에 병이 생기면 더는 같은 조건으로 가입할 수 없다(<a href="asymmetry.html">4장</a>).</li>
+    </ul>
+    <p>이 세 가지를 하나의 부등식으로 쓰면, 한 사람이 보험을 스스로 사는 조건은 이렇다.</p>
+    <div class="formula">$$\beta \cdot w \cdot p \cdot L \cdot (1 + a) \;\ge\; \text{보험료}$$<div class="where">\(p\): 실제 사고 확률, \(L\): 사고가 나면 잃는 돈, \(w\): 확률 체감 배율(1이면 정확하게, 0.3이면 실제의 30%로 느낀다), \(\beta\): 현재 편향 계수, \(a\): 그 사람의 위험 회피 정도(불확실성을 없애는 데 기대손실보다 얼마나 더 낼 용의가 있는가). 보험료는 평균 기대손실에 부가보험료가 붙어 있으니 \(w\)와 \(\beta\)가 1보다 작으면 왼쪽이 쉽게 오른쪽에 못 미친다.</div></div>
+    <p>아래는 32세 200명의 마을이다. 각자 큰 병(여기서는 암)에 걸려 소득과 치료비로 5,000만원을 잃을 위험을 안고 있고, 사람마다 위험의 크기와 위험 회피 정도가 다르다. 보험료는 평균 기대손실에 30%를 붙인 값(20년 동안 월 약 2.1만원)이다. 먼저 확률 체감 배율과 현재 편향을 바꿔 가며 가입 의향이 있는 사람이 몇 명인지 본다. 그다음 '미루기'를 켜고 20년을 돌려, 병에 걸린 사람 가운데 보장이 없는 사람이 몇 명인지 센다. 마지막으로 '설계사가 니즈를 환기한다'를 켠다.</p>
+
+    <div class="sim" id="sim-gp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>스스로 사는 사람 vs 실제로 위험한 사람</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>확률 체감 배율 w <output id="gp-w-out"></output></span><input type="range" id="gp-w" min="0.1" max="1.5" step="0.05" value="0.4"></label>
+          <label class="ctrl"><span>현재 편향 β <output id="gp-b-out"></output></span><input type="range" id="gp-b" min="0.3" max="1" step="0.05" value="0.7"></label>
+          <label class="check"><input type="checkbox" id="gp-pro" checked> 미루기(의향이 있어도 해마다 20%만 실제로 가입)</label>
+          <label class="check"><input type="checkbox" id="gp-adv"> 설계사가 니즈를 환기한다</label>
+          <div class="btn-row"><button class="btn" id="gp-re">20년 다시 돌리기</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>가입함</span><span><i style="background:var(--warn)"></i>의향은 있으나 아직</span><span><i style="background:var(--ok)"></i>병에 걸림 · 보장 있음</span><span><i style="background:var(--bad)"></i>병에 걸림 · 보장 없음</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가입 의향</span><span class="v" id="gp-o-int">—</span></div>
+        <div class="stat"><span class="k">실제 가입</span><span class="v" id="gp-o-sign">—</span></div>
+        <div class="stat"><span class="k">병에 걸린 사람 중 보장 없음</span><span class="v" id="gp-o-gap">—</span></div>
+        <div class="stat"><span class="k">경과</span><span class="v" id="gp-o-yr">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(w 0.4, β 0.7)에서 가입 의향은 200명 중 열 명 남짓이다. 의향이 있는 사람은 대부분 실제 위험이 평균보다 훨씬 큰 사람이다. 병에 걸리는 사람은 20년 동안 십수 명인데, 그 대부분이 보장 없이 맞는다. ② w와 β를 모두 1로 올린다. 확률을 정확히 느끼고 미래를 깎지 않으면 200명 중 절반 가까이가 가입한다. 그래도 위험 회피가 작은 사람은 여전히 사지 않고, 미루기를 켜 두면 가입 전에 병을 만나는 사람도 남는다. ③ 슬라이더를 기본값으로 되돌리고 '설계사가 니즈를 환기한다'만 켠다. 체감 배율이 1로 올라가고 미루기가 사라진다(오늘 서명한다). β는 그대로인데도 가입자와 보장받는 환자가 크게 는다. 반대로 w를 0.1까지 내리면 니즈 환기 없이는 거의 아무도 사지 않는다. (32세 200명, 20년 위험은 이 책의 모델 암 발생 확률 약 7.7% 주변에서 사람마다 다르게 뽑았다. 손실 5,000만원, 보험료는 평균 기대손실 × 1.3. 위험 회피 a는 0~1.5에서 고르게 뽑았다. 시드 고정 교육용 모델이다.)</div>
+    </div>
+
+    <p>시뮬레이터가 보여 준 것은 "보장 공백"<span class="en">(Protection gap)</span>이 단순히 돈이 없어서 생기지 않는다는 점이다. 보험료를 낼 형편이 되는 사람도 위험을 작게 느끼고, 미래를 깎고, 미루다가 보장 없이 병을 만난다. 그리고 스스로 찾아와 가입하는 사람은 평균보다 위험한 사람에 치우친다. 보험사 입장에서는 <a href="asymmetry.html">4장</a>의 역선택과 같은 모양이다. 누군가 찾아가서 평균적인 사람에게도 위험을 보여 주고 오늘 결정하게 만드는 일, 즉 판매가 이 두 문제를 동시에 줄인다. "보험은 팔리는 것"이라는 말의 경제학적 근거가 여기 있다.</p>
+    <p>그런데 같은 시뮬레이터는 판매의 그림자도 보여 준다. 체감 배율을 1보다 크게(1.5) 올리면 실제 위험보다 크게 겁먹은 사람들까지 가입한다. 니즈 환기가 지나쳐 공포 마케팅이 되면 필요 없는 보장, 과한 금액이 팔린다. 위험을 '정확하게' 보이는 것과 '크게' 보이는 것은 다르다. 이 차이가 이 장 후반의 이해상충 이야기로 이어진다.</p>
+  </section>
+
+  <section id="search">
+    <h2>탐색 비용: 혼자 고르는 데 드는 시간</h2>
+    <p>보험이 팔려야 하는 두 번째 이유는 고르기가 어렵다는 것이다. 같은 '암보험'도 회사마다 진단비 정의, 유사암 범위, 감액 기간, 갱신 조건, 해지환급금 구조가 다르다(<a href="complexity.html">5장</a>). 상품 하나를 제대로 이해하려면 설계서와 상품설명서를 읽고, 약관의 지급 사유를 찾아보고, 내 상황과 맞춰 보는 데 한두 시간은 든다. 비교 대상이 늘수록 더 좋은 상품을 고를 가능성은 오르지만, 드는 시간도 그만큼 는다.</p>
+    <p>경제학은 이것을 <span class="term">탐색 비용</span><span class="en">(Search cost)</span>이라고 부른다. 탐색 비용이 클수록 사람들은 비교를 덜 하고, 첫 번째로 권유받은 상품을 그대로 산다. 아래 시뮬레이터는 시장에 상품이 40개 있을 때, 그중 몇 개를 직접 비교할지를 고르는 문제다. 상품마다 같은 예산에서 주는 보장의 가치가 다르다(평균적인 상품을 0으로 두고 10년 동안의 차이를 돈으로 환산했다). 혼자 비교하는 사람은 상품의 진짜 가치를 정확히 보지 못하고, 이해도가 낮을수록 잡음이 크다.</p>
+    <p>그래프 위의 손잡이를 좌우로 끌어 비교할 상품 수를 바꾼다. 그다음 시간 가치와 상품 이해도를 바꿔, 금색 선(설계사에게 맡겼을 때)과 파란 곡선(혼자 골랐을 때의 순가치)이 어디서 엇갈리는지 본다.</p>
+
+    <div class="sim" id="sim-sc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>몇 개를 비교할 것인가: 혼자 고르기 vs 맡기기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>내 시간의 가치(시간당) <output id="sc-wage-out"></output></span><input type="range" id="sc-wage" min="5000" max="100000" step="5000" value="30000"></label>
+          <label class="ctrl"><span>상품 이해도 <output id="sc-lit-out"></output></span><input type="range" id="sc-lit" min="0" max="100" step="5" value="40"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>고른 상품의 가치</span><span><i style="background:var(--bad)"></i>비교에 쓴 시간 비용</span><span><i style="background:var(--accent)"></i>혼자: 순가치</span><span><i style="background:var(--accent-2)"></i>설계사에게 맡김: 순가치</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">비교한 상품 수</span><span class="v" id="sc-o-n">—</span></div>
+        <div class="stat"><span class="k">혼자 · 순가치</span><span class="v" id="sc-o-diy">—</span></div>
+        <div class="stat"><span class="k">혼자 · 가장 좋은 비교 개수</span><span class="v" id="sc-o-best">—</span></div>
+        <div class="stat"><span class="k">맡김 · 순가치</span><span class="v" id="sc-o-adv">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(시간당 3만원, 이해도 40%)에서 손잡이를 끌어 본다. 처음 몇 개는 비교할수록 순가치가 오르지만 곧 시간 비용이 이득을 따라잡는다. 이 조건에서는 금색 선이 파란 곡선의 꼭대기보다 높다. ② 이해도를 90%로 올리고 시간 가치를 1만원으로 내린다. 파란 곡선의 꼭대기가 금색 선 위로 올라간다. 보험을 잘 알고 시간이 넉넉한 사람은 혼자 많이 비교하는 편이 맡기는 것보다 낫다. ③ 이해도를 0%로 내린다. 잡음이 너무 커서 많이 비교해도 고른 상품의 가치가 거의 오르지 않는다. 비교 사이트를 열 개 띄워 놓아도 무엇이 다른지 모르면 소용이 없다. (상품 40개의 가치는 표준편차 150만원으로 뽑았고, 상품 하나를 이해하는 데 1.5시간이 든다고 가정했다. 설계사는 잡음이 작지만 수수료가 큰 상품 쪽으로 약간 기울고(편향 가중 0.6), 맡기는 비용은 아래 채널 비교의 정기보험 판매비용 차이 10년분을 썼다. 300번 반복한 평균이며 교육용 모델이다.)</div>
+    </div>
+
+    <p>답은 사람마다 다르다. 시간이 귀하고 보험을 잘 모르는 사람에게는 잘 아는 사람에게 맡기는 비용이 싸고, 보험을 잘 알고 시간이 있는 사람에게는 그 비용이 비싸다. 설계사가 존재하는 두 번째 이유가 이것이다. 수십 개 상품의 약관을 이미 읽어 둔 사람에게 비교를 맡기면, 한 사람 한 사람이 같은 공부를 반복하지 않아도 된다. 다만 금색 선은 설계사가 성실하고, 수수료 쪽으로 '약간만' 기운다는 가정 위에 있다. 그 가정이 깨지면 금색 선은 내려간다. 이것도 뒤에서 다시 다룬다.</p>
+    <div class="callout tip">
+      <strong>탐색 비용을 줄이는 공공 도구</strong>
+      생명보험협회와 손해보험협회의 공시실에서는 상품별 보험료와 보장 내용을 같은 조건으로 비교해 볼 수 있다. 내보험다보여에서는 내가 이미 가진 계약을 한 번에 조회할 수 있다. 두 가지만 써도 "혼자 비교하기"의 시간 비용이 크게 줄어, 시뮬레이터의 파란 곡선이 위로 올라간다.
+    </div>
+  </section>
+
+  <section id="channels">
+    <h2>판매채널 지도</h2>
+    <p>보험이 가입자에게 도착하는 길을 <span class="term">판매채널</span><span class="en">(Distribution channel)</span>이라고 한다. 같은 보험회사가 여러 길로 상품을 팔고, 길마다 비용과 상담의 깊이가 다르다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 340" role="img" aria-label="보험회사에서 가입자까지 이어지는 여섯 판매채널">
+        <defs><marker id="ag-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="60" y="20" text-anchor="middle" class="lbl-dim">상품을 만든다</text>
+        <text x="230" y="20" text-anchor="middle" class="lbl-dim">파는 길</text>
+        <text x="400" y="20" text-anchor="middle" class="lbl-dim">산다</text>
+        <rect x="8" y="140" width="104" height="72" rx="8" class="f-acc-soft"/>
+        <text x="60" y="170" text-anchor="middle" class="lbl-acc">보험회사</text>
+        <text x="60" y="192" text-anchor="middle" class="lbl-dim">상품·가격·심사</text>
+        <rect x="348" y="140" width="104" height="72" rx="8" class="f-ok-soft"/>
+        <text x="400" y="170" text-anchor="middle" class="lbl-b">가입자</text>
+        <text x="400" y="192" text-anchor="middle" class="lbl-dim">지우네</text>
+        <g>
+          <rect x="146" y="32" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="50" class="lbl-b">전속설계사</text><text x="156" y="68" class="lbl-dim">한 회사 상품만 판다</text>
+          <rect x="146" y="80" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="98" class="lbl-b">GA 소속 설계사</text><text x="156" y="116" class="lbl-dim">여러 회사 상품을 판다</text>
+          <rect x="146" y="128" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="146" class="lbl-b">방카슈랑스</text><text x="156" y="164" class="lbl-dim">은행 창구에서 판다</text>
+          <rect x="146" y="176" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="194" class="lbl-b">TM</text><text x="156" y="212" class="lbl-dim">전화로 권유한다</text>
+          <rect x="146" y="224" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="242" class="lbl-b">CM(다이렉트)</text><text x="156" y="260" class="lbl-dim">온라인에서 직접 산다</text>
+          <rect x="146" y="272" width="168" height="42" rx="7" class="f-surface"/>
+          <text x="156" y="290" class="lbl-b">비교 플랫폼</text><text x="156" y="308" class="lbl-dim">여러 회사를 비교해 연결</text>
+        </g>
+        <g class="s-line">
+          <path d="M112 176 L146 53" marker-end="url(#ag-ar1)"/><path d="M112 176 L146 101" marker-end="url(#ag-ar1)"/><path d="M112 176 L146 149" marker-end="url(#ag-ar1)"/>
+          <path d="M112 176 L146 197" marker-end="url(#ag-ar1)"/><path d="M112 176 L146 245" marker-end="url(#ag-ar1)"/><path d="M112 176 L146 293" marker-end="url(#ag-ar1)"/>
+          <path d="M314 53 L348 176" marker-end="url(#ag-ar1)"/><path d="M314 101 L348 176" marker-end="url(#ag-ar1)"/><path d="M314 149 L348 176" marker-end="url(#ag-ar1)"/>
+          <path d="M314 197 L348 176" marker-end="url(#ag-ar1)"/><path d="M314 245 L348 176" marker-end="url(#ag-ar1)"/><path d="M314 293 L348 176" marker-end="url(#ag-ar1)"/>
+        </g>
+        <text x="230" y="332" text-anchor="middle" class="lbl-dim">위로 갈수록 대면 상담, 아래로 갈수록 스스로 결정</text>
+      </svg>
+      <figcaption><b>그림 1. 판매채널 지도.</b> 같은 보험회사의 상품이 여섯 갈래 길로 가입자에게 간다. 위쪽 대면 채널은 상담이 깊고 판매비용이 크며, 아래쪽 비대면 채널은 판매비용이 작은 대신 결정과 책임이 가입자에게 더 많이 넘어온다.</figcaption>
+    </figure>
+
+    <p>몇 가지 용어를 정리한다. <span class="term">전속설계사</span>는 한 보험회사에 소속되어 그 회사 상품만 판다. <span class="term">GA</span><span class="en">(General Agency, 법인보험대리점)</span>는 여러 보험회사와 위탁 계약을 맺고 여러 회사 상품을 함께 파는 판매 전문 회사이고, 도윤이 여기 소속이다. <span class="term">방카슈랑스</span><span class="en">(Bancassurance)</span>는 은행 창구에서 보험을 파는 것, <span class="term">TM</span><span class="en">(Telemarketing)</span>은 전화 판매, <span class="term">CM</span><span class="en">(Cyber marketing)</span>은 보험회사 홈페이지나 앱에서 직접 가입하는 다이렉트 채널이다. <span class="term">비교 플랫폼</span>은 여러 회사의 상품을 한 화면에 비교해 보여 주고 가입을 연결하는 온라인 서비스로, 규제 범위 안에서 시범적으로 넓어지고 있다(2026년 기준).</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>채널</th><th>판매비용</th><th>상담 깊이</th><th>상품 범위</th><th>잘못 팔았을 때 책임</th></tr></thead>
+      <tbody>
+        <tr><td>전속설계사</td><td>큼</td><td>깊음(대면, 장기 관리)</td><td>한 회사</td><td>보험회사가 직접 책임(설계사는 회사의 모집인)</td></tr>
+        <tr><td>GA 소속 설계사</td><td>큼</td><td>깊음(대면, 여러 회사 비교)</td><td>여러 회사</td><td>GA와 보험회사가 함께(GA에도 배상 책임과 내부통제 의무)</td></tr>
+        <tr><td>방카슈랑스</td><td>중간</td><td>얕음~중간(창구 직원)</td><td>은행이 제휴한 회사, 주로 저축성</td><td>은행(판매사)과 보험회사</td></tr>
+        <tr><td>TM</td><td>중간</td><td>중간(전화, 녹취)</td><td>한 회사 또는 대리점 상품</td><td>보험회사·대리점, 통화 녹취가 근거</td></tr>
+        <tr><td>CM(다이렉트)</td><td>작음</td><td>얕음(화면 안내, 상담 채팅)</td><td>한 회사</td><td>보험회사. 다만 고르는 판단은 가입자 몫</td></tr>
+        <tr><td>비교 플랫폼</td><td>작음~중간</td><td>얕음(비교 정보 중심)</td><td>제휴한 여러 회사</td><td>플랫폼·보험회사, 범위는 제도에 따라 다름</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>한 가지 흔한 오해가 있다. 같은 보험회사의 같은 상품이라면 전속설계사에게 사든 GA에서 사든 보험료는 같다. 보험료는 상품마다 정해지기 때문이다. 채널에 따라 값이 달라지는 것은 채널마다 <b>다른 상품</b>을 팔기 때문이다. CM 전용 상품, TM 전용 상품처럼 판매비용을 낮춰 설계한 상품이 따로 있다. 아래 시뮬레이터는 같은 보장을 채널별 전용 상품으로 만들었을 때 보험료가 어떻게 다른지를, 이 책의 엔진에 채널별 사업비 가정을 넣어 계산한다. 상품 종류를 바꾸고, 가입 나이를 움직여 본다.</p>
+
+    <div class="sim" id="sim-ch">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>같은 보장, 채널별 보험료와 상담 깊이</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ch-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="ch-prod"><button data-value="term" class="on">정기 3억</button><button data-value="cancer">암 진단 3천</button><button data-value="whole">종신 1억</button></div>
+          <label class="ctrl"><span>가입 나이(남) <output id="ch-age-out"></output></span><input type="range" id="ch-age" min="25" max="50" step="1" value="32"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">대면 상품(월)</span><span class="v" id="ch-o-f">—</span></div>
+        <div class="stat"><span class="k">CM 상품(월)</span><span class="v" id="ch-o-c">—</span></div>
+        <div class="stat"><span class="k">차이</span><span class="v" id="ch-o-d">—</span></div>
+        <div class="stat"><span class="k">납입기간 누적 차이</span><span class="v" id="ch-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 정기 3억(60세 만기)에서 대면 상품과 CM 상품의 차이를 본다. 이 책의 모델로 32세면 월 약 5천원, 비율로 12% 안팎이다. 28년 납입이면 누적 차이가 약 169만원이다. ② 종신 1억으로 바꾼다. 비율은 11%로 비슷한데 차이 금액은 월 약 1.9만원, 20년이면 약 444만원으로 커진다. 사업비 대부분이 보험료에 비례해 매겨지기 때문에, 보험료가 큰 계약일수록 채널 차이의 절대 금액이 커진다. ③ 정기로 돌아가 나이를 50세로 올린다. 60세 만기라 납입기간이 10년으로 짧아지고 차이 비율이 16% 가까이로 커진다. 신계약비는 계약 한 번에 드는 비용이라 짧은 기간에 나눠 낼수록 무겁다. (채널별 신계약비·유지비·건당 비용은 이 책의 교육용 가정이다: 대면 α 1.0·β 10%, TM 0.8·9%, 방카 0.6·8%, 플랫폼 0.4·5.5%, CM 0.3·5%. 상담 깊이 점은 이 책의 정성 평가다. 실제 보험료는 회사·상품·심사에 따라 크게 다르고, CM이 항상 싼 것도 아니다.)</div>
+    </div>
+
+    <p>이 책의 가정에서는 어느 상품이든 다이렉트 쪽이 10% 남짓 싸고, 보험료가 큰 계약일수록 차이 금액이, 납입기간이 짧을수록 차이 비율이 커진다. 반대로 상담 깊이 점은 거꾸로 줄어든다. 실제 시장에서는 회사마다 사업비와 심사 기준이 달라 대면 상품이 더 싼 경우도 있으니, 이 차이는 '경향'으로만 받아들인다. 표의 마지막 칸도 함께 봐야 한다. CM으로 가입하면 고지 항목을 혼자 읽고 답해야 하고, 보장이 내 상황에 맞는지 판단하는 것도 내 몫이다. 고지를 잘못 해서 나중에 보험금이 깎이면 그 손실은 몇 년치 보험료 차이를 순식간에 넘는다. 싼 길은 "스스로 판단할 수 있는 사람"에게 싸다.</p>
+
+    <div class="callout pro">
+      <strong>"왜 설계사한테 사면 더 비싸요?"에 답하기</strong>
+      정기보험처럼 단순한 상품은 다이렉트가 쌀 수 있다는 사실을 먼저 인정하는 편이 신뢰를 얻는다. 그다음 차이의 이유를 숫자로 보여 준다. "이 차이가 제 상담·설계·관리·청구 지원의 값입니다. 이 상품만 놓고 보면 직접 가입하셔도 괜찮습니다. 대신 고지 항목은 함께 보고, 전체 보장 구조는 제가 정리해 드리겠습니다." 고객이 다이렉트로 가입해도 관계는 남고, 다음에 복잡한 상품(진단비 조합, 실손 전환, 청구)을 상의하러 돌아온다. 가격 차이를 숨기거나 다이렉트를 깎아내리면, 고객이 나중에 직접 비교해 본 순간 신뢰가 한꺼번에 무너진다.
+    </div>
+  </section>
+
+  <section id="value">
+    <h2>설계사가 주는 가치</h2>
+    <p>판매비용만 보면 설계사는 비싼 중개인이다. 하지만 설계사가 하는 일은 서명을 받는 것에서 끝나지 않는다. 좋은 설계사의 일은 네 단계로 나뉜다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 300" role="img" aria-label="설계사가 주는 가치의 네 단계와 수수료가 지급되는 시점">
+        <defs><marker id="ag-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="6" y="14" width="102" height="128" rx="8" class="f-acc-soft"/>
+        <rect x="122" y="14" width="102" height="128" rx="8" class="f-acc-soft"/>
+        <rect x="238" y="14" width="102" height="128" rx="8" class="f-ok-soft"/>
+        <rect x="354" y="14" width="102" height="128" rx="8" class="f-ok-soft"/>
+        <text x="57" y="40" text-anchor="middle" class="lbl-b">니즈 환기</text>
+        <text x="173" y="40" text-anchor="middle" class="lbl-b">설계</text>
+        <text x="289" y="40" text-anchor="middle" class="lbl-b">계약 관리</text>
+        <text x="405" y="40" text-anchor="middle" class="lbl-b">청구 지원</text>
+        <text x="57" y="70" text-anchor="middle" class="lbl-dim">몰랐던 위험을</text><text x="57" y="90" text-anchor="middle" class="lbl-dim">보이게 하고</text><text x="57" y="110" text-anchor="middle" class="lbl-dim">미루기를 끝낸다</text>
+        <text x="173" y="70" text-anchor="middle" class="lbl-dim">공백과 중복을</text><text x="173" y="90" text-anchor="middle" class="lbl-dim">찾아 예산 안에서</text><text x="173" y="110" text-anchor="middle" class="lbl-dim">조합을 짠다</text>
+        <text x="289" y="70" text-anchor="middle" class="lbl-dim">고지·서류 점검</text><text x="289" y="90" text-anchor="middle" class="lbl-dim">갱신·실효 관리</text><text x="289" y="110" text-anchor="middle" class="lbl-dim">삶의 변화 반영</text>
+        <text x="405" y="70" text-anchor="middle" class="lbl-dim">받을 수 있는</text><text x="405" y="90" text-anchor="middle" class="lbl-dim">보험금을 찾고</text><text x="405" y="110" text-anchor="middle" class="lbl-dim">서류를 돕는다</text>
+        <path d="M108 78 h12" class="s-line" marker-end="url(#ag-ar2)"/><path d="M224 78 h12" class="s-line" marker-end="url(#ag-ar2)"/><path d="M340 78 h12" class="s-line" marker-end="url(#ag-ar2)"/>
+        <text x="6" y="176" class="lbl">수수료가 지급되는 시점</text>
+        <rect x="6" y="188" width="218" height="26" class="f-bad-soft"/>
+        <text x="115" y="206" text-anchor="middle" class="lbl-bad">계약 체결 무렵에 대부분</text>
+        <rect x="238" y="188" width="102" height="26" class="f-warn-soft"/>
+        <text x="289" y="206" text-anchor="middle" class="lbl-dim">몇 년간 소액</text>
+        <rect x="354" y="188" width="102" height="26" class="f-surface"/>
+        <text x="405" y="206" text-anchor="middle" class="lbl-dim">거의 없음</text>
+        <text x="6" y="246" class="lbl">가입자에게 가치가 드러나는 시점</text>
+        <rect x="6" y="258" width="218" height="26" class="f-surface"/>
+        <text x="115" y="276" text-anchor="middle" class="lbl-dim">당장은 보이지 않는다</text>
+        <rect x="238" y="258" width="218" height="26" class="f-ok-soft"/>
+        <text x="347" y="276" text-anchor="middle" class="lbl-b">사고가 났을 때, 몇 년 뒤</text>
+      </svg>
+      <figcaption><b>그림 2. 설계사 가치의 네 단계와 보수의 시점.</b> 수수료는 주로 앞의 두 단계(판매)에 몰려 지급되지만, 가입자가 가치를 실감하는 것은 뒤의 두 단계(관리·청구)다. 이 어긋남이 '팔고 나면 연락이 끊기는' 설계사를 만들고, 반대로 뒤 단계까지 챙기는 설계사가 오래 살아남는 이유도 된다(<a href="commission.html">15장</a>).</figcaption>
+    </figure>
+
+    <p><b>니즈 환기</b>는 앞의 첫 시뮬레이터에서 본 것이다. 사람들이 작게 느끼는 위험을 제 크기로 보이게 하고, 결정을 미루지 않게 한다. <b>설계</b>는 여러 계약을 겹치지 않게 조합하는 일이다. 지우의 서랍에서 일상생활배상책임이 두 번 들어 있던 것처럼(<a href="property.html">12장</a>) 혼자 가입하면 중복과 공백이 함께 생긴다. <b>계약 관리</b>는 고지 항목을 제대로 답했는지 점검하고, 갱신과 납입을 챙기고, 결혼·출산·이직 같은 변화에 맞춰 보장을 고치는 일이다. <b>청구 지원</b>은 사고가 났을 때 받을 수 있는 보험금을 빠짐없이 찾고 서류를 챙기는 일이다.</p>
+    <p>네 번째 가치는 숫자로 보기 쉽다. 사람들은 자기 보험이 무엇을 보장하는지 잊는다. 소액 실손 청구는 귀찮아서 넘기고, 수술 특약이 있다는 사실을 몰라서 수술비를 청구하지 않는다. 아래는 한 사람의 20년이다. 위쪽 타임라인에 일어나는 청구 사유가 떨어지고, 채워진 점은 받은 보험금, 빈 점은 놓친 보험금이다. 아래 막대는 20년 동안의 기대값이다. '혼자'와 '설계사 도움'을 번갈아 누르고, 혼자 챙기는 정도와 실손24 사용 여부를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-cl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>20년 동안 놓치는 보험금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cl-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="cl-mode"><button data-value="self" class="on">혼자</button><button data-value="adv">설계사 도움</button></div>
+          <label class="ctrl"><span>혼자일 때 소액 청구를 놓치는 비율 <output id="cl-m-out"></output></span><input type="range" id="cl-m" min="0" max="60" step="5" value="30"></label>
+          <label class="check"><input type="checkbox" id="cl-auto"> 실손24 전산 청구를 쓴다</label>
+          <div class="btn-row"><button class="btn" id="cl-re">다른 20년</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>받은 보험금</span><span><i style="background:var(--bad)"></i>놓친 보험금</span><span><i style="background:var(--accent-2)"></i>설계사 경유 판매비용(10년)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">20년 청구 가능액(기대)</span><span class="v" id="cl-o-all">—</span></div>
+        <div class="stat"><span class="k">혼자 · 놓치는 돈</span><span class="v" id="cl-o-self">—</span></div>
+        <div class="stat"><span class="k">도움 · 놓치는 돈</span><span class="v" id="cl-o-adv">—</span></div>
+        <div class="stat"><span class="k">도움의 가치 − 판매비용</span><span class="v" id="cl-o-net">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 '혼자'와 '설계사 도움'을 번갈아 누른다. 혼자일 때는 20년 동안 기대값으로 약 100만원을 놓치고, 대부분이 소액 실손 청구다. 도움을 받으면 그 손실이 4분의 1로 준다. ② 실손24를 켠다. 소액 청구를 놓치는 비율이 크게 줄어 '도움의 가치'가 판매비용 아래로 내려간다. 청구 전산화가 설계사의 일 하나를 기계가 대신하는 모습이다. ③ 놓치는 비율을 60%로 올린다. 보험을 잘 챙기지 않는 사람일수록 도움의 가치가 커진다. '다른 20년'을 누르면 드물게 진단비 사건이 떨어진다. 한 번이라도 진단비를 놓치면 그 손실은 다른 모든 소액 청구보다 크다. (소액 실손 청구 연 3건·건당 약 4만원, 수술·입원 특약 연 0.12건·건당 약 80만원, 진단비 3,000만원은 이 책의 모델 암 발생률을 따랐다. 수술·입원은 소액의 40%, 진단비는 7%의 비율로 놓친다고 가정했다. 도움을 받으면 놓치는 비율이 4분의 1, 실손24는 소액 청구 누락을 70% 줄인다고 가정했다. 교육용 모델이다.)</div>
+    </div>
+
+    <p>결과는 생각보다 담담하다. 평균적인 사람에게 청구 지원의 기대 가치는 판매비용과 비슷한 크기이고, 청구 전산화가 넓어질수록 줄어든다. 청구 지원의 진짜 가치는 평균이 아니라 꼬리에 있다. 큰 병이나 사고를 겪었을 때 어떤 계약에서 무엇을 받을 수 있는지, 진단서에 무엇이 적혀야 하는지, 보험사가 지급을 미루면 무엇을 해야 하는지(<a href="claim.html">17장</a>)를 아는 사람이 곁에 있다는 것은 평소의 기대값보다 큰 의미가 있다. 다만 그 가치는 설계사가 그때까지 일을 계속하고 있어야 받을 수 있다. 이 장 끝에서 이 조건이 생각보다 까다롭다는 것을 본다.</p>
+  </section>
+
+  <section id="conflict">
+    <h2>이해상충과 신뢰재</h2>
+    <p>설계사의 보수는 대부분 보험회사가 주는 <span class="term">모집수수료</span>다. 수수료는 대개 월 보험료에 비례하고, 상품마다 배수가 다르다. 그러면 설계사에게는 고객에게 가장 맞는 상품보다 수수료가 큰 상품을 권할 유인이 생긴다. 이것이 <span class="term">이해상충</span><span class="en">(Conflict of interest)</span>이다. 설계사가 나쁜 사람이라서가 아니라 보수 구조가 그렇게 기울어 있기 때문이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 310" role="img" aria-label="고객에게 맞는 상품과 수수료가 큰 상품 사이에서 기울어진 저울과 세 가지 균형추">
+        <polygon points="230,170 214,200 246,200" class="f-elev"/>
+        <line x1="70" y1="140" x2="390" y2="176" class="s-line"/>
+        <circle cx="230" cy="158" r="4" class="f-acc2"/>
+        <line x1="90" y1="142" x2="90" y2="160" class="s-dash"/><line x1="370" y1="174" x2="370" y2="194" class="s-dash"/>
+        <rect x="22" y="160" width="136" height="54" rx="7" class="f-ok-soft"/>
+        <text x="90" y="182" text-anchor="middle" class="lbl-b">고객에게 맞는 상품</text>
+        <text x="90" y="202" text-anchor="middle" class="lbl-dim">예: 정기·진단비 보강</text>
+        <rect x="302" y="194" width="136" height="54" rx="7" class="f-bad-soft"/>
+        <text x="370" y="216" text-anchor="middle" class="lbl-bad">수수료가 큰 상품</text>
+        <text x="370" y="236" text-anchor="middle" class="lbl-dim">예: 큰 종신·저축성</text>
+        <text x="230" y="26" text-anchor="middle" class="lbl">수수료 ≈ 월 보험료 × 배수</text>
+        <text x="230" y="48" text-anchor="middle" class="lbl-dim">보험료가 클수록, 배수가 클수록 저울이 오른쪽으로</text>
+        <path d="M300 96 q50 0 64 60" class="s-bad" fill="none"/>
+        <text x="300" y="90" class="lbl-bad">기울이는 힘</text>
+        <text x="16" y="276" class="lbl-acc">균형추</text>
+        <text x="80" y="276" class="lbl">평판·소개</text>
+        <text x="190" y="276" class="lbl">규제·감독</text>
+        <text x="304" y="276" class="lbl">유지율·환수</text>
+        <text x="80" y="298" class="lbl-dim">오래 일할수록</text>
+        <text x="190" y="298" class="lbl-dim">적합성·설명의무</text>
+        <text x="304" y="298" class="lbl-dim">맞지 않으면 해지</text>
+      </svg>
+      <figcaption><b>그림 3. 이해상충의 저울.</b> 수수료는 저울을 '보험료가 크고 배수가 큰 상품' 쪽으로 기울인다. 이를 되돌리는 힘은 세 가지다. 오래 일하려는 설계사에게 평판과 소개는 큰 자산이고, 금융소비자보호법의 적합성 원칙·설명의무가 맞지 않는 권유를 막으며, 고객이 곧 해지하면 수수료를 돌려내야 하는 환수 규정이 있다(<a href="commission.html">15장</a>).</figcaption>
+    </figure>
+
+    <p>이해상충이 특히 까다로운 이유는 보험이 <span class="term">신뢰재</span><span class="en">(Credence good)</span>이기 때문이다. 경제학은 상품을 품질을 언제 알 수 있느냐로 나눈다. 옷이나 과일은 사기 전에 보고 고를 수 있다(탐색재). 식당 음식은 먹어 봐야 안다(경험재). 그런데 자동차 정비, 의료, 법률 자문, 금융 자문은 <b>써 본 뒤에도</b> 그 조언이 좋았는지 알기 어렵다. 정비사가 "이 부품을 바꿔야 한다"고 할 때 정말 필요했는지 손님은 끝내 모른다. 보험 상담도 같다. 권유받은 상품이 최선이었는지는 수십 년 뒤 사고가 났을 때나, 아니면 영영 알 수 없다.</p>
+    <p>품질을 확인할 수 없는 시장에서는 정직한 판매자가 손해를 볼 수 있다. 정직한 조언과 수수료 위주의 조언이 손님 눈에는 똑같아 보이는데, 수수료 위주의 조언이 돈을 더 벌기 때문이다. 이런 시장을 지키는 장치는 두 가지다. 하나는 <b>평판</b>이다. 소개와 후기, 설계사의 판매 이력 공개가 품질을 간접적으로 보이게 한다. 다른 하나는 <b>감독</b>이다. 적합성·설명의무 같은 판매 규칙을 두고, 위반을 적발하면 제재한다.</p>
+    <p>아래는 설계사 60명의 시장이다. 파란 점은 고객에게 맞는 상품을 권하는 설계사, 빨간 점은 수수료가 큰 상품을 권하는 설계사다. 해마다 더 많이 번 쪽의 방식이 퍼진다(새로 들어오는 설계사는 반반이다). 처음에는 그대로 재생해 보고, 평판 가시성과 감독 강도를 바꿔 시장이 어디로 가는지 본다.</p>
+
+    <div class="sim" id="sim-cr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>신뢰재 시장: 정직한 설계사는 살아남는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cr-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>평판 가시성 <output id="cr-r-out"></output></span><input type="range" id="cr-r" min="0" max="1" step="0.05" value="0.2"></label>
+          <label class="ctrl"><span>감독 강도(적발 확률) <output id="cr-a-out"></output></span><input type="range" id="cr-a" min="0" max="0.3" step="0.01" value="0.05"></label>
+          <label class="ctrl"><span>수수료 격차 <output id="cr-g-out"></output></span><input type="range" id="cr-g" min="0" max="1" step="0.05" value="0.5"></label>
+          <div class="btn-row"><button class="btn primary" id="cr-play">일시정지</button><button class="btn" id="cr-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">경과</span><span class="v" id="cr-o-t">—</span></div>
+        <div class="stat"><span class="k">정직한 설계사 비율</span><span class="v" id="cr-o-x">—</span></div>
+        <div class="stat"><span class="k">정직 vs 수수료 위주 수입</span><span class="v" id="cr-o-p">—</span></div>
+        <div class="stat"><span class="k">고객 피해(상대값)</span><span class="v" id="cr-o-h">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(평판 0.2, 감독 5%, 격차 50%)에서 재생한다. 수수료 위주 설계사가 조금 더 벌어서 파란 점이 서서히 줄어든다. ② 평판 가시성과 감독을 모두 0으로 내리고 처음부터 돌린다. 품질을 아무도 볼 수 없으면 정직한 설계사는 열 명 중 두 명 정도로 줄어든다. 새로 들어오는 사람이 있어 0이 되지는 않을 뿐이다. 신뢰재 시장이 무너지는 모습이다. ③ 평판을 0.5, 감독을 10%로 올린다. 수수료 격차가 그대로여도 정직한 쪽이 더 벌게 되어 시장이 파랗게 바뀐다. 수수료 격차를 0으로 줄이는 것(수수료 구조 개편)도 같은 효과를 낸다. (수입은 정직 1 + 0.6×평판, 수수료 위주 (1 + 격차)×(1 − 0.6×평판) − 2.5×적발 확률로 둔 교육용 모델이다. 해마다 5%가 새 설계사로 바뀐다.)</div>
+    </div>
+
+    <p>세 개의 손잡이는 모두 현실의 제도와 연결된다. 평판 가시성은 설계사의 불완전판매 이력과 계약 유지율을 공개하는 제도, 소개 문화, 상담 후기에 해당한다. 감독 강도는 금융소비자보호법의 판매 원칙과 금융감독원의 검사·제재다. 수수료 격차는 상품별 수수료 배수와 시책이다. 셋 중 무엇 하나만으로는 부족하고, 함께 움직일 때 시장이 정직한 쪽으로 기운다. 각 나라가 이 문제를 어떻게 풀려 했는지 보면 쉬운 답이 없다는 것도 알 수 있다.</p>
+
+    <div class="callout deep">
+      <strong>해외의 실험: 수수료를 금지하면 어떻게 되는가</strong>
+      영국은 2013년 무렵 시행된 소매유통개혁(RDR, Retail Distribution Review)으로 투자형 금융상품(투자성 보험·연금 포함)을 자문할 때 상품 제공자에게서 수수료를 받는 것을 금지하고, 고객에게 자문료를 직접 받도록 바꿨다. 자문 인력의 자격 기준도 높였다. 이해상충은 줄었다는 평가가 많지만, 자문료를 낼 형편이 안 되거나 낼 생각이 없는 사람들이 자문을 받지 않게 되는 '자문 공백'<span class="en">(Advice gap)</span> 논쟁이 이어졌고, 이후 저렴한 안내·디지털 자문을 넓히는 후속 논의가 있었다. 순수 보장성 보험은 이 금지 대상에서 빠졌다. 네덜란드·호주 등도 비슷한 시기에 금융 자문의 보수 구조를 손봤다. 교훈은 양쪽이다. 수수료는 이해상충을 만들지만, 수수료 덕분에 자문이 '공짜처럼' 보여 더 많은 사람이 상담을 받는다. 한국에도 금융소비자보호법으로 자문료를 받는 독립 금융상품자문업 제도가 생겼으나 보험 분야에서는 아직 활발하지 않다(2026년 기준).
+    </div>
+  </section>
+
+  <section id="choose">
+    <h2>좋은 설계사를 고르는 법</h2>
+    <p>신뢰재 시장에서 가입자가 할 수 있는 일은 평판을 스스로 확인하는 것이다. 다행히 공개된 정보가 있다. 생명보험협회와 손해보험협회가 운영하는 <span class="term">e-클린보험서비스</span>에서는 설계사의 이름과 등록번호로 소속, 경력, 모집 이력, 불완전판매 건수와 비율, 그 설계사가 판 계약의 유지율 같은 정보를 조회할 수 있다. 명함을 받으면 한 번 찾아보는 것만으로 시뮬레이터의 '평판 가시성'이 올라간다.</p>
+
+    <div class="callout buyer">
+      <strong>설계사를 만나기 전과 만난 뒤</strong>
+      ① 명함의 이름·소속으로 e-클린보험서비스에서 경력, 불완전판매 이력, 계약 유지율을 확인한다. ② 첫 만남에서 지금 가진 보험부터 분석해 주는지 본다. 분석 없이 새 설계서부터 내밀면 경계한다. ③ "이 상품 말고 비교한 다른 상품은 무엇인가요", "이 설계에서 가장 비싼 부분은 어디고 왜 필요한가요", "다이렉트로 사면 얼마인가요"를 묻는다. ④ 해지환급금 예시표에서 1년·3년·5년 환급률을, 갱신형이면 갱신 때 보험료 예시를 확인한다. ⑤ 서명 뒤에도 청약철회(증권 받은 날부터 15일, 청약일부터 30일 이내, 2026년 기준)를 쓸 수 있다는 것을 기억한다.
+    </div>
+
+    <p>질문보다 더 확실한 것은 경고 신호다. 아래 말을 들으면 한 걸음 물러선다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>들은 말</th><th>무엇이 문제인가</th></tr></thead>
+      <tbody>
+        <tr><td>"지금 보험은 다 해지하고 이걸로 갈아타세요"</td><td>승환 권유. 기존 계약을 깨고 새 계약을 맺게 하는 것이다. 해지 손실, 새 사업비, 높아진 나이의 보험료, 새 면책·감액 기간을 모두 고객이 진다. 비교 안내 없이 권하면 위법이 될 수 있다(<a href="commission.html">15장</a>).</td></tr>
+        <tr><td>"이달 말이면 이 상품 없어집니다", "다음 달부터 보험료 오릅니다"</td><td>절판 마케팅. 개정 전 막차라는 말로 결정을 서두르게 한다. 사실인 경우도 있지만, 서둘러야 할 이유는 대개 판매자에게 있다.</td></tr>
+        <tr><td>"무조건 이득이에요", "은행 적금보다 낫습니다"</td><td>보험은 보장을 사는 상품이다. 환급률이 높은 상품은 그만큼 오래 묶이거나 보장이 줄거나 해지하면 손해가 크다(<a href="savings.html">11장</a>).</td></tr>
+        <tr><td>"고지는 안 하셔도 돼요", "그 정도는 말 안 해도 됩니다"</td><td>고지의무 위반의 책임은 가입자에게 돌아온다. 나중에 보험금이 깎이거나 계약이 해지될 수 있다(<a href="asymmetry.html">4장</a>).</td></tr>
+        <tr><td>"서명은 여기, 여기만 하시면 됩니다"</td><td>자필서명과 중요 사항 설명은 가입자를 위한 절차다. 빠지면 품질보증해지 사유가 되지만, 애초에 내용을 모른 채 가입한 것이 문제다.</td></tr>
+      </tbody>
+    </table></div>
+    <p>반대로 좋은 신호도 있다. 지금 가진 보험 중 유지할 것을 먼저 말해 주는 설계사, 권하지 않는 상품의 이유를 말해 주는 설계사, 다이렉트가 더 싼 경우를 먼저 알려 주는 설계사, 상담 기록과 비교 안내 자료를 남겨 주는 설계사다. 이들은 수수료를 덜 받는 선택을 고객 앞에서 보여 준다. 신뢰재 시장에서 그보다 강한 신호는 드물다.</p>
+  </section>
+
+  <section id="career">
+    <h2>설계사로 일한다는 것</h2>
+    <p>설계사는 보험회사의 직원이 아니라 대부분 회사나 GA와 위탁 계약을 맺은 개인 사업자다. 이를 <span class="term">위촉</span>이라고 한다. 설계사가 되려면 정해진 교육을 받고 협회가 주관하는 자격시험에 합격해 등록해야 한다. 시험은 생명보험, 손해보험, 제3보험(질병·상해·간병처럼 생명보험과 손해보험의 중간 영역)으로 나뉘고, 투자 성격이 있는 변액보험을 팔려면 별도의 자격(변액보험판매관리사)이 더 필요하다. 등록 뒤에도 정기적인 보수교육을 받아야 한다.</p>
+    <p>수입은 대부분 판매한 계약의 수수료에서 나온다. 고정급이 거의 없거나 작고, 신입 시기에는 회사가 일정 기간 정착 지원금을 주는 경우가 많다. 수수료는 계약 초기에 크게 나오지만 고객이 일찍 해지하면 돌려내야 한다. 이 구조가 설계사의 행동을 어떻게 움직이는지는 <a href="commission.html">15장</a>에서 자세히 본다.</p>
+    <p>이 직업의 가장 큰 특징은 이탈이 많다는 것이다. 처음에는 가족·친구·지인에게 가입을 권하고, 그 인맥이 바닥나면 새 고객을 찾지 못해 떠나는 일이 흔하다. 신입 설계사가 1년 넘게 남아 있는 비율을 <span class="term">13월차 정착률</span>이라고 하는데, 업계 전체로 보면 낮은 편이다(회사·채널별 수치는 업계 통계로 공개된다). 이것은 설계사만의 문제가 아니다. 설계사가 떠나면 그가 판 계약은 담당자가 없는 <span class="term">고아계약</span>이 된다. 아래에서 신입 100명이 3년 동안 어떻게 줄어드는지와, 그동안 판 계약 중 고아계약이 되는 몫을 본다. 그래프 위 세로선을 끌어 시점을 고르고, 이탈률을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-co">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>신입 설계사 100명의 3년과 고아계약</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="co-cv"></canvas><span class="hint">세로선을 끌어 시점을 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>첫해 월 이탈률 <output id="co-h1-out"></output></span><input type="range" id="co-h1" min="1" max="12" step="0.5" value="6"></label>
+          <label class="ctrl"><span>2년차부터 월 이탈률 <output id="co-h2-out"></output></span><input type="range" id="co-h2" min="0.5" max="6" step="0.5" value="2"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>남아 있는 설계사</span><span><i style="background:var(--warn)"></i>그동안 판 계약 중 고아계약 비율</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">13월차 정착률</span><span class="v" id="co-o-13">—</span></div>
+        <div class="stat"><span class="k">고른 시점</span><span class="v" id="co-o-m">—</span></div>
+        <div class="stat"><span class="k">남은 설계사</span><span class="v" id="co-o-s">—</span></div>
+        <div class="stat"><span class="k">고아계약 비율</span><span class="v" id="co-o-o">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(첫해 월 6%, 이후 월 2%)에서 13개월 시점을 본다. 100명 중 47명, 절반이 안 되게 남는다. ② 36개월로 세로선을 옮긴다. 남은 설계사는 열 명 중 세 명꼴이고, 그동안 판 계약의 약 40%가 담당자 없는 계약이 된다. 가입자가 3년 뒤 청구 상담을 하려고 전화했을 때 받을 사람이 없을 확률이다. ③ 첫해 이탈률을 2%로 낮춘다. 정착 교육과 지원이 첫해 이탈을 줄이면 고아계약 비율이 크게 내려간다. 이탈률을 끝까지 올리면 3년 뒤에는 거의 아무도 남지 않는다. (이탈률은 이 책의 교육용 가정이며 실제 정착률 통계가 아니다. 설계사는 남아 있는 동안 매달 같은 수의 계약을 판다고 단순화했고, 계약의 해지는 무시했다.)</div>
+    </div>
+
+    <p>고아계약이 되었다고 보장이 사라지지는 않는다. 보험회사나 GA가 다른 담당자를 배정하고, 청구는 언제든 보험회사에 직접 할 수 있다. 하지만 새 담당자는 그 계약을 판 사람이 아니라 받을 수수료가 거의 없다. 관리가 소홀해지거나, 반대로 새 담당자가 "이 오래된 보험 정리하시고…"라며 승환을 권하는 계기가 되기도 한다. 가입자 입장에서는 오래 일할 설계사를 고르는 것, 그리고 담당자가 바뀌어도 내 보험을 내가 알고 있는 것이 둘 다 중요하다.</p>
+
+    <div class="callout pro">
+      <strong>지인 영업 다음을 준비한다</strong>
+      첫해 실적은 대부분 가족과 지인에게서 나온다. 문제는 지인 계약이 "거절하기 어려워서" 맺어지면 유지율이 낮고, 해지되면 환수와 관계 손상이 한꺼번에 온다는 것이다. 오래 가는 설계사들이 공통으로 말하는 원칙은 세 가지다. 지인에게도 분석부터 하고 가입은 상대가 결정하게 둔다. 판 계약의 사후 관리(갱신 안내, 청구 도움)를 처음부터 일정에 넣는다. 만족한 고객에게 소개를 부탁할 수 있을 만큼 기록을 남긴다. 소개로 오는 고객은 탐색 비용이 이미 줄어 있어 상담이 짧고 유지율이 높다. 정착률이 낮은 직업에서 살아남는 길은 판매 건수보다 관계의 수명을 늘리는 쪽에 있다(<a href="advisor.html">19장</a>).
+    </div>
+
+    <div class="callout warn">
+      <strong>제도와 수치는 해마다 바뀐다</strong>
+      이 장의 채널별 보험료 차이, 청구 누락률, 설계사 이탈률은 원리를 보이기 위한 교육용 가정이다. 실제 보험료는 회사·상품·나이·병력·가입 시기에 따라 크게 다르고, CM 상품이 언제나 싸지도 않다. 비교 플랫폼의 보험 비교·추천 서비스, 설계사 정보 공개 범위, 판매 규제, 수수료 제도는 2026년 기준으로도 개편이 진행 중이며 세부 내용과 시기는 바뀔 수 있다. 특정 보험회사·상품·판매채널을 권하지 않는다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 도윤의 입장</h2>
+    <p>지금까지 지우와 민서는 도윤과 함께 보장의 빈틈을 하나씩 찾아왔다. 진단비를 넓히고(<a href="fixed.html">9장</a>), 정기보험 규모를 정하고(<a href="life.html">10장</a>), 사회보험이 이미 막아 주는 몫을 뺐다(<a href="social.html">13장</a>). 이제 "어디서 가입할 것인가"가 남았다. 이 장의 도구로 그 질문을 따져 본다.</p>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 14장</span></div>
+      <h4>"정기보험은 다이렉트가 더 쌀 수 있어"</h4>
+      <p>도윤은 지우의 대학 동기다. 처음 만났을 때 둘이 정한 약속은 "분석 먼저, 판매는 나중"이었다(<a href="overview.html">1장</a>). 도윤은 그 약속에 하나를 더 붙였다. 친구라서 거절하기 어려운 구조를 스스로 경계하겠다는 것이다. 그래서 상담은 늘 지우네가 가진 계약의 분석으로 시작했고, 가입 여부는 설계서를 집에 가져가 하루 이상 생각한 뒤 지우네가 정하기로 했다. 지인 계약일수록 해지되면 관계까지 상한다는 것을 도윤은 3년 동안 여러 번 봤다.</p>
+      <p>정기보험 이야기가 나오자 도윤이 먼저 말했다. "정기보험은 구조가 단순해서 다이렉트(CM) 상품이 더 쌀 수 있어." 이 책의 채널 모델로 계산하면 32세 남성 정기보험 3억원(60세 만기)은 대면 상품 월 약 4.2만원, CM 상품 월 약 3.7만원으로, 28년 납입이면 누적 차이가 약 169만원이다. 도윤은 두 견적을 나란히 놓고, CM으로 가입한다면 고지 항목만 함께 읽어 보자고 했다. 민서는 의외라는 표정이었다. "그럼 도윤 씨는 뭘로 돈을 벌어요?" 도윤의 답은 이랬다. "제가 값을 하는 곳은 따로 있어요. 서랍 전체를 분석하고, 진단비처럼 회사마다 정의가 다른 상품을 비교해서 조합하고, 갱신과 실손 전환을 챙기고, 나중에 청구할 때 옆에 있는 거요."</p>
+      <p>지우는 이 장의 시뮬레이터를 떠올렸다. 시간 가치가 크고 보험을 잘 모르는 사람에게는 맡기는 쪽이 낫고, 단순한 상품을 스스로 판단할 수 있다면 직접 사는 쪽이 낫다. 지우네의 결론은 둘을 나누는 것이었다. 비교가 어려운 진단비 보강과 전체 설계는 도윤에게 맡기고, 정기보험은 대면과 CM 견적을 비교해 고른다. 도윤은 고객 하나를 잃은 것이 아니라, 앞으로 20년 동안 보험 이야기를 가장 먼저 꺼낼 사람이 되었다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>정기보험은 대면·CM 견적을 나란히 놓고 고른다. 도윤의 역할은 분석·설계·관리·청구 지원. 지인이라도 분석이 먼저이고 결정은 지우네가 한다.</div><div><b>아직 남은 문제</b>도윤은 실제로 무엇으로, 얼마를 버는가. 수수료 구조가 그의 권유를 기울이지는 않는가.</div><div><b>다음 단계</b><a href="commission.html">15장</a>에서 도윤의 수수료를 직접 계산하고, 종신보험을 갈아타자는 제안의 손익을 따진다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>사람들은 드문 위험을 작게 느끼고(확률 체감), 미래의 이득을 깎고(현재 편향), 결정을 미룬다. 그래서 형편이 되는 사람도 보장 없이 큰 병을 만나는 보장 공백이 생긴다. 판매는 이 공백과 역선택을 함께 줄인다.</li>
+      <li>상품을 직접 비교하는 데는 시간과 이해 비용이 든다. 시간이 귀하고 보험을 잘 모르는 사람에게는 맡기는 쪽이, 보험을 잘 알고 시간이 있는 사람에게는 직접 고르는 쪽이 대개 낫다.</li>
+      <li>같은 상품은 어느 설계사에게 사도 보험료가 같다. 채널별 가격 차이는 채널 전용 상품의 사업비 차이에서 온다. 젊은 사람의 순수 보장성 상품에서 다이렉트가 싸지는 경향이 크고, 대신 판단과 고지의 책임이 가입자에게 넘어온다.</li>
+      <li>설계사의 가치는 니즈 환기·설계·계약 관리·청구 지원이다. 수수료는 판매 시점에 몰리고 가치는 나중에 드러나는 어긋남이 있다.</li>
+      <li>보험 상담은 써 본 뒤에도 품질을 알기 어려운 신뢰재다. 수수료 구조가 만드는 이해상충은 평판(정보 공개·소개), 감독(판매 원칙·제재), 수수료 구조 개편이 함께 막는다.</li>
+      <li>좋은 설계사는 e-클린보험서비스로 이력을 확인하고, 기존 보험 분석부터 하는지, 비교 근거를 보여 주는지로 고른다. 승환 권유, 절판 마케팅, '무조건 이득', 고지 생략 권유는 경고 신호다.</li>
+      <li>설계사는 위촉된 개인 사업자이고 생명·손해·제3보험 자격(변액은 별도)이 필요하다. 초기 이탈이 많아 13월차 정착률이 낮은 편이며, 떠난 설계사의 계약은 고아계약이 된다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>보험료를 낼 형편이 되는 사람도 스스로 보험에 가입하지 않는 이유로 이 장의 설명과 가장 거리가 먼 것은?</p>
+        <div class="opts">
+          <button class="opt">드문 위험을 실제보다 작게 느낀다</button>
+          <button class="opt" data-correct>보험은 평균적으로 이득을 보는 거래라서 서두를 필요가 없다고 생각한다</button>
+          <button class="opt">오늘의 확실한 보험료를 미래의 불확실한 보험금보다 크게 느낀다</button>
+          <button class="opt">필요하다고 생각해도 비교와 고지가 귀찮아 결정을 미룬다</button>
+        </div>
+        <div class="quiz-exp">보험은 부가보험료 때문에 평균적으로는 손해인 거래다(<a href="pooling.html">2장</a>). 사람들이 스스로 사지 않는 이유는 확률 체감(과소평가), 현재 편향, 미루기다. 이 셋이 보장 공백을 만들고 판매가 필요해지는 근거가 된다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>같은 보험회사의 같은 상품을 전속설계사에게 가입할 때와 GA 소속 설계사에게 가입할 때 보험료는?</p>
+        <div class="opts">
+          <button class="opt">GA는 여러 회사를 비교하므로 항상 더 싸다</button>
+          <button class="opt">전속설계사는 회사 직원이라 수수료가 없어 더 싸다</button>
+          <button class="opt">설계사의 경력에 따라 할인이 달라진다</button>
+          <button class="opt" data-correct>같다. 보험료는 상품마다 정해지고, 채널별 차이는 채널 전용 상품의 사업비 차이에서 생긴다</button>
+        </div>
+        <div class="quiz-exp">보험료는 상품의 예정위험률·예정이율·예정사업비율로 정해진다. 같은 상품이면 누구에게 사도 같다. CM이나 TM이 싼 경우는 판매비용을 낮춰 설계한 전용 상품이기 때문이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>보험 상담이 '신뢰재'라는 말의 뜻으로 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>상담을 받고 가입한 뒤에도 그 조언이 최선이었는지 가입자가 확인하기 어렵다</button>
+          <button class="opt">가입 전에 품질을 직접 보고 고를 수 있다</button>
+          <button class="opt">한 번 써 보면 품질을 바로 알 수 있다</button>
+          <button class="opt">정부가 품질을 보증하므로 믿고 사도 된다</button>
+        </div>
+        <div class="quiz-exp">신뢰재는 써 본 뒤에도 품질을 알기 어려운 상품이다(정비, 의료, 금융 자문). 그래서 정직한 판매자와 그렇지 않은 판매자를 가입자가 구별하기 어렵고, 평판 정보 공개와 감독이 시장을 지키는 장치가 된다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>설계사가 "지금 보험은 다 해지하고 새 상품으로 갈아타면 보장이 훨씬 좋아요"라고 권한다. 가장 먼저 할 일은?</p>
+        <div class="opts">
+          <button class="opt">보장이 좋아진다니 바로 기존 계약을 해지한다</button>
+          <button class="opt">설계사를 믿고 새 계약에만 서명한다</button>
+          <button class="opt" data-correct>기존 계약의 해지 손실과 새 계약의 보험료·면책 기간을 비교한 자료를 요구하고, 부족한 보장은 기존 계약을 둔 채 추가할 수 없는지 묻는다</button>
+          <button class="opt">새 상품의 환급률만 확인한다</button>
+        </div>
+        <div class="quiz-exp">승환은 해지 손실, 새 사업비, 높아진 나이의 보험료, 새 면책·감액 기간을 모두 가입자가 지는 대신 설계사에게는 새 수수료가 생기는 구조다. 비교 안내를 요구하고, 늘리고 싶은 보장은 기존 계약을 유지한 채 더할 수 있는지 먼저 확인한다(<a href="commission.html">15장</a>).</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+
+  // 채널별 사업비 가정(교육용): α 신계약비 배수, β 유지비율, f 건당 연 고정비, adv 상담 깊이(0~5, 정성 평가)
+  const CHANNELS = [
+    { k: "대면(전속·GA)", s: "대면", a: 1.0, b: 0.10, f: 20000, adv: 5 },
+    { k: "방카슈랑스", s: "방카", a: 0.6, b: 0.08, f: 12000, adv: 2 },
+    { k: "TM(전화)", s: "TM", a: 0.8, b: 0.09, f: 15000, adv: 2 },
+    { k: "비교 플랫폼", s: "플랫폼", a: 0.4, b: 0.055, f: 8000, adv: 1 },
+    { k: "CM(다이렉트)", s: "CM", a: 0.3, b: 0.05, f: 6000, adv: 1 },
+  ];
+  const PRODS = {
+    term: (age) => ({ type: "term", age, sex: "m", S: 3e8, term: Math.max(5, 60 - age), pay: Math.max(5, 60 - age) }),
+    cancer: (age) => ({ type: "cancer", age, sex: "m", S: 3e7, term: 90 - age, pay: 20 }),
+    whole: (age) => ({ type: "whole", age, sex: "m", S: 1e8, pay: 20 }),
+  };
+  const chPrice = (prod, age, c) => INS.price(Object.assign(PRODS[prod](age), { alpha: c.a, beta: c.b, fee: c.f })).monthly;
+  // 설계사를 거칠 때의 판매비용 차이(정기 3억, 32세, 10년분): 대면 상품 − CM 상품
+  const ADV_COST = (chPrice("term", 32, CHANNELS[0]) - chPrice("term", 32, CHANNELS[4])) * 120;
+
+  /* ---------------------------------------------------------- 1. 보장 공백 마을 */
+  (function () {
+    const N = 200, L = 5e7, P0 = INS.prob("cancer", 32, 20, "m"), PREM = P0 * L * 1.3, YEARS = 20;
+    const g = INS.gauss(21), r = INS.rng(7);
+    const people = [];
+    for (let i = 0; i < N; i++) {
+      const p = Math.min(0.6, P0 * Math.exp(0.8 * g() - 0.32));
+      const a = r() * 1.5, v = r();
+      const sick = r() < p ? 1 + Math.floor(r() * YEARS) : Infinity;
+      people.push({ p, a, v, sick, intend: false, sign: Infinity });
+    }
+    let t = 0, hold = 0;
+    const W = IB.range("gp-w", (v) => "실제의 ×" + v.toFixed(2), restart);
+    const B = IB.range("gp-b", (v) => v.toFixed(2), restart);
+    const pro = document.getElementById("gp-pro"), adv = document.getElementById("gp-adv");
+    pro.addEventListener("change", restart); adv.addEventListener("change", restart);
+    function decide() {
+      const ad = adv.checked, w = ad ? Math.max(W(), 1) : W(), b = B();
+      people.forEach((q) => {
+        q.intend = b * w * q.p * L * (1 + q.a) >= PREM;
+        if (!q.intend) q.sign = Infinity;
+        else if (pro.checked && !ad) q.sign = Math.ceil(Math.log(1 - q.v * 0.999) / Math.log(1 - 0.2)) - 1;
+        else q.sign = 0;
+      });
+    }
+    function restart() { decide(); t = 0; hold = 0; if (anim) anim.start(); if (cv) cv.redraw(); }
+    decide();
+    const COLS = 20, ROWS = 10;
+    let cv = null, anim = null;
+    cv = IB.canvas("#gp-cv", (ctx, w, h) => {
+      const P = IB.palette(), yr = Math.floor(t);
+      const cell = Math.min((w - 24) / COLS, 26), gx = (w - cell * COLS) / 2, gy = 30;
+      T(ctx, "32세 200명 · " + yr + "년째", 12, 18, { size: 12, color: P.dim, base: "middle" });
+      let nInt = 0, nSign = 0, nSick = 0, nGap = 0;
+      people.forEach((q, i) => {
+        const cx = gx + (i % COLS) * cell + cell / 2, cy = gy + Math.floor(i / COLS) * cell + cell / 2, rr = cell * 0.36;
+        const signed = q.sign <= yr && q.sign < q.sick;
+        const sick = q.sick <= yr;
+        if (q.intend) nInt++;
+        if (signed) nSign++;
+        let col = null, ring = P.faint;
+        if (sick) { nSick++; if (signed) col = P.ok; else { col = P.bad; nGap++; } }
+        else if (signed) col = P.accent;
+        else if (q.intend) ring = P.warn;
+        ctx.beginPath(); ctx.arc(cx, cy, rr, 0, TAU);
+        if (col) { ctx.fillStyle = col; ctx.fill(); }
+        else { ctx.strokeStyle = ring; ctx.lineWidth = q.intend ? 2 : 1; ctx.stroke(); }
+      });
+      // 아래 막대: 노출 / 의향 / 가입
+      const by = gy + ROWS * cell + 22, bx = w < 480 ? 92 : 120, bw = w - bx - 60, bh = 14;
+      const rows = [["위험에 노출", N, P.dim], ["가입 의향", nInt, P.warn], ["실제 가입", nSign, P.accent]];
+      rows.forEach(([lab, n, col], k) => {
+        const y = by + k * 24;
+        T(ctx, lab, bx - 8, y + bh / 2, { size: 12, color: P.text, align: "right", base: "middle" });
+        ctx.fillStyle = P.grid; ctx.fillRect(bx, y, bw, bh);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(bx, y, bw * n / N, bh); ctx.globalAlpha = 1;
+        T(ctx, n + "명", bx + bw + 6, y + bh / 2, { size: 11.5, mono: true, color: P.text, base: "middle" });
+      });
+      IB.stat("gp-o-int", nInt + "<small>명 (" + Math.round(nInt / N * 100) + "%)</small>");
+      IB.stat("gp-o-sign", nSign + "<small>명</small>");
+      IB.stat("gp-o-gap", nSick ? tone(nGap / nSick > 0.5 ? "bad-t" : "", nGap + " / " + nSick + "<small>명</small>") : "—");
+      IB.stat("gp-o-yr", yr + "<small>년</small>");
+    }, { get height() { const el = document.getElementById("gp-cv"); const w = el.parentElement.clientWidth || 600; return 30 + Math.min((w - 24) / 20, 26) * 10 + 22 + 72 + 8; } });
+    anim = IB.loop(cv.canvas, (dt) => {
+      if (t >= YEARS) { hold += dt; if (hold > 0.5) anim.stop(); return; }
+      const prev = Math.floor(t);
+      t = Math.min(YEARS, t + dt * 1.8);
+      if (Math.floor(t) !== prev) cv.redraw();
+    });
+    document.getElementById("gp-re").addEventListener("click", restart);
+  })();
+
+  /* ---------------------------------------------------------- 2. 탐색 비용 */
+  (function () {
+    const K = 40, SV = 1.5e6, HRS = 1.5, TR = 300;
+    let dv = [], adv = 0, n = 6, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Wg = IB.range("sc-wage", (v) => won(v), redraw);
+    const Lt = IB.range("sc-lit", (v) => v + "%", () => { compute(); redraw(); });
+    function compute() {
+      const g = INS.gauss(99), lit = Lt() / 100, ns = 2.5 * (1 - lit) + 0.2;
+      const sum = new Array(K + 1).fill(0);
+      let sa = 0;
+      for (let tr = 0; tr < TR; tr++) {
+        let best = -Infinity, bv = 0, ab = -Infinity, av = 0;
+        for (let k = 0; k < K; k++) {
+          const v = g() * SV, e = v + g() * SV * ns;
+          if (e > best) { best = e; bv = v; }
+          sum[k + 1] += bv;
+          const ae = v + g() * SV * 0.35 + 0.6 * g() * SV;
+          if (ae > ab) { ab = ae; av = v; }
+        }
+        sa += av;
+      }
+      dv = sum.map((s) => s / TR);
+      adv = sa / TR - ADV_COST;
+    }
+    compute();
+    let cv = null;
+    cv = IB.canvas("#sc-cv", (ctx, w, h) => {
+      const P = IB.palette(), wage = Wg();
+      const cost = (k) => k * HRS * wage;
+      const net = (k) => dv[k] - cost(k);
+      let bestK = 1; for (let k = 1; k <= K; k++) if (net(k) > net(bestK)) bestK = k;
+      const lo = Math.min(-1e6, net(K), adv) * 1.1, hi = Math.max(dv[K], adv, 1e6) * 1.15;
+      const box = { x: 58, y: 18, w: w - 74, h: h - 84 };
+      const s = (f) => { const d = []; for (let k = 1; k <= K; k++) d.push([k, f(k)]); return d; };
+      const c = IB.chart(ctx, box, { x: [1, K], y: [lo, hi], yFmt: IB.wonAxis, xLabel: "직접 비교한 상품 수",
+        series: [{ data: s((k) => dv[k]), color: P.dim, width: 1.5, dash: [5, 4] }, { data: s(cost), color: P.bad, width: 1.5 }, { data: s(net), color: P.accent, width: 2.5 }],
+        hlines: [{ y: 0, color: P.axis, dash: [] }, { y: adv, color: P.accent2, dash: [], width: 2 }] });
+      G = c;
+      T(ctx, "설계사에게 맡김", box.x + box.w - 4, c.Y(adv) - 6, { size: 11.5, color: P.accent2, align: "right", weight: 600 });
+      vline(ctx, c.X(bestK), c.Y(net(bestK)) - 4, c.Y(net(bestK)) + 4, P.accent, [], 2);
+      vline(ctx, c.X(n), box.y, box.y + box.h, P.faint, [3, 3]);
+      knob(ctx, c.X(n), c.Y(net(n)), P, P.accent, 7);
+      IB.stat("sc-o-n", n + "<small>개 · " + (n * HRS).toFixed(1) + "시간</small>");
+      IB.stat("sc-o-diy", tone(net(n) >= adv ? "ok-t" : "", won(net(n))));
+      IB.stat("sc-o-best", bestK + "<small>개 → " + won(net(bestK)) + "</small>");
+      IB.stat("sc-o-adv", tone(adv > net(bestK) ? "ok-t" : "", won(adv)));
+    }, { aspect: 0.66, minHeight: 300, maxHeight: 420 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; n = IB.clamp(Math.round(1 + ((x - b.x) / b.w) * (K - 1)), 1, K); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 채널별 보험료 */
+  (function () {
+    const redraw = () => cv && cv.redraw();
+    const prod = IB.seg("ch-prod", redraw);
+    const Ag = IB.range("ch-age", (v) => v + "세", redraw);
+    let cv = null;
+    cv = IB.canvas("#ch-cv", (ctx, w, h) => {
+      const P = IB.palette(), age = Ag(), pk = prod();
+      const vals = CHANNELS.map((c) => chPrice(pk, age, c));
+      const mx = Math.max(...vals);
+      const narrow = w < 480;
+      const lx = narrow ? 70 : 104, dotW = narrow ? 62 : 96, bx = lx + 8, bw = w - bx - dotW - (narrow ? 58 : 76);
+      const top = 34, rh = (h - top - 30) / CHANNELS.length, bh = Math.min(22, rh * 0.5);
+      T(ctx, "월 보험료", bx, 18, { size: 11.5, color: P.dim, base: "middle" });
+      T(ctx, narrow ? "상담 깊이" : "상담 깊이(정성)", w - 8, 18, { size: 11.5, color: P.dim, align: "right", base: "middle" });
+      CHANNELS.forEach((c, i) => {
+        const y = top + rh * i + rh / 2, v = vals[i], bwv = Math.max(2, (v / mx) * bw);
+        T(ctx, narrow ? c.s : c.k, lx, y, { size: 12, color: P.text, align: "right", base: "middle", weight: i === 0 || i === 4 ? 700 : 400 });
+        ctx.fillStyle = i === 0 ? P.accent2 : i === 4 ? P.accent : P.dim; ctx.globalAlpha = i === 0 || i === 4 ? 0.9 : 0.55;
+        ctx.fillRect(bx, y - bh / 2, bwv, bh); ctx.globalAlpha = 1;
+        T(ctx, IB.wonAxis(v) + "원", bx + bwv + 6, y, { size: 11.5, mono: true, color: P.text, base: "middle" });
+        const dx = w - 8 - dotW, step = dotW / 5;
+        for (let k = 0; k < 5; k++) {
+          ctx.beginPath(); ctx.arc(dx + step * (k + 0.5), y, Math.min(5, step * 0.3), 0, TAU);
+          if (k < c.adv) { ctx.fillStyle = P.ok; ctx.fill(); } else { ctx.strokeStyle = P.faint; ctx.lineWidth = 1; ctx.stroke(); }
+        }
+      });
+      const f = vals[0], cm = vals[4], pay = INS.price(PRODS[pk](age)).pay;
+      T(ctx, "막대 길이는 가장 비싼 채널 대비", bx, h - 10, { size: 11, color: P.faint, base: "middle" });
+      IB.stat("ch-o-f", won(f));
+      IB.stat("ch-o-c", won(cm));
+      IB.stat("ch-o-d", won(f - cm) + " <small>(" + Math.round((1 - cm / f) * 100) + "%)</small>");
+      IB.stat("ch-o-t", won((f - cm) * 12 * pay) + " <small>(" + pay + "년)</small>");
+    }, { aspect: 0.6, minHeight: 260, maxHeight: 340 });
+  })();
+
+  /* ---------------------------------------------------------- 4. 놓치는 보험금 */
+  (function () {
+    const Y = 20, SMALL = { lam: 3, amt: 4e4 }, MID = { lam: 0.12, amt: 8e5 }, BIG = 3e7;
+    const bigP = INS.prob("cancer", 32, Y, "m");
+    let seed = 4, events = [], t = 0;
+    const redraw = () => cv && cv.redraw();
+    const mode = IB.seg("cl-mode", redraw);
+    const Mr = IB.range("cl-m", (v) => v + "%", redraw);
+    const auto = document.getElementById("cl-auto");
+    auto.addEventListener("change", redraw);
+    function gen() {
+      const r = INS.rng(seed); events = [];
+      const pois = (lam) => { const Lm = Math.exp(-lam); let k = 0, p = 1; do { k++; p *= r(); } while (p > Lm); return k - 1; };
+      for (let y = 0; y < Y; y++) {
+        const ns = pois(SMALL.lam); for (let k = 0; k < ns; k++) events.push({ x: y + r(), kind: 0, amt: SMALL.amt * Math.exp(0.6 * (r() - 0.5)), u: r() });
+        const nm = pois(MID.lam); for (let k = 0; k < nm; k++) events.push({ x: y + r(), kind: 1, amt: MID.amt * (0.4 + 1.2 * r()), u: r() });
+        if (r() < INS.incidence("cancer", 32 + y, "m")) events.push({ x: y + r(), kind: 2, amt: BIG, u: r() });
+      }
+      events.sort((a, b) => a.x - b.x);
+    }
+    function miss(kind, m) {
+      const base = Mr() / 100 * [1, 0.4, 0.07][kind];
+      let q = m === "adv" ? base * 0.25 : base;
+      if (kind === 0 && auto.checked) q *= 0.3;
+      return q;
+    }
+    gen();
+    let cv = null;
+    cv = IB.canvas("#cl-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = mode();
+      const tl = { x: w < 480 ? 64 : 84, y: 26, w: 0, h: 96 }; tl.w = w - tl.x - 14;
+      const X = (v) => tl.x + (v / Y) * tl.w;
+      const rowsY = [tl.y + 14, tl.y + 46, tl.y + 78], names = ["소액 실손", "수술·입원", "진단비"];
+      T(ctx, "한 사람의 20년", tl.x, 12, { size: 12, color: P.dim, base: "middle" });
+      names.forEach((s, k) => { T(ctx, s, tl.x - 8, rowsY[k], { size: 11.5, color: P.text, align: "right", base: "middle" }); ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(tl.x, rowsY[k]); ctx.lineTo(tl.x + tl.w, rowsY[k]); ctx.stroke(); });
+      [0, 5, 10, 15, 20].forEach((v) => T(ctx, v + "년", X(v), tl.y + tl.h + 6, { size: 10.5, mono: true, color: P.faint, align: v === 0 ? "left" : v === 20 ? "right" : "center" }));
+      events.forEach((e) => {
+        if (e.x > t) { ctx.beginPath(); ctx.arc(X(e.x), rowsY[e.kind], [2, 3.5, 6][e.kind], 0, TAU); ctx.fillStyle = P.grid; ctx.fill(); return; }
+        const missed = e.u < miss(e.kind, m), y = rowsY[e.kind], rr = [2.6, 4.5, 7][e.kind];
+        ctx.beginPath(); ctx.arc(X(e.x), y + (e.kind === 0 ? ((e.u * 997) % 1 - 0.5) * 12 : 0), rr, 0, TAU);
+        if (missed) { ctx.strokeStyle = P.bad; ctx.lineWidth = 1.5; ctx.stroke(); } else { ctx.fillStyle = P.ok; ctx.fill(); }
+      });
+      if (t < Y) vline(ctx, X(t), tl.y, tl.y + tl.h - 8, P.accent, [], 1.5);
+      // 기대값 막대
+      const ex = [SMALL.lam * Y * SMALL.amt, MID.lam * Y * MID.amt, bigP * BIG];
+      const all = ex[0] + ex[1] + ex[2];
+      const lost = (mm) => ex.reduce((s, v, k) => s + v * miss(k, mm), 0);
+      const ls = lost("self"), la = lost("adv");
+      const bb = { x: tl.x, y: tl.y + tl.h + 34, w: tl.w - 70, h: h - (tl.y + tl.h + 34) - 10 };
+      const mxv = Math.max(ls, ADV_COST, 1) * 1.1, rh = bb.h / 3, bh = Math.min(18, rh * 0.6);
+      [["혼자 놓침", ls, P.bad], ["도움 놓침", la, P.bad], ["판매비용", ADV_COST, P.accent2]].forEach(([lab, v, col], k) => {
+        const y = bb.y + rh * k + rh / 2;
+        T(ctx, lab, bb.x - 8, y, { size: 11.5, color: P.text, align: "right", base: "middle", weight: (k === 0 && m === "self") || (k === 1 && m === "adv") ? 700 : 400 });
+        ctx.fillStyle = col; ctx.globalAlpha = k === 2 ? 0.85 : (k === 0) === (m === "self") ? 0.9 : 0.4;
+        ctx.fillRect(bb.x, y - bh / 2, Math.max(2, (v / mxv) * bb.w), bh); ctx.globalAlpha = 1;
+        T(ctx, IB.wonAxis(v), bb.x + Math.max(2, (v / mxv) * bb.w) + 6, y, { size: 11, mono: true, color: P.text, base: "middle" });
+      });
+      IB.stat("cl-o-all", won(all));
+      IB.stat("cl-o-self", tone("bad-t", won(ls)));
+      IB.stat("cl-o-adv", won(la));
+      const nv = ls - la - ADV_COST;
+      IB.stat("cl-o-net", tone(nv >= 0 ? "ok-t" : "warn-t", (nv >= 0 ? "+" : "") + won(nv)));
+    }, { aspect: 0.72, minHeight: 300, maxHeight: 380 });
+    const anim = IB.loop(cv.canvas, (dt) => {
+      if (t >= Y) { anim.stop(); return; }
+      t = Math.min(Y, t + dt * 4); cv.redraw();
+    });
+    document.getElementById("cl-re").addEventListener("click", () => { seed++; gen(); t = 0; anim.start(); });
+  })();
+
+  /* ---------------------------------------------------------- 5. 신뢰재 시장 */
+  (function () {
+    const NA = 60, ROUNDS = 40;
+    let x = 0.5, hist = [0.5], acc = 0, playing = true;
+    const Rr = IB.range("cr-r", (v) => v.toFixed(2), () => cv && cv.redraw());
+    const Ar = IB.range("cr-a", (v) => Math.round(v * 100) + "%", () => cv && cv.redraw());
+    const Gr = IB.range("cr-g", (v) => "+" + Math.round(v * 100) + "%", () => cv && cv.redraw());
+    const pay = () => { const r = Rr(), a = Ar(), g = Gr(); return { h: 1 + 0.6 * r, c: (1 + g) * (1 - 0.6 * r) - 2.5 * a }; };
+    function step() {
+      const p = pay(), avg = Math.max(0.3, x * p.h + (1 - x) * p.c);
+      const d = 0.3 * x * (1 - x) * (p.h - p.c) / avg;
+      x = IB.clamp(0.95 * (x + d) + 0.05 * 0.5, 0.01, 0.99);
+      hist.push(x);
+    }
+    let cv = null;
+    cv = IB.canvas("#cr-cv", (ctx, w, h) => {
+      const P = IB.palette(), p = pay();
+      const cols = w < 480 ? 15 : 20, rows = NA / cols, cell = Math.min((w - 24) / cols, 22), gx = (w - cols * cell) / 2, gy = 12;
+      const nh = Math.round(x * NA), order = INS.rng(3), idx = [];
+      for (let i = 0; i < NA; i++) idx.push([order(), i]);
+      idx.sort((a, b) => a[0] - b[0]);
+      const honest = new Set(idx.slice(0, nh).map((e) => e[1]));
+      for (let i = 0; i < NA; i++) {
+        const cx = gx + (i % cols) * cell + cell / 2, cy = gy + Math.floor(i / cols) * cell + cell / 2;
+        ctx.beginPath(); ctx.arc(cx, cy, cell * 0.34, 0, TAU); ctx.fillStyle = honest.has(i) ? P.accent : P.bad; ctx.fill();
+      }
+      const box = { x: 46, y: gy + rows * cell + 18, w: w - 62, h: 0 }; box.h = h - box.y - 40;
+      IB.chart(ctx, box, { x: [0, ROUNDS], y: [0, 1], yFmt: (v) => Math.round(v * 100) + "%", xLabel: "해(라운드)", yTicks: [0, 0.5, 1],
+        series: [{ data: hist.map((v, i) => [i, v]), color: P.accent, width: 2.5 }], hlines: [{ y: 0.5, color: P.faint }] });
+      const t = hist.length - 1;
+      IB.stat("cr-o-t", t + "<small>년</small>");
+      IB.stat("cr-o-x", tone(x < 0.3 ? "bad-t" : x > 0.7 ? "ok-t" : "", Math.round(x * 100) + "%"));
+      IB.stat("cr-o-p", p.h.toFixed(2) + " vs " + p.c.toFixed(2));
+      IB.stat("cr-o-h", ((1 - x) * Gr() * 100).toFixed(0));
+    }, { aspect: 0.72, minHeight: 320, maxHeight: 420 });
+    const anim = IB.loop(cv.canvas, (dt) => {
+      if (!playing || hist.length > ROUNDS) return;
+      acc += dt; if (acc < 0.3) return; acc = 0;
+      step(); cv.redraw();
+    });
+    const pb = document.getElementById("cr-play");
+    pb.addEventListener("click", () => { playing = !playing; pb.textContent = playing ? "일시정지" : "재생"; if (playing && hist.length > ROUNDS) reset(); });
+    function reset() { x = 0.5; hist = [0.5]; acc = 0; cv.redraw(); anim.start(); }
+    document.getElementById("cr-re").addEventListener("click", () => { playing = true; pb.textContent = "일시정지"; reset(); });
+  })();
+
+  /* ---------------------------------------------------------- 6. 신입 설계사 코호트 */
+  (function () {
+    const M = 36;
+    let sel = 13, G = null;
+    const redraw = () => cv && cv.redraw();
+    const H1 = IB.range("co-h1", (v) => v + "%", redraw);
+    const H2 = IB.range("co-h2", (v) => v + "%", redraw);
+    function curves() {
+      const S = [1], O = [0];
+      let written = 0, sumS = 0;
+      for (let m = 1; m <= M; m++) {
+        const hz = (m <= 12 ? H1() : H2()) / 100;
+        S.push(S[m - 1] * (1 - hz));
+      }
+      for (let m = 1; m <= M; m++) {
+        sumS += S[m - 1]; written = sumS; // 매달 시작 시점에 남아 있던 설계사가 같은 수의 계약을 판다
+        O.push(written > 0 ? 1 - (S[m] * m) / written : 0);
+      }
+      return { S, O };
+    }
+    let cv = null;
+    cv = IB.canvas("#co-cv", (ctx, w, h) => {
+      const P = IB.palette(), { S, O } = curves();
+      const box = { x: 46, y: 16, w: w - 62, h: h - 80 };
+      const c = IB.chart(ctx, box, { x: [0, M], y: [0, 1], yFmt: (v) => Math.round(v * 100) + "%", xLabel: "위촉 후 개월", xTicks: [0, 6, 12, 18, 24, 30, 36],
+        series: [{ data: S.map((v, i) => [i, v]), color: P.accent, width: 2.5 }, { data: O.map((v, i) => [i, v]), color: P.warn, width: 2 }],
+        vlines: [{ x: 13, color: P.faint, label: "13개월" }] });
+      G = c;
+      vline(ctx, c.X(sel), box.y, box.y + box.h, P.text, [], 1.2);
+      knob(ctx, c.X(sel), c.Y(S[sel]), P, P.accent, 6);
+      knob(ctx, c.X(sel), c.Y(O[sel]), P, P.warn, 5);
+      IB.stat("co-o-13", tone(S[13] < 0.6 ? "warn-t" : "", Math.round(S[13] * 100) + "%"));
+      IB.stat("co-o-m", sel + "<small>개월</small>");
+      IB.stat("co-o-s", Math.round(S[sel] * 100) + "<small>명</small>");
+      IB.stat("co-o-o", Math.round(O[sel] * 100) + "%");
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 380 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; sel = IB.clamp(Math.round(((x - b.x) / b.w) * M), 1, M); cv.redraw(); } });
+  })();
+})();
+</script>
+</body>
+</html>

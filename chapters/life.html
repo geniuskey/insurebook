@@ -1,0 +1,813 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "사망보험은 남은 사람을 위한 보험이다. 필요 사망보장액 계산, 시간이 지나며 줄어드는 필요와 정기보험, 정기+투자와 종신의 비교, 단기납 종신 '환급률 130%'의 연 수익률, 계약자·피보험자·수익자와 세금, 단체보험의 한계를 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>생명보험: 정기와 종신 · InsureBook</title>
+<meta name="description" content="사망보험은 남은 사람을 위한 보험이다. 필요 사망보장액 계산, 시간이 지나며 줄어드는 필요와 정기보험, 정기+투자와 종신의 비교, 단기납 종신 '환급률 130%'의 연 수익률, 계약자·피보험자·수익자와 세금, 단체보험의 한계를 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/life.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="생명보험: 정기와 종신 · InsureBook">
+<meta property="og:description" content="사망보험은 남은 사람을 위한 보험이다. 필요 사망보장액 계산, 시간이 지나며 줄어드는 필요와 정기보험, 정기+투자와 종신의 비교, 단기납 종신 '환급률 130%'의 연 수익률, 계약자·피보험자·수익자와 세금, 단체보험의 한계를 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/life.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/life.html#chapter","name":"생명보험: 정기와 종신","headline":"생명보험: 정기와 종신 · InsureBook","description":"사망보험은 남은 사람을 위한 보험이다. 필요 사망보장액 계산, 시간이 지나며 줄어드는 필요와 정기보험, 정기+투자와 종신의 비교, 단기납 종신 '환급률 130%'의 연 수익률, 계약자·피보험자·수익자와 세금, 단체보험의 한계를 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/life.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"10. 생명보험: 정기와 종신","item":"https://insurebook.euiyun.com/chapters/life.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="life">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 10</div>
+    <h1>생명보험: 정기와 종신</h1>
+    <p class="lead">생명보험은 이상한 상품이다. 돈을 내는 사람은 보험금을 받지 못하고, 보험금이 나오는 날에는 그 사람이 없다. 그래서 생명보험의 질문은 "나에게 무엇이 필요한가"가 아니라 "내가 없을 때 누가, 얼마 동안, 얼마가 모자란가"다. 이 장은 그 질문에서 출발해 필요한 사망보장을 계산하고, 그것을 사는 두 가지 방법인 정기보험과 종신보험을 공정하게 비교한다. 요즘 많이 팔리는 단기납 종신보험의 '환급률 130%'가 실제로 연 몇 %인지도 직접 계산한다.</p>
+    <ul class="objectives">
+      <li>필요 사망보장액을 생활비·빚·교육비·자산·기존 보장·유족연금으로 계산한다.</li>
+      <li>필요가 시간이 지나며 줄어든다는 것을 보고, 정기보험의 금액과 만기를 정한다.</li>
+      <li>정기보험 + 차액 투자와 종신보험을 사망 시와 해지 시 두 방향에서 비교한다.</li>
+      <li>환급률을 연 수익률(IRR)로 바꿔 단기납 종신의 광고 숫자를 해부하고, 그것이 합리적일 수 있는 조건도 본다.</li>
+      <li>계약자·피보험자·수익자 지정이 세금을 어떻게 바꾸는지와 단체보험의 한계를 안다.</li>
+    </ul>
+  </header>
+
+  <section id="for-others">
+    <h2>사망보험은 남은 사람을 위한 보험이다</h2>
+    <p>사망보험금은 내가 쓰는 돈이 아니다. 그래서 사망보장의 크기는 내 나이나 내 연봉이 아니라 <b>내 소득에 기대어 사는 사람</b>이 정한다. 혼자 사는 사회초년생이 사망하면 슬퍼할 사람은 많아도 생활이 무너지는 사람은 대개 없다. 반대로 외벌이로 어린 자녀 둘을 키우는 사람이 사망하면 남은 가족은 수십 년의 생활비와 빚을 한꺼번에 떠안는다. 같은 32세라도 필요한 사망보장은 0원에서 수억원까지 벌어진다.</p>
+    <p>사망보장을 사는 방법은 크게 두 가지다. <span class="term">정기보험</span><span class="en">(Term life)</span>은 정해진 기간, 예를 들어 60세까지 안에 사망할 때만 보험금을 준다. 그 기간을 무사히 넘기면 아무것도 돌려받지 않는다. 순수한 위험만 사니 보험료가 싸다. <span class="term">종신보험</span><span class="en">(Whole life)</span>은 언제 사망하든 보험금을 준다. 사람은 언젠가 반드시 사망하니 종신보험의 보험금은 결국 지급이 확정된 돈이다. 그 돈을 마련하려고 보험료 안에 큰 저축이 들어 있다(<a href="pricing.html">3장</a>의 저축보험료와 책임준비금).</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 280" role="img" aria-label="정기보험과 종신보험의 보장 기간과 보험료 구성 비교">
+        <defs><marker id="lf-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="70" y1="40" x2="425" y2="40" class="s-axis" marker-end="url(#lf-ar1)"/>
+        <text x="70" y="28" text-anchor="middle" class="lbl-dim">32세</text>
+        <text x="250" y="28" text-anchor="middle" class="lbl-dim">60세</text>
+        <text x="400" y="28" text-anchor="middle" class="lbl-dim">언제든</text>
+        <line x1="250" y1="34" x2="250" y2="200" class="s-dash"/>
+        <text x="8" y="76" class="lbl-b">정기</text>
+        <rect x="70" y="60" width="180" height="28" rx="4" class="f-acc-soft"/>
+        <text x="160" y="79" text-anchor="middle" class="lbl-acc">사망하면 보험금</text>
+        <text x="300" y="79" class="lbl-dim">만기 후 0원</text>
+        <text x="8" y="128" class="lbl-b">종신</text>
+        <rect x="70" y="112" width="345" height="28" rx="4" class="f-acc2-soft"/>
+        <text x="240" y="131" text-anchor="middle" class="lbl-acc2">언제 사망해도 보험금(지급 확정)</text>
+        <text x="8" y="178" class="lbl-dim">월 보험료</text>
+        <rect x="70" y="164" width="22" height="22" class="f-acc"/>
+        <text x="98" y="180" class="lbl t-mono">정기 1억 약 1.3만</text>
+        <rect x="250" y="164" width="150" height="22" class="f-acc2"/>
+        <text x="245" y="180" text-anchor="end" class="lbl t-mono">종신 1억 약 16.4만</text>
+        <text x="8" y="224" class="lbl">종신 보험료의 대부분은 저축(준비금)과 사업비다.</text>
+        <text x="8" y="246" class="lbl">정기는 거의 전부가 위험보험료와 사업비다.</text>
+        <text x="8" y="270" class="lbl-dim">32세 남성, 이 책의 교육용 모델(종신 20년납, 정기 60세 만기)</text>
+      </svg>
+      <figcaption><b>그림 1. 정기와 종신.</b> 정기는 기간을 사고, 종신은 기간 제한 없는 보장과 저축을 함께 산다. 이 책의 모델로 같은 1억원 보장의 월 보험료는 약 13배 차이다. 이 차이를 무엇으로 볼지가 이 장의 절반이다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="needs">
+    <h2>필요 사망보장: 무엇이 얼마나 모자라나</h2>
+    <p>필요 사망보장을 계산하는 방법을 <span class="term">니즈 분석</span><span class="en">(Needs analysis)</span>이라 한다. 생각은 간단하다. 내가 오늘 사망했다고 가정하고, 남은 가족에게 필요한 돈을 모두 더한 다음, 이미 있는 돈을 뺀다.</p>
+    <div class="formula">$$\text{공백} = \underbrace{\text{생활비 부족분}_{PV} + \text{빚} + \text{교육비} + \text{정리 비용}}_{\text{필요}} - \underbrace{(\text{자산} + \text{기존 사망보장} + \text{유족연금}_{PV})}_{\text{이미 있는 것}}$$<div class="where">생활비 부족분: 남은 가족의 월 생활비에서 남은 배우자의 소득 등을 빼고도 모자라는 돈. \(PV\)는 여러 해에 걸친 돈을 오늘 한 번에 맡겨 둘 때 필요한 금액(현재가치)이다. 물가 2.5%, 운용 수익률 3%로 할인한다. 엔진의 <code>INS.needs</code>가 이 계산이다.</div></div>
+    <p>아래는 지우네가 첫 아이를 낳았다고 놓고 계산한 것이다. 지우가 사망하면 민서의 월 실수령 약 260만원은 계속 들어오지만, 아이를 키우는 가구의 생활비에는 모자란다. 그 월 부족분, 부족분이 이어지는 기간, 교육비를 바꿔 본다. 빚(전세대출 2억원), 예금 3,000만원, 기존 종신보험 1억원, 정리 비용 1,500만원은 고정했다.</p>
+
+    <div class="sim" id="sim-nd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>지우가 오늘 사망한다면: 필요와 공백</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nd-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>월 생활비 부족분 <output id="nd-me-out"></output></span><input type="range" id="nd-me" min="0" max="4000000" step="100000" value="1200000"></label>
+          <label class="ctrl"><span>부족분이 이어지는 기간 <output id="nd-y-out"></output></span><input type="range" id="nd-y" min="0" max="35" step="1" value="25"></label>
+          <label class="ctrl"><span>자녀 교육비(합계) <output id="nd-ed-out"></output></span><input type="range" id="nd-ed" min="0" max="200000000" step="5000000" value="50000000"></label>
+          <label class="check"><input type="checkbox" id="nd-pen" checked> 유족연금 월 약 30만원 반영(가정)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>필요</span><span><i style="background:var(--ok)"></i>이미 있는 것</span><span><i style="background:var(--warn)"></i>공백</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필요 합계</span><span class="v" id="nd-o-n">—</span></div>
+        <div class="stat"><span class="k">이미 있는 것</span><span class="v" id="nd-o-h">—</span></div>
+        <div class="stat"><span class="k">공백 = 더 필요한 사망보장</span><span class="v" id="nd-o-g">—</span></div>
+        <div class="stat"><span class="k">지우 연 실수령의</span><span class="v" id="nd-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(월 120만원, 25년, 교육비 5,000만원)에서 생활비 부족분의 현재가치는 약 3억 3,890만원이다. 120만원 × 300개월 = 3억 6,000만원보다 작은 것은 남은 돈을 굴리면서 쓰기 때문이다. 이 책의 모델로 공백은 약 3억 8,900만원이다. ② 유족연금을 끈다. 공백이 약 8,500만원 커진다. 국민연금의 유족연금은 사적 보장을 줄여 주는 숨은 자산이다(<a href="social.html">13장</a>). ③ 기간을 0년으로 내린다. 아이가 없거나 다 컸다면 남는 것은 빚과 정리 비용뿐이고, 자산과 기존 보장으로 대부분 덮인다. 사망보장의 크기를 정하는 것은 부양 기간이다. (INS.needs: 물가 2.5%, 운용 수익률 3%. 유족연금 월액은 교육용 가정이다.)</div>
+    </div>
+
+    <p>막대에서 가장 큰 덩어리는 언제나 생활비 부족분이다. 빚은 눈에 잘 보여 보험 상담에서 먼저 나오지만, 실제로 큰 것은 수십 년에 걸친 생활비다. 반대로 '이미 있는 것' 쪽에서 가장 자주 빠뜨리는 것은 유족연금이다. 국민연금 가입자가 사망하면 배우자·자녀에게 유족연금이 나온다. 금액은 가입 기간과 소득에 따라 다르지만, 수십 년 동안 받으면 현재가치로 수천만원이 된다.</p>
+    <p>이 계산에는 판단이 많이 들어간다. 남은 배우자가 일을 계속할 수 있는가, 전세대출을 갚을 것인가 아니면 집을 줄일 것인가, 교육비를 어디까지 잡을 것인가. 정답은 없고 가족마다 다르다. 니즈 분석의 가치는 정답을 주는 데 있지 않고, <b>막연한 불안을 항목별 숫자로 바꿔 대화할 수 있게 하는 데</b> 있다.</p>
+
+    <div class="callout pro">
+      <strong>니즈 분석을 고객과 함께 채우는 법</strong>
+      숫자를 설계사가 미리 채워 오면 고객은 결과만 보고 "너무 많다" 또는 "그 정도면 되겠지"로 반응한다. 칸을 비워 두고 고객이 채우게 한다. ① "만약 오늘 남편분이 안 계신다면, 아이 키우는 데 매달 얼마가 모자랄까요?" ② "그 상태가 몇 년쯤 이어질까요? 막내가 몇 살이 될 때까지요?" ③ "대출은 갚으시겠어요, 아니면 이사를 하시겠어요?" 배우자가 함께 있을 때 하는 것이 좋다. 사망보장은 받는 사람의 판단이 중요하기 때문이다. 흔한 실수는 유족연금과 기존 단체보험을 빼먹거나, 반대로 퇴사하면 사라지는 단체보험을 영구 자산처럼 넣는 것이다. 계산에 쓴 가정을 상담 기록에 그대로 남긴다.
+    </div>
+  </section>
+
+  <section id="decline">
+    <h2>필요는 시간이 지나며 줄어든다</h2>
+    <p>니즈 분석은 오늘의 사진이다. 그런데 이 사진은 해마다 바뀐다. 아이가 자라면 남은 부양 기간이 줄고, 대출을 갚으면 빚이 줄고, 저축이 쌓이면 자산이 늘어난다. 그래서 대부분의 가정에서 필요 사망보장은 <b>아이가 어릴 때 가장 크고 그 뒤로 줄어드는</b> 모양이다.</p>
+    <p>이 모양에 맞추는 것이 정기보험의 설계다. 아래 그래프의 빨간 곡선은 지우네의 공백이 해마다 어떻게 줄어드는지를 이 책의 모델로 계산한 것이다(대출은 20년에 걸쳐 갚고, 저축은 해마다 600만원 늘어난다고 가정). 위에 세 가지 정기보험 설계를 겹쳐 보고, 세로선이 나이를 따라 움직이며 그 해의 보장과 공백을 보여 준다. 세로선을 직접 끌어도 된다.</p>
+
+    <div class="sim" id="sim-dec">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>줄어드는 필요 vs 정기보험 설계</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dec-cv"></canvas><span class="hint">세로선을 끌어 나이를 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dec-plan"><button data-value="flat4">정기 4억(60세)</button><button data-value="ladder" class="on">사다리 2억+2억</button><button data-value="flat2">정기 2억(60세)</button></div>
+          <label class="ctrl"><span>해마다 늘어나는 저축 <output id="dec-s-out"></output></span><input type="range" id="dec-s" min="0" max="20000000" step="1000000" value="6000000"></label>
+          <div class="btn-row"><button class="btn" id="dec-play">자동 재생</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>그해의 공백(필요 − 이미 있는 것)</span><span><i style="background:var(--accent)"></i>정기보험 보장</span><span><i style="background:var(--warn)"></i>과잉 구간</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">나이</span><span class="v" id="dec-o-a">—</span></div>
+        <div class="stat"><span class="k">공백 / 보장</span><span class="v" id="dec-o-g">—</span></div>
+        <div class="stat"><span class="k">설계의 월 보험료</span><span class="v" id="dec-o-p">—</span></div>
+        <div class="stat"><span class="k">보장이 모자란 해</span><span class="v" id="dec-o-u">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "정기 4억"에서 노란 과잉 구간을 본다. 첫해에는 공백(약 3억 8,900만원)과 거의 같지만, 대출을 갚고 저축이 쌓이며 과잉이 빠르게 커진다. ② "사다리 2억+2억"은 60세 만기 2억원과 50세 만기 2억원을 함께 드는 방식이다. 50세에 보장이 계단처럼 줄어 과잉이 작아지고, 이 책의 모델로 월 보험료는 4억 단일보다 약 8,400원 싸다. ③ "정기 2억"을 누른다. 기본값에서도 처음 7년은 보장이 모자란다(빨간 음영). 저축을 0으로 내리면 모자란 해가 10년으로 늘어난다. 저축 계획이 무너지면 보장 계획도 다시 봐야 한다. (공백은 INS.needs: 월 부족분 120만원, 부양 25년에서 해마다 1년씩 감소, 대출 2억원 20년 균등 상환, 교육비도 25년에 걸쳐 감소, 기존 종신 1억원, 유족연금 월 30만원. 보험료는 INS.price 정기, 32세 남성.)</div>
+    </div>
+
+    <p>사다리 방식은 필요가 줄어드는 곡선을 계단으로 따라가는 방법이다. 만기가 다른 정기보험 두세 개로 나누면, 나중에 필요 없어지는 부분을 일찍 끝낼 수 있다. 체감형 정기보험처럼 보장이 해마다 줄어드는 상품도 같은 생각에서 나왔다. 다만 계약을 여러 개로 나누면 계약마다 붙는 고정비가 생기고, 관리할 것이 늘어난다. 정답은 필요 곡선의 모양과 가족의 계획에 따라 다르다.</p>
+    <p>더 중요한 것은 이 곡선이 <b>가정 위에 서 있다</b>는 사실이다. 둘째가 생기면 곡선은 다시 올라가고, 집을 사며 대출이 커지면 또 올라간다. 정기보험은 가입할 때 한 번 정하고 끝나는 것이 아니라, 생애 사건마다 다시 맞춰 보는 것이다. 그래서 늘리기 쉬운 구조(나중에 추가 가입)와 줄이기 쉬운 구조(일부 해지)를 함께 생각해 둔다.</p>
+  </section>
+
+  <section id="term-vs-whole">
+    <h2>정기보험 + 차액 투자 vs 종신보험</h2>
+    <p>"정기보험을 사고 남는 돈은 투자하라(Buy term and invest the difference)." 개인 재무 분야에서 가장 오래된 조언 가운데 하나다. 근거는 그림 1의 보험료 차이다. 종신보험 보험료의 대부분은 저축과 사업비이니, 사망보장은 싼 정기보험으로 사고 저축은 사업비가 적은 곳에서 따로 하자는 것이다.</p>
+    <p>이 조언을 공정하게 시험해 본다. 32세 남성이 사망 보장 1억원을 산다. 종신보험(20년납)과 정기보험(60세 만기)의 보험료 차이를 매달 따로 투자한다. 실선은 그 나이에 사망하면 가족이 받는 돈, 점선은 살아서 해지하거나 꺼내 쓸 수 있는 돈이다. 세로선을 끌어 나이를 옮기고, 수익률과 '차액을 실제로 얼마나 투자하는가'를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-tw">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>정기 + 투자 vs 종신, 90세까지</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tw-cv"></canvas><span class="hint">세로선을 끌어 나이를 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>차액 투자 수익률(연) <output id="tw-r-out"></output></span><input type="range" id="tw-r" min="0" max="8" step="0.5" value="4"></label>
+          <div class="seg" id="tw-d"><button data-value="1" class="on">차액 100% 투자</button><button data-value="0.5">절반만</button><button data-value="0">다 써 버림</button></div>
+          <label class="ctrl"><span>나이 <output id="tw-a-out"></output></span><input type="range" id="tw-a" min="33" max="90" step="1" value="52"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>종신: 사망 시</span><span><i style="background:var(--accent-2);opacity:.5"></i>종신: 해지환급금(점선)</span><span><i style="background:var(--accent)"></i>정기+투자: 사망 시</span><span><i style="background:var(--accent);opacity:.5"></i>정기+투자: 투자 잔고(점선)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">종신 · 사망 / 해지</span><span class="v" id="tw-o-w">—</span></div>
+        <div class="stat"><span class="k">정기+투자 · 사망 / 잔고</span><span class="v" id="tw-o-t">—</span></div>
+        <div class="stat"><span class="k">월 보험료 · 종신 / 정기</span><span class="v" id="tw-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 52세(20년째)에 세로선을 둔다. 이 책의 모델로 종신의 해지환급금은 약 4,240만원, 정기+투자의 잔고(연 4%)는 약 5,480만원이다. 사망하면 정기 쪽 가족은 1억원에 잔고까지 받는다. ② 수익률을 0%로 내리고 "절반만"을 누른다. 이번엔 종신이 앞서는 구간이 생긴다. 이 비교의 승패는 '정말로 꾸준히 투자하는가'에 달려 있다. ③ 세로선을 60세 뒤로 끈다. 정기의 사망보장이 사라지고 잔고만 남는다. 평생 사망보장이 꼭 필요한 사람에게는 이 구간이 종신을 사는 이유다. (INS.price 종신 20년납·정기 60세 만기, 32세 남성 1억원. 20~28년째에는 정기 보험료를 투자 잔고에서 낸다고 본다. 투자 수익은 보장되지 않고 세금은 무시했다. 명목 금액이다.)</div>
+    </div>
+
+    <p>차액을 100% 꾸준히 투자하고 수익률이 예금 이상이면, 대부분의 나이에서 정기+투자가 앞선다. 종신보험의 저축에 붙는 사업비와 낮은 적립 이율 때문이다. 하지만 이 결론에는 두 개의 '만약'이 붙어 있다. 사람들은 차액을 꾸준히 투자하지 않는 경우가 많고, 중간에 꺼내 쓰기도 쉽다. 종신보험은 해지하면 손해라는 구조 자체가 <span class="term">강제 저축</span>의 장치가 된다. 이것은 실제 가치다. 또 60세 이후에도 사망보장이 반드시 필요한 사람(아래 절)에게는 정기보험이 답이 될 수 없다.</p>
+    <p>반대쪽의 사실도 있다. 50년 뒤의 1억원은 물가 연 2.5%면 오늘 돈으로 약 2,900만원이다. 종신보험의 '평생 1억원'은 시간이 갈수록 가벼워진다. 그리고 젊은 가장의 가장 큰 위험, 곧 아이가 어릴 때의 사망에 수억원의 보장이 필요할 때 종신보험으로 그 금액을 채우면 보험료가 감당하기 어려워진다. 종신 1억원 대신 같은 돈으로 정기 수억원을 살 수 있다. 큰 보장이 필요한 시기에는 정기가, 평생의 작은 확정 보장이 필요한 경우에는 종신이 맞는 경우가 많다.</p>
+  </section>
+
+  <section id="short-pay">
+    <h2>단기납 종신과 '환급률 130%' 해부</h2>
+    <p>최근 종신보험 시장에서 많이 팔린 것이 <span class="term">단기납 종신보험</span>이다. 보험료를 5년, 7년, 10년처럼 짧게 몰아 내고, 10년 시점에 해지하면 낸 돈의 120~130%를 돌려준다는 설명과 함께 팔린다. 사망 보장도 있고, 10년 뒤 원금보다 많이 돌려받는다니 매력적으로 들린다. 이 숫자를 정확히 읽어 본다.</p>
+    <p>먼저 <span class="term">환급률</span>은 해지환급금을 낸 보험료 합계로 나눈 값이다. 여기에는 <b>시간이 빠져 있다</b>. 5년 동안 나눠 낸 돈을 10년 시점에 130%로 돌려받는 것과, 오늘 낸 돈을 내일 130%로 받는 것은 전혀 다른 거래다. 시간을 넣으려면 연 수익률로 바꿔야 한다. 돈이 오간 날짜와 금액을 놓고, 그 흐름을 예금처럼 볼 때의 연 이율을 <span class="term">내부수익률</span><span class="en">(IRR)</span>이라 한다.</p>
+    <div class="formula">$$\sum_{t=0}^{n-1} \frac{P}{(1+r)^t} = \frac{\text{해지환급금}_T}{(1+r)^T}$$<div class="where">\(P\): 해마다 내는 보험료(연초), \(n\): 납입 연수, \(T\): 해지 시점(년), \(r\): 이 식을 맞추는 연 수익률(IRR). 환급률 130%, 5년납, 10년 시점이면 \(r\)은 약 3.3%다.</div></div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 250" role="img" aria-label="5년납 단기납 종신의 돈 흐름: 5년 동안 내고 10년 시점에 130%를 받는다">
+        <line x1="30" y1="130" x2="425" y2="130" class="s-axis"/>
+        <g class="t-mono">
+          <text x="40" y="150" text-anchor="middle" class="lbl-dim">0</text>
+          <text x="77" y="150" text-anchor="middle" class="lbl-dim">1</text>
+          <text x="114" y="150" text-anchor="middle" class="lbl-dim">2</text>
+          <text x="151" y="150" text-anchor="middle" class="lbl-dim">3</text>
+          <text x="188" y="150" text-anchor="middle" class="lbl-dim">4</text>
+          <text x="225" y="150" text-anchor="middle" class="lbl-dim">5</text>
+          <text x="410" y="150" text-anchor="middle" class="lbl-dim">10년</text>
+        </g>
+        <rect x="32" y="130" width="16" height="50" class="f-bad"/>
+        <rect x="69" y="130" width="16" height="50" class="f-bad"/>
+        <rect x="106" y="130" width="16" height="50" class="f-bad"/>
+        <rect x="143" y="130" width="16" height="50" class="f-bad"/>
+        <rect x="180" y="130" width="16" height="50" class="f-bad"/>
+        <text x="114" y="202" text-anchor="middle" class="lbl-bad">5년 동안 해마다 낸다(합계 100)</text>
+        <rect x="398" y="40" width="24" height="90" class="f-ok"/>
+        <text x="390" y="58" text-anchor="end" class="lbl">10년 시점 130</text>
+        <text x="390" y="78" text-anchor="end" class="lbl-dim">마지막 납입 뒤 5년 거치</text>
+        <text x="225" y="236" text-anchor="middle" class="lbl">광고: "130%"  →  연 수익률로는 약 3.3%</text>
+      </svg>
+      <figcaption><b>그림 2. 환급률에는 시간이 없다.</b> 첫해에 낸 돈은 10년, 마지막 해에 낸 돈은 6년 동안 묶인다. 평균적으로 약 8년 묶인 돈이 30% 불어난 것이니 연 수익률은 3%대다. 예금과 비교할 숫자는 130%가 아니라 이 연 수익률이다.</figcaption>
+    </figure>
+
+    <p>아래 시뮬레이터에서 직접 확인한다. 월 100만원씩 내는 단기납 종신을 가정한다. 납입 기간과 10년 시점 환급률(광고 숫자)을 고르고, 비교할 예금 금리를 정한다. 세로선을 끌어 해지 시점을 옮기면 그 시점의 연 수익률이 나온다. 납입 중의 해지환급금은 저해지 구조를 흉내 낸 교육용 가정이다.</p>
+
+    <div class="sim" id="sim-irr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>환급률을 연 수익률로: 단기납 종신 vs 예금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="irr-cv"></canvas><span class="hint">세로선을 끌어 해지 시점을 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="irr-pay"><button data-value="5" class="on">5년납</button><button data-value="7">7년납</button><button data-value="10">10년납</button></div>
+          <label class="ctrl"><span>10년 시점 환급률(광고) <output id="irr-r-out"></output></span><input type="range" id="irr-r" min="100" max="135" step="1" value="130"></label>
+          <label class="ctrl"><span>비교 예금 금리(세전) <output id="irr-d-out"></output></span><input type="range" id="irr-d" min="1" max="5" step="0.25" value="3"></label>
+          <label class="ctrl"><span>해지 시점 <output id="irr-t-out"></output></span><input type="range" id="irr-t" min="1" max="15" step="1" value="10"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>낸 돈(누적)</span><span><i style="background:var(--accent-2)"></i>해지환급금</span><span><i style="background:var(--ok)"></i>같은 돈을 예금(세후)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">낸 돈 → 해지환급금</span><span class="v" id="irr-o-m">—</span></div>
+        <div class="stat"><span class="k">환급률</span><span class="v" id="irr-o-r">—</span></div>
+        <div class="stat"><span class="k">연 수익률(IRR)</span><span class="v" id="irr-o-i">—</span></div>
+        <div class="stat"><span class="k">같은 돈 예금(세후)</span><span class="v" id="irr-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(5년납, 130%, 10년 시점)에서 연 수익률은 약 3.3%다. 세전 3% 예금의 세후 수익률(약 2.5%)보다는 높고, 물가 2%를 빼면 실질 1%대다. ② 해지 시점을 3년으로 끈다. 저해지 구간이라 낸 돈의 절반 남짓만 돌려받고 연 수익률은 크게 마이너스다. 130%는 10년을 버틴 사람의 숫자다. ③ 10년납으로 바꾼다. 같은 130%라도 돈이 묶인 기간이 짧아 연 수익률이 약 4.7%로 오른다. 반대로 환급률을 110%로 내리면 예금보다 못하다. 같은 '환급률'이라도 납입 기간에 따라 뜻이 다르다. (연초 납입, 납입 중 해지환급금은 낸 돈의 30~70%(저해지 가정), 납입 완료 시점 98%에서 10년 시점 광고 환급률까지 직선, 그 뒤 연 2% 증가로 가정. 예금은 이자소득세 15.4%를 뗀 복리. 보험의 세금은 계약 요건에 따라 다르므로 무시했다.)</div>
+    </div>
+
+    <p>환급률 130%가 거짓은 아니다. 다만 그 숫자가 전달하는 느낌("30%를 번다")과 실제 연 수익률(3%대)의 차이가 크다. 그리고 그 숫자는 <b>10년을 끝까지 유지한 사람</b>에게만 해당한다. 납입 중에 해지하면 저해지·무해지 구조 때문에 원금의 상당 부분을 잃는다. 단기납 종신은 월 보험료가 크기 때문에, 납입 기간 중에 목돈이 필요해지는 일(전세 보증금, 이직, 출산)이 생기면 그대로 손실로 이어진다.</p>
+    <p>그런데 질문이 하나 남는다. 보험사는 어떻게 10년 뒤 130%를 줄 수 있을까. 보험사의 운용 수익률이 특별히 높아서가 아니다. 핵심은 <b>중간에 해지하는 사람</b>이다. 무해지·저해지 구조에서 해지자는 쌓인 준비금의 대부분을 두고 떠난다. 그 돈이 끝까지 남는 사람의 환급금을 받쳐 준다. 이 책의 엔진으로 직접 확인한다. 40세 남성, 사망 1억원 종신, 납입 중 해지 시 환급금이 없는(무해지) 구조에서 해마다 해지하는 사람의 비율을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-lapse">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>130%는 누가 만들어 주나: 해지율과 환급률</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lp-cv"></canvas><span class="hint">곡선 위 점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="lp-pay"><button data-value="5">5년납</button><button data-value="7" class="on">7년납</button><button data-value="10">10년납</button></div>
+          <label class="ctrl"><span>납입 중 연 해지율 <output id="lp-l-out"></output></span><input type="range" id="lp-l" min="0" max="15" step="1" value="10"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>10년 시점 환급률</span><span><i style="background:var(--text-dim)"></i>10년까지 남아 있는 가입자 비율</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">10년 시점 환급률</span><span class="v" id="lp-o-r">—</span></div>
+        <div class="stat"><span class="k">끝까지 남는 가입자</span><span class="v" id="lp-o-p">—</span></div>
+        <div class="stat"><span class="k">월 보험료(1억원)</span><span class="v" id="lp-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 7년납, 해지율 10%에서 10년 시점 환급률은 이 책의 모델로 약 133%이고, 끝까지 남는 가입자는 약 47%다. 절반 넘는 사람이 중간에 떠나며 남긴 돈이 130%를 만든다. ② 해지율을 0%로 내린다. 아무도 떠나지 않으면 같은 상품의 10년 환급률은 약 91%로 원금에도 못 미친다. ③ 10년납에서 해지율을 15%로 올린다. 환급률이 200%를 넘지만 끝까지 남는 사람은 다섯에 하나 꼴이다. 예상보다 해지가 적으면 보험사가 손해를 보는 구조라, 이런 가격에는 위험이 따른다. (INS.price 종신 refund 0(납입 중 무해지), 40세 남성, 1억원, 예정이율 2.5%. 해지율은 납입 기간에만 적용. 교육용 모델이며 실제 상품의 가격 구조와 다르다.)</div>
+    </div>
+
+    <p>이것은 사기가 아니라 <span class="term">해지율</span>을 가격에 반영한 정상적인 보험수리다(<a href="pricing.html">3장</a>). 하지만 두 가지 의미가 있다. 가입자 입장에서 130%는 "끝까지 버티면 남들이 남긴 돈을 나눠 받는다"는 내기에 가깝다. 자신이 끝까지 버틸 수 있는 사람인지가 핵심이다. 보험사 입장에서는 예상보다 해지가 적으면 약속한 환급금이 부담이 된다. 이런 위험 때문에 감독당국이 과도한 환급률 경쟁을 문제 삼아 상품 구조를 조정하도록 한 적이 있고, 판매 조건은 시기마다 바뀐다.</p>
+    <p>그럼 단기납 종신은 언제 합리적일 수 있을까. ① 평생 사망보장이 실제로 필요하고(아래 절), ② 납입 기간 동안 보험료를 확실히 낼 여유가 있고, ③ 그 돈을 10년 이상 쓸 일이 없으며, ④ 비교 대상(예금·채권)의 세후 수익률보다 연 수익률이 높다면, 보장과 저축을 함께 묶는 선택지로 검토할 만하다. 반대로 사망보장이 필요 없는데 "저축이 된다"는 이유로 가입하거나, 비상금까지 끌어다 큰 보험료를 내는 것은 위험하다. 저축이 목적이라면 <a href="savings.html">11장</a>의 저축성보험·연금 비교가 먼저다.</p>
+
+    <div class="callout buyer">
+      <strong>단기납 종신 설계서에서 확인할 것</strong>
+      ① 해지환급금 예시표에서 1년·3년·5년·7년·10년 시점의 금액과 환급률(납입 중 구간이 특히 중요하다). ② 10년 시점 환급률이 '공시이율 변동' 가정인지 '확정'인지. ③ 같은 흐름을 연 수익률(IRR)로 바꾸면 몇 %인지. 설계사에게 물어도 되고, 이 장의 시뮬레이터에 넣어도 된다. ④ 사망보험금이 정말 필요한 금액인지. ⑤ 월 보험료가 가구 실수령에서 차지하는 비중과, 납입 기간 중 목돈 쓸 계획. 하나라도 답이 흐릿하면 서명을 미룬다. 청약철회 기간(<a href="contract.html">6장</a>)도 기억한다.
+    </div>
+
+    <div class="callout pro">
+      <strong>"130%면 은행보다 낫죠?"라는 질문에</strong>
+      이 질문에 "네"라고만 답하면 판매는 쉽지만 나중에 분쟁이 된다. 연 수익률로 바꿔 보여 주는 것이 가장 정직하고, 오히려 신뢰를 얻는다. "10년 유지하면 연 3%대이고, 세후 예금보다는 조금 높습니다. 대신 5년 안에 해지하면 낸 돈의 절반 정도만 돌려받습니다." 그리고 판매 기준을 분명히 한다. 사망보장 니즈가 있는가, 납입 여력이 있는가, 비상금이 따로 있는가. 단기납 종신은 월 보험료가 커서 수수료도 크다. 그만큼 적합성 판단과 설명의무 이행 기록을 꼼꼼히 남긴다. 저축 목적만 있는 고객에게 보장성 보험을 저축처럼 설명하는 것은 불완전판매 분쟁의 전형적인 유형이다.
+    </div>
+  </section>
+
+  <section id="when-whole">
+    <h2>종신보험이 맞는 경우</h2>
+    <p>지금까지의 계산이 종신보험에 불리해 보였다면, 그것은 비교의 기준을 '젊은 가장의 기간 한정 사망보장'에 두었기 때문이다. 기준을 바꾸면 종신보험이 맞는 사람이 있다.</p>
+    <ul>
+      <li><b>상속세 재원이 필요한 경우.</b> 부동산이나 비상장 주식처럼 바로 현금으로 바꾸기 어려운 재산이 많으면, 상속인이 상속세를 낼 현금이 모자라 재산을 급히 팔아야 할 수 있다. 사망 시 확정적으로 나오는 현금이 그 재원이 된다. 이 필요는 나이가 많을수록 커지니 '평생' 보장이 의미를 가진다.</li>
+      <li><b>평생 부양 책임이 있는 경우.</b> 장애가 있는 자녀처럼 부모가 사망한 뒤에도 평생 돌봄 비용이 필요한 가족이 있다면, 60세에 끝나는 정기보험은 답이 되지 않는다.</li>
+      <li><b>강제 저축이 실제로 필요한 경우.</b> 차액을 투자하지 못하고 써 버리는 성향이 분명하고, 납입 여력이 충분하다면 종신보험의 구조 자체가 저축을 지켜 준다. 다만 사업비라는 비용을 치르는 방식이라는 것은 알고 고른다.</li>
+      <li><b>건강이 나빠 나중에 보험을 살 수 없을 것 같은 경우.</b> 정기보험 만기 뒤 갱신이나 재가입이 어렵다면, 처음부터 평생 보장을 사 두는 것이 나을 수 있다.</li>
+    </ul>
+    <p>이 목록의 공통점은 <b>필요가 기간이 아니라 평생</b>이라는 것이다. 반대로 필요가 아이가 독립할 때까지, 대출을 다 갚을 때까지처럼 기간으로 정해져 있다면 정기보험이 더 맞는 경우가 많다. 둘을 섞는 것도 흔하다. 평생 필요한 작은 금액(정리 비용, 일부 상속 재원)은 종신으로, 기간 한정의 큰 금액은 정기로 나눈다.</p>
+  </section>
+
+  <section id="roles-tax">
+    <h2>계약자·피보험자·수익자, 그리고 세금</h2>
+    <p>생명보험 계약에는 세 역할이 있다. <span class="term">계약자</span>는 계약을 맺고 보험료를 내는 사람, <span class="term">피보험자</span>는 그 사람의 생사가 보험금 지급의 기준이 되는 사람, <span class="term">수익자</span>는 보험금을 받는 사람이다. 셋이 모두 같을 수도, 모두 다를 수도 있다. 지우의 종신보험은 부모님이 가입해 주었으니, 가입 당시 계약자는 부모님, 피보험자는 지우였을 것이다. 이 지정이 세금을 바꾼다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 270" role="img" aria-label="계약자, 피보험자, 수익자의 관계와 보험금 흐름">
+        <defs><marker id="lf-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="160" y="14" width="120" height="50" rx="8" class="f-acc-soft"/>
+        <text x="220" y="36" text-anchor="middle" class="lbl-acc">보험회사</text>
+        <text x="220" y="54" text-anchor="middle" class="lbl-dim">보험금 지급</text>
+        <rect x="12" y="150" width="130" height="62" rx="8" class="f-bad-soft"/>
+        <text x="77" y="174" text-anchor="middle" class="lbl-b">계약자</text>
+        <text x="77" y="194" text-anchor="middle" class="lbl-dim">보험료를 낸다</text>
+        <rect x="155" y="150" width="130" height="62" rx="8" class="f-warn-soft"/>
+        <text x="220" y="174" text-anchor="middle" class="lbl-b">피보험자</text>
+        <text x="220" y="194" text-anchor="middle" class="lbl-dim">사망하면 사건</text>
+        <rect x="298" y="150" width="130" height="62" rx="8" class="f-ok-soft"/>
+        <text x="363" y="174" text-anchor="middle" class="lbl-b">수익자</text>
+        <text x="363" y="194" text-anchor="middle" class="lbl-dim">보험금을 받는다</text>
+        <path d="M77 148 L180 68" class="s-bad" marker-end="url(#lf-ar2)"/>
+        <text x="96" y="100" class="lbl-bad">보험료</text>
+        <path d="M220 148 L220 70" class="s-dash" marker-end="url(#lf-ar2)"/>
+        <path d="M262 68 L355 148" class="s-ok" marker-end="url(#lf-ar2)"/>
+        <text x="320" y="100" class="lbl">보험금</text>
+        <text x="220" y="240" text-anchor="middle" class="lbl">세금의 열쇠: 보험료를 실제로 낸 사람과</text>
+        <text x="220" y="260" text-anchor="middle" class="lbl">보험금을 받는 사람이 같은가, 그리고 누가 사망했는가</text>
+      </svg>
+      <figcaption><b>그림 3. 세 역할.</b> 보험금은 보험료를 낸 사람이 남긴 재산처럼 취급되는 것이 기본 원리다. 보험료를 낸 사람이 사망하면 상속, 살아 있는 사람이 다른 사람에게 보험금이 가게 하면 증여에 가깝다.</figcaption>
+    </figure>
+
+    <p>아래에서 세 역할을 지우·민서·자녀 중에서 골라 본다. 피보험자가 사망해 사망보험금이 나올 때, 세법의 일반 원리로 어떤 세금의 대상이 되는지를 보여 준다. 실제 과세 여부와 금액은 공제, 다른 재산, 보험료를 실제로 누가 냈는지에 따라 달라진다.</p>
+
+    <div class="sim" id="sim-tax">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>누가 내고, 누가 사망하고, 누가 받나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tax-cv"></canvas></div>
+        <div class="sim-controls">
+          <span style="font-size:13px;color:var(--text-dim)">계약자(보험료를 실제로 낸 사람)</span>
+          <div class="seg" id="tax-c"><button data-value="jiwoo" class="on">지우</button><button data-value="minseo">민서</button></div>
+          <span style="font-size:13px;color:var(--text-dim)">피보험자(사망한 사람)</span>
+          <div class="seg" id="tax-i"><button data-value="jiwoo" class="on">지우</button><button data-value="minseo">민서</button></div>
+          <span style="font-size:13px;color:var(--text-dim)">수익자</span>
+          <div class="seg" id="tax-b"><button data-value="jiwoo">지우</button><button data-value="minseo" class="on">민서</button><button data-value="child">자녀</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">일반 원리상 과세 유형</span><span class="v" id="tax-o-t">—</span></div>
+        <div class="stat"><span class="k">이유</span><span class="v" id="tax-o-w" style="font-size:13px;font-family:var(--font)">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 계약자 지우, 피보험자 지우, 수익자 민서. 보험료를 낸 지우가 사망했으니 보험금은 지우가 남긴 재산처럼 보아 상속세 계산에 들어간다. ② 계약자를 민서로 바꾼다(민서가 자기 소득으로 보험료를 냈다면). 민서가 낸 보험료로 민서가 받으니 상속·증여세 과세 대상이 아닌 것이 원칙이다. 부부가 서로를 피보험자로 교차 가입하는 설계가 여기서 나온다. ③ 계약자 민서, 수익자 자녀로 바꾼다. 보험료를 낸 사람과 받는 사람이 다르고, 낸 사람은 살아 있으니 증여세 문제가 된다. 수익자를 바꾸는 한 번의 클릭이 세금 유형을 바꾼다. (세법의 일반 원리를 단순화한 교육용 판정이다. 공제·비과세 한도, 보험료 실제 부담자 판정, 지정 변경 시점에 따라 결과가 달라지며 세법은 바뀐다.)</div>
+    </div>
+
+    <p>원리는 하나다. <b>보험금은 보험료를 실제로 낸 사람의 돈으로 본다.</b> 낸 사람이 사망해서 다른 사람이 받으면 상속, 낸 사람이 살아 있는데 다른 사람이 받으면 증여, 낸 사람이 직접 받으면 상속도 증여도 아니다. 그래서 계약서에 이름만 바꿔 적는 것으로는 부족하다. 계약자를 배우자로 해 두었더라도 실제 보험료가 피보험자의 통장에서 나갔다면 세무 판단에서는 피보험자가 낸 것으로 볼 수 있다.</p>
+
+    <div class="callout deep">
+      <strong>상속세·증여세의 일반 원리</strong>
+      상속세는 사망한 사람의 재산 전체에서 공제를 뺀 금액에 매긴다. 사망보험금은 피상속인이 보험료를 냈다면 상속재산으로 간주되어 합산된다. 공제가 커서 실제 상속세가 0원인 가정도 많다(2026년 기준 일괄공제 5억원, 배우자 상속공제 최소 5억원 수준이며, 공제 구조와 과세 방식의 개편이 논의되어 왔다). 증여세는 받는 사람 기준으로 매기며, 배우자·직계존비속 사이에는 10년 합산 공제 한도가 있다. 같은 보험금이라도 상속재산 규모, 공제, 다른 증여 이력에 따라 세금이 크게 달라진다. 세법과 공제 금액은 해마다 개정될 수 있으므로, 큰 금액이나 상속 설계가 걸린 경우에는 세무 전문가와 확인한다. 이 책은 세무 자문을 하지 않는다.
+    </div>
+
+    <p>수익자 지정에서 자주 생기는 문제도 있다. 수익자를 '법정상속인'으로 두면 상속 비율대로 나뉘는데, 가족 관계가 바뀌면(이혼, 재혼) 예상과 다른 사람이 받을 수 있다. 미성년 자녀가 수익자이면 보험금을 실제로 관리할 사람(법정대리인)이 문제가 될 수 있다. 결혼·출산·이혼 같은 사건이 있을 때마다 증권의 수익자 칸을 다시 확인한다.</p>
+  </section>
+
+  <section id="group">
+    <h2>회사 단체보험의 한계</h2>
+    <p>많은 직장이 직원을 위해 <span class="term">단체보험</span>을 든다. 사망 보장, 단체실손, 상해 보장 같은 것을 회사가 보험료를 내고 제공한다. 직원 입장에서는 공짜 보장이니 고마운 제도다. 문제는 그 보장이 <b>회사에 다니는 동안에만</b> 있다는 것이다. 퇴사하거나 이직하면 사라지고, 새 회사의 단체보험은 보장 내용이 전혀 다를 수 있다.</p>
+    <p>민서의 회사 단체보험은 사망 5,000만원을 보장한다. 이것을 필요 사망보장 계산에 영구 자산처럼 넣으면, 민서가 이직하는 날 보장 공백이 생긴다. 그때 개인 정기보험을 사면 되지 않을까? 두 가지 위험이 있다. 나이가 들수록 보험료가 오르고, 그 사이 건강이 바뀌면 가입이 거절되거나 할증·부담보가 붙을 수 있다(<a href="asymmetry.html">4장</a>). 아래에서 민서의 퇴사 나이를 바꿔 보며, 지금 개인 정기보험(2억원, 60세 만기)을 드는 것과 퇴사할 때 드는 것을 비교한다.</p>
+
+    <div class="sim" id="sim-grp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>단체보험이 사라지는 날: 지금 살까, 그때 살까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="grp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>민서의 퇴사·이직 나이 <output id="grp-q-out"></output></span><input type="range" id="grp-q" min="32" max="58" step="1" value="36"></label>
+          <div class="seg" id="grp-plan"><button data-value="now" class="on">지금 개인 정기 가입</button><button data-value="later">퇴사 때 가입</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>단체보험 5,000만원</span><span><i style="background:var(--accent)"></i>개인 정기 2억원</span><span><i style="background:var(--warn)"></i>건강이 바뀌면 못 살 수도 있는 구간</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">개인 정기 월 보험료</span><span class="v" id="grp-o-m">—</span></div>
+        <div class="stat"><span class="k">60세까지 낸 돈</span><span class="v" id="grp-o-t">—</span></div>
+        <div class="stat"><span class="k">퇴사 전 보장(평균)</span><span class="v" id="grp-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "지금 개인 정기 가입"에서 31세 가입 월 보험료는 이 책의 모델로 약 1.4만원, 60세까지 낸 돈은 약 480만원이다. ② "퇴사 때 가입"으로 바꾼다. 36세에 가입하면 월 약 1.6만원으로 오르지만 내는 기간이 짧아 총액은 오히려 약간 적다. 대신 퇴사 전 몇 년은 단체보험 5,000만원뿐이고, 그 사이 건강이 바뀌면 아예 못 살 수 있다(노란 구간). ③ 퇴사 나이를 50세로 끈다. 월 보험료가 두 배 넘게 뛴다. 늦게 사는 것의 진짜 비용은 총액이 아니라 보장 없는 시간과 가입 거절의 위험이다. (INS.price 정기, 31세 여성 기준. 건강 변화 확률은 모델에 넣지 않았다.)</div>
+    </div>
+
+    <p>계산의 결론은 의외로 단순하지 않다. 보험료 총액만 보면 늦게 사는 것이 꼭 손해는 아니다. 늦게 사면 내는 기간이 짧기 때문이다. 하지만 단체보험만 있는 기간에는 필요 보장의 일부만 있고, 건강이 바뀌는 순간 선택지가 사라진다. 그래서 단체보험은 <b>덤으로 여기고 계산에서는 빼는 것</b>이 안전하다. 특히 이직이 잦은 업계에 있거나, 앞으로 프리랜서·창업을 생각한다면 더 그렇다.</p>
+
+    <div class="callout warn">
+      <strong>수치와 제도는 해마다 바뀐다</strong>
+      이 장의 보험료·해지환급금·환급률은 2026년 무렵을 염두에 둔 교육용 모델이며 실제 상품과 다르다. 실제 보험료는 나이·성별·흡연·직업·병력·회사·가입 시기에 따라 크게 다르다. 단기납 종신의 환급률과 판매 조건, 저축성·보장성 보험의 비과세 요건, 상속세·증여세의 공제와 세율, 국민연금 유족연금의 산식은 법령과 감독 기준의 개정에 따라 바뀐다. 특정 보험사나 상품을 권하지 않으며, 가입과 세무 판단 전에는 최신 약관·상품설명서·세법을 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 아이를 기다리며 사망보장을 다시 짜다</h2>
+    <p>2027년 첫 아이를 계획하는 지우네에게 도윤은 이 장의 순서대로 계산을 펼쳤다. 숫자는 모두 이 책의 교육용 모델로 계산한 것이다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th class="num">지우</th><th class="num">민서</th></tr></thead>
+      <tbody>
+        <tr><td>월 생활비 부족분 × 기간</td><td class="num">120만원 × 25년</td><td class="num">80만원 × 25년</td></tr>
+        <tr><td>빚(전세대출 몫)</td><td class="num">2억원</td><td class="num">1억원</td></tr>
+        <tr><td>교육비 · 정리 비용</td><td class="num">5,000만 · 1,500만원</td><td class="num">5,000만 · 1,500만원</td></tr>
+        <tr><td>예금 · 기존 사망보장</td><td class="num">3,000만 · 종신 1억원</td><td class="num">3,000만 · 0원(단체보험 제외)</td></tr>
+        <tr><td>유족연금(월, 가정)</td><td class="num">약 30만원</td><td class="num">약 20만원</td></tr>
+        <tr><td><b>공백</b></td><td class="num"><b>약 3억 8,900만원</b></td><td class="num"><b>약 3억 400만원</b></td></tr>
+        <tr><td>추가 정기보험</td><td class="num">2억(60세)+2억(50세)<br>월 약 4.3만원</td><td class="num">2억(60세)+1억(50세)<br>월 약 1.8만원</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 10장</span></div>
+      <h4>정기보험 사다리를 더하고, 종신 1억원은 그대로 둔다</h4>
+      <p>지우는 처음에 "종신 1억 있으니 된 거 아냐?"라고 물었다. 도윤은 니즈 분석 칸을 비워 둔 채 민서에게 펜을 넘겼다. 민서가 채운 숫자로 계산하자 지우가 사망했을 때의 공백은 약 3억 8,900만원이었다. 생활비 부족분 월 120만원이 25년 이어지는 값(현재가치 약 3억 3,900만원)이 가장 컸고, 전세대출 2억원이 그다음이었다. 종신 1억원과 예금, 유족연금을 다 넣어도 그만큼이 모자랐다.</p>
+      <p>도윤은 60세 만기 정기 4억원 하나(월 약 5.2만원)와, 60세 만기 2억원 + 50세 만기 2억원 사다리(월 약 4.3만원)를 나란히 보여 줬다. 대출을 갚고 저축이 쌓이면 50대에는 공백이 크게 줄어드니 사다리가 필요 곡선에 더 가깝다. 60세까지 남는 2억원은 둘째나 집 구입처럼 곡선을 다시 끌어올릴 일에 대비한 여유로 두었다. 지우는 사다리를 골랐다. 종신보험 1억원은 해지하지 않기로 했다. 부모님이 들어 준 계약으로 납입 14년째이고 남은 납입은 6년이다. 주계약만 놓고 모델로 보면 지금 해지환급금은 낸 주계약 보험료와 비슷한 수준이고, 예정이율(약 4%)은 지금 새로 사는 계약보다 높다. 평생 남는 1억원은 정리 비용과 작은 상속 재원으로 의미가 있다. 다만 계약자가 아직 부모님으로 되어 있다면 계약자 변경과 그에 따른 세금 문제를 따로 확인하기로 했다.</p>
+      <p>민서 쪽도 계산했다. 민서가 사망하면 지우의 소득은 이어지지만 월 약 80만원이 모자라고, 공백은 약 3억 400만원이었다. 회사 단체보험 5,000만원은 이직하면 사라지니 계산에서 뺐다. 그래서 민서도 60세 만기 2억원 + 50세 만기 1억원(월 약 1.8만원)을 더한다. 둘의 추가 보험료는 월 약 6.1만원이다. 도윤은 덧붙였다. "정기보험은 수수료가 작아. 그래서 설계사들이 잘 권하지 않는다는 말도 있지. 그래도 너희한테 맞는 건 이거야."</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>지우: 정기 2억(60세)+2억(50세), 월 약 4.3만원 추가. 종신 1억원 유지. 민서: 정기 2억(60세)+1억(50세), 월 약 1.8만원. 단체보험은 덤으로.</div><div><b>아직 남은 문제</b>은행 창구에서 권유받은 월 50만원 '비과세 저축보험'은 어떻게 할까. 보장과 저축을 한 상품에 묶는 것이 맞는가.</div><div><b>다음 단계</b><a href="savings.html">11장</a>에서 저축성보험과 연금저축·ISA를 해지환급금 곡선으로 비교한다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>사망보험은 남은 사람을 위한 보험이다. 필요는 내 소득에 기대어 사는 사람과 그 기간이 정한다.</li>
+      <li>공백 = 생활비 부족분(현재가치) + 빚 + 교육비 + 정리 비용 − (자산 + 기존 보장 + 유족연금). 유족연금은 자주 빠뜨리는 자산이고, 단체보험은 영구 자산이 아니다.</li>
+      <li>필요는 아이가 자라고 빚을 갚고 저축이 쌓이며 줄어든다. 정기보험은 만기와 금액을 그 곡선에 맞추고, 사다리로 나눌 수 있다.</li>
+      <li>정기+차액 투자는 꾸준히 투자한다면 대부분의 나이에서 종신보다 유리하다. 종신의 가치는 평생 보장과 강제 저축에 있다.</li>
+      <li>환급률에는 시간이 없다. 5년납 10년 시점 130%는 연 수익률 약 3.3%이고, 납입 중 해지하면 크게 손해다. 높은 환급률은 중간 해지자가 남긴 돈이 받친다.</li>
+      <li>종신이 맞는 경우: 상속세 재원, 평생 부양 책임, 강제 저축이 실제로 필요한 경우, 나중에 보험을 사기 어려운 건강 상태.</li>
+      <li>보험금은 보험료를 실제로 낸 사람의 돈으로 본다. 낸 사람이 사망하면 상속, 살아 있는 사람이 남에게 주면 증여, 낸 사람이 받으면 둘 다 아니다. 세법은 바뀐다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>필요 사망보장액을 가장 크게 좌우하는 요인은 대개 무엇인가?</p>
+        <div class="opts">
+          <button class="opt">본인의 나이</button>
+          <button class="opt" data-correct>내 소득에 기대어 사는 가족의 생활비 부족분과 그 기간</button>
+          <button class="opt">이미 가입한 보험의 개수</button>
+          <button class="opt">본인의 건강 상태</button>
+        </div>
+        <div class="quiz-exp">니즈 분석에서 가장 큰 항목은 수십 년에 걸친 생활비 부족분의 현재가치다. 부양가족이 없으면 이 항목이 0에 가까워 필요 사망보장도 작아진다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>5년 동안 보험료를 나눠 내고 10년 시점에 낸 돈의 130%를 돌려받았다. 이 거래를 가장 정확하게 설명한 것은?</p>
+        <div class="opts">
+          <button class="opt">10년 동안 30%를 벌었으니 연 3% 단리와 같다</button>
+          <button class="opt">연 수익률 30%짜리 거래다</button>
+          <button class="opt">원금보다 많이 받았으므로 어떤 예금보다도 낫다</button>
+          <button class="opt" data-correct>돈이 평균 약 8년 묶인 것을 반영하면 연 수익률(IRR)은 약 3.3%다</button>
+        </div>
+        <div class="quiz-exp">환급률에는 시간이 빠져 있다. 연초에 5년 동안 나눠 내고 10년 시점에 130%를 받는 흐름의 IRR은 약 3.3%다. 비교는 세후 예금 수익률, 물가와 해야 한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>무해지·저해지 구조의 단기납 종신이 10년 시점에 높은 환급률을 줄 수 있는 핵심 이유는?</p>
+        <div class="opts">
+          <button class="opt" data-correct>납입 중 해지하는 가입자가 쌓인 준비금 대부분을 두고 떠나, 그 돈이 끝까지 남는 사람의 환급금을 받쳐 주기 때문이다</button>
+          <button class="opt">보험사의 투자 수익률이 은행보다 늘 훨씬 높기 때문이다</button>
+          <button class="opt">사망보험금을 줄여서 그 돈을 환급금으로 돌리기 때문이다</button>
+          <button class="opt">예금자보호 제도가 환급금을 보장하기 때문이다</button>
+        </div>
+        <div class="quiz-exp">해지율을 가격에 반영한 구조다. 이 책의 모델에서 해지율 0%면 같은 상품의 10년 환급률은 원금에도 못 미친다. 그래서 높은 환급률은 '끝까지 버티는 사람'에게만 해당한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>민서가 자기 소득으로 보험료를 내는 계약(계약자 민서, 피보험자 지우, 수익자 민서)에서 지우가 사망해 보험금이 나왔다. 일반 원리상 맞는 설명은?</p>
+        <div class="opts">
+          <button class="opt">지우의 상속재산에 합산되어 상속세 대상이다</button>
+          <button class="opt">민서가 지우에게서 증여받은 것으로 증여세 대상이다</button>
+          <button class="opt" data-correct>보험료를 낸 사람과 받는 사람이 같아 상속·증여세 과세 대상이 아닌 것이 원칙이다</button>
+          <button class="opt">사망보험금은 언제나 소득세를 낸다</button>
+        </div>
+        <div class="quiz-exp">보험금은 보험료를 실제로 낸 사람의 돈으로 본다. 민서가 내고 민서가 받았으므로 원칙적으로 상속·증여세 대상이 아니다. 다만 실제 보험료 부담자 판정과 세법 개정에 따라 달라질 수 있다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  /** 연 수익률(IRR): cfs[t] = t년 시점 현금흐름. 이분법 */
+  function irr(cfs) {
+    const npv = (r) => cfs.reduce((s, c, t) => s + c / Math.pow(1 + r, t), 0);
+    let lo = -0.99, hi = 1;
+    if (npv(lo) * npv(hi) > 0) return NaN;
+    for (let k = 0; k < 120; k++) { const m = (lo + hi) / 2; if (npv(m) > 0) lo = m; else hi = m; }
+    return (lo + hi) / 2;
+  }
+  const CASE = INS.CASE;
+  const termPrice = (age, sex, S, end) => INS.price({ type: "term", age, sex, S, term: end - age, pay: end - age }).monthly;
+
+  /* ---------------------------------------------------------- 1. 니즈 분석 폭포 */
+  (function () {
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const ME = IB.range("nd-me", (v) => won(v), redraw);
+    const Y = IB.range("nd-y", (v) => v + "년", redraw);
+    const ED = IB.range("nd-ed", (v) => won(v), redraw);
+    const PEN = document.getElementById("nd-pen");
+    PEN.addEventListener("change", redraw);
+    const DEBT = CASE.home.jeonseLoan, ASSET = CASE.assets.cash, EXIST = 1e8, FUN = 1.5e7;
+    cv = IB.canvas("#nd-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const r = INS.needs({ monthlyExpense: ME(), years: Y(), debt: DEBT, education: ED(), funeral: FUN, assets: ASSET, existing: EXIST, survivorPension: PEN.checked ? 3e5 : 0 });
+      const items = [
+        ["생활비", r.expensePV, 1], ["빚", DEBT, 1], ["교육비", ED(), 1], ["정리", FUN, 1],
+        ["예금", -ASSET, 0], ["종신", -EXIST, 0], ["유족연금", -r.pensionPV, 0], ["공백", r.gap, 2],
+      ];
+      const top = Math.max(r.need, 1e8) * 1.1;
+      const B = { x: 54, y: 18, w: w - 54 - 10, h: h - 18 - 40 };
+      const c = IB.chart(ctx, B, { x: [0, items.length], y: [0, top], xTicks: [], yFmt: IB.wonAxis });
+      const slot = B.w / items.length, bw = slot * 0.66;
+      let run = 0;
+      items.forEach(([lab, v, kind], i) => {
+        const cx = B.x + slot * (i + 0.5);
+        let a, b, col;
+        if (kind === 1) { a = run; b = run + v; run = b; col = P.bad; }
+        else if (kind === 0) { a = run + v; b = run; run = a; col = P.ok; }
+        else { a = r.need - r.gap; b = r.need; col = P.warn; }
+        const y0 = c.Y(Math.max(0, Math.min(a, b))), y1 = c.Y(Math.max(a, b));
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(cx - bw / 2, y1, bw, Math.max(1, y0 - y1)); ctx.globalAlpha = 1;
+        T(ctx, lab, cx, B.y + B.h + 14, { size: w < 480 ? 10 : 11.5, color: P.dim, align: "center", base: "middle" });
+        if (Math.abs(v) > 0) T(ctx, IB.wonAxis(Math.abs(v)), cx, y1 - 7, { size: w < 480 ? 9.5 : 11, mono: true, color: P.text, align: "center", base: "middle" });
+        if (i < items.length - 1 && kind !== 2) { ctx.strokeStyle = P.faint; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(cx + bw / 2, c.Y(run)); ctx.lineTo(cx + slot - bw / 2, c.Y(run)); ctx.stroke(); ctx.setLineDash([]); }
+      });
+      IB.stat("nd-o-n", won(r.need));
+      IB.stat("nd-o-h", won(r.have));
+      IB.stat("nd-o-g", r.gap > 0 ? tone("bad-t", won(r.gap)) : tone("ok-t", "없음"));
+      IB.stat("nd-o-x", IB.fmt(r.gap / (CASE.jiwoo.monthlyNet * 12), 2) + "<small>배</small>");
+    }, { aspect: 0.56, minHeight: 280, maxHeight: 380 });
+  })();
+
+  /* ---------------------------------------------------------- 2. 줄어드는 필요 vs 정기 (애니메이션) */
+  (function () {
+    const AGE = 32, END = 60;
+    const PLANS = {
+      flat4: [[4e8, 60]],
+      ladder: [[2e8, 60], [2e8, 50]],
+      flat2: [[2e8, 60]],
+    };
+    const prem = {};
+    Object.keys(PLANS).forEach((k) => { prem[k] = PLANS[k].reduce((s, [S, e]) => s + termPrice(AGE, "m", S, e), 0); });
+    const cover = (plan, age) => PLANS[plan].reduce((s, [S, e]) => s + (age < e ? S : 0), 0);
+    let cv = null, G = null, t = 0, auto = true, hold = 0;
+    const redraw = () => cv && cv.redraw();
+    const PL = IB.seg("dec-plan", redraw);
+    const SV = IB.range("dec-s", (v) => won(v), redraw);
+    const gapAt = (k, sv) => INS.needs({ monthlyExpense: 1.2e6, years: Math.max(0, 25 - k), debt: 2e8 * Math.max(0, 1 - k / 20), education: 5e7 * Math.max(0, 1 - k / 25), assets: 3e7 + sv * k, existing: 1e8, survivorPension: 3e5 }).gap;
+    cv = IB.canvas("#dec-cv", (ctx, w, h) => {
+      const P = IB.palette(), plan = PL(), sv = SV();
+      const gaps = []; for (let k = 0; k <= END - AGE; k++) gaps.push([AGE + k, gapAt(k, sv)]);
+      const ymax = Math.max(4.4e8, ...gaps.map((g) => g[1])) * 1.05;
+      const covSeries = []; for (let a = AGE; a <= END; a += 0.25) covSeries.push([a, cover(plan, Math.floor(a))]);
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 62 }, { x: [AGE, END], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: "지우의 나이" });
+      G = c;
+      // 과잉 / 부족 음영
+      for (let k = 0; k < gaps.length - 1; k++) {
+        const a = AGE + k, cov = cover(plan, a), g0 = gaps[k][1], g1 = gaps[k + 1][1];
+        const x0 = c.X(a), x1 = c.X(a + 1);
+        ctx.beginPath(); ctx.moveTo(x0, c.Y(cov)); ctx.lineTo(x1, c.Y(cov)); ctx.lineTo(x1, c.Y(g1)); ctx.lineTo(x0, c.Y(g0)); ctx.closePath();
+        ctx.fillStyle = (g0 + g1) / 2 > cov ? P.bad : P.warn; ctx.globalAlpha = (g0 + g1) / 2 > cov ? 0.25 : 0.2; ctx.fill(); ctx.globalAlpha = 1;
+      }
+      ctx.save(); ctx.strokeStyle = P.accent; ctx.lineWidth = 2.6; ctx.beginPath();
+      covSeries.forEach(([a, v], i) => (i ? ctx.lineTo(c.X(a), c.Y(v)) : ctx.moveTo(c.X(a), c.Y(v)))); ctx.stroke();
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2.6; ctx.beginPath();
+      gaps.forEach(([a, v], i) => (i ? ctx.lineTo(c.X(a), c.Y(v)) : ctx.moveTo(c.X(a), c.Y(v)))); ctx.stroke(); ctx.restore();
+      const age = AGE + t, ai = Math.min(gaps.length - 1, Math.floor(t)), u = t - ai;
+      const g = ai < gaps.length - 1 ? gaps[ai][1] + (gaps[ai + 1][1] - gaps[ai][1]) * u : gaps[ai][1];
+      const cov = cover(plan, Math.floor(age));
+      vline(ctx, c.X(age), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      knob(ctx, c.X(age), c.Y(g), P, P.bad, 5);
+      knob(ctx, c.X(age), c.Y(cov), P, P.accent, 5);
+      knob(ctx, c.X(age), c.box.y + c.box.h, P, P.text, 7);
+      const right = age > AGE + 18;
+      T(ctx, (g > cov ? "부족 " : "과잉 ") + IB.wonAxis(Math.abs(g - cov)), c.X(age) + (right ? -8 : 8), c.box.y + 12, { size: 11.5, color: g > cov ? P.bad : P.warn, align: right ? "right" : "left", base: "middle", weight: 600 });
+      let under = 0; for (let k = 0; k < gaps.length - 1; k++) if (gaps[k][1] > cover(plan, AGE + k) + 1) under++;
+      IB.stat("dec-o-a", Math.floor(age) + "<small>세</small>");
+      IB.stat("dec-o-g", IB.wonAxis(g) + " <small>/</small> " + IB.wonAxis(cov));
+      IB.stat("dec-o-p", won(prem[plan]));
+      IB.stat("dec-o-u", under ? tone("bad-t", under + "<small>년</small>") : tone("ok-t", "없음"));
+    }, { aspect: 0.56, minHeight: 290, maxHeight: 390 });
+    const loop = IB.loop(cv.canvas, (dt) => {
+      if (!auto) return;
+      if (t < END - AGE) { t = Math.min(END - AGE, t + dt * 3.2); cv.redraw(); }
+      else { hold += dt; if (hold > 2) { t = 0; hold = 0; } }
+    });
+    IB.drag(cv.canvas, { start() { auto = false; }, move(x) { if (!G) return; const b = G.box; t = IB.clamp(((x - b.x) / b.w) * (END - AGE), 0, END - AGE - 0.01); cv.redraw(); } });
+    document.getElementById("dec-play").addEventListener("click", () => { auto = true; t = 0; hold = 0; loop.start(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 정기+투자 vs 종신 */
+  (function () {
+    const AGE = 32, S = 1e8, TEND = 60, MAXA = 90;
+    const W = INS.price({ type: "whole", age: AGE, sex: "m", S, pay: 20 });
+    const TP = termPrice(AGE, "m", S, TEND);
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const R = IB.range("tw-r", (v) => v + "%", redraw);
+    const D = IB.seg("tw-d", redraw);
+    const A = IB.range("tw-a", (v) => v + "세", redraw);
+    function fund() {
+      const r = INS.monthly(R() / 100), d = Number(D()), out = [[AGE, 0]];
+      let b = 0;
+      for (let m = 1; m <= (MAXA - AGE) * 12; m++) {
+        const y = Math.floor((m - 1) / 12);
+        const wp = y < 20 ? W.monthly : 0, tp = AGE + y < TEND ? TP : 0;
+        const diff = wp - tp;
+        b = b * (1 + r) + (diff > 0 ? diff * d : diff);
+        if (m % 12 === 0) out.push([AGE + m / 12, b]);
+      }
+      return out;
+    }
+    cv = IB.canvas("#tw-cv", (ctx, w, h) => {
+      const P = IB.palette(), F = fund(), age = A();
+      const wsv = W.rows.slice(0, MAXA - AGE + 1).map((r) => [r.age, r.surrender]);
+      const tdeath = F.map(([a, b]) => [a, (a < TEND ? S : 0) + Math.max(b, 0)]);
+      const ymax = Math.max(S, ...tdeath.map((x) => x[1]), ...wsv.map((x) => x[1])) * 1.08;
+      const ymin = Math.min(0, ...F.map((x) => x[1])) * 1.1;
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 62 }, {
+        x: [AGE, MAXA], y: [ymin, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: "나이",
+        series: [
+          { data: [[AGE, S], [MAXA, S]], color: P.accent2, width: 2.4 },
+          { data: wsv, color: P.accent2, width: 1.8, dash: [6, 4] },
+          { data: tdeath, color: P.accent, width: 2.4 },
+          { data: F, color: P.accent, width: 1.8, dash: [6, 4] },
+        ],
+        vlines: [{ x: TEND, color: P.faint, label: "정기 만기" }],
+      });
+      G = c;
+      vline(ctx, c.X(age), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      const k = age - AGE, fb = F[k][1], ws = W.rows[k].surrender, td = (age < TEND ? S : 0) + Math.max(fb, 0);
+      knob(ctx, c.X(age), c.Y(td), P, P.accent, 5);
+      knob(ctx, c.X(age), c.Y(ws), P, P.accent2, 5);
+      knob(ctx, c.X(age), c.box.y + c.box.h, P, P.text, 7);
+      IB.stat("tw-o-w", IB.wonAxis(S) + " <small>/</small> " + IB.wonAxis(ws));
+      IB.stat("tw-o-t", IB.wonAxis(td) + " <small>/</small> " + (fb < 0 ? tone("bad-t", IB.wonAxis(fb)) : IB.wonAxis(fb)));
+      IB.stat("tw-o-p", won(W.monthly) + " <small>/</small> " + won(TP));
+    }, { aspect: 0.56, minHeight: 290, maxHeight: 390 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; A.set(IB.clamp(Math.round(AGE + ((x - b.x) / b.w) * (MAXA - AGE)), 33, 90)); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 환급률 → IRR */
+  (function () {
+    const MON = 1e6, YR = MON * 12, TMAX = 15, TAX = INS.KR.interestTax;
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const PAY = IB.seg("irr-pay", redraw);
+    const RR = IB.range("irr-r", (v) => v + "%", redraw);
+    const DR = IB.range("irr-d", (v) => v + "%", redraw);
+    const TT = IB.range("irr-t", (v) => v + "년", redraw);
+    // 해지환급금 비율(낸 돈 대비): 교육용 가정
+    function ratioAt(t, pay, R) {
+      if (t <= 0) return 0;
+      if (t < pay) return 0.3 + 0.4 * (t / pay);
+      if (t <= 10) return pay >= 10 ? R : 0.98 + (R - 0.98) * ((t - pay) / (10 - pay));
+      return R * Math.pow(1.02, t - 10);
+    }
+    function at(t, pay, R) {
+      const paid = YR * Math.min(t, pay), sv = paid * ratioAt(t, pay, R);
+      const cfs = []; for (let y = 0; y <= t; y++) cfs.push((y < Math.min(t, pay) ? -YR : 0) + (y === t ? sv : 0));
+      return { paid, sv, ratio: paid ? sv / paid : 0, irr: irr(cfs) };
+    }
+    function deposit(t, pay, rate) { const r = rate * (1 - TAX); let b = 0; for (let y = 0; y < t; y++) { if (y < pay) b += YR; b *= 1 + r; } return b; }
+    cv = IB.canvas("#irr-cv", (ctx, w, h) => {
+      const P = IB.palette(), pay = Number(PAY()), R = RR() / 100, dr = DR() / 100, T0 = TT();
+      const paidS = [], svS = [], depS = [];
+      for (let t = 0; t <= TMAX; t++) { const a = at(t, pay, R); paidS.push([t, a.paid]); svS.push([t, a.sv]); depS.push([t, deposit(t, pay, dr)]); }
+      const ymax = Math.max(...svS.map((x) => x[1]), ...depS.map((x) => x[1])) * 1.1;
+      const c = IB.chart(ctx, { x: 62, y: 16, w: w - 62 - 16, h: h - 16 - 62 }, {
+        x: [0, TMAX], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "년", xTicks: [0, 5, 10, 15], xLabel: "가입 후 경과",
+        series: [
+          { data: paidS, color: P.bad, width: 2 },
+          { data: depS, color: P.ok, width: 2, dash: [6, 4] },
+          { data: svS, color: P.accent2, width: 2.6 },
+        ],
+        bands: [{ x0: 0, x1: pay, color: "rgba(128,128,128,0.10)" }],
+      });
+      G = c;
+      T(ctx, "납입 " + pay + "년", c.X(pay / 2), c.box.y + 12, { size: 11, color: P.dim, align: "center", base: "middle" });
+      const a = at(T0, pay, R), dep = deposit(T0, pay, dr);
+      vline(ctx, c.X(T0), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      knob(ctx, c.X(T0), c.Y(a.sv), P, P.accent2, 5);
+      knob(ctx, c.X(T0), c.box.y + c.box.h, P, P.text, 7);
+      const right = T0 > 9;
+      T(ctx, "연 " + (isFinite(a.irr) ? (a.irr * 100).toFixed(2) + "%" : "—"), c.X(T0) + (right ? -8 : 8), c.Y(a.sv) - 14, { size: 12, color: a.irr < 0 ? P.bad : P.text, align: right ? "right" : "left", base: "middle", weight: 700 });
+      IB.stat("irr-o-m", IB.wonAxis(a.paid) + " → " + IB.wonAxis(a.sv));
+      IB.stat("irr-o-r", tone(a.ratio < 1 ? "bad-t" : "ok-t", Math.round(a.ratio * 100) + "%"));
+      IB.stat("irr-o-i", tone(a.irr < 0 ? "bad-t" : a.irr < dr * (1 - TAX) ? "warn-t" : "ok-t", isFinite(a.irr) ? (a.irr * 100).toFixed(2) + "%" : "—"));
+      IB.stat("irr-o-d", IB.wonAxis(dep) + " <small>세후 " + (dr * (1 - TAX) * 100).toFixed(2) + "%</small>");
+    }, { aspect: 0.56, minHeight: 290, maxHeight: 390 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; TT.set(IB.clamp(Math.round(((x - b.x) / b.w) * TMAX), 1, TMAX)); } });
+  })();
+
+  /* ---------------------------------------------------------- 5. 해지율과 환급률 */
+  (function () {
+    const cache = {};
+    const calc = (pay, l) => {
+      const k = pay + "|" + l;
+      if (!cache[k]) { const p = INS.price({ type: "whole", age: 40, sex: "m", S: 1e8, pay, refund: 0, lapse: l / 100 }); cache[k] = { ratio: p.rows[10].ratio, persist: p.rows[10].persist, monthly: p.monthly }; }
+      return cache[k];
+    };
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const PAY = IB.seg("lp-pay", redraw);
+    const L = IB.range("lp-l", (v) => v + "%", redraw);
+    cv = IB.canvas("#lp-cv", (ctx, w, h) => {
+      const P = IB.palette(), pay = Number(PAY()), l = L();
+      const rs = [], ps = [];
+      for (let x = 0; x <= 15; x++) { const r = calc(pay, x); rs.push([x, r.ratio]); ps.push([x, r.persist]); }
+      const ymax = Math.max(1.4, ...rs.map((x) => x[1])) * 1.06;
+      const c = IB.chart(ctx, { x: 52, y: 16, w: w - 52 - 16, h: h - 16 - 62 }, {
+        x: [0, 15], y: [0, ymax], yFmt: (v) => Math.round(v * 100) + "%", xFmt: (v) => v + "%", xLabel: "납입 중 연 해지율",
+        series: [{ data: ps, color: P.dim, width: 2, dash: [6, 4] }, { data: rs, color: P.accent2, width: 2.6 }],
+        hlines: [{ y: 1, color: P.faint, label: "원금 100%" }],
+      });
+      G = c;
+      const cur = calc(pay, l);
+      vline(ctx, c.X(l), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.2);
+      knob(ctx, c.X(l), c.Y(cur.persist), P, P.dim, 5);
+      knob(ctx, c.X(l), c.Y(cur.ratio), P, P.accent2, 7);
+      const right = l > 9;
+      T(ctx, "환급률 " + Math.round(cur.ratio * 100) + "%", c.X(l) + (right ? -10 : 10), c.Y(cur.ratio) - 12, { size: 12, color: P.accent2, align: right ? "right" : "left", base: "middle", weight: 700 });
+      T(ctx, "남는 사람 " + Math.round(cur.persist * 100) + "%", c.X(l) + (right ? -10 : 10), c.Y(cur.persist) + 14, { size: 11.5, color: P.dim, align: right ? "right" : "left", base: "middle" });
+      IB.stat("lp-o-r", tone(cur.ratio < 1 ? "bad-t" : "ok-t", Math.round(cur.ratio * 100) + "%"));
+      IB.stat("lp-o-p", Math.round(cur.persist * 100) + "%");
+      IB.stat("lp-o-m", won(cur.monthly));
+    }, { aspect: 0.52, minHeight: 270, maxHeight: 360 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; L.set(IB.clamp(Math.round(((x - b.x) / b.w) * 15), 0, 15)); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 계약자·피보험자·수익자 */
+  (function () {
+    const NM = { jiwoo: "지우", minseo: "민서", child: "자녀" };
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const C = IB.seg("tax-c", redraw);
+    const I = IB.seg("tax-i", redraw);
+    const B = IB.seg("tax-b", redraw);
+    function judge(c, i, b) {
+      if (c === i && b === i) return { t: "상속세", k: "warn", w: "수익자가 사망한 본인이라 보험금은 상속인에게 상속재산으로 넘어간다." };
+      if (c === i) return { t: "상속세", k: "warn", w: "보험료를 낸 " + NM[c] + "가 사망했다. 보험금은 " + NM[c] + "의 상속재산으로 간주되어 합산된다." };
+      if (c === b) return { t: "상속·증여세 대상 아님(원칙)", k: "ok", w: NM[c] + "가 자기 돈으로 낸 보험료의 보험금을 직접 받는다." };
+      return { t: "증여세", k: "bad", w: "보험료를 낸 " + NM[c] + "는 살아 있고, 보험금은 " + NM[b] + "가 받는다. 낸 사람이 받는 사람에게 준 것으로 본다." };
+    }
+    cv = IB.canvas("#tax-cv", (ctx, w, h) => {
+      const P = IB.palette(), c = C(), i = I(), b = B(), J = judge(c, i, b);
+      const bw = Math.min(118, (w - 40) / 3), gap = (w - bw * 3) / 4, by = h * 0.46, bh = 58;
+      const xs = [gap, gap * 2 + bw, gap * 3 + bw * 2];
+      const ins = { x: w / 2 - 60, y: 14, w: 120, h: 40 };
+      rrect(ctx, ins.x, ins.y, ins.w, ins.h, 8); ctx.fillStyle = P.accent; ctx.globalAlpha = 0.15; ctx.fill(); ctx.globalAlpha = 1;
+      T(ctx, "보험회사", w / 2, ins.y + ins.h / 2, { size: 13, weight: 700, color: P.accent, align: "center", base: "middle" });
+      const boxes = [["계약자", c, P.bad, "보험료"], ["피보험자", i, P.warn, "사망"], ["수익자", b, P.ok, "보험금"]];
+      boxes.forEach(([role, who, col, act], k) => {
+        const x = xs[k];
+        rrect(ctx, x, by, bw, bh, 8); ctx.fillStyle = col; ctx.globalAlpha = 0.16; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+        T(ctx, role, x + bw / 2, by + 18, { size: 11.5, color: P.dim, align: "center", base: "middle" });
+        T(ctx, NM[who], x + bw / 2, by + 40, { size: 16, weight: 800, color: P.text, align: "center", base: "middle" });
+        const sx = x + bw / 2, sy = by - 4, ex = w / 2 + (k - 1) * 40, ey = ins.y + ins.h + 4;
+        ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 2; if (k === 1) ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        if (k === 2) { ctx.moveTo(ex, ey); ctx.lineTo(sx, sy); } else { ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); }
+        ctx.stroke(); ctx.restore();
+        const [hx, hy, fx, fy] = k === 2 ? [sx, sy, ex, ey] : [ex, ey, sx, sy];
+        const ang = Math.atan2(hy - fy, hx - fx);
+        ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx - 9 * Math.cos(ang - 0.4), hy - 9 * Math.sin(ang - 0.4)); ctx.lineTo(hx - 9 * Math.cos(ang + 0.4), hy - 9 * Math.sin(ang + 0.4)); ctx.closePath(); ctx.fill();
+        T(ctx, act, (sx + ex) / 2 + (k === 0 ? -8 : k === 2 ? 8 : 6), (sy + ey) / 2, { size: 11, color: col, align: k === 0 ? "right" : "left", base: "middle", weight: 600 });
+      });
+      const vy = by + bh + 22, vh = h - vy - 10;
+      rrect(ctx, 12, vy, w - 24, vh, 10); ctx.fillStyle = P[J.k]; ctx.globalAlpha = 0.14; ctx.fill(); ctx.globalAlpha = 1;
+      T(ctx, J.t, w / 2, vy + vh / 2, { size: w < 400 ? 14 : 16, weight: 800, color: P[J.k], align: "center", base: "middle" });
+      IB.stat("tax-o-t", tone(J.k + "-t", J.t));
+      IB.stat("tax-o-w", J.w);
+    }, { aspect: 0.62, minHeight: 260, maxHeight: 330 });
+  })();
+
+  /* ---------------------------------------------------------- 7. 단체보험의 한계 */
+  (function () {
+    const AGE = CASE.minseo.age, END = 60, S = 2e8, GRP = 5e7;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const Q = IB.range("grp-q", (v) => v + "세", redraw);
+    const PL = IB.seg("grp-plan", redraw);
+    cv = IB.canvas("#grp-cv", (ctx, w, h) => {
+      const P = IB.palette(), q = Q(), plan = PL();
+      const buy = plan === "now" ? AGE : q;
+      const m = termPrice(buy, "f", S, END), tot = m * 12 * (END - buy);
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 46 }, { x: [AGE, END], y: [0, 2.8e8], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: "민서의 나이" });
+      const X = c.X, Y = c.Y;
+      if (plan === "later") { ctx.fillStyle = P.warn; ctx.globalAlpha = 0.16; ctx.fillRect(X(AGE), c.box.y, X(q) - X(AGE), c.box.h); ctx.globalAlpha = 1; T(ctx, "개인 보장 없음", (X(AGE) + X(q)) / 2, Y(2.5e8), { size: 11, color: P.warn, align: "center", base: "middle", weight: 600 }); }
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.8; ctx.fillRect(X(AGE), Y(GRP), X(q) - X(AGE), Y(0) - Y(GRP)); ctx.globalAlpha = 1;
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.7;
+      const base = (a) => (a < q ? GRP : 0);
+      if (buy < q) ctx.fillRect(X(buy), Y(GRP + S), X(q) - X(buy), Y(GRP) - Y(GRP + S));
+      ctx.fillRect(X(Math.max(buy, q)), Y(S), X(END) - X(Math.max(buy, q)), Y(0) - Y(S));
+      ctx.globalAlpha = 1;
+      vline(ctx, X(q), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      T(ctx, "퇴사 " + q + "세", X(q) + 5, c.box.y + 12, { size: 11.5, color: P.text, base: "middle", weight: 600 });
+      if (X(q) - X(AGE) > 60) T(ctx, "단체 5,000만", (X(AGE) + X(q)) / 2, Y(GRP / 2), { size: 10.5, color: "#fff", align: "center", base: "middle" });
+      let covSum = 0; for (let a = AGE; a < q; a++) covSum += base(a) + (a >= buy ? S : 0);
+      IB.stat("grp-o-m", won(m) + " <small>" + buy + "세 가입</small>");
+      IB.stat("grp-o-t", won(tot));
+      IB.stat("grp-o-c", q > AGE ? IB.wonAxis(covSum / (q - AGE)) : "—");
+    }, { aspect: 0.5, minHeight: 260, maxHeight: 340 });
+  })();
+})();
+</script>
+</body>
+</html>

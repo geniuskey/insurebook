@@ -1,0 +1,1043 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "가입자는 자기 몸을 알고 보험사는 통계만 안다. 역선택의 죽음의 나선, 언더라이팅과 표준체·할증·부담보, 계약 전 알릴 의무, 간편심사 보험, 면책·감액 기간, 실손 보험금의 쏠림과 도덕적 해이, 고지의무 위반의 해지 규칙을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보의 비대칭 · InsureBook</title>
+<meta name="description" content="가입자는 자기 몸을 알고 보험사는 통계만 안다. 역선택의 죽음의 나선, 언더라이팅과 표준체·할증·부담보, 계약 전 알릴 의무, 간편심사 보험, 면책·감액 기간, 실손 보험금의 쏠림과 도덕적 해이, 고지의무 위반의 해지 규칙을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/asymmetry.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="정보의 비대칭 · InsureBook">
+<meta property="og:description" content="가입자는 자기 몸을 알고 보험사는 통계만 안다. 역선택의 죽음의 나선, 언더라이팅과 표준체·할증·부담보, 계약 전 알릴 의무, 간편심사 보험, 면책·감액 기간, 실손 보험금의 쏠림과 도덕적 해이, 고지의무 위반의 해지 규칙을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/asymmetry.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/asymmetry.html#chapter","name":"정보의 비대칭","headline":"정보의 비대칭 · InsureBook","description":"가입자는 자기 몸을 알고 보험사는 통계만 안다. 역선택의 죽음의 나선, 언더라이팅과 표준체·할증·부담보, 계약 전 알릴 의무, 간편심사 보험, 면책·감액 기간, 실손 보험금의 쏠림과 도덕적 해이, 고지의무 위반의 해지 규칙을 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/asymmetry.html","position":4,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"4. 정보의 비대칭","item":"https://insurebook.euiyun.com/chapters/asymmetry.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="asymmetry">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 04</div>
+    <h1>정보의 비대칭</h1>
+    <p class="lead">민서는 2년 전 건강검진에서 갑상선에 작은 혹이 있다는 말을 들었다. 의사는 "지켜보자"고 했고, 그 뒤로 몇 번 초음파를 다시 찍었다. 암보험을 알아보던 민서가 청약서의 질문을 읽다 멈췄다. "최근 1년 이내에 추가검사(재검사)를 받은 사실이 있습니까?" 이걸 적어야 하나, 적으면 가입이 안 되나, 안 적으면 누가 아나. 이 장은 그 질문이 왜 거기 있는지에서 시작한다. 가입자는 자기 몸을 알고, 보험사는 통계만 안다. 이 차이를 메우려는 장치들이 보험을 복잡하게 만든 첫 번째 이유다.</p>
+    <ul class="objectives">
+      <li>가입자와 보험사가 아는 것의 차이가 역선택과 도덕적 해이를 만드는 과정을 본다.</li>
+      <li>한 가지 가격을 매기면 건강한 사람부터 떠나 보험이 무너지는 죽음의 나선을 직접 돌려 본다.</li>
+      <li>언더라이팅(우량체·표준체·할증·부담보·거절)과 계약 전 알릴 의무의 질문 구조를 읽는다.</li>
+      <li>간편심사 보험이 왜 더 비싼지, 면책·감액 기간이 무엇을 막는지 숫자로 확인한다.</li>
+      <li>고지의무를 어겼을 때 계약 해지와 보험금 지급이 어떤 규칙으로 갈리는지 시간표 위에서 따져 본다.</li>
+    </ul>
+  </header>
+
+  <section id="know">
+    <h2>내가 아는 것과 보험사가 아는 것</h2>
+    <p>보험료는 "이런 사람들은 1년에 몇 명꼴로 아프다"는 통계에서 나온다(<a href="pricing.html">3장</a>). 그런데 보험사 창구에 오는 사람은 통계 속 평균이 아니라 한 명 한 명이다. 그리고 한 명 한 명은 보험사가 모르는 것을 안다. 요즘 가슴이 자주 답답한지, 부모가 몇 살에 무슨 병을 앓았는지, 담배를 끊었다가 다시 피우는지, 다음 달에 미뤄 둔 수술을 받을 생각인지. 거래의 한쪽만 아는 정보가 있을 때 이것을 <span class="term">정보의 비대칭</span><span class="en">(Information asymmetry)</span>이라 한다.</p>
+    <p>정보의 비대칭은 계약을 기준으로 두 번 문제를 일으킨다. 계약 <b>전</b>에는 숨은 정보가 문제다. 자기 위험이 높다는 것을 아는 사람일수록 보험에 더 들고 싶어 한다. 이것이 <span class="term">역선택</span><span class="en">(Adverse selection)</span>이다. 계약 <b>후</b>에는 숨은 행동이 문제다. 보험이 비용을 대신 내 주니 덜 조심하거나 더 많이 쓴다. 이것이 <span class="term">도덕적 해이</span><span class="en">(Moral hazard)</span>다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 330" role="img" aria-label="가입자와 보험사가 아는 것의 차이, 계약 전의 역선택과 계약 후의 도덕적 해이">
+        <defs><marker id="as-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="10" width="200" height="138" rx="8" class="f-acc-soft"/>
+        <text x="110" y="36" text-anchor="middle" class="lbl-acc">가입자가 아는 것</text>
+        <text x="24" y="64" class="lbl-dim">· 요즘의 증상, 검사 결과</text>
+        <text x="24" y="86" class="lbl-dim">· 가족력, 술·담배 습관</text>
+        <text x="24" y="108" class="lbl-dim">· 미뤄 둔 치료 계획</text>
+        <text x="24" y="130" class="lbl-dim">· 가입 뒤 얼마나 조심할지</text>
+        <rect x="230" y="10" width="200" height="138" rx="8" class="f-surface"/>
+        <text x="330" y="36" text-anchor="middle" class="lbl-b">보험사가 아는 것</text>
+        <text x="244" y="64" class="lbl-dim">· 나이·성별별 통계</text>
+        <text x="244" y="86" class="lbl-dim">· 청약서에 적힌 답</text>
+        <text x="244" y="108" class="lbl-dim">· 검진 결과(심사할 때)</text>
+        <text x="244" y="130" class="lbl-dim">· 다른 보험 가입·청구 기록</text>
+        <line x1="20" y1="196" x2="420" y2="196" class="s-axis" marker-end="url(#as-ar1)"/>
+        <line x1="220" y1="184" x2="220" y2="208" class="s-line"/>
+        <text x="220" y="178" text-anchor="middle" class="lbl-b">계약</text>
+        <text x="115" y="230" text-anchor="middle" class="lbl-dim">계약 전 · 숨은 정보</text>
+        <text x="115" y="256" text-anchor="middle" class="lbl-bad">역선택</text>
+        <text x="115" y="284" text-anchor="middle" class="lbl">심사 · 고지의무</text>
+        <text x="115" y="306" text-anchor="middle" class="lbl">면책 · 감액 기간</text>
+        <text x="325" y="230" text-anchor="middle" class="lbl-dim">계약 후 · 숨은 행동</text>
+        <text x="325" y="256" text-anchor="middle" class="lbl-bad">도덕적 해이</text>
+        <text x="325" y="284" text-anchor="middle" class="lbl">자기부담금 · 한도</text>
+        <text x="325" y="306" text-anchor="middle" class="lbl">이용량 할증</text>
+      </svg>
+      <figcaption><b>그림 1. 정보의 비대칭이 일으키는 두 문제.</b> 계약 전에는 위험이 높은 사람이 더 몰리는 역선택이, 계약 후에는 보험이 있어서 더 쓰는 도덕적 해이가 생긴다. 아래 줄의 장치들이 이 장에서 하나씩 다룰 대응이다. 보험의 복잡한 조항 상당수가 이 두 칸 중 하나에서 나왔다.</figcaption>
+    </figure>
+
+    <p>그림 아래 줄의 장치들은 가입자에게 대개 귀찮고 불리해 보인다. 질문은 많고, 가입 직후에는 보장이 안 되고, 병원비의 일부는 내가 내야 한다. 그런데 이 장치들이 없으면 어떻게 되는지를 먼저 보면 생각이 달라진다. 장치가 하나도 없는 시장부터 돌려 본다.</p>
+  </section>
+
+  <section id="spiral">
+    <h2>역선택의 죽음의 나선</h2>
+    <p>어느 보험사가 질병 보장 상품을 내놓는다. 걸리면 1,000만원을 준다. 가입을 원하는 사람 120명의 1년 발병 확률은 1%부터 12%까지 제각각이고, 각자 자기 확률을 대략 안다. 보험사는 아무것도 묻지 않고 모두에게 같은 값을 받는다. 값은 지난해 가입자들의 평균 위험에 사업비 20%를 얹어 정한다.</p>
+    <p>사람들은 보험료가 "내 기대손실 × (1 + 안심의 값)"보다 비싸면 가입하지 않는다. 안심의 값은 큰 손실을 피하려고 기꺼이 더 내는 몫이다(<a href="pooling.html">2장</a>의 효용 곡선). 아래 점 하나가 한 사람이고, 위험이 낮을수록 초록, 높을수록 빨강이다. "한 해 진행"을 눌러 해마다 누가 떠나는지, 아래 막대의 <span class="term">손해율</span><span class="en">(Loss ratio)</span>이 어떻게 움직이는지 본다. 손해율은 걷은 보험료 중 보험금으로 나간 비율이다.</p>
+
+    <div class="sim" id="sim-sp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>죽음의 나선: 떠나는 사람과 손해율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sp-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="sp-mode"><button data-value="one" class="on">한 가격</button><button data-value="class">위험 등급 6개</button><button data-value="all">의무 가입</button></div>
+          <label class="ctrl"><span>안심의 값(위험 회피 여유) <output id="sp-m-out"></output></span><input type="range" id="sp-m" min="0" max="150" step="5" value="40"></label>
+          <div class="btn-row"><button class="btn primary" id="sp-step">한 해 진행</button><button class="btn" id="sp-auto">자동</button><button class="btn" id="sp-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>저위험</span><span><i style="background:var(--warn)"></i>중간</span><span><i style="background:var(--bad)"></i>고위험</span><span><i style="background:var(--accent)"></i>손해율 100% 이하</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">해</span><span class="v" id="sp-o-y">—</span></div>
+        <div class="stat"><span class="k">남은 가입자</span><span class="v" id="sp-o-n">—</span></div>
+        <div class="stat"><span class="k">평균 보험료(연)</span><span class="v" id="sp-o-p">—</span></div>
+        <div class="stat"><span class="k">올해 손해율</span><span class="v" id="sp-o-l">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "한 가격"에서 한 해씩 진행한다. 첫해에 절반 가까이 떠나고 손해율이 120%를 넘는다. 보험료를 올리면 다시 건강한 쪽이 떠나고, 몇 해 뒤에는 고위험자 20명 남짓만 비싼 값을 내며 남는다. ② "위험 등급 6개"로 바꾼다. 비슷한 사람끼리 값을 매기니 대부분 남고 손해율도 목표(약 83%) 근처에서 안정된다. ③ "의무 가입"은 아무도 떠날 수 없다. 저위험자는 손해를 보지만 시장이 유지된다. 안심의 값을 0%로 내리면 등급을 나눠도 사람이 빠진다. (발병 시 1,000만원, 사업비 20%, 보험료는 지난해 가입자 평균으로 다시 매긴다. 손해율은 그해 가입자의 기대 보험금 ÷ 그해 보험료. 떠난 사람도 값이 내리면 돌아온다. 교육용 모델이다.)</div>
+    </div>
+
+    <p>"한 가격" 시장이 무너지는 과정은 매번 같다. 평균값을 매기면 평균보다 건강한 사람에게는 비싸다. 그들이 떠나면 남은 사람의 평균 위험이 올라가 손해율이 치솟고, 보험사는 값을 올린다. 그러면 다시 그다음으로 건강한 사람이 떠난다. 이 되먹임이 <span class="term">죽음의 나선</span><span class="en">(Death spiral)</span>이다. 손해율 막대가 100%를 넘는 해가 바로 "남은 사람이 예상보다 위험했다"는 신호다.</p>
+    <div class="formula">$$P_{t+1} = (1+\lambda)\,L\,\bar p_t,\qquad \text{손해율}_t = \frac{\sum_{i \in t} p_i L}{\sum_{i \in t} P_t}$$<div class="where">\(P_t\): t년의 보험료, \(\lambda\): 사업비율(여기서 20%), \(L\): 보험금, \(\bar p_t\): t년 가입자들의 평균 발병 확률. 가입자 구성이 바뀌는 해에는 지난해 평균으로 정한 \(P_t\)가 모자라서 손해율이 \(1/(1+\lambda) \approx 83\%\)를 넘는다.</div></div>
+    <p>시뮬레이터의 세 단추가 역선택을 막는 세 가지 길이다. 위험이 비슷한 사람끼리 묶어 값을 다르게 매기거나(심사와 등급), 아무도 빠질 수 없게 묶거나(국민건강보험, 자동차 책임보험), 가입하자마자 받는 것을 막는다(면책·감액 기간, 뒤에서 본다). 민간 보험이 쓸 수 있는 것은 첫째와 셋째이고, 그래서 민간 보험에는 질문이 많다.</p>
+  </section>
+
+  <section id="underwriting">
+    <h2>언더라이팅: 누구를 어떤 값에 받을 것인가</h2>
+    <p>보험사가 청약을 받아 위험을 평가하고 인수 여부와 조건을 정하는 일을 <span class="term">언더라이팅</span><span class="en">(Underwriting)</span>, 우리말로 계약 심사라 한다. 심사의 재료는 청약서의 질문에 대한 답(고지), 필요하면 건강검진과 진료 기록, 직업과 운전 여부다. 결과는 대개 다섯 갈래로 나뉜다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 360" role="img" aria-label="언더라이팅 흐름: 청약과 고지, 심사를 거쳐 우량체, 표준체, 할증, 부담보, 거절로 나뉜다">
+        <defs><marker id="as-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="30" width="150" height="56" rx="8" class="f-surface"/>
+        <text x="85" y="54" text-anchor="middle" class="lbl-b">청약 · 고지</text>
+        <text x="85" y="74" text-anchor="middle" class="lbl-dim">질문에 답한다</text>
+        <line x1="85" y1="88" x2="85" y2="148" class="s-line" marker-end="url(#as-ar2)"/>
+        <rect x="10" y="152" width="150" height="62" rx="8" class="f-acc-soft"/>
+        <text x="85" y="178" text-anchor="middle" class="lbl-acc">심사</text>
+        <text x="85" y="200" text-anchor="middle" class="lbl-dim">위험을 평가한다</text>
+        <line x1="85" y1="276" x2="85" y2="218" class="s-dash" marker-end="url(#as-ar2)"/>
+        <rect x="10" y="278" width="150" height="56" rx="8" class="f-surface"/>
+        <text x="85" y="302" text-anchor="middle" class="lbl">검진 · 진료 기록</text>
+        <text x="85" y="322" text-anchor="middle" class="lbl-dim">필요할 때만</text>
+        <rect x="214" y="10" width="216" height="58" rx="8" class="f-ok-soft"/>
+        <text x="226" y="34" class="lbl-b">우량체 · 할인</text>
+        <text x="226" y="56" class="lbl-dim">비흡연·혈압·체격 기준 통과</text>
+        <rect x="214" y="78" width="216" height="58" rx="8" class="f-acc-soft"/>
+        <text x="226" y="102" class="lbl-b">표준체 · 그대로</text>
+        <text x="226" y="124" class="lbl-dim">평균 위험으로 인수</text>
+        <rect x="214" y="146" width="216" height="58" rx="8" class="f-warn-soft"/>
+        <text x="226" y="170" class="lbl-b">할증 · 더 낸다</text>
+        <text x="226" y="192" class="lbl-dim">높은 위험만큼 값을 올려 인수</text>
+        <rect x="214" y="214" width="216" height="58" rx="8" class="f-warn-soft"/>
+        <text x="226" y="238" class="lbl-b">부담보 · 일부 제외</text>
+        <text x="226" y="260" class="lbl-dim">특정 부위·질병을 기간 동안 제외</text>
+        <rect x="214" y="282" width="216" height="58" rx="8" class="f-bad-soft"/>
+        <text x="226" y="306" class="lbl-b">거절 · 연기</text>
+        <text x="226" y="328" class="lbl-dim">간편심사 상품을 안내받기도</text>
+        <path d="M160 183 C 188 183, 188 39, 210 39" class="s-line" marker-end="url(#as-ar2)"/>
+        <path d="M160 183 C 188 183, 188 107, 210 107" class="s-line" marker-end="url(#as-ar2)"/>
+        <line x1="160" y1="183" x2="210" y2="175" class="s-line" marker-end="url(#as-ar2)"/>
+        <path d="M160 183 C 188 183, 188 243, 210 243" class="s-line" marker-end="url(#as-ar2)"/>
+        <path d="M160 183 C 188 183, 188 311, 210 311" class="s-line" marker-end="url(#as-ar2)"/>
+      </svg>
+      <figcaption><b>그림 2. 언더라이팅의 다섯 갈래.</b> 같은 병력이라도 회사와 상품에 따라 결과가 다르다. 한 회사에서 부담보가 나온 사람이 다른 회사에서는 표준체로 인수되기도 한다. 우량체 할인의 기준(흡연 여부, 혈압, 체질량지수 등)과 할인 폭도 상품마다 다르다.</figcaption>
+    </figure>
+
+    <p><span class="term">부담보</span><span class="en">(Exclusion rider)</span>는 현장에서 자주 쓰는 말이다. "부담보 1년, 갑상선" 같은 조건은 가입은 받되 갑상선 관련 질병은 정해진 기간 동안 보장하지 않는다는 뜻이다. 할증은 값을 올려 위험을 받고, 부담보는 위험한 부분을 잘라 내고 받는다. 어느 쪽이 나은지는 사람마다 다르다. 잘려 나간 부위가 바로 걱정하는 부위라면 할증이 나을 수 있다.</p>
+    <p>심사는 얼마나 엄격해야 할까. 아래는 지원자 600명이다. 가로축은 각자의 <b>실제</b> 위험(보험사는 모른다), 세로축은 보험사가 고지와 검진으로 <b>추정한</b> 위험이다. 빨간 기준선 아래만 인수한다. 기준선의 손잡이를 위아래로 끌어 심사를 엄격하게 또는 느슨하게 바꾸고, 정보의 정확도도 바꿔 본다.</p>
+
+    <div class="sim" id="sim-uw">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>심사의 엄격함: 보험료와 받아 주는 사람</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="uw-cv"></canvas><span class="hint">빨간 기준선을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="uw-info"><button data-value="none">무심사</button><button data-value="self" class="on">고지만</button><button data-value="exam">고지 + 검진</button></div>
+          <label class="ctrl"><span>인수 기준(추정 위험) <output id="uw-t-out"></output></span><input type="range" id="uw-t" min="-1.2" max="2" step="0.05" value="0.6"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">인수 비율</span><span class="v" id="uw-o-a">—</span></div>
+        <div class="stat"><span class="k">보험료 지수 (모두 받으면 100)</span><span class="v" id="uw-o-p">—</span></div>
+        <div class="stat"><span class="k">평균보다 건강한데 거절</span><span class="v" id="uw-o-f">—</span></div>
+        <div class="stat"><span class="k">고위험(2배 이상)인데 통과</span><span class="v" id="uw-o-h">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기준선을 위로 끝까지 올린다(또는 “무심사”를 누른다). 거의 모두 받으니 보험료 지수는 100 가까이다. 이 값이 건강한 사람에게 비싸다는 것이 앞 절의 나선이었다. ② 기준선을 내려 엄격하게 한다. 보험료가 내려가는 대신 거절되는 사람이 늘고, 그중에는 실제로는 평균보다 건강한 사람도 섞인다. 끝까지 내리면 보험료는 가장 싸지만 보험이 정말 필요한 사람은 거의 못 들어온다. ③ "고지 + 검진"으로 바꾼다. 점들이 대각선에 붙어 같은 보험료에서 잘못 거절되는 사람이 준다. 정확한 심사에는 검진비와 시간이 든다. (실제 위험은 로그정규 분포, 추정 오차는 고지만 σ=0.45, 검진 포함 σ=0.22로 둔 교육용 모델이다.)</div>
+    </div>
+
+    <p>심사는 공짜 점심이 아니다. 엄격하게 할수록 인수된 사람의 보험료는 싸지지만 보험이 필요한 사람이 밖으로 밀려난다. 느슨하게 할수록 더 많이 받아 주지만 그 값은 건강한 가입자가 나눠 낸다. 정확도를 높이면 이 교환이 덜 아파진다. 보험사가 묻는 질문의 수와 깊이, 검진을 요구하는 가입 금액 기준은 이 줄다리기의 결과다.</p>
+
+    <div class="callout pro">
+      <strong>"부담보가 나왔는데 받아들여야 하나요?"</strong>
+      고객이 가장 자주 묻는 질문이다. 먼저 부담보의 범위(부위·질병 코드)와 기간을 증권과 청약서에서 정확히 짚어 준다. 기간형 부담보는 정해진 기간이 지나면 보장이 살아나고, 상품에 따라 일정 기간 그 부위로 치료받지 않으면 부담보를 풀어 주는 조건이 붙기도 한다. 다른 회사의 심사 결과가 다를 수 있으니 같은 고지 내용으로 여러 회사의 사전 심사를 받아 보는 것도 방법이다. 다만 결과가 마음에 들 때까지 고지 내용을 바꿔 가며 넣어 보는 것은 안 된다. 고지는 회사가 바뀌어도 같은 사실이어야 한다.
+    </div>
+  </section>
+
+  <section id="disclosure">
+    <h2>고지의무: 무엇을 물어보고, 무엇을 알려야 하나</h2>
+    <p>심사의 첫 재료는 가입자의 답이다. 계약자와 피보험자는 청약할 때 보험사가 묻는 중요한 사항을 사실대로 알려야 하는데, 이것을 <span class="term">계약 전 알릴 의무</span><span class="en">(Duty of disclosure)</span>, 줄여서 고지의무라 한다. 핵심은 <b>보험사가 서면(전자청약 화면 포함)으로 물어본 것</b>에 답하는 의무라는 점이다. 묻지 않은 것까지 스스로 찾아 털어놓을 의무가 있는 것은 아니지만, 물어본 것은 기간과 범위를 정확히 읽고 답해야 한다.</p>
+    <p>질문은 상품과 회사마다 다르지만, 일반 심사 상품의 청약서에는 대개 아래와 같은 구조의 질문이 있다. 기간이 짧을수록 가벼운 일까지, 길수록 무거운 일만 묻는다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>질문(요지)</th><th>기간</th><th>흔히 놓치는 것</th></tr></thead>
+      <tbody>
+        <tr><td>① 의사의 진찰·검사로 질병 확정 진단, 질병 의심 소견, 치료, 입원, 수술, 투약을 받은 사실</td><td>최근 3개월</td><td>감기로 받은 처방, 검진의 "재검 필요" 소견</td></tr>
+        <tr><td>② 혈압강하제·신경안정제·수면제·진통제 등 약을 상시 복용한 사실</td><td>최근 3개월</td><td>꾸준히 먹는 처방약</td></tr>
+        <tr><td>③ 의사의 진찰·검사로 추가검사(재검사)를 받은 사실</td><td>최근 1년</td><td>결절·용종 등의 추적 검사</td></tr>
+        <tr><td>④ 입원, 수술, 계속하여 7일 이상 치료, 계속하여 30일 이상 투약</td><td>최근 5년</td><td>"7일 이상"은 통원 횟수가 아니라 같은 원인 치료 기간</td></tr>
+        <tr><td>⑤ 주요 질병(암, 백혈병, 고혈압, 협심증, 심근경색, 심장판막증, 간경화, 뇌졸중, 당뇨병 등)의 진단·치료·투약</td><td>최근 5년</td><td>이미 다 나은 병도 기간 안이면 해당</td></tr>
+      </tbody>
+    </table></div>
+    <p>이 밖에 직업과 직무, 운전 여부와 차종, 위험한 취미, 키·몸무게, 음주·흡연, 다른 보험 가입 여부를 묻는다. 질문의 정확한 문구, 기간, 주요 질병의 목록은 상품마다 다르므로 실제 청약서를 기준으로 한다.</p>
+    <p>표만 봐서는 내 기록이 어디에 걸리는지 감이 오지 않는다. 아래 시간표에서 일의 종류를 고르고, 점을 끌어 그 일이 청약일 기준 얼마 전에 있었는지 옮겨 본다. 걸리는 질문에 불이 들어온다.</p>
+
+    <div class="sim" id="sim-dq">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>내 기록은 어느 질문에 걸리나</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="dq-cv"></canvas><span class="hint">점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dq-type"><button data-value="cold">감기 진료(약 3일)</button><button data-value="flag">검진 이상 소견</button><button data-value="retest" class="on">추가검사(재검)</button><button data-value="treat7">7일 이상 치료</button><button data-value="drug30">30일 이상 투약</button><button data-value="hosp">입원·수술</button><button data-value="major">주요 질병 진단</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">청약일 기준</span><span class="v" id="dq-o-t">—</span></div>
+        <div class="stat"><span class="k">걸리는 질문</span><span class="v" id="dq-o-q">—</span></div>
+        <div class="stat"><span class="k">질문에서 빠지는 때</span><span class="v" id="dq-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "감기 진료"를 2개월 전에 둔다. 가벼운 일이라도 3개월 안이면 ①번 질문에 걸린다. 4개월 전으로 옮기면 어디에도 걸리지 않는다. ② "추가검사(재검)"를 11개월 전에 둔다. ③번에 걸린다. 13개월 전으로 옮기면 빠진다. 이 장 끝의 민서 이야기가 여기다. ③ "입원·수술"과 "주요 질병 진단"은 5년 동안 따라다닌다. (일반 심사 청약서의 대표 구조를 단순화했다. 실제 질문의 기간·문구는 상품마다 다르며, 간편심사 상품은 질문 자체가 다르다.)</div>
+    </div>
+
+    <p>해 보면 세 가지가 보인다. 3개월 창은 아주 가벼운 일까지 잡는다. 1년 창은 "검사를 다시 받은 것"을 잡는다. 5년 창은 입원·수술처럼 무거운 일과 주요 질병만 잡는다. 기간이 지나면 질문에서 빠지지만, 그 기록이 사라지는 것은 아니다. 보험금을 청구하면 보험사는 진료 기록을 받아 보고, 그때 가입 전의 기록이 질문에 걸렸는지를 따진다.</p>
+
+    <div class="callout pro">
+      <strong>말로 알린 것은 고지가 아니다</strong>
+      고객이 상담 중에 "작년에 위내시경에서 용종을 뗐다"고 말했더라도 청약서에 적히지 않으면 고지로 인정받기 어렵다. 설계사에게는 보험사를 대신해 고지를 받는 권한이 없다고 보는 것이 일반적이기 때문이다. 고객이 말한 내용은 반드시 청약서(전자청약 화면)의 해당 질문에 직접 체크하고 내용을 적게 한다. 반대로 설계사가 "그 정도는 안 적어도 된다"고 말해 고객이 적지 않았다면, 그것은 고지 방해나 부실 고지 권유가 되어 설계사와 회사가 책임을 지는 문제가 된다. 애매하면 적는 쪽으로 안내하고, 진단서나 소견서를 함께 내면 심사가 빨라진다.
+    </div>
+  </section>
+
+  <section id="simple">
+    <h2>유병자·간편심사 보험: 질문을 줄인 값</h2>
+    <p>고혈압약을 먹고 있거나 몇 년 전에 수술을 받은 사람은 일반 심사에서 거절되거나 무거운 조건을 받기 쉽다. 이런 사람들을 위해 질문을 크게 줄인 상품이 <span class="term">간편심사 보험</span><span class="en">(Simplified issue)</span>이다. 흔히 유병자보험이라고도 부른다. 질문 구조는 숫자 세 개로 부르는 경우가 많다. 예를 들어 "3-2-5"는 아래 세 질문만 묻는다는 뜻이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 270" role="img" aria-label="간편심사 3-2-5 질문 구조: 3개월, 2년, 5년 창">
+        <line x1="20" y1="230" x2="420" y2="230" class="s-axis"/>
+        <text x="420" y="252" text-anchor="end" class="lbl-dim">청약일</text>
+        <text x="20" y="252" class="lbl-dim">5년 전</text>
+        <line x1="420" y1="20" x2="420" y2="236" class="s-dash"/>
+        <rect x="396" y="30" width="24" height="44" class="f-bad-soft"/>
+        <text x="388" y="48" text-anchor="end" class="lbl-b">3 · 최근 3개월</text>
+        <text x="388" y="68" text-anchor="end" class="lbl-dim">입원·수술·추가검사 필요 소견</text>
+        <rect x="260" y="96" width="160" height="44" class="f-warn-soft"/>
+        <text x="252" y="114" text-anchor="end" class="lbl-b">2 · 최근 2년</text>
+        <text x="252" y="134" text-anchor="end" class="lbl-dim">입원·수술</text>
+        <rect x="20" y="162" width="400" height="44" class="f-acc-soft"/>
+        <text x="32" y="182" class="lbl-b">5 · 최근 5년</text>
+        <text x="32" y="200" class="lbl-dim">암 진단·입원·수술</text>
+        <text x="250" y="190" class="lbl-dim">묻지 않는 것: 약 복용, 통원</text>
+      </svg>
+      <figcaption><b>그림 3. 간편심사 "3-2-5" 구조의 예.</b> 일반 심사의 다섯 질문 중 가벼운 일(통원, 투약)과 많은 주요 질병 질문이 빠진다. 가운데 숫자를 늘린 "3-5-5", "3-10-5" 같은 구조도 있다. 상품마다 묻는 질병과 기간이 다르고, 질문이 더 적은 초간편 상품도 있다.</figcaption>
+    </figure>
+
+    <p>질문을 덜 하면 더 많은 사람을 받을 수 있다. 대신 가입자 무리 안에 위험이 높은 사람의 비율이 올라가고, 보험료는 그 무리의 평균을 따른다. 아래 모델에서 인구는 네 무리다. 병력 없음(60%), 가벼운 병력(16%, 일반 심사에서 부담보 등으로 인수), 만성질환 관리 중(12%, 약 복용), 최근 입원·수술 이력(12%, 시간이 지날수록 위험이 내려감). 가운데 숫자 N과, 건강한데도 간편한 쪽을 고르는 사람의 비율을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-ez">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>간편심사 보험료는 왜 비싼가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ez-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>3-N-5의 N(입원·수술 질문 기간) <output id="ez-n-out"></output></span><input type="range" id="ez-n" min="1" max="10" step="1" value="2"></label>
+          <label class="ctrl"><span>건강한데 간편심사를 고르는 비율 <output id="ez-h-out"></output></span><input type="range" id="ez-h" min="0" max="60" step="5" value="5"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">일반 심사 보험료(월)</span><span class="v" id="ez-o-s">—</span></div>
+        <div class="stat"><span class="k">간편심사 보험료(월)</span><span class="v" id="ez-o-e">—</span></div>
+        <div class="stat"><span class="k">배수</span><span class="v" id="ez-o-x">—</span></div>
+        <div class="stat"><span class="k">어디에도 못 드는 사람</span><span class="v" id="ez-o-o">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(3-2-5)에서 간편심사 보험료는 일반 심사의 약 1.8배다. 무리 안에 만성질환자와 수술 이력자가 몰려 있기 때문이다. ② N을 10으로 올린다. 10년 안에 입원·수술한 사람을 빼니 보험료가 내려가지만, 어디에도 못 드는 사람이 늘어난다. ③ 건강한데 간편심사를 고르는 비율을 60%로 올린다. 보험료 배수는 내려가지만 여전히 1보다 크다. 건강한 사람이 간편심사에 들면 자기 위험보다 비싼 값을 내며 남의 위험을 나눠 지는 셈이다. (월 보험료의 기준은 31세 여성, 암 진단 3,000만원, 100세 만기 20년납을 이 책의 엔진으로 계산한 값이다. 무리별 상대 위험과 간편심사의 불확실성 할증 10%는 교육용 가정이다.)</div>
+    </div>
+
+    <p>간편심사 보험은 거절당하던 사람에게 길을 열어 준 상품이다. 그러나 일반 심사를 통과할 수 있는 사람에게는 대개 손해다. "질문이 세 개뿐이라 편하다"는 이유로 건강한 사람이 간편심사에 들면 시뮬레이터의 ③처럼 남의 위험 값을 대신 낸다. 그래서 순서가 중요하다. 먼저 일반 심사를 받아 보고, 거절되거나 조건이 무거울 때 간편심사로 간다.</p>
+
+    <div class="callout buyer">
+      <strong>간편심사 설계서를 받았다면</strong>
+      ① 일반 심사로 먼저 넣어 봤는지 묻는다. 일반 심사 결과(표준체·부담보·할증)와 간편심사 보험료를 나란히 놓고 비교한다. ② 간편심사 상품의 질문 구조(3-2-5, 3-5-5 등)를 확인하고, 내 기록이 질문에 정말 걸리는지 한 줄씩 대조한다. 걸리지 않는데 간편심사로 들 이유는 거의 없다. ③ 일부 간편심사 상품에는 가입 초기 보장 감액이 더 길게 붙기도 하니 감액 기간과 비율을 본다. ④ 건강이 좋아지면 일반 심사 상품으로 갈아탈 수 있는지, 그때 새 면책·감액 기간이 다시 시작된다는 점도 함께 따진다.
+    </div>
+  </section>
+
+  <section id="waiting">
+    <h2>면책·감액 기간: 가입 직후의 청구를 막는 장치</h2>
+    <p>심사로도 다 걸러지지 않는 것이 있다. 증상은 있는데 아직 병원에 가지 않은 사람, 즉 기록이 없어서 질문에 걸리지 않는 사람이다. 그런 사람이 보험에 들고 곧바로 진단을 받으면 보험사로서는 막을 길이 없다. 그래서 많은 암 보장에는 두 겹의 장치가 붙는다. 계약일부터 일정 기간(흔히 90일) 안에 진단되면 보험금을 주지 않는 <span class="term">면책 기간</span><span class="en">(Waiting period)</span>, 그 뒤 일정 기간(흔히 1년) 안에 진단되면 보험금을 줄여 주는(흔히 50%) <span class="term">감액 기간</span><span class="en">(Reduction period)</span>이다. 기간과 비율은 상품과 보장마다 다르다.</p>
+    <p>아래는 40세 가입자 1만 명의 첫 36개월이다. 파란 막대는 가입 뒤에 새로 병이 생긴 정직한 가입자, 빨간 막대는 가입 전부터 증상이 있던 사람이다. 증상이 있던 사람은 가입 직후 몇 달 안에 몰려서 진단받는다. 막대가 꽉 차 있으면 보험금 전액, 반쯤 비어 있으면 감액, 테두리만 있으면 지급되지 않은 진단이다. 세로선을 끌어 면책 기간을 바꾼다.</p>
+
+    <div class="sim" id="sim-wt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>면책·감액 기간이 막는 것과 놓치는 것</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wt-cv"></canvas><span class="hint">면책 경계선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>면책 기간 <output id="wt-e-out"></output></span><input type="range" id="wt-e" min="0" max="180" step="30" value="90"></label>
+          <label class="ctrl"><span>50% 감액 기간(계약일부터) <output id="wt-r-out"></output></span><input type="range" id="wt-r" min="0" max="24" step="3" value="12"></label>
+          <label class="ctrl"><span>가입 전부터 증상이 있던 사람 <output id="wt-h-out"></output></span><input type="range" id="wt-h" min="0" max="5" step="0.5" value="2"></label>
+          <div class="btn-row"><button class="btn" id="wt-play">다시 재생</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>가입 뒤 새로 발병</span><span><i style="background:var(--bad)"></i>가입 전부터 증상</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보험료 지수 (장치 없고 숨은 병 없으면 100)</span><span class="v" id="wt-o-p">—</span></div>
+        <div class="stat"><span class="k">숨은 병에 나간 보험금 비중</span><span class="v" id="wt-o-h">—</span></div>
+        <div class="stat"><span class="k">면책으로 못 받은 정직한 가입자</span><span class="v" id="wt-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 면책과 감액을 모두 0으로 둔다. 빨간 막대가 첫 몇 달에 우뚝 솟고, 20년 보험료 지수가 약 114까지 오른다. 증상이 있던 사람의 보험금을 정직한 가입자가 나눠 내는 것이다. ② 기본값(90일 면책, 1년 50% 감액)으로 돌린다. 빨간 막대 대부분이 비고 보험료 지수가 98 안팎으로 내려간다. ③ 면책을 180일로 늘린다. 숨은 병은 거의 다 막히지만, 그 기간에 정말로 새로 병이 생긴 정직한 가입자도 한 푼도 못 받는다. 장치가 강할수록 막는 것과 놓치는 것이 함께 커진다. (새 발병은 이 책의 엔진의 40세 여성 연 암 발생률, 숨은 병은 가입 후 평균 2개월 안에 진단된다고 가정했다. 보험료 지수는 20년 동안의 보험금으로 계산한 교육용 값이다.)</div>
+    </div>
+
+    <p>면책 기간이 지나서 보장이 시작되는 날을 <span class="term">보장개시일</span>이라 한다. 암 보장이라면 대개 계약일부터 90일이 지난 다음 날이다. 면책은 가입자에게 손해처럼 보이지만, 시뮬레이터 ①과 ②의 차이만큼 모든 가입자의 보험료를 낮춘다. 대신 그 대가를 운 나쁜 정직한 가입자 몇 명이 치른다. 이 기간에 진단받으면 보험금은 없고, 대개 계약이 무효가 되어 낸 보험료를 돌려받는다. 자세한 약관 문구는 <a href="contract.html">6장</a>에서 읽는다.</p>
+
+    <div class="callout pro">
+      <strong>갈아타기 상담에서 가장 먼저 짚을 것</strong>
+      기존 암보험을 해지하고 새 상품으로 바꾸면 새 계약에 다시 면책 90일과 감액 1년이 붙는다. 그 사이에 진단되면 옛 계약은 이미 없고 새 계약은 보험금을 안 주거나 반만 준다. 갈아탈 때는 새 계약의 보장개시일과 감액 기간이 끝날 때까지 기존 계약을 유지하라고 안내하고, 두 계약의 보험료가 겹치는 기간도 미리 말해 준다. 고객이 "지금 증상이 좀 있는데 빨리 들어야 하지 않느냐"고 물으면, 그 증상은 고지 대상일 수 있고 면책 기간의 취지도 바로 그 상황을 막는 데 있다고 솔직하게 설명한다.
+    </div>
+  </section>
+
+  <section id="moral">
+    <h2>도덕적 해이와 실손보험의 쏠림</h2>
+    <p>계약 뒤의 숨은 행동은 실손보험에서 가장 뚜렷하다. 실손은 실제 낸 병원비를 메워 주니, 가입자 입장에서 비급여 치료의 값이 거의 공짜처럼 느껴진다. 병원도 환자가 부담을 덜 느끼니 비급여 진료를 권하기 쉽다. 그 결과 보험금이 소수의 가입자와 일부 비급여 항목에 몰린다는 지적이 감독기관과 업계에서 여러 차례 나왔다. 아래 그림은 가입자를 보험금을 많이 받은 순서로 세웠을 때 상위 몇 %가 전체 보험금의 몇 %를 가져가는지 그린 곡선이다. 곡선 위의 점을 끌어 읽는다.</p>
+
+    <div class="sim" id="sim-lz">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보험금은 누구에게 몰리는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lz-cv"></canvas><span class="hint">곡선 위의 점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>이용량의 쏠림 정도 <output id="lz-s-out"></output></span><input type="range" id="lz-s" min="0.6" max="2.2" step="0.1" value="1.5"></label>
+          <label class="check"><input type="checkbox" id="lz-ded"> 자기부담금 + 비급여 이용량 할증 적용</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>지금 곡선</span><span><i style="background:var(--text-faint)"></i>모두 똑같이 받을 때</span><span><i style="background:var(--accent)"></i>장치 적용(체크 시)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">상위 가입자</span><span class="v" id="lz-o-x">—</span></div>
+        <div class="stat"><span class="k">가져가는 보험금 몫</span><span class="v" id="lz-o-y">—</span></div>
+        <div class="stat"><span class="k">1년간 보험금 0원</span><span class="v" id="lz-o-z">—</span></div>
+        <div class="stat"><span class="k">1인당 월 보험료(손해율 85%)</span><span class="v" id="lz-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 점을 상위 10%에 둔다. 기본값에서 이들이 전체 보험금의 80% 가까이를 가져간다. 절반 가까운 가입자는 한 해 동안 한 푼도 받지 않는다. ② 쏠림 정도를 최대로 올린다. 상위 1%가 절반 넘게 가져가는 극단적인 모양이 되고, 1인당 보험료가 몇 배로 뛴다. 그 보험료는 나머지 99%가 함께 낸다. ③ 자기부담금과 할증을 켠다. 많이 쓰던 사람의 재량적 이용이 줄어 1인당 보험료가 약 30% 내려간다. 그런데 곡선의 모양은 거의 그대로다. 꼭 필요한 큰 치료는 남고, 작은 청구는 자기부담금 아래로 사라져 0원인 사람이 오히려 늘기 때문이다. (가입자 4,000명, 한 해 청구할 확률 55%, 청구액은 로그정규 분포에 재량적 추가 이용을 얹은 교육용 모델이다. 장치를 켜면 재량적 이용이 70% 줄고 연 2만원을 자기부담한다고 가정했다. 실제 분포는 공개 자료와 다를 수 있다.)</div>
+    </div>
+
+    <p>곡선이 대각선에서 멀수록 보험금이 소수에게 몰린 것이다. ③에서 본 것처럼 자기부담금은 쏠림을 없애지 못한다. 쏠림 자체는 보험의 본질이기 때문이다. 큰 병에 걸린 소수에게 돈이 몰리라고 보험에 드는 것이다. 문제는 그 쏠림의 일부가 꼭 필요하지 않은 이용, 즉 보험이 있어서 생긴 이용일 때다. 그 몫은 한 번도 청구하지 않은 가입자의 보험료 인상으로 돌아온다.</p>
+    <p>실손보험이 세대를 거치며 자기부담을 늘려 온 이유가 이것이다(자세한 구조는 <a href="health.html">8장</a>). 2021년 7월부터 판매된 4세대 실손에는 비급여 보험금을 많이 받은 사람의 다음 해 비급여 보험료를 올리는 구조가 들어갔다. 대략 아래와 같다(2026년 기준, 세부는 상품과 시기에 따라 다를 수 있다).</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>직전 1년 비급여 보험금</th><th>다음 해 비급여 특약 보험료</th></tr></thead>
+      <tbody>
+        <tr><td>없음</td><td>할인(약 5%)</td></tr>
+        <tr><td>100만원 미만</td><td>그대로</td></tr>
+        <tr><td>100만원 이상 150만원 미만</td><td>약 100% 할증</td></tr>
+        <tr><td>150만원 이상 300만원 미만</td><td>약 200% 할증</td></tr>
+        <tr><td>300만원 이상</td><td>약 300% 할증</td></tr>
+      </tbody>
+    </table></div>
+    <p>중증 질환 등 일부 치료는 할증 산정에서 빠진다. 할증은 급여 부분이 아니라 비급여 특약의 보험료에만 붙고, 해마다 다시 계산된다. 비급여 중심의 과잉 이용을 더 줄이는 방향의 5세대 실손 개편이 추진 중이지만, 2026년 현재 세부 내용은 확정 전이다.</p>
+  </section>
+
+  <section id="breach">
+    <h2>고지의무를 어기면: 해지와 보험금의 규칙</h2>
+    <p>알려야 할 것을 알리지 않았거나 사실과 다르게 알렸다면, 보험사는 계약을 해지할 수 있다. 그러나 이 권리에는 시간 제한이 있다. 2026년 기준 상법과 표준약관은 대략 이렇게 정한다.</p>
+    <ul>
+      <li>보험사가 위반 사실을 <b>안 날부터 1개월</b>이 지나면 해지할 수 없다.</li>
+      <li>보장개시일부터 보험금 지급 사유 없이 <b>2년</b>(진단 계약이면 질병은 1년)이 지나면 해지할 수 없다.</li>
+      <li>계약일부터 <b>3년</b>이 지나면 해지할 수 없다.</li>
+      <li>보험사가 계약 당시 그 사실을 알았거나 과실로 몰랐을 때, 설계사 등이 고지할 기회를 주지 않거나 사실대로 고지하는 것을 막았거나 부실한 고지를 권했을 때도 해지할 수 없다(단, 그와 상관없이 계약자가 스스로 사실과 다르게 알린 경우는 예외).</li>
+    </ul>
+    <p>보험금은 별도의 규칙을 따른다. 해지하더라도, 알리지 않은 사실과 보험금 지급 사유 사이에 <b>인과관계가 없으면</b> 보험금은 지급된다. 예를 들어 위염 치료를 알리지 않은 사람이 교통사고로 다쳤다면, 위염과 교통사고는 관계가 없으니 사고 보험금은 받는다. 계약 자체는 해지될 수 있다. 반대로 알리지 않은 갑상선 결절이 갑상선암 진단으로 이어졌다면 인과관계가 인정될 가능성이 크다. 인과관계가 있는지는 개별 사안의 의학적 판단이라 다툼이 잦다. 아래 시간표에서 지급 사유가 생긴 시점을 끌어 보고, 조건을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-br">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>고지의무 위반 시간표: 해지되나, 보험금은 나오나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="br-cv"></canvas><span class="hint">빨간 점(지급 사유 발생)을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="br-cause"><button data-value="yes" class="on">인과관계 있음</button><button data-value="no">인과관계 없음</button></div>
+          <label class="check"><input type="checkbox" id="br-prior"> 2년 안에 다른 지급 사유(청구)가 있었다</label>
+          <label class="check"><input type="checkbox" id="br-agent"> 설계사가 고지를 막거나 부실 고지를 권했다</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">지급 사유 발생</span><span class="v" id="br-o-t">—</span></div>
+        <div class="stat"><span class="k">계약 해지</span><span class="v" id="br-o-c">—</span></div>
+        <div class="stat"><span class="k">이번 보험금</span><span class="v" id="br-o-p">—</span></div>
+      </div>
+      <div class="sim-note" id="br-msg">해볼 것: ① 1년째에 지급 사유를 두고 인과관계를 바꿔 본다. 계약은 어느 쪽이든 해지될 수 있지만, 인과관계가 없으면 이번 보험금은 나온다. ② 2년 반으로 옮긴다. 그전까지 다른 청구가 없었다면 해지할 수 없다. "2년 안에 다른 지급 사유"를 켜면 3년까지 해지 가능으로 바뀐다. ③ 3년을 넘기면 어떤 경우에도 해지할 수 없다. (보험사가 청구를 심사하면서 위반을 알고 1개월 안에 해지한다고 가정했다. 보장개시일은 계약일과 같다고 단순화했다. 사기에 가까운 적극적 기망은 별도 규정(계약일부터 5년 안 취소 등)이 적용될 수 있다. 실제 판단은 약관과 개별 사실에 따른다.)</div>
+    </div>
+
+    <p>이 규칙은 양쪽의 이해를 함께 담고 있다. 보험사가 영원히 과거를 문제 삼을 수 있으면 가입자는 언제 보험금을 거절당할지 몰라 불안하다. 반대로 숨긴 사람이 아무 일 없이 보험금을 받으면 정직하게 고지하고 할증이나 부담보를 받은 사람이 바보가 된다. 기간 제한과 인과관계 규칙은 그 사이의 타협이다. 그렇다고 "2년만 버티면 된다"고 생각하면 안 된다. 그 2년 안에 무슨 일이 생기면 바로 그 일 때문에 보장을 잃고, 3년 안에는 해지될 수 있으며, 적극적으로 속였다면 더 긴 기간 동안 계약이 취소될 수 있다.</p>
+
+    <div class="callout warn">
+      <strong>질문과 규칙은 해마다 바뀐다</strong>
+      청약서의 질문 문구와 기간, 간편심사 상품의 질문 구조, 면책·감액 조건, 실손보험의 할증 기준은 회사와 상품, 판매 시기에 따라 다르고 제도 개편으로 계속 바뀐다. 이 장의 표와 시뮬레이터는 2026년 무렵의 대표적인 구조를 단순화한 것이다. 5세대 실손 개편은 추진 중이며 확정 전이다. 실제로 가입할 때는 그 상품의 청약서와 약관을 기준으로 하고, 판단이 어려우면 보험사 심사 부서나 금융감독원 상담을 이용한다.
+    </div>
+
+    <div class="callout buyer">
+      <strong>청약서에 답하기 전에</strong>
+      ① 최근 5년의 진료 기록을 먼저 확인한다. 국민건강보험공단의 진료 내역 조회나 다니던 병원의 기록으로 날짜와 진단명을 맞춰 본다. 기억에만 의존하면 기간을 잘못 세기 쉽다. ② 질문의 기간(3개월, 1년, 5년)과 범위(진찰·검사, 추가검사, 7일 이상 치료, 30일 이상 투약)를 한 줄씩 대조한다. ③ 걸리는 것은 진단명, 날짜, 치료 내용, 현재 상태를 함께 적는다. ④ 전자청약이면 내가 직접 답했는지, 설계사가 대신 눌렀는지 확인한다. 답은 내 이름으로 남는다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>민서의 갑상선 결절과 청약서</h2>
+    <p>이 장의 도구로 민서의 기록을 청약서 질문에 하나씩 대조해 본다. 기록은 가상의 예시다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>날짜</th><th>일</th><th>걸리는 질문(일반 심사)</th></tr></thead>
+      <tbody>
+        <tr><td>2024년 9월</td><td>회사 건강검진 초음파에서 갑상선 결절 발견, "추가 검사 필요"</td><td>3개월이 지나 ①은 해당 없음</td></tr>
+        <tr><td>2024년 10월</td><td>대학병원에서 세침흡인검사, 양성 추정. "1년 뒤 추적 초음파"</td><td>1년이 지나 ③은 해당 없음. 입원·수술·투약이 없어 ④도 해당 없음</td></tr>
+        <tr><td>2025년 11월</td><td>추적 초음파, 크기 변화 없음. "2년 뒤 다시 보자"</td><td><b>③ 최근 1년 이내 추가검사에 해당</b>(청약일 2026년 10월 기준 11개월 전)</td></tr>
+        <tr><td>—</td><td>약 복용 없음, 주요 질병 진단 없음</td><td>②·⑤ 해당 없음</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 4장</span></div>
+      <h4>민서의 결절, 적을 것인가 말 것인가</h4>
+      <p>민서는 처음에 "양성이라고 했으니 병이 아니잖아"라고 생각했다. 도윤은 청약서의 질문을 같이 읽자고 했다. 질문은 병이 있느냐를 묻는 것이 아니라 일정 기간 안에 무슨 일이 있었느냐를 묻는다. 2025년 11월의 추적 초음파는 청약일(2026년 10월) 기준 11개월 전이라 "최근 1년 이내 추가검사(재검사)" 질문에 해당한다. 나머지 질문에는 걸리지 않는다. 결론은 간단하다. 적어야 한다.</p>
+      <p>적으면 어떻게 되는가. 도윤의 설명은 이랬다. 회사에 따라 표준체로 받아 주기도 하고, 갑상선 부위를 일정 기간 부담보로 걸기도 하고, 갑상선 관련 보장만 빼고 받기도 한다. 검사 결과지(양성 추정 소견)를 함께 내면 심사가 유리해질 수 있다. 일반 심사가 어렵다면 간편심사도 있지만, 이 책의 교육용 모델로 계산하면 31세 여성의 암 진단 3,000만원(100세 만기, 20년납)은 일반 심사 월 약 3.8만원, 간편심사(3-2-5)는 그 약 1.8배인 월 약 7만원이다. 민서처럼 걸리는 질문이 하나뿐인 사람에게는 일반 심사를 먼저 받아 보는 것이 맞다.</p>
+      <p>숨기면 어떻게 되는가. 결절이 2년 안에 갑상선암으로 진단되면 인과관계가 인정될 가능성이 커 보험금을 못 받고 계약도 해지될 수 있다. 다른 이유로 청구한 일이 있었다면 3년까지 같은 위험이 이어진다. 한 달만 기다려 11월이 지나면 그 질문에서 빠진다는 계산도 할 수 있다. 실제로 기간이 지나 질문에 해당하지 않게 되면 적을 의무는 없다. 다만 도윤은 "기다리는 동안 다른 검사를 받게 되면 다시 걸린다"며 날짜를 기준으로 판단하되 사실을 바꾸지는 말자고 했다. 도윤 입장에서 부담보가 붙으면 고객이 실망해 계약이 늦어질 수 있지만, 지금 정확하게 적는 것이 나중의 분쟁보다 싸다는 것이 도윤의 원칙이다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>민서는 ③ 추가검사 질문에 해당하니 사실대로 고지하고 검사 결과지를 함께 낸다. 일반 심사부터 받는다.</div><div><b>아직 남은 문제</b>심사 결과(표준체·부담보)에 따라 설계가 달라진다. 지우 서랍의 특약은 무엇이 얼마나 겹치는가.</div><div><b>다음 단계</b><a href="complexity.html">5장</a>에서 지우 서랍의 특약을 세어 보고 한 장짜리 요약표를 만든다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>가입자는 자기 위험을 알고 보험사는 통계만 안다. 계약 전의 숨은 정보는 역선택을, 계약 후의 숨은 행동은 도덕적 해이를 만든다.</li>
+      <li>모두에게 한 가격을 매기면 건강한 사람부터 떠나고 손해율이 치솟아 보험료가 오르는 죽음의 나선이 생긴다. 위험 등급, 의무 가입, 면책 기간이 이를 막는다.</li>
+      <li>언더라이팅은 우량체·표준체·할증·부담보·거절로 나뉜다. 엄격할수록 보험료는 싸지지만 보험이 필요한 사람이 밀려난다.</li>
+      <li>고지의무는 보험사가 서면으로 물은 것에 사실대로 답하는 의무다. 3개월(가벼운 일까지)·1년(추가검사)·5년(입원·수술·7일 치료·30일 투약·주요 질병) 창을 날짜로 대조한다. 설계사에게 말로 한 것은 고지가 아니다.</li>
+      <li>간편심사 보험은 질문을 줄인 대신 고위험자 비중이 높아 보험료가 비싸다. 일반 심사를 먼저 받아 본다.</li>
+      <li>면책·감액 기간은 가입 직후의 청구를 막아 모두의 보험료를 낮추지만, 그 기간에 새로 아픈 정직한 가입자는 손해를 본다.</li>
+      <li>고지의무 위반 해지는 안 날부터 1개월, 보장개시 후 2년 무사고, 계약일부터 3년이 지나면 할 수 없다. 인과관계가 없으면 해지되더라도 그 보험금은 지급된다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>아무 심사 없이 모두에게 같은 보험료를 받는 상품에서 가장 먼저 일어날 일은?</p>
+        <div class="opts">
+          <button class="opt">위험이 높은 사람부터 떠나 보험료가 내려간다</button>
+          <button class="opt" data-correct>위험이 낮은 사람부터 떠나 남은 가입자의 평균 위험과 손해율이 올라간다</button>
+          <button class="opt">가입자 구성은 그대로이고 보험료만 매년 오른다</button>
+          <button class="opt">대수의 법칙 덕분에 아무 일도 일어나지 않는다</button>
+        </div>
+        <div class="quiz-exp">평균값은 평균보다 건강한 사람에게 비싸다. 그들이 먼저 떠나면 남은 사람의 위험이 예상보다 높아 손해율이 오르고, 보험료를 올리면 다시 그다음으로 건강한 사람이 떠난다. 이것이 죽음의 나선이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>청약일이 2026년 10월이다. 일반 심사 청약서의 "최근 1년 이내 추가검사(재검사)" 질문에 해당하는 것은?</p>
+        <div class="opts">
+          <button class="opt">2025년 3월에 받은 결절 추적 초음파</button>
+          <button class="opt">2026년 9월에 약국에서 산 감기약</button>
+          <button class="opt">2023년에 받은 맹장 수술</button>
+          <button class="opt" data-correct>2026년 2월에 의사의 권유로 다시 받은 위내시경</button>
+        </div>
+        <div class="quiz-exp">1년 창 안(2025년 10월 이후)에 의사의 진찰·검사 결과로 다시 받은 검사가 해당한다. 2025년 3월 검사는 1년이 지났고, 약국에서 산 약은 의사의 진찰이 아니며, 3년 전 수술은 5년 창의 입원·수술 질문에 해당한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>건강한 사람이 "질문이 적어 편하다"며 간편심사 보험에 들면 어떻게 되는가?</p>
+        <div class="opts">
+          <button class="opt" data-correct>자기 위험보다 비싼, 고위험자 무리의 평균 보험료를 내게 된다</button>
+          <button class="opt">질문이 적은 만큼 보험료가 일반 심사보다 싸다</button>
+          <button class="opt">보험료는 같고 보장 범위만 넓어진다</button>
+          <button class="opt">간편심사는 고지의무가 없어 나중에 분쟁이 생기지 않는다</button>
+        </div>
+        <div class="quiz-exp">간편심사 무리에는 일반 심사를 통과하지 못한 사람의 비중이 높아 보험료가 그 평균을 따른다. 일반 심사를 통과할 수 있는 사람은 대개 일반 심사가 싸다. 간편심사에도 묻는 질문에 대한 고지의무는 있다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>위염 치료 사실을 알리지 않고 가입한 사람이 1년 뒤 교통사고로 다쳐 보험금을 청구했다. 일반적인 결과는?</p>
+        <div class="opts">
+          <button class="opt">고지의무를 어겼으므로 보험금도 못 받고 낸 보험료도 모두 잃는다</button>
+          <button class="opt">2년이 지나지 않았으니 보험금은 나오지 않는다</button>
+          <button class="opt" data-correct>계약은 해지될 수 있지만, 위염과 사고 사이에 인과관계가 없으므로 이번 보험금은 지급된다</button>
+          <button class="opt">교통사고는 고지 대상이 아니므로 계약도 그대로 유지된다</button>
+        </div>
+        <div class="quiz-exp">보험사는 계약일부터 3년 안, 안 날부터 1개월 안이면 계약을 해지할 수 있다. 그러나 알리지 않은 사실과 지급 사유 사이에 인과관계가 없으면 해지하더라도 그 보험금은 지급한다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function hline(ctx, x0, x1, y, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke(); ctx.restore();
+  }
+  /** 글자가 maxW를 넘지 않도록 크기를 줄여 쓴다 */
+  function fitT(ctx, s, x, y, maxW, o) {
+    let fs = o.size || 12; ctx.font = IB.font(fs, o.mono, o.weight);
+    while (ctx.measureText(s).width > maxW && fs > 8.5) { fs -= 0.5; ctx.font = IB.font(fs, o.mono, o.weight); }
+    T(ctx, s, x, y, Object.assign({}, o, { size: fs }));
+  }
+
+  /* ---------------------------------------------------------- 1. 죽음의 나선 */
+  (function () {
+    const N = 120, L = 1e7, LOAD = 0.2, NCLS = 6, MAXY = 15;
+    const ppl = Array.from({ length: N }, (_, i) => {
+      const u = (i + 0.5) / N, p = 0.01 + 0.11 * Math.pow(u, 1.6);
+      return { p, cls: Math.min(NCLS - 1, Math.floor((i / N) * NCLS)), tier: p < 0.035 ? 0 : p < 0.07 ? 1 : 2, inside: true, x: null, y: null, outSlot: -1 };
+    });
+    let prem, year, hist, auto = null, still = 0, outCount = 0;
+    const redraw = () => cv && cv.redraw();
+    const mode = IB.seg("sp-mode", () => reset());
+    const Mr = IB.range("sp-m", (v) => v + "%", () => reset());
+    const will = (q) => q.p * L * (1 + Mr() / 100);
+    function price() {
+      prem = new Array(N).fill(NaN);
+      if (mode() === "class") {
+        for (let c = 0; c < NCLS; c++) {
+          const g = ppl.filter((q) => q.cls === c && q.inside);
+          const v = g.length ? (g.reduce((s, q) => s + q.p, 0) / g.length) * L * (1 + LOAD) : NaN;
+          ppl.forEach((q, i) => { if (q.cls === c) prem[i] = v; });
+        }
+      } else {
+        const g = ppl.filter((q) => q.inside);
+        const v = g.length ? (g.reduce((s, q) => s + q.p, 0) / g.length) * L * (1 + LOAD) : NaN;
+        prem.fill(v);
+      }
+    }
+    function reset() {
+      ppl.forEach((q) => { q.inside = true; q.outSlot = -1; });
+      outCount = 0; year = 0; hist = []; still = 0; price(); stopAuto(); redraw(); stats();
+    }
+    function step() {
+      if (year >= MAXY) return false;
+      const before = ppl.map((q) => q.inside);
+      if (mode() !== "all") ppl.forEach((q, i) => { q.inside = isFinite(prem[i]) && will(q) >= prem[i]; });
+      let claims = 0, rev = 0, n = 0;
+      ppl.forEach((q, i) => { if (q.inside) { claims += q.p * L; rev += prem[i]; n++; } });
+      // 떠난 사람은 오른쪽 칸으로, 돌아온 사람은 자리를 비운다
+      ppl.forEach((q, i) => {
+        if (before[i] && !q.inside) q.outSlot = outCount++;
+        if (!before[i] && q.inside) q.outSlot = -1;
+      });
+      year++;
+      hist.push({ year, n, lr: rev > 0 ? claims / rev : NaN, prem: n ? rev / n : NaN });
+      price();
+      stats();
+      return before.some((v, i) => v !== ppl[i].inside);
+    }
+    function stats() {
+      const n = ppl.filter((q) => q.inside).length, h = hist[hist.length - 1];
+      IB.stat("sp-o-y", year + "<small>년차</small>");
+      IB.stat("sp-o-n", tone(n < 40 ? "bad-t" : n < 90 ? "warn-t" : "ok-t", String(n)) + "<small> / " + N + "명</small>");
+      const avgP = n ? ppl.reduce((s, q, i) => s + (q.inside ? prem[i] : 0), 0) / n : NaN;
+      IB.stat("sp-o-p", isFinite(avgP) ? won(avgP) : "—");
+      IB.stat("sp-o-l", h && isFinite(h.lr) ? tone(h.lr > 1 ? "bad-t" : "ok-t", Math.round(h.lr * 100) + "%") : "—");
+    }
+    function stopAuto() { auto = null; const b = document.getElementById("sp-auto"); if (b) b.textContent = "자동"; }
+    let G = null, cv = null;
+    function layout(w, h) {
+      const topH = Math.round(h * 0.52), inW = Math.round(w * 0.6);
+      const zin = { x: 10, y: 34, w: inW - 20, h: topH - 44 }, zout = { x: inW + 6, y: 34, w: w - inW - 16, h: topH - 44 };
+      const ci = 12, ri = 10, cell = Math.min(zin.w / ci, zin.h / ri);
+      const co = Math.max(4, Math.floor(zout.w / Math.max(6, cell * 0.8))), ro = Math.ceil(N / co), cellO = Math.min(zout.w / co, zout.h / ro);
+      return { topH, zin, zout, ci, cell, co, cellO, chart: { x: 50, y: topH + 26, w: w - 64, h: h - topH - 58 } };
+    }
+    function target(q, i) {
+      if (q.inside || q.outSlot < 0) {
+        const c = i % G.ci, r = Math.floor(i / G.ci);
+        return [G.zin.x + (G.zin.w - G.ci * G.cell) / 2 + (c + 0.5) * G.cell, G.zin.y + (r + 0.5) * G.cell];
+      }
+      const c = q.outSlot % G.co, r = Math.floor(q.outSlot / G.co);
+      return [G.zout.x + (c + 0.5) * G.cellO, G.zout.y + (r + 0.5) * G.cellO];
+    }
+    price(); year = 0; hist = [];
+    cv = IB.canvas("#sp-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      G = layout(w, h);
+      const tierC = [P.ok, P.warn, P.bad];
+      // 위: 사람들
+      ctx.globalAlpha = 0.06; ctx.fillStyle = P.accent; rrect(ctx, G.zin.x - 4, G.zin.y - 6, G.zin.w + 8, G.zin.h + 10, 8); ctx.fill();
+      ctx.fillStyle = P.dim; rrect(ctx, G.zout.x - 4, G.zout.y - 6, G.zout.w + 8, G.zout.h + 10, 8); ctx.fill(); ctx.globalAlpha = 1;
+      const nIn = ppl.filter((q) => q.inside).length;
+      T(ctx, "가입자 " + nIn + "명", G.zin.x, 20, { size: 12, weight: 700, color: P.text, base: "middle" });
+      T(ctx, year + "년차", G.zin.x + G.zin.w, 20, { size: 12, color: P.dim, align: "right", base: "middle" });
+      T(ctx, "떠난 사람 " + (N - nIn), G.zout.x, 20, { size: 12, weight: 700, color: P.dim, base: "middle" });
+      if (mode() === "class") {
+        ctx.save(); ctx.strokeStyle = P.border; ctx.setLineDash([3, 3]);
+        for (let c = 1; c < NCLS; c++) { const r = (c * N) / NCLS / G.ci, y = G.zin.y + r * G.cell; ctx.beginPath(); ctx.moveTo(G.zin.x, y); ctx.lineTo(G.zin.x + G.zin.w, y); ctx.stroke(); }
+        ctx.restore();
+      }
+      ppl.forEach((q, i) => {
+        const [tx, ty] = target(q, i);
+        if (q.x == null) { q.x = tx; q.y = ty; }
+        const out = !q.inside;
+        const r = (out ? G.cellO : G.cell) * 0.34;
+        ctx.globalAlpha = out ? 0.45 : 0.95;
+        ctx.fillStyle = tierC[q.tier]; ctx.beginPath(); ctx.arc(q.x, q.y, Math.max(2, r), 0, TAU); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+      // 아래: 손해율 막대
+      const B = G.chart;
+      const c = IB.chart(ctx, B, { x: [0, MAXY], y: [0, 1.6], xTicks: [], yTicks: [0, 0.5, 1, 1.5], yFmt: (v) => Math.round(v * 100) + "%" });
+      const slot = B.w / MAXY, bw = slot * 0.62;
+      hline(ctx, B.x, B.x + B.w, c.Y(1), P.bad, [4, 3], 1.2);
+      hline(ctx, B.x, B.x + B.w, c.Y(1 / (1 + LOAD)), P.faint, [2, 3], 1);
+      T(ctx, "100%", B.x + B.w - 2, c.Y(1) - 4, { size: 10.5, color: P.bad, align: "right" });
+      hist.forEach((hh, k) => {
+        if (!isFinite(hh.lr)) return;
+        const x = B.x + slot * k + (slot - bw) / 2, v = Math.min(hh.lr, 1.6);
+        ctx.fillStyle = hh.lr > 1.0001 ? P.bad : P.accent; ctx.globalAlpha = 0.85;
+        ctx.fillRect(x, c.Y(v), bw, c.Y(0) - c.Y(v)); ctx.globalAlpha = 1;
+        if (slot > 14) T(ctx, String(hh.year), x + bw / 2, B.y + B.h + 13, { size: 10, mono: true, color: P.faint, align: "center" });
+      });
+      T(ctx, "해마다의 손해율 (점선: 목표 약 83%)", B.x, B.y - 10, { size: 11, color: P.dim });
+      if (!hist.length) T(ctx, "‘한 해 진행’을 누른다", B.x + B.w / 2, B.y + B.h / 2, { size: 12, color: P.faint, align: "center", base: "middle" });
+    }, { get height() { const w = (document.getElementById("sp-cv").parentElement.clientWidth || 600); return w < 480 ? 430 : 420; } });
+    IB.loop(cv.canvas, (dt) => {
+      if (!G) return;
+      let moving = false;
+      ppl.forEach((q, i) => {
+        const [tx, ty] = target(q, i);
+        if (q.x == null) { q.x = tx; q.y = ty; }
+        const k = Math.min(1, dt * 4.5), dx = tx - q.x, dy = ty - q.y;
+        if (Math.abs(dx) + Math.abs(dy) > 0.3) { q.x += dx * k; q.y += dy * k; moving = true; } else { q.x = tx; q.y = ty; }
+      });
+      if (auto != null) {
+        auto += dt;
+        if (auto > 1.0) {
+          auto = 0.0001;
+          if (!step()) still++; else still = 0;
+          if (still >= 2 || year >= MAXY) stopAuto();
+          moving = true;
+        }
+      }
+      if (moving) cv.redraw();
+    });
+    document.getElementById("sp-step").addEventListener("click", () => { stopAuto(); step(); redraw(); });
+    document.getElementById("sp-re").addEventListener("click", reset);
+    document.getElementById("sp-auto").addEventListener("click", (e) => {
+      if (auto != null) { stopAuto(); return; }
+      e.target.textContent = "멈춤"; still = 0; auto = 0.8;
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 2. 심사의 엄격함 */
+  (function () {
+    const N = 600, g = IB.randnSeeded(41), ge = IB.randnSeeded(42);
+    const lr = [], e = [];
+    for (let i = 0; i < N; i++) { lr.push(-0.15 + 0.55 * g()); e.push(ge()); }
+    const SIG = { none: 0, self: 0.45, exam: 0.22 };
+    const meanAll = lr.reduce((s, v) => s + Math.exp(v), 0) / N;
+    let G = null;
+    const redraw = () => cv && cv.redraw();
+    const info = IB.seg("uw-info", redraw);
+    const Tr = IB.range("uw-t", (v) => "추정 " + Math.exp(v).toFixed(2) + "배 이하", redraw);
+    const sig = (i) => lr[i] + SIG[info()] * e[i];
+    let cv = null;
+    cv = IB.canvas("#uw-cv", (ctx, w, h) => {
+      const P = IB.palette(), Tv = Tr(), none = info() === "none";
+      const lo = -1.9, hi = 2.1;
+      const ticks = [0.25, 0.5, 1, 2, 4].map(Math.log);
+      const c = IB.chart(ctx, { x: 52, y: 18, w: w - 68, h: h - 90 }, {
+        x: [lo, hi], y: [lo, hi], xTicks: ticks, yTicks: ticks,
+        xFmt: (v) => +Math.exp(v).toFixed(2) + "배", yFmt: (v) => +Math.exp(v).toFixed(2) + "배",
+        xLabel: "실제 위험(평균의 몇 배)",
+      });
+      G = c;
+      ctx.save(); ctx.translate(12, c.box.y + c.box.h / 2); ctx.rotate(-Math.PI / 2); T(ctx, "보험사가 추정한 위험", 0, 0, { size: 11.5, color: P.dim, align: "center", base: "middle" }); ctx.restore();
+      // 대각선
+      ctx.save(); ctx.strokeStyle = P.faint; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(c.X(lo), c.Y(lo)); ctx.lineTo(c.X(hi), c.Y(hi)); ctx.stroke(); ctx.restore();
+      let acc = 0, sumR = 0, falseRej = 0, hiPass = 0;
+      for (let i = 0; i < N; i++) {
+        const s = none ? lr[i] : sig(i), y = none ? c.box.y + 6 + ((i * 37) % 100) / 100 * (c.box.h - 12) : c.Y(IB.clamp(s, lo, hi));
+        const ok = none || s <= Tv, r = Math.exp(lr[i]);
+        if (ok) { acc++; sumR += r; if (r >= 2) hiPass++; } else if (r < 1) falseRej++;
+        ctx.fillStyle = ok ? P.accent : P.bad; ctx.globalAlpha = ok ? 0.6 : 0.35;
+        ctx.beginPath(); ctx.arc(c.X(IB.clamp(lr[i], lo, hi)), y, 2.6, 0, TAU); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (!none) {
+        const y = c.Y(Tv);
+        ctx.globalAlpha = 0.07; ctx.fillStyle = P.bad; ctx.fillRect(c.box.x, c.box.y, c.box.w, Math.max(0, y - c.box.y)); ctx.globalAlpha = 1;
+        hline(ctx, c.box.x, c.box.x + c.box.w, y, P.bad, [], 2);
+        T(ctx, "거절", c.box.x + 6, Math.max(c.box.y + 14, y - 8), { size: 12, weight: 700, color: P.bad });
+        T(ctx, "인수", c.box.x + 6, Math.min(c.box.y + c.box.h - 6, y + 18), { size: 12, weight: 700, color: P.accent });
+        knob(ctx, c.box.x + c.box.w - 10, y, P, P.bad, 7);
+      } else {
+        T(ctx, "무심사: 모두 인수 (세로 위치는 의미 없음)", c.box.x + 6, c.box.y + 14, { size: 11.5, color: P.dim });
+      }
+      const idx = acc ? (sumR / acc / meanAll) * 100 : NaN;
+      IB.stat("uw-o-a", Math.round((acc / N) * 100) + "%<small> (" + acc + "명)</small>");
+      IB.stat("uw-o-p", isFinite(idx) ? tone(idx < 90 ? "ok-t" : "", idx.toFixed(0)) : "—");
+      IB.stat("uw-o-f", tone(falseRej > 30 ? "bad-t" : "", String(falseRej)) + "<small>명</small>");
+      IB.stat("uw-o-h", tone(hiPass > 10 ? "warn-t" : "", String(hiPass)) + "<small>명</small>");
+    }, { aspect: 0.8, minHeight: 330, maxHeight: 440 });
+    IB.drag(cv.canvas, { move(x, y) { if (!G || info() === "none") return; const b = G.box, v = -1.9 + ((b.y + b.h - y) / b.h) * 4.0; Tr.set(IB.clamp(Math.round(v / 0.05) * 0.05, -1.2, 2)); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 고지 질문 시간표 */
+  (function () {
+    const Q = [
+      { k: 1, t: "① 3개월: 진찰·검사 결과 진단·소견·치료·투약", m: 3 },
+      { k: 2, t: "② 3개월: 약을 상시 복용", m: 3 },
+      { k: 3, t: "③ 1년: 추가검사(재검사)", m: 12 },
+      { k: 4, t: "④ 5년: 입원·수술·7일 치료·30일 투약", m: 60 },
+      { k: 5, t: "⑤ 5년: 주요 질병 진단·치료", m: 60 },
+    ];
+    const HIT = {
+      cold: [1], flag: [1], retest: [1, 3], treat7: [1, 4], drug30: [1, 2, 4], hosp: [1, 4], major: [1, 2, 4, 5],
+    };
+    const LABEL = { cold: "감기 진료", flag: "검진 이상 소견", retest: "추가검사", treat7: "7일 이상 치료", drug30: "30일 이상 투약", hosp: "입원·수술", major: "주요 질병 진단" };
+    let ago = 11, G = null; // 개월 전
+    const redraw = () => cv && cv.redraw();
+    const type = IB.seg("dq-type", redraw);
+    const hits = () => HIT[type()].filter((k) => ago <= Q[k - 1].m + 1e-9 && (k !== 2 || ago <= 3));
+    let cv = null;
+    cv = IB.canvas("#dq-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const A = { x: 22, y: 70, w: w - 44 };
+      const MAXM = 72;
+      const X = (m) => A.x + A.w - (m / MAXM) * A.w;
+      G = { A, X, MAXM };
+      // 창
+      [[60, P.accent, "5년"], [12, P.warn, "1년"], [3, P.bad, "3개월"]].forEach(([m, col, lab], i) => {
+        ctx.globalAlpha = 0.12 + i * 0.05; ctx.fillStyle = col; ctx.fillRect(X(m), A.y - 34, X(0) - X(m), 34); ctx.globalAlpha = 1;
+        if (i < 2) T(ctx, lab, X(m) + 4, A.y - 34 + 14 + i * 14, { size: 11, color: col, weight: 700 });
+        else T(ctx, lab, X(0), A.y - 40, { size: 11, color: col, weight: 700, align: "right" });
+      });
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(A.x + A.w, A.y); ctx.stroke();
+      const narrow = A.w < 420;
+      (narrow ? [0, 12, 36, 60] : [0, 12, 24, 36, 48, 60, 72]).forEach((m) => {
+        ctx.beginPath(); ctx.moveTo(X(m), A.y); ctx.lineTo(X(m), A.y + 4); ctx.stroke();
+        T(ctx, m === 0 ? "청약일" : (m / 12) + (narrow ? "년" : "년 전"), X(m), A.y + 17, { size: 10.5, color: m === 0 ? P.text : P.faint, align: m === 0 ? "right" : m === 72 ? "left" : "center", weight: m === 0 ? 700 : 400 });
+      });
+      const ex = X(ago);
+      vline(ctx, ex, A.y - 34, A.y, P.text, [2, 2], 1);
+      knob(ctx, ex, A.y, P, P.bad, 8);
+      const lab = LABEL[type()] + " · " + (ago < 12 ? ago + "개월 전" : (ago / 12).toFixed(ago % 12 ? 1 : 0) + "년 전");
+      ctx.font = IB.font(11.5, false, 600);
+      const tw = ctx.measureText(lab).width;
+      T(ctx, lab, IB.clamp(ex, A.x + tw / 2, A.x + A.w - tw / 2), A.y + 34, { size: 11.5, weight: 600, color: P.text, align: "center" });
+      // 질문 목록
+      const hs = hits(), y0 = A.y + 50, rh = Math.min(30, (h - y0 - 28) / Q.length);
+      Q.forEach((q, i) => {
+        const on = hs.includes(q.k), y = y0 + i * rh;
+        rrect(ctx, 12, y, w - 24, rh - 5, 7);
+        ctx.fillStyle = on ? P.bad : P.surface; ctx.globalAlpha = on ? 0.15 : 1; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.strokeStyle = on ? P.bad : P.border; ctx.lineWidth = on ? 1.5 : 1; ctx.stroke();
+        T(ctx, on ? "해당" : "—", w - 22, y + (rh - 5) / 2, { size: 11.5, weight: 700, color: on ? P.bad : P.faint, align: "right", base: "middle" });
+        fitT(ctx, q.t, 22, y + (rh - 5) / 2, w - 90, { size: 12, color: on ? P.text : P.dim, base: "middle", weight: on ? 700 : 400 });
+      });
+      IB.stat("dq-o-t", ago < 12 ? ago + "<small>개월 전</small>" : (ago / 12).toFixed(1) + "<small>년 전</small>");
+      IB.stat("dq-o-q", hs.length ? tone("bad-t", hs.map((k) => "①②③④⑤"[k - 1]).join(" ")) : tone("ok-t", "없음"));
+      const wins = HIT[type()].map((k) => (k === 2 ? 3 : Q[k - 1].m)).filter((m) => m >= ago);
+      const close = wins.length ? Math.max(...wins) - ago : 0;
+      IB.stat("dq-o-c", wins.length ? "약 " + (close + 1) + "<small>개월 뒤</small>" : "<small>이미 빠짐</small>");
+    }, { get height() { const w = document.getElementById("dq-cv").parentElement.clientWidth || 600; return w < 480 ? 320 : 310; } });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const m = ((G.A.x + G.A.w - x) / G.A.w) * G.MAXM; ago = IB.clamp(Math.round(m), 0, G.MAXM); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 간편심사 보험료 */
+  (function () {
+    const SH = { A: 0.6, B: 0.16, C: 0.12, D: 0.12 };
+    const RISK = { A: 1, B: 1.1, C: 1.6 };
+    const dRisk = (y) => 1.4 + 5 * Math.exp(-y / 2.5);
+    const BASE = INS.price({ type: "cancer", age: 31, sex: "f", S: 3e7, term: 69, pay: 20 }).monthly;
+    const redraw = () => cv && cv.redraw();
+    const Nr = IB.range("ez-n", (v) => v + "년", redraw);
+    const Hr = IB.range("ez-h", (v) => v + "%", redraw);
+    function model(N, h) {
+      const stdW = SH.A * (1 - h) + SH.B, stdR = (SH.A * (1 - h) * RISK.A + SH.B * RISK.B) / stdW;
+      let dw = 0, dr = 0; const K = 200;
+      for (let k = 0; k < K; k++) { const y = ((k + 0.5) / K) * 10; if (y >= N) { dw++; dr += dRisk(y); } }
+      const dS = (SH.D * dw) / K, dR = dw ? dr / dw : 0;
+      const ezW = SH.C + dS + SH.A * h, ezR = (SH.C * RISK.C + dS * dR + SH.A * h * RISK.A) / ezW;
+      return { stdR, ezR, ratio: (ezR / stdR) * 1.1, parts: { A: SH.A * h, C: SH.C, D: dS }, stdParts: { A: SH.A * (1 - h), B: SH.B }, out: SH.D - dS, ezW, stdW };
+    }
+    let cv = null;
+    cv = IB.canvas("#ez-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model(Nr(), Hr() / 100);
+      const stdP = BASE, ezP = BASE * m.ratio;
+      // 왼쪽: 두 무리의 구성 (100명 기준 막대)
+      const narrow = w < 480;
+      const top = 40, bh = h - top - (narrow ? 66 : 46), colW = narrow ? 34 : Math.min(64, w * 0.11), gap = narrow ? 10 : 18;
+      const x1 = narrow ? 14 : 26, x2 = x1 + colW + gap, x3 = x2 + colW + gap;
+      const scale = bh / 0.8;
+      const stack = (x, parts, title) => {
+        let y = top + bh;
+        parts.forEach(([v, col]) => {
+          const hh = v * scale; if (hh < 0.5) return;
+          ctx.fillStyle = col; ctx.globalAlpha = 0.8; ctx.fillRect(x, y - hh, colW, hh); ctx.globalAlpha = 1;
+          if (hh > 15) T(ctx, Math.round(v * 100) + "", x + colW / 2, y - hh / 2, { size: 11, mono: true, weight: 700, color: P.bg, align: "center", base: "middle" });
+          y -= hh;
+        });
+        T(ctx, title, x + colW / 2, top + bh + 16, { size: 11.5, weight: 700, color: P.text, align: "center" });
+      };
+      T(ctx, narrow ? "인구 100명" : "인구 100명 중 누가 어디에", x1, 18, { size: 11.5, color: P.dim, base: "middle" });
+      stack(x1, [[m.stdParts.A, P.ok], [m.stdParts.B, P.accent]], "일반");
+      stack(x2, [[m.parts.A, P.ok], [m.parts.C, P.warn], [m.parts.D, P.bad]], "간편");
+      const hh0 = m.out * scale;
+      ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = P.bad; ctx.strokeRect(x3, top + bh - hh0, colW, hh0); ctx.restore();
+      if (hh0 > 15) T(ctx, Math.round(m.out * 100) + "", x3 + colW / 2, top + bh - hh0 / 2, { size: 11, mono: true, weight: 700, color: P.bad, align: "center", base: "middle" });
+      T(ctx, "못 듦", x3 + colW / 2, top + bh + 16, { size: 11.5, weight: 700, color: P.bad, align: "center" });
+      // 범례(작게, 넘치면 줄바꿈)
+      const items = [[P.ok, "병력 없음"], [P.accent, "가벼운 병력"], [P.warn, "만성질환"], [P.bad, "최근 입원·수술"]];
+      let cx = x1, ly = top + bh + 34;
+      ctx.font = IB.font(10.5);
+      items.forEach(([col, s]) => {
+        const iw = 12 + ctx.measureText(s).width + 10;
+        if (cx + iw > w - 8) { cx = x1; ly += 15; }
+        ctx.fillStyle = col; ctx.fillRect(cx, ly - 8, 9, 9); T(ctx, s, cx + 12, ly, { size: 10.5, color: P.dim }); ctx.font = IB.font(10.5);
+        cx += iw;
+      });
+      // 오른쪽: 보험료 막대
+      const R = { x: x3 + colW + (narrow ? 22 : 40), y: top, w: 0, h: bh };
+      R.w = w - R.x - 12;
+      const pmax = BASE * 2.6, bw = Math.min(54, R.w * 0.3);
+      const Y = (v) => R.y + R.h - (v / pmax) * R.h;
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(R.x, R.y + R.h); ctx.lineTo(R.x + R.w, R.y + R.h); ctx.stroke();
+      [[stdP, P.accent, narrow ? "일반" : "일반 심사", 0.25], [ezP, P.bad, narrow ? "간편" : "간편심사", 0.75]].forEach(([v, col, lab, f]) => {
+        const x = R.x + R.w * f - bw / 2;
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(x, Y(v), bw, R.y + R.h - Y(v)); ctx.globalAlpha = 1;
+        T(ctx, IB.wonAxis(v), x + bw / 2, Y(v) - 6, { size: 11.5, mono: true, weight: 700, color: P.text, align: "center" });
+        fitT(ctx, lab, x + bw / 2, R.y + R.h + 16, R.w / 2 - 4, { size: 11.5, color: P.text, align: "center", weight: 700 });
+      });
+      T(ctx, "월 보험료", R.x, 18, { size: 11.5, color: P.dim, base: "middle" });
+      IB.stat("ez-o-s", won(stdP));
+      IB.stat("ez-o-e", tone("bad-t", won(ezP)));
+      IB.stat("ez-o-x", m.ratio.toFixed(2) + "<small>배</small>");
+      IB.stat("ez-o-o", Math.round(m.out * 100) + "<small>명 / 100명</small>");
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 380 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 면책·감액 기간 */
+  (function () {
+    const NPOP = 10000, MON = 36, H20 = 240, MEAN = 2;
+    const gm = INS.incidence("cancer", 40, "f") / 12; // 월 발생률
+    let reveal = MON, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Er = IB.range("wt-e", (v) => v + "일", () => play());
+    const Rr = IB.range("wt-r", (v) => (v ? v + "개월" : "없음"), () => play());
+    const Hr = IB.range("wt-h", (v) => v + "%", () => play());
+    // 개월 m(0부터) 동안의 비율: 면책이면 0, 감액이면 0.5, 그 뒤 1 (월 중간 기준)
+    const payRate = (m) => { const mid = m + 0.5, e = Er() / 30, r = Rr(); return mid < e ? 0 : mid < r ? 0.5 : 1; };
+    const hidMonth = (m) => Math.exp(-m / MEAN) - Math.exp(-(m + 1) / MEAN);
+    function totals() {
+      const hid = (NPOP * Hr()) / 100;
+      let gPaid = 0, hPaid = 0, gLost = 0;
+      for (let m = 0; m < H20; m++) {
+        const gn = NPOP * gm, hn = hid * hidMonth(m), r = payRate(m);
+        gPaid += gn * r; hPaid += hn * r; if (r === 0) gLost += gn;
+      }
+      const base = NPOP * gm * H20;
+      return { idx: ((gPaid + hPaid) / base) * 100, hShare: hPaid / Math.max(1e-9, gPaid + hPaid), gLost };
+    }
+    function play() { reveal = 0; anim.start(); redraw(); }
+    let cv = null;
+    cv = IB.canvas("#wt-cv", (ctx, w, h) => {
+      const P = IB.palette(), hid = (NPOP * Hr()) / 100;
+      const B = { x: 42, y: 22, w: w - 56, h: h - 88 };
+      const ymax = Math.max(12, NPOP * gm + hid * hidMonth(0)) * 1.1;
+      const c = IB.chart(ctx, B, { x: [0, MON], y: [0, ymax], xTicks: [0, 6, 12, 18, 24, 30, 36], xFmt: (v) => v + "개월", yFmt: (v) => String(Math.round(v)), xLabel: "가입 후 경과" });
+      G = c;
+      const e = Er() / 30, r = Rr();
+      ctx.globalAlpha = 0.08; ctx.fillStyle = P.bad; ctx.fillRect(c.X(0), B.y, c.X(e) - c.X(0), B.h);
+      ctx.fillStyle = P.warn; ctx.fillRect(c.X(e), B.y, Math.max(0, c.X(Math.max(e, r)) - c.X(e)), B.h); ctx.globalAlpha = 1;
+      const slot = B.w / MON, bw = slot * 0.7;
+      const n = Math.floor(reveal);
+      for (let m = 0; m < Math.min(n, MON); m++) {
+        const gn = NPOP * gm, hn = hid * hidMonth(m), rt = payRate(m), x = c.X(m) + (slot - bw) / 2;
+        const seg = (y0v, v, col) => {
+          const yTop = c.Y(y0v + v), yBot = c.Y(y0v), hh = yBot - yTop; if (hh <= 0) return;
+          ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.strokeRect(x + 0.5, yTop + 0.5, bw - 1, hh - 1);
+          if (rt > 0) { ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(x, yBot - hh * rt, bw, hh * rt); ctx.globalAlpha = 1; }
+        };
+        seg(0, gn, P.accent); seg(gn, hn, P.bad);
+      }
+      vline(ctx, c.X(e), B.y, B.y + B.h, P.bad, [], 2);
+      knob(ctx, c.X(e), B.y + 10, P, P.bad, 7);
+      if (e > 0) T(ctx, "면책", c.X(e / 2), B.y + 30, { size: 11, weight: 700, color: P.bad, align: "center" });
+      if (r > e) T(ctx, "50% 감액", c.X((e + r) / 2), B.y + 30, { size: 11, weight: 700, color: P.warn, align: "center" });
+      T(ctx, "월 진단 건수 (1만 명)", 4, 12, { size: 11, color: P.dim, base: "middle" });
+      const t = totals();
+      IB.stat("wt-o-p", tone(t.idx > 105 ? "bad-t" : "ok-t", t.idx.toFixed(0)));
+      IB.stat("wt-o-h", IB.pct(t.hShare, 1));
+      IB.stat("wt-o-x", t.gLost.toFixed(1) + "<small>명 / 1만 명</small>");
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 400 });
+    const anim = IB.loop(cv.canvas, (dt) => {
+      if (reveal >= MON) { anim.stop(); return; }
+      reveal = Math.min(MON, reveal + dt * 24);
+      cv.redraw();
+    });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const m = (x - G.box.x) / G.box.w * MON; const d = IB.clamp(Math.round((m * 30) / 30) * 30, 0, 180); if (d !== Er()) { Er.set(d); } } });
+    document.getElementById("wt-play").addEventListener("click", play);
+  })();
+
+  /* ---------------------------------------------------------- 6. 보험금 쏠림(로렌츠 곡선) */
+  (function () {
+    const N = 4000, PCLAIM = 0.55, MED = 8e4, LR = 0.85;
+    const r = IB.rng(77), g = IB.randnSeeded(78);
+    const has = [], z = [], ex = [];
+    for (let i = 0; i < N; i++) { has.push(r() < PCLAIM); z.push(g()); ex.push(Math.pow(r(), 3)); }
+    let xs = 0.1, G = null, cacheK = "", cache = null;
+    const redraw = () => cv && cv.redraw();
+    const Sr = IB.range("lz-s", (v) => v.toFixed(1), redraw);
+    const dedEl = document.getElementById("lz-ded");
+    dedEl.addEventListener("change", redraw);
+    function pays(s, on) {
+      const out = new Float64Array(N);
+      for (let i = 0; i < N; i++) {
+        if (!has[i]) continue;
+        const base = MED * Math.exp(s * z[i]);
+        const disc = base * 2.0 * ex[i] * Math.min(1, base / 2e5); // 재량적 추가 이용(많이 쓰는 사람일수록 큼)
+        const v = on ? base + disc * 0.3 - 2e4 : base + disc;
+        out[i] = Math.max(0, v);
+      }
+      return out;
+    }
+    function lorenz(a) {
+      const s = Array.from(a).sort((x, y) => y - x), tot = s.reduce((q, v) => q + v, 0) || 1, pts = [[0, 0]];
+      let c = 0; const step = Math.max(1, Math.floor(N / 400));
+      for (let i = 0; i < N; i++) { c += s[i]; if ((i + 1) % step === 0 || i === N - 1) pts.push([(i + 1) / N, c / tot]); }
+      return { pts, sorted: s, tot, zero: s.filter((v) => v <= 0).length / N };
+    }
+    function data() {
+      const k = Sr() + "|" + dedEl.checked;
+      if (k === cacheK) return cache;
+      const off = lorenz(pays(Sr(), false)), on = dedEl.checked ? lorenz(pays(Sr(), true)) : null;
+      cacheK = k; cache = { off, on };
+      return cache;
+    }
+    const shareAt = (L, x) => { const n = Math.max(1, Math.round(x * N)); let c = 0; for (let i = 0; i < n; i++) c += L.sorted[i]; return c / L.tot; };
+    let cv = null;
+    cv = IB.canvas("#lz-cv", (ctx, w, h) => {
+      const P = IB.palette(), d = data();
+      const pct = (v) => Math.round(v * 100) + "%";
+      const sz = Math.min(w - 70, h - 70);
+      const B = { x: 50, y: 16, w: w - 66, h: h - 84 };
+      const c = IB.chart(ctx, B, { x: [0, 1], y: [0, 1], xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1], yTicks: [0, 0.25, 0.5, 0.75, 1], xFmt: pct, yFmt: pct, xLabel: "보험금을 많이 받은 순서의 가입자",
+        series: [{ data: [[0, 0], [1, 1]], color: P.faint, dash: [4, 4], width: 1.5 }].concat(d.on ? [{ data: d.on.pts, color: P.accent, width: 2.2 }] : []).concat([{ data: d.off.pts, color: P.bad, width: 2.6 }]) });
+      G = c;
+      void sz;
+      const L = d.on || d.off, ys = shareAt(d.off, xs);
+      vline(ctx, c.X(xs), c.Y(ys), B.y + B.h, P.dim, [3, 3]);
+      hline(ctx, B.x, c.X(xs), c.Y(ys), P.dim, [3, 3]);
+      knob(ctx, c.X(xs), c.Y(ys), P, P.bad, 7);
+      const lab = "상위 " + (xs < 0.1 ? (xs * 100).toFixed(1) : Math.round(xs * 100)) + "% → " + Math.round(ys * 100) + "%";
+      T(ctx, lab, Math.min(c.X(xs) + 12, B.x + B.w - 4), c.Y(ys) + 18, { size: 12, weight: 700, color: P.text, align: c.X(xs) + 140 > B.x + B.w ? "right" : "left" });
+      if (d.on) { const yo = shareAt(d.on, xs); ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(c.X(xs), c.Y(yo), 4.5, 0, TAU); ctx.fill(); }
+      ctx.save(); ctx.translate(12, B.y + B.h / 2); ctx.rotate(-Math.PI / 2); T(ctx, "전체 보험금 중 몫", 0, 0, { size: 11.5, color: P.dim, align: "center", base: "middle" }); ctx.restore();
+      const prem = (x) => x.tot / N / LR / 12;
+      IB.stat("lz-o-x", (xs < 0.1 ? (xs * 100).toFixed(1) : Math.round(xs * 100)) + "%");
+      IB.stat("lz-o-y", tone("bad-t", Math.round(ys * 100) + "%") + (d.on ? " <small>→ " + Math.round(shareAt(d.on, xs) * 100) + "%</small>" : ""));
+      IB.stat("lz-o-z", Math.round(L.zero * 100) + "%");
+      IB.stat("lz-o-p", won(prem(d.off)) + (d.on ? " <small>→ " + won(prem(d.on)) + "</small>" : ""));
+    }, { aspect: 0.72, minHeight: 320, maxHeight: 440 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; xs = IB.clamp((x - G.box.x) / G.box.w, 0.005, 1); xs = xs < 0.1 ? Math.round(xs * 200) / 200 : Math.round(xs * 100) / 100; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 7. 고지의무 위반 시간표 */
+  (function () {
+    const D = INS.KR.disclosure, MAXT = 5;
+    let t = 1, G = null;
+    const redraw = () => cv && cv.redraw();
+    const cause = IB.seg("br-cause", redraw);
+    const prior = document.getElementById("br-prior"), agent = document.getElementById("br-agent");
+    prior.addEventListener("change", redraw); agent.addEventListener("change", redraw);
+    function judge() {
+      const reasons = [];
+      let canCancel = true;
+      if (agent.checked) { canCancel = false; reasons.push("설계사가 고지를 막거나 부실 고지를 권한 경우라 해지할 수 없다"); }
+      else if (t > D.contractYears) { canCancel = false; reasons.push("계약일부터 " + D.contractYears + "년이 지나 해지할 수 없다"); }
+      else if (t > D.benefitYears && !prior.checked) { canCancel = false; reasons.push("보장개시 후 " + D.benefitYears + "년 동안 지급 사유가 없었으니 해지할 수 없다"); }
+      else reasons.push("계약일부터 " + D.contractYears + "년 안이고 보험사가 안 날부터 " + D.knowMonths + "개월 안이라 해지할 수 있다");
+      let pay;
+      if (!canCancel) pay = "지급";
+      else if (cause() === "yes") { pay = "미지급"; reasons.push("알리지 않은 사실이 지급 사유에 영향을 줬으니 보험금은 나오지 않는다(해지환급금은 돌려받는다)"); }
+      else { pay = "지급"; reasons.push("인과관계가 없으니 해지되더라도 이번 보험금은 나온다"); }
+      return { canCancel, pay, reasons };
+    }
+    let cv = null;
+    cv = IB.canvas("#br-cv", (ctx, w, h) => {
+      const P = IB.palette(), j = judge();
+      const A = { x: 20, y: 96, w: w - 40 };
+      const X = (v) => A.x + (v / MAXT) * A.w;
+      G = { A, X };
+      // 구간
+      const z2 = D.benefitYears, z3 = D.contractYears;
+      const bands = [[0, z2, P.bad, "해지 가능"], [z2, z3, P.warn, prior.checked ? "해지 가능(청구 있었음)" : "2년 무사고면 해지 불가"], [z3, MAXT, P.ok, "해지 불가"]];
+      bands.forEach(([a, b, col, lab]) => {
+        ctx.globalAlpha = 0.12; ctx.fillStyle = col; ctx.fillRect(X(a), A.y - 54, X(b) - X(a), 54); ctx.globalAlpha = 1;
+        fitT(ctx, lab, (X(a) + X(b)) / 2, A.y - 62, X(b) - X(a) - 4, { size: 11.5, weight: 700, color: col, align: "center" });
+      });
+      if (agent.checked) { ctx.globalAlpha = 0.18; ctx.fillStyle = P.ok; ctx.fillRect(X(0), A.y - 54, X(MAXT) - X(0), 54); ctx.globalAlpha = 1; T(ctx, "설계사 고지 방해: 언제든 해지 불가", X(MAXT / 2), A.y - 24, { size: 12, weight: 700, color: P.ok, align: "center" }); }
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(A.x + A.w, A.y); ctx.stroke();
+      for (let y = 0; y <= MAXT; y++) {
+        ctx.beginPath(); ctx.moveTo(X(y), A.y); ctx.lineTo(X(y), A.y + 4); ctx.stroke();
+        T(ctx, y === 0 ? "계약일" : y + "년", X(y), A.y + 17, { size: 10.5, color: y === 0 ? P.text : P.faint, align: y === 0 ? "left" : y === MAXT ? "right" : "center" });
+      }
+      vline(ctx, X(z2), A.y - 54, A.y, P.dim, [3, 3]); vline(ctx, X(z3), A.y - 54, A.y, P.dim, [3, 3]);
+      knob(ctx, X(t), A.y, P, P.bad, 8);
+      const lab = "지급 사유 발생 " + t.toFixed(1) + "년";
+      ctx.font = IB.font(11.5, false, 600); const tw = ctx.measureText(lab).width;
+      T(ctx, lab, IB.clamp(X(t), A.x + tw / 2, A.x + A.w - tw / 2), A.y + 36, { size: 11.5, weight: 600, color: P.text, align: "center" });
+      // 결과 카드 두 장
+      const cy = A.y + 50, ch = h - cy - 32, cw = (w - 36) / 2;
+      [[j.canCancel ? "해지될 수 있음" : "계약 유지", j.canCancel ? P.bad : P.ok, "계약"], [j.pay === "지급" ? "보험금 지급" : "보험금 없음", j.pay === "지급" ? P.ok : P.bad, "이번 보험금"]].forEach(([s, col, k], i) => {
+        const x = 12 + i * (cw + 12);
+        rrect(ctx, x, cy, cw, ch, 8); ctx.fillStyle = col; ctx.globalAlpha = 0.12; ctx.fill(); ctx.globalAlpha = 1; ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+        T(ctx, k, x + cw / 2, cy + ch * 0.36, { size: 11.5, color: P.dim, align: "center", base: "middle" });
+        fitT(ctx, s, x + cw / 2, cy + ch * 0.68, cw - 12, { size: 15, weight: 800, color: col, align: "center", base: "middle" });
+      });
+      IB.stat("br-o-t", t.toFixed(1) + "<small>년째</small>");
+      IB.stat("br-o-c", j.canCancel ? tone("bad-t", "가능") : tone("ok-t", "불가"));
+      IB.stat("br-o-p", j.pay === "지급" ? tone("ok-t", "지급") : tone("bad-t", "미지급"));
+      const msg = document.getElementById("br-msg");
+      if (msg.dataset.init) msg.innerHTML = "<b>판단:</b> " + j.reasons.join(". ") + ". (보험사가 청구 심사 중 위반을 알고 1개월 안에 해지한다고 가정했다. 실제 판단은 약관과 개별 사실에 따른다.)";
+    }, { get height() { const w = document.getElementById("br-cv").parentElement.clientWidth || 600; return w < 480 ? 270 : 260; } });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; t = IB.clamp(Math.round(((x - G.A.x) / G.A.w) * MAXT * 10) / 10, 0.1, MAXT); document.getElementById("br-msg").dataset.init = "1"; cv.redraw(); } });
+    [prior, agent].forEach((el) => el.addEventListener("change", () => { document.getElementById("br-msg").dataset.init = "1"; redraw(); }));
+    document.querySelectorAll("#br-cause button").forEach((b) => b.addEventListener("click", () => { document.getElementById("br-msg").dataset.init = "1"; redraw(); }));
+  })();
+})();
+</script>
+</body>
+</html>

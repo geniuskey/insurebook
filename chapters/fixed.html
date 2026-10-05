@@ -1,0 +1,853 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "쓴 만큼 주는 실손과 정해진 만큼 주는 정액 보장의 차이, 큰 병의 진짜 비용인 소득 공백으로 진단비를 정하는 법, 뇌·심장 보장 정의의 폭, 유사암과 소액암, 수술비와 입원 일당의 함정을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진단비·수술비·입원비 · InsureBook</title>
+<meta name="description" content="쓴 만큼 주는 실손과 정해진 만큼 주는 정액 보장의 차이, 큰 병의 진짜 비용인 소득 공백으로 진단비를 정하는 법, 뇌·심장 보장 정의의 폭, 유사암과 소액암, 수술비와 입원 일당의 함정을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/fixed.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="진단비·수술비·입원비 · InsureBook">
+<meta property="og:description" content="쓴 만큼 주는 실손과 정해진 만큼 주는 정액 보장의 차이, 큰 병의 진짜 비용인 소득 공백으로 진단비를 정하는 법, 뇌·심장 보장 정의의 폭, 유사암과 소액암, 수술비와 입원 일당의 함정을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/fixed.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/fixed.html#chapter","name":"진단비·수술비·입원비","headline":"진단비·수술비·입원비 · InsureBook","description":"쓴 만큼 주는 실손과 정해진 만큼 주는 정액 보장의 차이, 큰 병의 진짜 비용인 소득 공백으로 진단비를 정하는 법, 뇌·심장 보장 정의의 폭, 유사암과 소액암, 수술비와 입원 일당의 함정을 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/fixed.html","position":9,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"9. 진단비·수술비·입원비","item":"https://insurebook.euiyun.com/chapters/fixed.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="fixed">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 09</div>
+    <h1>진단비·수술비·입원비</h1>
+    <p class="lead">"암 진단비 얼마짜리 들어 있어요?" 보험 상담에서 가장 자주 오가는 질문이다. 그런데 그 금액을 왜 그만큼으로 정했는지 답할 수 있는 사람은 드물다. 실손보험이 병원비를 대 주는데 진단비는 왜 또 필요한지, 같은 '뇌 질환 보장'인데 왜 어떤 특약은 보험료가 몇 배인지, 암 진단을 받았는데 왜 진단비의 10%만 나오는지. 이 장은 정해진 금액을 주는 보장, 곧 정액 보장을 숫자로 뜯어본다.</p>
+    <ul class="objectives">
+      <li>실손(쓴 만큼)과 정액(정해진 만큼)이 막는 위험이 서로 다르다는 것을 구분한다.</li>
+      <li>큰 병의 가장 큰 비용인 소득 공백으로 적정 진단비를 계산한다.</li>
+      <li>뇌출혈·뇌졸중·뇌혈관질환, 급성심근경색·허혈성심장질환처럼 겹겹이 싸인 보장 정의가 보장 확률과 보험료를 어떻게 바꾸는지 본다.</li>
+      <li>유사암·소액암이 왜 진단비의 일부만 주는지, 그것이 누구에게 크게 작용하는지 확인한다.</li>
+      <li>수술비 분류, 입원 일당의 기댓값, 정액 보장의 중복과 과잉을 따진다.</li>
+    </ul>
+  </header>
+
+  <section id="two-kinds">
+    <h2>쓴 만큼 주는 보험, 정해진 만큼 주는 보험</h2>
+    <p>건강 관련 보험이 주는 돈은 두 갈래다. 하나는 <span class="term">실손 보상</span><span class="en">(Indemnity)</span>이다. 병원에서 실제로 낸 돈을 영수증대로 계산해서, 자기부담을 뺀 만큼 돌려준다. <a href="health.html">8장</a>의 실손의료보험이 대표다. 병원비가 100만원이면 100만원 근처, 1,000만원이면 1,000만원 근처를 준다. 실제 손해보다 더 받을 수는 없다. 여러 개에 가입해도 나눠서 낼 뿐 합계가 실제 손해를 넘지 않는다(<span class="term">비례보상</span>).</p>
+    <p>다른 하나는 <span class="term">정액 보상</span><span class="en">(Fixed benefit)</span>이다. 약관이 정한 사건, 예를 들어 "암으로 진단 확정"이 일어나면 병원비가 얼마였는지와 상관없이 정해진 금액을 준다. 암 진단비 3,000만원 특약이라면 수술비가 300만원이든 3,000만원이든 3,000만원이다. 영수증이 필요 없는 대신, 사건의 정의가 전부다. 정의에 들어가면 다 받고, 한 글자라도 벗어나면 한 푼도 못 받는다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 300" role="img" aria-label="실손 보상과 정액 보상의 지급 방식 비교">
+        <defs><marker id="fx-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="110" y="22" text-anchor="middle" class="lbl-b">실손: 쓴 만큼</text>
+        <text x="330" y="22" text-anchor="middle" class="lbl-b">정액: 정해진 만큼</text>
+        <line x1="220" y1="10" x2="220" y2="290" class="s-dash"/>
+        <rect x="24" y="42" width="172" height="40" rx="6" class="f-surface s-line"/>
+        <text x="110" y="60" text-anchor="middle" class="lbl">병원 영수증</text>
+        <text x="110" y="75" text-anchor="middle" class="lbl-dim">실제로 낸 돈</text>
+        <line x1="110" y1="84" x2="110" y2="110" class="s-line" marker-end="url(#fx-ar1)"/>
+        <rect x="24" y="114" width="172" height="40" rx="6" class="f-warn-soft"/>
+        <text x="110" y="132" text-anchor="middle" class="lbl">자기부담 빼기</text>
+        <text x="110" y="147" text-anchor="middle" class="lbl-dim">세대마다 10~30%</text>
+        <line x1="110" y1="156" x2="110" y2="182" class="s-line" marker-end="url(#fx-ar1)"/>
+        <rect x="24" y="186" width="172" height="40" rx="6" class="f-ok-soft"/>
+        <text x="110" y="204" text-anchor="middle" class="lbl">나머지를 지급</text>
+        <text x="110" y="219" text-anchor="middle" class="lbl-dim">손해보다 많을 수 없다</text>
+        <text x="110" y="252" text-anchor="middle" class="lbl-dim">여러 개 가입해도</text>
+        <text x="110" y="270" text-anchor="middle" class="lbl-dim">나눠 낼 뿐(비례보상)</text>
+        <rect x="244" y="42" width="172" height="40" rx="6" class="f-surface s-line"/>
+        <text x="330" y="60" text-anchor="middle" class="lbl">약관이 정한 사건</text>
+        <text x="330" y="75" text-anchor="middle" class="lbl-dim">예: 암 진단 확정</text>
+        <line x1="330" y1="84" x2="330" y2="110" class="s-line" marker-end="url(#fx-ar1)"/>
+        <rect x="244" y="114" width="172" height="40" rx="6" class="f-acc-soft"/>
+        <text x="330" y="132" text-anchor="middle" class="lbl">정의에 맞는가?</text>
+        <text x="330" y="147" text-anchor="middle" class="lbl-dim">질병코드·진단 방법</text>
+        <line x1="330" y1="156" x2="330" y2="182" class="s-line" marker-end="url(#fx-ar1)"/>
+        <rect x="244" y="186" width="172" height="40" rx="6" class="f-ok-soft"/>
+        <text x="330" y="204" text-anchor="middle" class="lbl">가입금액 전액</text>
+        <text x="330" y="219" text-anchor="middle" class="lbl-dim">병원비와 무관</text>
+        <text x="330" y="252" text-anchor="middle" class="lbl-dim">여러 개 가입하면</text>
+        <text x="330" y="270" text-anchor="middle" class="lbl-dim">각각 다 나온다</text>
+      </svg>
+      <figcaption><b>그림 1. 실손과 정액.</b> 실손은 "얼마를 썼는가"를 묻고, 정액은 "무슨 일이 일어났는가"를 묻는다. 실손의 핵심 변수는 자기부담 비율, 정액의 핵심 변수는 사건의 정의와 가입금액이다.</figcaption>
+    </figure>
+
+    <p>둘이 막는 위험은 다르다. 실손은 병원비를 막는다. 정액은 병원비와 상관없는 돈, 곧 <b>일을 못 하는 동안의 생활비와 영수증으로 증명하기 어려운 비용</b>을 막는다. 아래에서 암 치료 한 번을 놓고 둘이 각각 무엇을 메우는지 본다. 진료비 총액, 그중 비급여 비율, 일을 쉬는 개월 수를 바꿔 본다. 가입자는 지우(월 실수령 약 330만원, 2세대 실손, 암 진단비 3,000만원)다.</p>
+
+    <div class="sim" id="sim-vs">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>암 치료 한 번: 무엇을 실손이, 무엇을 진단비가 메우나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="vs-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>총 진료비 <output id="vs-cost-out"></output></span><input type="range" id="vs-cost" min="5000000" max="100000000" step="1000000" value="30000000"></label>
+          <label class="ctrl"><span>비급여 비율 <output id="vs-nc-out"></output></span><input type="range" id="vs-nc" min="0" max="70" step="5" value="30"></label>
+          <label class="ctrl"><span>일을 쉬는 기간 <output id="vs-m-out"></output></span><input type="range" id="vs-m" min="0" max="24" step="1" value="12"></label>
+          <div class="seg" id="vs-gen"><button data-value="2" class="on">2세대 실손</button><button data-value="4">4세대 실손</button><button data-value="0">실손 없음</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>병원비 본인부담</span><span><i style="background:var(--warn)"></i>소득 공백</span><span><i style="background:var(--ok)"></i>실손 보험금</span><span><i style="background:var(--accent)"></i>암 진단비</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">건강보험 후 내 병원비</span><span class="v" id="vs-o-p">—</span></div>
+        <div class="stat"><span class="k">실손이 메운 돈</span><span class="v" id="vs-o-s">—</span></div>
+        <div class="stat"><span class="k">소득 공백</span><span class="v" id="vs-o-g">—</span></div>
+        <div class="stat"><span class="k">진단비까지 받고 남은 구멍</span><span class="v" id="vs-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(진료비 3,000만원, 비급여 30%, 12개월)에서 막대 두 개를 비교한다. 암은 산정특례로 급여 본인부담이 5%라 건강보험 뒤에 남는 병원비는 약 1,005만원이고, 2세대 실손이 그 대부분을 메운다. 남는 큰 덩어리는 노란 소득 공백이다. ② 일을 쉬는 기간을 0개월로 내린다. 진단비가 남아돈다. 반대로 24개월로 올리면 진단비로도 못 메우는 구멍이 커진다. ③ "실손 없음"을 누르고 비급여를 70%로 올린다. 이번엔 빨간 병원비가 커진다. 실손과 정액은 서로 다른 구멍을 막는다. (INS.medical: 입원, 산정특례 5%. 소득 공백은 월 실수령 330만원 × 쉬는 개월, 회사 보전 없음으로 단순화했다.)</div>
+    </div>
+
+    <p>진료비를 아무리 키워도 실손을 가진 사람의 빨간 칸은 크게 자라지 않는다. 건강보험의 산정특례와 실손이 병원비를 겹겹이 막기 때문이다. 그런데 노란 칸, 일을 쉬는 동안 사라지는 월급은 실손이 한 푼도 메우지 않는다. 실손 약관에는 "치료비"만 있고 "생활비"는 없다. 정액 보장이 존재하는 가장 정직한 이유가 여기 있다. 병원비가 아니라 <b>병원비 바깥의 돈</b>을 막는 것이다.</p>
+    <p>반대 방향의 진실도 있다. 진단비는 병원비와 무관하게 나오니, 가볍게 끝난 병에서는 실제 손해보다 훨씬 많은 돈을 받는다. 이것이 정액 보장을 '보험이 아니라 복권 같다'고 비판하는 근거이고, 뒤에서 볼 유사암 감액이 생긴 이유이기도 하다. 정액 보장의 금액은 "많을수록 좋다"가 아니라 "막아야 할 구멍만큼"이어야 한다. 그 구멍을 재는 것이 다음 절이다.</p>
+  </section>
+
+  <section id="income-gap">
+    <h2>큰 병에서 무서운 것은 병원비보다 소득 공백</h2>
+    <p>암, 뇌졸중, 심근경색 같은 큰 병을 겪은 사람들이 공통으로 하는 말이 있다. "병원비는 어떻게든 됐는데, 월급이 끊긴 게 힘들었다." <a href="health.html">8장</a>에서 본 것처럼 건강보험의 본인부담상한제와 산정특례, 그리고 실손이 병원비를 크게 줄여 준다. 하지만 치료와 회복에 걸리는 몇 달에서 1~2년 동안 들어오지 않는 월급, 간병인 비용, 통원 교통비, 식단 관리비 같은 돈은 아무도 대신 내 주지 않는다.</p>
+    <p>그래서 진단비를 정하는 가장 합리적인 출발점은 <span class="term">소득 공백</span>이다.</p>
+    <div class="formula">$$\text{적정 진단비} \approx \text{월 실수령} \times \text{치료·회복 개월} \times (1 - \text{보전 비율}) + \text{추가 비용}$$<div class="where">보전 비율: 회사의 유급 병가·질병휴직 급여, 단체보험의 소득 보상, 상병수당 같은 제도가 월급을 얼마나 대신 주는가. 추가 비용: 비급여 중 실손이 안 메우는 몫, 간병비, 생활 변화 비용. 엔진의 <code>INS.incomeGap</code>이 이 식이다.</div></div>
+    <p>아래 그림은 큰 병 진단 뒤의 통장이다. 진단 첫 달에 추가 비용이 나가고, 그 뒤 매달 실수령에서 보전받지 못하는 만큼 잔고가 줄어든다. 지우네 예금 3,000만원에서 출발한다. 월 실수령, 쉬는 개월 수, 회사 보전 비율을 바꾸면서 잔고가 언제 바닥나는지, 그리고 진단비가 소득 공백만큼 있었다면 잔고가 어떻게 버티는지 비교한다.</p>
+
+    <div class="sim" id="sim-gap">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>진단 이후의 통장: 소득 공백과 적정 진단비</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gap-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>월 실수령 <output id="gap-net-out"></output></span><input type="range" id="gap-net" min="1500000" max="8000000" step="100000" value="3300000"></label>
+          <label class="ctrl"><span>치료·회복 기간 <output id="gap-m-out"></output></span><input type="range" id="gap-m" min="3" max="36" step="1" value="12"></label>
+          <label class="ctrl"><span>회사·제도 보전 비율 <output id="gap-k-out"></output></span><input type="range" id="gap-k" min="0" max="80" step="5" value="0"></label>
+          <div class="seg" id="gap-x"><button data-value="0">추가비용 0</button><button data-value="5000000">500만</button><button data-value="10000000" class="on">1,000만</button><button data-value="20000000">2,000만</button></div>
+          <div class="btn-row"><button class="btn" id="gap-re">다시 재생</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>보전받는 월급</span><span><i style="background:var(--bad)"></i>사라진 월급</span><span><i style="background:var(--warn)"></i>추가 비용</span><span><i style="background:var(--text-dim)"></i>예금 잔고(진단비 없음)</span><span><i style="background:var(--accent)"></i>예금 잔고(진단비 = 공백)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">소득 공백 합계</span><span class="v" id="gap-o-g">—</span></div>
+        <div class="stat"><span class="k">예금이 바닥나는 때</span><span class="v" id="gap-o-z">—</span></div>
+        <div class="stat"><span class="k">적정 진단비(500만원 단위)</span><span class="v" id="gap-o-n">—</span></div>
+        <div class="stat"><span class="k">연 실수령 대비</span><span class="v" id="gap-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(330만원, 12개월, 보전 0%, 추가 1,000만원)에서 회색 잔고가 내려가는 모습을 본다. 이 책의 교육용 모델로 계산하면 소득 공백은 4,960만원이고 예금 3,000만원은 진단 후 7개월째에 바닥난다. ② 보전 비율을 60%로 올린다. 질병휴직 급여가 있는 회사라면 필요한 진단비가 절반 가까이로 준다. 내 회사의 병가·휴직 규정을 먼저 확인해야 하는 이유다. ③ 치료 기간을 36개월로 늘린다. 공백이 1억원을 훌쩍 넘는다. 진단비 한 번으로 막기엔 너무 크다. 오래 가는 소득 상실은 다른 장치(장해·소득 보상, <a href="social.html">13장</a>의 사회보험)와 나눠 막아야 한다. (예금 3,000만원에서 출발, 이자·세금 무시. 생활비는 월 실수령만큼 그대로 쓴다고 본다.)</div>
+    </div>
+
+    <p>파란 선을 보면 진단비가 하는 일이 분명해진다. 진단비는 병을 고치지 않는다. 진단비가 하는 일은 <b>예금이 바닥나기 전에 시간을 사 주는 것</b>이다. 치료에 집중할 시간, 서둘러 복직하지 않아도 될 시간, 집을 줄이지 않아도 될 시간이다. 그 시간의 가격이 소득 공백이다.</p>
+    <p>이 계산은 사람마다 답이 다르다. 월급이 높을수록, 회사 보전이 적을수록, 프리랜서·자영업자처럼 쉬면 바로 수입이 끊길수록 진단비가 더 필요하다. 반대로 질병휴직 급여가 넉넉한 직장인, 자산이 충분한 은퇴자는 덜 필요하다. "암 진단비는 무조건 5,000만원" 같은 숫자는 누군가의 계산 결과일 뿐 모두의 정답이 아니다.</p>
+
+    <div class="callout pro">
+      <strong>"얼마나 들어야 해요?"에 답하는 순서</strong>
+      금액부터 말하면 고객은 그 숫자를 설계사의 영업 목표로 듣는다. 순서를 바꾼다. ① "암 진단을 받으면 몇 달쯤 쉬실 것 같으세요? 회사에 병가나 질병휴직 제도가 있나요?" ② "그동안 월 생활비는 얼마가 필요하세요?" ③ 두 숫자를 곱한 값을 고객이 직접 계산기에 찍게 한다. ④ 이미 가진 진단비를 빼고 남는 공백만 제안한다. 고객이 스스로 만든 숫자는 나중에 해지 상담이 와도 흔들리지 않는다. 회사 규정을 모르는 고객이 많으니 취업규칙이나 인사팀 확인을 숙제로 주는 것도 좋다. 이 과정을 상담 기록에 남겨 두면 적합성 판단의 근거가 된다.
+    </div>
+  </section>
+
+  <section id="incidence">
+    <h2>나이가 들면 확률이 어떻게 오르나</h2>
+    <p>진단비의 금액만큼 중요한 것이 언제까지 보장받느냐다. 큰 병의 발생률은 나이에 따라 가파르게 오른다. 아래 그래프는 이 책의 교육용 모델에서 암·뇌졸중·급성심근경색이 10만 명당 1년에 몇 명꼴로 새로 생기는지를 나이별로 그린 것이다. 국가 통계의 크기를 흉내 낸 근사치이며 실제 통계와는 다르다. 세로선을 끌어 나이를 옮겨 보고, 성별을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-inc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>나이별 1년 발생률: 암·뇌졸중·급성심근경색</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="inc-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="inc-sex"><button data-value="m" class="on">남성</button><button data-value="f">여성</button></div>
+          <label class="ctrl"><span>나이 <output id="inc-a-out"></output></span><input type="range" id="inc-a" min="20" max="89" step="1" value="32"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>암</span><span><i style="background:var(--warn)"></i>뇌졸중</span><span><i style="background:var(--bad)"></i>급성심근경색</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">암 · 1년 / 10년 안</span><span class="v" id="inc-o-c">—</span></div>
+        <div class="stat"><span class="k">뇌졸중 · 1년 / 10년 안</span><span class="v" id="inc-o-s">—</span></div>
+        <div class="stat"><span class="k">급성심근경색 · 1년 / 10년 안</span><span class="v" id="inc-o-h">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세 남성에서 시작한다. 10년 안에 암이 생길 확률은 약 2.3%다. 젊을 때는 큰 병이 드물다. ② 세로선을 60세, 70세로 끈다. 암은 10만 명당 1,500명을 넘고, 뇌졸중은 70세를 지나며 암을 따라잡는다. 진단비가 정말 필요해지는 때는 대개 60세 이후다. ③ 여성으로 바꿔 30~40대를 본다. 같은 나이 남성보다 암 발생률이 두 배 이상 높다. 다음 다음 절에서 볼 갑상선암 같은 소액암의 영향이 크다. (INS.incidence, 10년 안 확률은 사망과 경쟁하는 INS.prob. 교육용 근사이며 실제 통계와 다르다.)</div>
+    </div>
+
+    <p>두 가지를 기억한다. 첫째, 발생률은 60세 이후에 몰려 있다. "60세 만기"나 "80세 만기"로 보장 기간을 줄이면 보험료는 싸지지만 정작 위험이 큰 구간을 빼는 셈이다. 이 책의 모델로 32세 남성이 80세까지 암에 걸릴 확률은 약 39%, 100세까지는 약 47%다. 둘째, 그래프의 세로축이 보여 주듯 질병마다 크기가 다르고 나이에 따른 기울기도 다르다. 그런데 보험에서 이 차이보다 더 크게 보장을 가르는 것이 있다. 같은 병을 <b>어디까지 그 병으로 인정하는가</b>, 곧 정의의 폭이다.</p>
+  </section>
+
+  <section id="definition">
+    <h2>보장 범위의 함정: 같은 '뇌 보장'이 아니다</h2>
+    <p>"뇌 질환 보장 있어요"라는 말은 정보가 거의 없는 문장이다. 뇌 쪽 정액 보장은 대개 세 단계의 정의로 나뉜다. 가장 좁은 <span class="term">뇌출혈</span>은 뇌혈관이 터진 경우만 본다. 그보다 넓은 <span class="term">뇌졸중</span>은 뇌출혈에 뇌혈관이 막힌 <span class="term">뇌경색</span>을 더한다. 가장 넓은 <span class="term">뇌혈관질환</span>은 뇌졸중에 더해 뇌혈관이 좁아지거나 생긴 이상 같은 질환까지 포함한다. 심장도 같다. 좁은 <span class="term">급성심근경색</span>은 심장 근육에 피가 갑자기 끊겨 손상된 경우만, 넓은 <span class="term">허혈성심장질환</span>은 협심증처럼 심장으로 가는 혈류가 부족한 질환 전체를 본다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 300" role="img" aria-label="뇌출혈은 뇌졸중에, 뇌졸중은 뇌혈관질환에 포함된다. 급성심근경색은 허혈성심장질환에 포함된다">
+        <text x="112" y="20" text-anchor="middle" class="lbl-b">뇌</text>
+        <rect x="8" y="30" width="208" height="232" rx="12" class="f-acc-soft"/>
+        <text x="20" y="52" class="lbl-acc">뇌혈관질환</text>
+        <text x="20" y="70" class="lbl-dim">협착·폐색 등까지</text>
+        <rect x="26" y="84" width="172" height="164" rx="10" class="f-warn-soft"/>
+        <text x="38" y="106" class="lbl">뇌졸중</text>
+        <text x="38" y="124" class="lbl-dim">뇌출혈 + 뇌경색</text>
+        <rect x="44" y="140" width="136" height="94" rx="8" class="f-bad-soft"/>
+        <text x="112" y="182" text-anchor="middle" class="lbl-bad">뇌출혈</text>
+        <text x="112" y="202" text-anchor="middle" class="lbl-dim">혈관이 터짐</text>
+        <text x="328" y="20" text-anchor="middle" class="lbl-b">심장</text>
+        <rect x="232" y="30" width="200" height="232" rx="12" class="f-acc-soft"/>
+        <text x="244" y="52" class="lbl-acc">허혈성심장질환</text>
+        <text x="244" y="70" class="lbl-dim">협심증 등 혈류 부족</text>
+        <rect x="256" y="120" width="152" height="114" rx="8" class="f-bad-soft"/>
+        <text x="332" y="170" text-anchor="middle" class="lbl-bad">급성심근경색</text>
+        <text x="332" y="190" text-anchor="middle" class="lbl-dim">혈류가 갑자기 끊김</text>
+        <text x="220" y="288" text-anchor="middle" class="lbl-dim">상자 넓이는 개념용이며 실제 발생 비율과 다르다</text>
+      </svg>
+      <figcaption><b>그림 2. 겹겹이 싸인 정의.</b> 안쪽 정의일수록 좁고, 보험료도 싸고, 받을 확률도 낮다. 바깥 정의는 안쪽을 모두 포함한다. 같은 2,000만원 특약이라도 어느 상자에 걸렸느냐가 보장의 크기를 정한다.</figcaption>
+    </figure>
+
+    <div class="callout deep">
+      <strong>정의는 질병분류코드로 정해진다</strong>
+      약관은 질병의 범위를 <span class="term">한국표준질병·사인분류</span><span class="en">(KCD)</span> 코드로 적는다. 대체로 뇌출혈은 I60~I62, 뇌졸중은 여기에 뇌경색(I63)을 더한 범위, 뇌혈관질환은 I60~I69 전체를 가리키고, 급성심근경색은 I21~I23 근처, 허혈성심장질환은 I20~I25를 가리킨다. 다만 정확한 코드 범위, 진단 방법(영상 검사 결과 요구 여부 등), 포함·제외 질환은 상품과 판매 시기마다 조금씩 다르다. 분류 체계 자체도 몇 년마다 개정된다. 같은 이름이라도 반드시 해당 약관의 별표(대상 질병 분류표)를 확인해야 한다.
+    </div>
+
+    <p>정의의 폭이 얼마나 큰 차이를 만드는지 숫자로 본다. 아래는 정해진 나이에 가입해 100세까지 보장받을 때 각 정의로 보험금을 받을 확률과, 진단비 2,000만원(20년납·100세 만기·무해지형)의 월 보험료를 이 책의 교육용 모델로 계산한 것이다. 가입 나이를 바꾸고 뇌·심장, 성별을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-def">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>정의의 폭: 보장 확률과 보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="def-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="def-g"><button data-value="brain" class="on">뇌</button><button data-value="heart">심장</button></div>
+          <div class="seg" id="def-sex"><button data-value="m" class="on">남성</button><button data-value="f">여성</button></div>
+          <label class="ctrl"><span>가입 나이 <output id="def-a-out"></output></span><input type="range" id="def-a" min="20" max="65" step="1" value="32"></label>
+          <label class="ctrl"><span>보장 끝 나이 <output id="def-e-out"></output></span><input type="range" id="def-e" min="60" max="100" step="5" value="100"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가장 좁은 정의 · 받을 확률</span><span class="v" id="def-o-n">—</span></div>
+        <div class="stat"><span class="k">가장 넓은 정의 · 받을 확률</span><span class="v" id="def-o-w">—</span></div>
+        <div class="stat"><span class="k">좁은 정의가 놓치는 몫</span><span class="v" id="def-o-d">—</span></div>
+        <div class="stat"><span class="k">월 보험료 배수(넓은/좁은)</span><span class="v" id="def-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 32세 남성, 뇌, 100세 만기에서 시작한다. 이 책의 모델로 뇌출혈로 받을 확률은 약 7%, 뇌혈관질환은 약 57%다. 뇌 쪽 사건 대부분은 혈관이 터지는 것이 아니라 막히거나 좁아지는 것이다. ② 심장으로 바꾼다. 급성심근경색은 약 14%, 허혈성심장질환은 약 40%다. ③ 보장 끝 나이를 60세로 줄인다. 모든 확률이 크게 떨어지고, 좁은 정의는 거의 0에 가까워진다. 싸 보이는 특약이 왜 싼지가 보인다. (INS.prob, INS.price 무해지형·해지율 연 4%·20년납. 진단 시 1회 지급, 교육용 근사이며 실제 상품의 보험료와 다르다.)</div>
+    </div>
+
+    <p>좁은 정의의 특약은 보험료가 싸다. 그런데 보험료가 싼 이유는 사업비가 적어서가 아니라 <b>받을 확률이 낮아서</b>다. 보험료 1만원당 받는 보장의 '가성비'는 정의가 달라도 생각보다 비슷하다. 위험을 싸게 사는 것이 아니라 위험을 덜 사는 것이다. 문제는 가입자가 그것을 모른 채 "뇌 보장 2,000만원 있다"고 믿는 경우다. 실제로 뇌경색이나 협심증으로 진단받고 나서야 자기 특약이 뇌출혈과 급성심근경색만 보장한다는 사실을 아는 일이 드물지 않다. 오래전에 가입한 보험일수록 좁은 정의가 많다.</p>
+    <p>그렇다고 넓은 정의가 무조건 정답도 아니다. 넓은 정의일수록 보험료가 비싸고, 가볍게 끝나는 질환까지 포함하므로 가입금액 한도를 낮게 두는 상품이 많다. 넓은 정의로 기본을 깔고, 중증 사건(뇌출혈·급성심근경색)에 추가 금액을 얹는 식으로 섞는 설계도 흔하다. 핵심은 이름이 아니라 정의를 보고, 가입금액과 함께 판단하는 것이다.</p>
+
+    <div class="callout buyer">
+      <strong>증권에서 정의 읽기</strong>
+      ① 특약 이름에 '뇌출혈', '뇌졸중', '뇌혈관질환' 중 무엇이 적혀 있는가. 심장은 '급성심근경색'인가 '허혈성심장질환'인가. ② 약관 별표의 질병코드 범위. ③ 보장 끝 나이(80세, 90세, 100세). ④ 가입 후 1~2년 안 진단 시 50% 감액 같은 조건. ⑤ 같은 정의 특약이 여러 계약에 흩어져 있는지. 내보험다보여에서 계약 목록을 내려받아 한 장에 모으면 빈칸과 겹치는 칸이 함께 보인다.
+    </div>
+  </section>
+
+  <section id="minor-cancer">
+    <h2>유사암·소액암: 왜 10~20%만 주는가</h2>
+    <p>암 진단비 약관을 펴 보면 거의 예외 없이 '일반암'과 따로 묶인 목록이 있다. <span class="term">갑상선암</span>, <span class="term">제자리암</span><span class="en">(Carcinoma in situ)</span>, <span class="term">경계성종양</span>, <span class="term">기타피부암</span>이다. 회사와 상품에 따라 <span class="term">유사암</span> 또는 <span class="term">소액암</span>이라고 부르며, 진단비의 10~20%만 주는 경우가 많다. 지우의 암보험도 일반암 3,000만원, 유사암 300만원(10%)이다.</p>
+    <p>이렇게 나눈 이유는 두 가지다. 첫째, 이 질환들은 대개 치료가 비교적 간단하고 생존율이 높아 소득 공백이 짧다. 제자리암은 상피 안에 머물러 퍼지지 않은 단계이고, 경계성종양은 양성과 악성의 경계에 있는 종양이다. 둘째, 건강검진이 늘면서 특히 갑상선암 진단이 크게 늘었다. 진단비 전액을 주면 보험료가 감당하기 어려울 만큼 오른다. 그래서 '암'이라는 같은 이름 안에 지급 비율이 다른 두 층이 생겼다.</p>
+    <p>이 구분은 모두에게 똑같이 작용하지 않는다. 소액암은 젊은 층, 특히 여성의 암 진단에서 차지하는 비중이 크다. 아래 시뮬레이터는 암 진단 1건이 소액암일 가능성을 나이와 성별에 따라 <b>교육용으로 가정한 값</b>으로 그린다. 실제 비율은 통계 연도·집계 방식·검진 관행에 따라 달라지며, 여기 그린 곡선은 그 크기를 대략 흉내 낸 것이다. 세로선을 끌어 나이를 옮기고, 유사암 지급 비율을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-thy">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>암 진단 1건의 기대 지급액: 소액암 비중과 지급 비율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="thy-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="thy-sex"><button data-value="f" class="on">여성</button><button data-value="m">남성</button></div>
+          <label class="ctrl"><span>진단 나이 <output id="thy-a-out"></output></span><input type="range" id="thy-a" min="25" max="85" step="1" value="35"></label>
+          <label class="ctrl"><span>유사암 지급 비율 <output id="thy-r-out"></output></span><input type="range" id="thy-r" min="10" max="100" step="5" value="10"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--warn)"></i>소액암(갑상선·제자리·경계성·기타피부, 가정)</span><span><i style="background:var(--accent)"></i>그 밖의 암</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">진단 중 소액암 비중(가정)</span><span class="v" id="thy-o-s">—</span></div>
+        <div class="stat"><span class="k">진단 1건 기대 지급(3,000만원 기준)</span><span class="v" id="thy-o-e">—</span></div>
+        <div class="stat"><span class="k">가입금액 대비</span><span class="v" id="thy-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 35세 여성에서 시작한다. 이 가정에서는 암 진단의 약 45%가 소액암이라, 진단비 3,000만원 계약의 기대 지급액은 약 1,790만원으로 가입금액의 60% 정도다. ② 세로선을 70세 이후로 끈다. 소액암 비중이 줄고 기대 지급액이 가입금액에 가까워진다. ③ 지급 비율을 100%로 올린다. 기대 지급액은 3,000만원이 되지만, 그만큼 보험료가 오른다. 반대로 젊은 여성에게 '유사암 진단비'를 따로 크게 얹는 설계가 흔한 이유도 여기서 보인다. (소액암 비중은 나이·성별에 따른 교육용 가정이다. 기대 지급 = 가입금액 × (일반암 비중 + 소액암 비중 × 지급 비율). 감액 기간은 무시했다.)</div>
+    </div>
+
+    <p>같은 '암 진단비 3,000만원'이라도 30대 여성과 60대 남성에게 그 계약의 실제 가치는 다르다. 30대 여성이 암 진단을 받을 때는 소액암일 가능성이 크고, 그러면 300만원을 받는다. 그래서 시장에는 유사암 진단비를 일반암과 같은 수준까지 따로 올려 주는 특약도 있다. 다만 소액암은 앞서 말했듯 소득 공백이 상대적으로 짧은 경우가 많다. 유사암 보장을 크게 키우는 것이 소득 공백 기준으로 합리적인지, 아니면 받을 확률이 높다는 느낌 때문인지를 구분해야 한다. 확률이 높은 사건을 크게 보장하면 그만큼 보험료도 높다.</p>
+
+    <div class="callout pro">
+      <strong>"암이라는데 왜 10%만 나와요?"</strong>
+      청구 현장에서 가장 감정이 격해지는 순간 중 하나다. 고객은 '암'이라는 진단서를 들고 왔고, 보험사는 약관대로 유사암 지급액을 준다. 이 분쟁을 줄이는 방법은 가입 때 미리 말하는 것뿐이다. 설계서의 '일반암'과 '유사암' 칸을 손가락으로 짚어 가며 "갑상선암, 제자리암, 경계성종양, 기타피부암은 이 금액입니다"라고 금액을 소리 내어 읽어 준다. 특히 갑상선 결절 추적 이력이 있는 고객(<a href="asymmetry.html">4장</a>)에게는 고지와 함께 이 부분을 꼭 짚는다. 또 하나 흔한 실수: 제자리암·경계성종양의 분류는 병리 진단과 약관 정의에 따라 갈리므로, 청구 전에 진단서의 질병코드와 조직검사 결과지를 함께 확인하게 한다.
+    </div>
+  </section>
+
+  <section id="surgery-hosp">
+    <h2>수술비와 입원 일당의 함정</h2>
+    <p>진단비가 "진단"이라는 한 번의 사건에 돈을 준다면, 수술비와 입원비는 치료 과정의 사건마다 돈을 준다. <span class="term">수술비</span>는 수술 한 번에 정해진 금액을, <span class="term">입원 일당</span>은 입원 하루에 정해진 금액을 준다. 둘 다 실손과 별개로 나오는 정액 보장이다.</p>
+    <h3>수술비: 종 분류와 N대 수술</h3>
+    <p>수술비 특약은 크게 두 방식이다. 하나는 수술을 난이도와 크기에 따라 1종부터 5종까지 나누고 종마다 금액을 정하는 <span class="term">종 분류</span> 방식이다. 숫자가 클수록 큰 수술이고 금액도 크다. 다른 하나는 특정 질병군의 수술만 골라 보장하는 <span class="term">N대 질병 수술</span> 방식이다. "64대 질병 수술비", "119대 수술비"처럼 숫자가 붙는다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 290" role="img" aria-label="수술비 특약의 두 방식: 1~5종 분류와 N대 질병 수술">
+        <text x="110" y="20" text-anchor="middle" class="lbl-b">종 분류(1~5종)</text>
+        <text x="330" y="20" text-anchor="middle" class="lbl-b">N대 질병 수술</text>
+        <rect x="20" y="214" width="40" height="22" class="f-acc-soft"/>
+        <rect x="64" y="190" width="40" height="46" class="f-acc-soft"/>
+        <rect x="108" y="156" width="40" height="80" class="f-acc-soft"/>
+        <rect x="152" y="112" width="40" height="124" class="f-acc"/>
+        <rect x="196" y="56" width="0" height="0" class="f-acc"/>
+        <text x="40" y="254" text-anchor="middle" class="lbl-dim">1종</text>
+        <text x="84" y="254" text-anchor="middle" class="lbl-dim">2종</text>
+        <text x="128" y="254" text-anchor="middle" class="lbl-dim">3종</text>
+        <text x="172" y="254" text-anchor="middle" class="lbl-dim">4·5종</text>
+        <text x="20" y="46" class="lbl">모든 수술을 크기로 나눈다</text>
+        <text x="20" y="66" class="lbl-dim">질병·상해 구분 없이 대부분</text>
+        <text x="20" y="86" class="lbl-dim">금액은 종이 클수록 크다</text>
+        <text x="110" y="278" text-anchor="middle" class="lbl-dim">큰 수술일수록 많이</text>
+        <line x1="220" y1="30" x2="220" y2="270" class="s-dash"/>
+        <rect x="244" y="40" width="176" height="176" rx="10" class="f-surface s-line"/>
+        <circle cx="300" cy="104" r="40" class="f-ok-soft"/>
+        <circle cx="362" cy="104" r="40" class="f-ok-soft"/>
+        <circle cx="331" cy="158" r="40" class="f-ok-soft"/>
+        <text x="300" y="100" text-anchor="middle" class="lbl">소화기</text>
+        <text x="362" y="100" text-anchor="middle" class="lbl">순환기</text>
+        <text x="331" y="166" text-anchor="middle" class="lbl">근골격</text>
+        <text x="256" y="206" class="lbl-dim">목록 밖은 0원</text>
+        <text x="330" y="238" text-anchor="middle" class="lbl">특정 질병군의 수술만</text>
+        <text x="330" y="258" text-anchor="middle" class="lbl-dim">숫자가 크다고 다 넓진 않다</text>
+      </svg>
+      <figcaption><b>그림 3. 수술비의 두 방식.</b> 종 분류는 '얼마나 큰 수술인가'로, N대 수술은 '어느 목록에 있는 질병의 수술인가'로 금액을 정한다. N대의 숫자는 질병을 얼마나 잘게 쪼개 셌는지에 따라 달라지므로 숫자만으로 넓이를 비교할 수 없다.</figcaption>
+    </figure>
+
+    <p>N대 수술의 숫자는 마케팅에 쓰기 좋다. 그러나 같은 범위를 10개로 묶어 셀 수도, 100개로 쪼개 셀 수도 있으니 숫자의 크기가 보장 범위의 크기는 아니다. 또 수술의 정의도 약관마다 다르다. 내시경으로 용종을 떼는 시술, 혈관 안으로 관을 넣는 시술처럼 의학 기술이 발전하며 생긴 방식이 '수술'에 들어가는지가 상품마다 달라 분쟁이 생기는 유형이 있다. 수술비는 금액보다 정의 목록을 먼저 본다.</p>
+
+    <h3>입원 일당: 하루가 짧아지는 시대의 기댓값</h3>
+    <p>입원 일당은 직관적이다. 하루 입원에 3만원이면 10일에 30만원이다. 그런데 의료 기술이 발전하고 병원 운영 방식이 바뀌면서 같은 치료를 위한 <b>입원 기간은 점점 짧아지는 추세</b>다. 예전에는 일주일 넘게 입원하던 수술이 이제는 며칠, 때로는 당일 퇴원으로 끝난다. 하루 단위로 돈을 주는 계약의 가치는 입원 일수에 그대로 비례하니, 이 추세는 입원 일당의 가치를 조용히 깎는다. 게다가 일부 계약은 처음 며칠을 빼고 지급한다(예: 4일째부터).</p>
+    <p>입원 일수가 평균 \(L\)일로 들쭉날쭉하다고 하면(지수분포로 단순화), 처음 \(k\)일을 빼고 주는 계약의 한 번 입원당 기대 지급은 다음과 같다.</p>
+    <div class="formula">$$E[\text{지급}] = d \cdot E[\max(0, D - k)] = d \cdot L \, e^{-k/L}$$<div class="where">\(d\): 일당, \(D\): 입원 일수(평균 \(L\)), \(k\): 지급하지 않는 앞쪽 일수. \(L\)이 \(k\)에 가까워지면 \(e^{-k/L}\)이 빠르게 작아진다. 평균 4일 입원에 3일 면책이면 기대 지급은 면책이 없을 때의 약 47%다.</div></div>
+    <p>아래는 32세 남성이 일당 특약을 80세 만기로 들고 20년 동안 보험료를 내는 경우다. 보험료는 가입 당시의 평균 입원 일수로 공정하게 매겼다고 가정하고(부가율 40%), 그 뒤 입원 일수가 해마다 줄어들면 실제로 받을 기대 보험금이 어떻게 변하는지 본다.</p>
+
+    <div class="sim" id="sim-hosp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>입원 일당의 기댓값 vs 보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hosp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>일당 <output id="hosp-d-out"></output></span><input type="range" id="hosp-d" min="10000" max="100000" step="10000" value="30000"></label>
+          <label class="ctrl"><span>가입 당시 평균 입원 일수 <output id="hosp-l-out"></output></span><input type="range" id="hosp-l" min="2" max="15" step="1" value="8"></label>
+          <label class="ctrl"><span>입원 일수 변화(연) <output id="hosp-t-out"></output></span><input type="range" id="hosp-t" min="-6" max="2" step="0.5" value="-2"></label>
+          <label class="check"><input type="checkbox" id="hosp-k"> 3일 면책(4일째부터 지급)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>연 보험료(20년 납)</span><span><i style="background:var(--ok)"></i>그해 기대 보험금</span><span><i style="background:var(--text-dim)"></i>가입 당시 예상</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보험료</span><span class="v" id="hosp-o-p">—</span></div>
+        <div class="stat"><span class="k">20년 낸 돈</span><span class="v" id="hosp-o-t">—</span></div>
+        <div class="stat"><span class="k">80세까지 기대 보험금</span><span class="v" id="hosp-o-b">—</span></div>
+        <div class="stat"><span class="k">낸 돈 대비</span><span class="v" id="hosp-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(일당 3만원, 평균 8일, 연 −2%)에서 초록 선이 회색 점선 아래로 점점 처지는 것을 본다. 보험료(월 약 5,500원)는 가입 때 정해졌는데 받을 돈은 해마다 줄어, 이 책의 모델로 80세까지 기대 보험금은 낸 돈의 약 65%다. ② 변화를 0%로 두면 두 선이 겹치고 낸 돈 대비가 약 113%가 된다. 보험금이 늦게 나오는 만큼 이자가 붙은 명목 금액이라 100%를 넘는다. 이것이 계약이 원래 약속한 크기다. ③ 3일 면책을 켜고 평균 입원 일수를 3일로 내린다. 보험료는 월 약 760원으로 싸지지만, 입원 일수가 연 −2%씩 줄면 낸 돈 대비가 약 35%, −6%면 한 자릿수로 무너진다. 짧은 입원의 시대에 면책 일수는 치명적이다. (연간 입원 확률은 INS.incidence("hosp"), 생존은 INS.survival. 입원 일수는 지수분포, 연 1회 입원으로 단순화, 할인율 2.5%. 교육용 모델이다.)</div>
+    </div>
+
+    <p>입원 일당 자체가 나쁜 보장은 아니다. 하루 단위로 생기는 간병비나 보호자의 소득 손실을 메우는 용도로는 쓸모가 있다. 다만 기억할 것이 있다. 첫째, 일당 보장은 '자주, 작게' 쪽에 가까운 위험이라 부가보험료 비중이 크다(<a href="pooling.html">2장</a>). 둘째, 보험료는 가입 때 고정되는데 의료 환경은 계속 바뀐다. 셋째, 장기 입원이 정말 무서운 경우(중증 질환, 간병이 필요한 상태)는 일당보다 진단비나 간병 관련 보장이 더 직접적으로 막는다. 일당은 보장 목록의 앞줄이 아니라 뒷줄이다.</p>
+  </section>
+
+  <section id="stacking">
+    <h2>정액은 중복해도 다 나온다, 그래서 과해지기 쉽다</h2>
+    <p>그림 1의 마지막 줄을 다시 본다. 실손은 여러 개 들어도 실제 손해까지만 나오지만, 정액은 계약마다 다 나온다. 암 진단비 3,000만원짜리 계약이 세 개면 9,000만원이다. 이것은 장점이자 함정이다. 장점은 필요한 금액을 여러 계약으로 나눠 쌓을 수 있다는 것이다. 함정은 '많이 받을 수 있다'는 매력 때문에 필요한 금액을 훌쩍 넘겨 쌓기 쉽다는 것이다. 보장마다 사업비가 붙으니, 필요를 넘는 보장은 보험료로 내 소득을 갉아먹는다.</p>
+    <p>아래에서 암 진단비와 뇌·심장 진단비 합계를 늘려 보며, 그 보험료가 월 실수령에서 차지하는 비중이 어떻게 변하는지 본다. 보험료는 32세 남성, 20년납·100세 만기·무해지형을 이 책의 모델로 계산했다. 위쪽 띠의 파란 손잡이를 끌어 암 진단비를 바꿀 수도 있다.</p>
+
+    <div class="sim" id="sim-over">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>쌓은 진단비 vs 보험료 부담</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="over-cv"></canvas><span class="hint">파란 손잡이를 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>암 진단비 합계 <output id="over-c-out"></output></span><input type="range" id="over-c" min="0" max="200000000" step="5000000" value="50000000"></label>
+          <label class="ctrl"><span>뇌혈관·허혈성심장 각각 <output id="over-b-out"></output></span><input type="range" id="over-b" min="0" max="100000000" step="5000000" value="10000000"></label>
+          <label class="ctrl"><span>월 실수령 <output id="over-n-out"></output></span><input type="range" id="over-n" min="1500000" max="8000000" step="100000" value="3300000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">진단비 월 보험료</span><span class="v" id="over-o-p">—</span></div>
+        <div class="stat"><span class="k">월 실수령 대비</span><span class="v" id="over-o-r">—</span></div>
+        <div class="stat"><span class="k">소득 공백(12개월+1,000만) 대비 암 진단비</span><span class="v" id="over-o-g">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(암 5,000만원, 뇌·심장 각 1,000만원)에서 진단비 보험료는 월 약 6.9만원, 실수령의 2% 남짓이다. ② 암 진단비를 2억원까지 끈다. 필요(소득 공백 약 5,000만원)의 네 배다. 보험료가 월 20만원을 넘는다. 남는 1억 5,000만원은 '받을 수도 있는 돈'이지만 매달 확실히 나가는 돈의 대가다. ③ 뇌·심장도 1억원씩 올린다. 진단비만으로 실수령의 10%를 넘는다. 실손·자동차·사망보장까지 더하면 가계가 버티기 어렵다. (INS.price 무해지형, 해지율 연 4%, 20년납·100세 만기, 32세 남성. 실손과 다른 보험료는 넣지 않았다.)</div>
+    </div>
+
+    <p>과잉의 신호는 두 가지다. 하나는 <b>필요액 대비 배수</b>다. 소득 공백의 두세 배를 넘는 진단비는 보장이라기보다 저축이나 투기에 가깝다. 다른 하나는 <b>소득 대비 보험료 비중</b>이다. 흔한 어림은 가구 실수령의 5~8% 안팎이고(<a href="planning.html">18장</a>에서 다시 다룬다), 그중 진단비가 혼자 절반 이상을 차지한다면 다른 보장(실손, 사망, 배상책임)과의 균형을 다시 볼 때다. 정액 보장은 쌓기 쉬운 만큼 덜어 내기도 어렵다. 해지하면 그동안 낸 보험료 대부분이 돌아오지 않기 때문이다(특히 무해지형). 그래서 처음부터 필요만큼 쌓는 것이 가장 싸다.</p>
+
+    <div class="callout buyer">
+      <strong>진단비 한 장 요약</strong>
+      계약을 모두 꺼내 ① 일반암, ② 유사암, ③ 뇌(정의별), ④ 심장(정의별), ⑤ 수술비, ⑥ 입원 일당을 한 줄씩 합산한다. 각 줄 옆에 보장 끝 나이와 갱신 여부를 적는다. 그다음 소득 공백 계산값(이 장 두 번째 시뮬레이터)과 나란히 놓는다. 모자란 줄은 보강하고, 크게 넘치는 줄은 새로 가입하지 않는다. 이미 있는 계약을 해지할지는 해지환급금과 다시 가입할 때의 나이·건강 조건까지 따져서 정한다. 건강이 바뀌면 같은 보장을 다시 못 살 수도 있다.
+    </div>
+  </section>
+
+  <section id="new-riders">
+    <h2>새로 생긴 특약들, 조심스럽게 보기</h2>
+    <p>의료 기술이 바뀌면 보험 상품도 따라 바뀐다. 최근 몇 년 사이 정액 보장 시장에는 치료 방식에 이름을 붙인 특약이 많이 생겼다. <span class="term">표적항암약물치료비</span>(특정 유전자나 단백질을 겨냥하는 항암제를 쓸 때), <span class="term">항암방사선·약물치료비</span>, 면역항암제나 특정 고가 방사선 치료를 겨냥한 특약, 그리고 진단 후 일정 기간 매달 돈을 주는 <span class="term">생활비형 진단 특약</span> 같은 것들이다.</p>
+    <p>이런 특약은 실제 치료 현장의 변화를 반영한다는 점에서 의미가 있다. 비급여 신약 비용이 실손 한도나 자기부담을 넘는 경우, 실손이 없는 사람에게 치료비 부담이 큰 경우에는 쓸모가 있을 수 있다. 하지만 몇 가지를 조심해서 본다.</p>
+    <ul>
+      <li><b>정의가 좁고 새롭다.</b> 어떤 약이나 장비가 대상인지가 약관 목록에 묶여 있다. 의료 기술이 다시 바뀌면 목록 밖의 새 치료가 나올 수 있다.</li>
+      <li><b>실손과 겹친다.</b> 치료비를 겨냥한 정액 특약은 실손이 이미 막는 구멍을 다시 막는 경우가 많다. 소득 공백이라는 큰 구멍은 그대로 둔 채 치료비 칸만 두껍게 할 수 있다.</li>
+      <li><b>경험 통계가 짧다.</b> 새 특약은 지급 경험이 쌓이지 않아 위험률이 불확실하다. 갱신형이면 나중에 보험료가 크게 조정될 수 있다.</li>
+      <li><b>판매가 몰린다.</b> 새 특약은 시장의 유행처럼 판매가 집중되는 시기가 있다. 유행보다 내 보장표의 빈칸을 먼저 본다.</li>
+    </ul>
+    <p>원칙은 이 장의 처음과 같다. 그 특약이 막는 돈이 실손이 막는 치료비인가, 실손이 못 막는 소득 공백인가. 앞쪽이면 실손이 있는지부터 보고, 뒤쪽이면 진단비로 충분한지부터 본다.</p>
+
+    <div class="callout warn">
+      <strong>수치와 상품 구조는 해마다 바뀐다</strong>
+      이 장의 발생률·보험료·소액암 비중은 2026년 무렵을 염두에 둔 교육용 근사이며 실제 통계·상품과 다르다. 진단비의 정의(질병코드 범위, 감액 기간, 유사암 목록), 수술 분류표, 새 특약의 대상 치료는 상품과 판매 시기마다 다르고, 감독 규정과 질병분류 개정에 따라 바뀐다. 실제 보험료는 나이·성별·직업·병력·회사·가입 시기에 따라 크게 다르다. 특정 보험사나 상품을 권하지 않으며, 가입 전에는 해당 상품의 약관과 상품설명서를 직접 확인한다.
+    </div>
+
+    <div class="callout pro">
+      <strong>새 특약을 권할 때의 설명의무</strong>
+      새 특약은 고객에게 생소하고, 그만큼 "좋은 거라던데"라는 막연한 기대로 가입되기 쉽다. 설명할 때는 ① 어떤 치료가 대상이고 무엇이 빠지는지(목록), ② 실손과 겹치는 부분, ③ 갱신 여부와 갱신 때 보험료 조정 가능성, ④ 이 특약을 빼면 월 보험료가 얼마 줄어드는지를 함께 말한다. 특히 판매 경쟁이 붙는 시기에는 회사의 판매 독려와 고객의 필요가 어긋나기 쉽다. "이 특약은 고객님 보장표의 어느 빈칸을 채우나요?"에 한 문장으로 답할 수 없다면 권하지 않는 편이 낫다. 그 한 문장을 상담 기록에도 남긴다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 진단비를 다시 재다</h2>
+    <p>도윤은 지우의 서랍에서 진단비 관련 특약만 모아 한 장에 정리했다. 암 진단비 3,000만원(유사암 300만원, 20년 갱신형)과, 오래된 종신보험에 붙은 뇌출혈·급성심근경색 진단 특약이 전부였다. 이 장의 방법으로 숫자를 다시 쟀다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th>지금</th><th>이 장의 기준</th><th class="num">100세까지 받을 확률(모델)</th></tr></thead>
+      <tbody>
+        <tr><td>암</td><td>3,000만원(갱신형)</td><td>소득 공백 약 4,960만원 → 약 5,000만원</td><td class="num">약 47%</td></tr>
+        <tr><td>뇌(지금 정의)</td><td>뇌출혈</td><td>뇌혈관질환으로 넓히기</td><td class="num">약 7% → 약 57%</td></tr>
+        <tr><td>심장(지금 정의)</td><td>급성심근경색</td><td>허혈성심장질환으로 넓히기</td><td class="num">약 14% → 약 40%</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 9장</span></div>
+      <h4>암 진단비 5,000만원, 뇌·심장은 정의부터 넓힌다</h4>
+      <p>도윤은 금액부터 말하지 않았다. "암 진단받으면 몇 달 쉴 것 같아?" 지우는 회사 취업규칙을 찾아봤다. 유급 병가는 짧고, 질병휴직은 무급이었다. 둘은 치료와 회복에 약 12개월, 회사 보전 0%, 실손이 안 메우는 비급여와 간병·생활 변화 비용 약 1,000만원으로 잡았다. 월 실수령 330만원 × 12개월 + 1,000만원 = 약 4,960만원. 지우가 직접 두드린 계산기의 숫자였다. 지금 암 진단비 3,000만원으로는 약 2,000만원이 모자란다. 예금 3,000만원이 있지만, 이 책의 모델에서는 진단 후 7개월째에 바닥난다.</p>
+      <p>더 놀란 것은 뇌·심장 쪽이었다. 지우는 "뇌, 심장 다 있다"고 알고 있었지만 특약 이름은 뇌출혈과 급성심근경색이었다. 이 책의 교육용 모델로 32세 남성이 100세까지 뇌출혈로 진단받을 확률은 약 7%, 뇌혈관질환 전체는 약 57%다. 심장은 급성심근경색 약 14%, 허혈성심장질환 약 40%다. "있는 줄 알았는데 대부분 비어 있었네." 민서는 다른 걸 물었다. "넓히면 얼마나 비싸져?" 도윤이 모델로 계산한 2,000만원 기준 월 보험료(20년납·100세 만기·무해지형)는 뇌출혈 약 2,800원 대 뇌혈관질환 약 2.2만원, 급성심근경색 약 5,200원 대 허혈성심장질환 약 1.6만원이었다. 그래서 넓은 정의로 각 1,000만원씩(합계 월 약 1.9만원)을 기본으로 까는 안을 냈다. 기존 좁은 특약은 해지하지 않고 중증 사건의 추가분으로 둔다.</p>
+      <p>도윤은 하나를 덧붙였다. 진단비 보강은 도윤에게도 수수료가 생기는 제안이다. 그래서 금액은 지우가 만든 소득 공백 숫자를 넘기지 않기로 했고, 넓은 정의 특약을 어느 계약에 붙일지는 갱신형 암보험의 처리(<a href="renewal.html">7장</a>)와 함께 정하기로 했다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>암 진단비 목표 약 5,000만원(지금보다 약 2,000만원 보강). 뇌는 뇌혈관질환, 심장은 허혈성심장질환으로 정의를 넓혀 각 1,000만원.</div><div><b>아직 남은 문제</b>첫 아이가 태어나면 지우에게 무슨 일이 생겼을 때 남는 가족의 생활은 누가 책임지나. 진단비는 살아 있는 동안의 공백만 막는다.</div><div><b>다음 단계</b><a href="life.html">10장</a>에서 첫 아이 계획을 놓고 필요 사망보장을 계산한다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>실손은 쓴 만큼(병원비), 정액은 정해진 만큼(사건 발생 시) 준다. 실손은 중복해도 실제 손해까지만, 정액은 계약마다 다 나온다.</li>
+      <li>큰 병의 가장 큰 비용은 병원비보다 소득 공백이다. 적정 진단비 ≈ 월 실수령 × 치료·회복 개월 × (1 − 보전 비율) + 추가 비용.</li>
+      <li>큰 병의 발생률은 60세 이후에 몰린다. 보장 끝 나이를 줄이면 보험료는 싸지지만 위험이 큰 구간이 빠진다.</li>
+      <li>뇌출혈 ⊂ 뇌졸중 ⊂ 뇌혈관질환, 급성심근경색 ⊂ 허혈성심장질환. 좁은 정의가 싼 것은 받을 확률이 낮아서다. 이름이 아니라 정의(질병코드)를 본다.</li>
+      <li>유사암·소액암(갑상선암, 제자리암, 경계성종양, 기타피부암)은 진단비의 10~20%만 주는 경우가 많고, 젊은 여성의 암 진단에서 비중이 크다.</li>
+      <li>수술비는 종 분류와 N대 수술의 정의 목록을, 입원 일당은 짧아지는 입원 일수와 면책 일수를 함께 본다.</li>
+      <li>정액 보장은 필요액(소득 공백)과 소득 대비 보험료 비중으로 과잉을 판단한다. 새 특약은 실손과 겹치는지, 정의가 좁은지부터 본다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>실손의료보험이 있는 사람에게 암 진단비가 여전히 의미 있는 가장 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt">실손은 암 치료비를 보장하지 않기 때문이다</button>
+          <button class="opt" data-correct>실손은 병원비만 메우고, 치료·회복 기간에 끊기는 소득은 메우지 않기 때문이다</button>
+          <button class="opt">진단비는 비과세 저축 효과가 있기 때문이다</button>
+          <button class="opt">실손과 진단비는 같은 손해를 두 번 보상하므로 이득이기 때문이다</button>
+        </div>
+        <div class="quiz-exp">실손은 실제 병원비(자기부담 제외)를 보상한다. 일을 쉬는 동안의 월급, 간병비 같은 병원비 바깥의 돈은 실손이 막지 않는다. 진단비는 이 소득 공백을 막는 용도로 금액을 정하는 것이 합리적이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>같은 가입금액에서 뇌출혈 진단 특약이 뇌혈관질환 진단 특약보다 보험료가 훨씬 싼 주된 이유는?</p>
+        <div class="opts">
+          <button class="opt">뇌출혈 특약은 사업비를 적게 떼기 때문이다</button>
+          <button class="opt">뇌출혈이 뇌혈관질환보다 치료비가 적게 들기 때문이다</button>
+          <button class="opt">뇌출혈 특약은 갱신형이기 때문이다</button>
+          <button class="opt" data-correct>뇌출혈은 뇌혈관질환의 일부라서 보험금을 받을 확률이 훨씬 낮기 때문이다</button>
+        </div>
+        <div class="quiz-exp">뇌출혈 ⊂ 뇌졸중 ⊂ 뇌혈관질환이다. 이 책의 모델로 32세 남성이 100세까지 받을 확률은 뇌출혈 약 7%, 뇌혈관질환 약 57%다. 싼 보험료는 위험을 싸게 사는 것이 아니라 위험을 덜 사는 것이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>암 진단비 3,000만원(유사암 10%) 계약이 있는 사람이 갑상선암 진단을 받았다. 약관이 일반적인 구조라면 받는 금액은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>약 300만원</button>
+          <button class="opt">3,000만원</button>
+          <button class="opt">실제 치료비만큼</button>
+          <button class="opt">0원, 갑상선암은 암이 아니다</button>
+        </div>
+        <div class="quiz-exp">갑상선암은 많은 약관에서 유사암(소액암)으로 분류되어 진단비의 10~20%만 지급한다. 이 계약은 10%이므로 약 300만원이다. 정확한 분류와 비율은 해당 약관에서 확인한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3일 면책(4일째부터 지급) 입원 일당 특약의 가치에 대한 설명으로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt">입원 일수가 짧아져도 면책 일수와 무관하게 가치는 같다</button>
+          <button class="opt">입원 일수가 짧아질수록 면책 없는 특약보다 오히려 유리해진다</button>
+          <button class="opt" data-correct>평균 입원 일수가 면책 일수에 가까워질수록 기대 지급액이 빠르게 줄어든다</button>
+          <button class="opt">입원 일당은 실손과 같아서 중복 가입하면 나눠서 지급된다</button>
+        </div>
+        <div class="quiz-exp">지수분포로 단순화하면 기대 지급은 일당 × L × e^(−k/L)이다. 평균 4일에 3일 면책이면 면책 없는 경우의 약 47%로 줄어든다. 입원 일당은 정액이라 중복해도 각각 나온다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  const pctf = (p) => (p < 0.001 ? (p * 100).toFixed(3) : p < 0.01 ? (p * 100).toFixed(2) : (p * 100).toFixed(1)) + "%";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  const CASE = INS.CASE;
+
+  /* ---------------------------------------------------------- 1. 실손 vs 정액 */
+  (function () {
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const C = IB.range("vs-cost", (v) => won(v), redraw);
+    const NC = IB.range("vs-nc", (v) => v + "%", redraw);
+    const M = IB.range("vs-m", (v) => v + "개월", redraw);
+    const G = IB.seg("vs-gen", redraw);
+    const DX = 3e7, NET = CASE.jiwoo.monthlyNet;
+    cv = IB.canvas("#vs-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const r = INS.medical({ cost: C(), nonCov: NC() / 100, setting: "inpatient", special: "cancer", gen: Number(G()) });
+      const gap = INS.incomeGap(NET, M());
+      const loss = r.patient + gap, got = r.silson + DX;
+      const maxV = Math.max(loss, got, 1e7) * 1.08;
+      const L = w < 480 ? 74 : 92, B = { x: L, y: 34, w: w - L - 18, h: h - 34 - 40 };
+      const rowH = B.h / 2, bh = Math.min(46, rowH * 0.5);
+      const X = (v) => B.x + (v / maxV) * B.w;
+      T(ctx, "진단 1건, 지우(월 실수령 330만원)", 12, 18, { size: 12, color: P.dim, base: "middle" });
+      const rows = [
+        { lab: "잃는 돈", parts: [[r.patient, P.bad, "병원비"], [gap, P.warn, "소득 공백"]] },
+        { lab: "받는 돈", parts: [[r.silson, P.ok, "실손"], [DX, P.accent, "진단비"]] },
+      ];
+      rows.forEach((row, i) => {
+        const cy = B.y + rowH * (i + 0.5);
+        T(ctx, row.lab, B.x - 10, cy, { size: 13, weight: 700, color: P.text, align: "right", base: "middle" });
+        let x0 = 0;
+        row.parts.forEach(([v, col, lab]) => {
+          if (v <= 0) return;
+          const a = X(x0), b = X(x0 + v);
+          ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(a, cy - bh / 2, Math.max(1, b - a), bh); ctx.globalAlpha = 1;
+          if (b - a > 54) {
+            T(ctx, lab, (a + b) / 2, cy - 7, { size: 11, color: "#fff", align: "center", base: "middle", weight: 600 });
+            T(ctx, IB.wonAxis(v), (a + b) / 2, cy + 9, { size: 11, mono: true, color: "#fff", align: "center", base: "middle" });
+          }
+          x0 += v;
+        });
+        T(ctx, IB.wonAxis(x0), Math.min(X(x0), w - 6), cy - bh / 2 - 8, { size: 11, mono: true, color: P.dim, align: "right", base: "middle" });
+      });
+      const remain = Math.max(0, loss - got);
+      vline(ctx, X(loss), B.y, B.y + B.h, P.faint, [4, 4]);
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(B.x, B.y + B.h); ctx.lineTo(B.x + B.w, B.y + B.h); ctx.stroke();
+      T(ctx, remain > 0 ? "받고도 남는 구멍 " + IB.wonAxis(remain) : "받는 돈이 잃는 돈보다 " + IB.wonAxis(got - loss) + " 많다", B.x, B.y + B.h + 22, { size: 12, color: remain > 0 ? P.bad : P.ok, base: "middle", weight: 600 });
+      IB.stat("vs-o-p", won(r.patient));
+      IB.stat("vs-o-s", won(r.silson));
+      IB.stat("vs-o-g", won(gap));
+      IB.stat("vs-o-r", remain > 0 ? tone("bad-t", won(remain)) : tone("ok-t", "없음"));
+    }, { aspect: 0.5, minHeight: 250, maxHeight: 330 });
+  })();
+
+  /* ---------------------------------------------------------- 2. 소득 공백 통장 (애니메이션) */
+  (function () {
+    const SAVE = CASE.assets.cash;
+    let cv = null, t = 0, hold = 0;
+    const restart = () => { t = 0; hold = 0; if (cv) cv.redraw(); };
+    const N = IB.range("gap-net", (v) => won(v), restart);
+    const Mo = IB.range("gap-m", (v) => v + "개월", restart);
+    const K = IB.range("gap-k", (v) => v + "%", restart);
+    const X = IB.seg("gap-x", restart);
+    function series() {
+      const net = N(), m = Mo(), k = K() / 100, extra = Number(X());
+      const gap = INS.incomeGap(net, m, { keep: k, extra });
+      const benefit = Math.round(gap / 5e6) * 5e6 || 0;
+      const bal = [SAVE], balB = [SAVE];
+      let zero = null;
+      for (let i = 1; i <= m; i++) {
+        const out = net * (1 - k) + (i === 1 ? extra : 0);
+        bal.push(bal[i - 1] - out);
+        balB.push(balB[i - 1] - out + (i === 1 ? gap : 0));
+        if (zero == null && bal[i] < 0) zero = i;
+      }
+      return { net, m, k, extra, gap, benefit, bal, balB, zero };
+    }
+    cv = IB.canvas("#gap-cv", (ctx, w, h) => {
+      const P = IB.palette(), S = series();
+      const top = 24, B = { x: 64, y: top, w: w - 64 - 14, h: h - top - 44 };
+      const lo = Math.min(0, ...S.bal) * 1.1, hi = Math.max(SAVE, ...S.balB, S.net + S.extra) * 1.12;
+      const c = IB.chart(ctx, B, { x: [0, S.m + 0.6], y: [lo, hi], yFmt: IB.wonAxis, xFmt: (v) => v + "", xTicks: S.m <= 12 ? null : [0, 6, 12, 18, 24, 30, 36].filter((v) => v <= S.m), xLabel: "진단 후 개월" });
+      const shown = Math.min(S.m, t);
+      const slot = c.X(1) - c.X(0), bw = Math.max(2, slot * 0.55);
+      for (let i = 1; i <= Math.ceil(shown); i++) {
+        const fr = Math.min(1, shown - (i - 1));
+        const keep = S.net * S.k * fr, lost = S.net * (1 - S.k) * fr, ex = i === 1 ? S.extra * fr : 0;
+        const x = c.X(i) - bw / 2;
+        let y0 = 0;
+        [[keep, P.ok], [lost, P.bad], [ex, P.warn]].forEach(([v, col]) => {
+          if (v <= 0) return;
+          ctx.fillStyle = col; ctx.globalAlpha = 0.55;
+          ctx.fillRect(x, c.Y(y0 + v), bw, c.Y(y0) - c.Y(y0 + v)); ctx.globalAlpha = 1; y0 += v;
+        });
+      }
+      const line = (arr, col, wdt, dash) => {
+        ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = wdt; ctx.setLineDash(dash || []);
+        ctx.beginPath();
+        for (let i = 0; i <= Math.ceil(shown); i++) {
+          const fi = Math.min(i, shown), a = Math.floor(fi), b = Math.min(arr.length - 1, a + 1), u = fi - a;
+          const v = arr[a] + (arr[b] - arr[a]) * u;
+          i ? ctx.lineTo(c.X(fi), c.Y(v)) : ctx.moveTo(c.X(0), c.Y(arr[0]));
+        }
+        ctx.stroke(); ctx.restore();
+      };
+      vline(ctx, B.x, c.Y(0), c.Y(0), P.axis);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(B.x, c.Y(0)); ctx.lineTo(B.x + B.w, c.Y(0)); ctx.stroke();
+      line(S.balB, P.accent, 2.2);
+      line(S.bal, P.dim, 2.2);
+      const fi = Math.min(S.m, shown), a = Math.floor(fi), b = Math.min(S.m, a + 1), u = fi - a;
+      const cur = S.bal[a] + (S.bal[b] - S.bal[a]) * u;
+      knob(ctx, c.X(fi), c.Y(cur), P, cur < 0 ? P.bad : P.dim, 5);
+      T(ctx, "잔고 " + IB.wonAxis(cur), Math.min(c.X(fi) + 8, w - 90), c.Y(cur) - 12, { size: 11, mono: true, color: cur < 0 ? P.bad : P.text, base: "middle" });
+      if (S.zero != null && shown >= S.zero) {
+        vline(ctx, c.X(S.zero), B.y, B.y + B.h, P.bad, [4, 4]);
+        T(ctx, S.zero + "개월째 바닥", c.X(S.zero) + 4, B.y + 10, { size: 11, color: P.bad, base: "middle", weight: 600 });
+      }
+      T(ctx, "예금 " + IB.wonAxis(SAVE) + "에서 출발", B.x + 4, top - 10, { size: 11, color: P.dim, base: "middle" });
+      IB.stat("gap-o-g", won(S.gap));
+      IB.stat("gap-o-z", S.zero == null ? tone("ok-t", "버틴다") : tone("bad-t", S.zero + "<small>개월째</small>"));
+      IB.stat("gap-o-n", won(S.benefit));
+      IB.stat("gap-o-x", IB.fmt(S.gap / (S.net * 12), 2) + "<small>배</small>");
+    }, { aspect: 0.56, minHeight: 280, maxHeight: 380 });
+    IB.loop(cv.canvas, (dt) => {
+      const m = Mo();
+      if (t < m) { t = Math.min(m, t + dt * Math.max(1.5, m / 6)); cv.redraw(); }
+      else { hold += dt; if (hold > 2.5) { t = 0; hold = 0; } }
+    });
+    document.getElementById("gap-re").addEventListener("click", restart);
+  })();
+
+  /* ---------------------------------------------------------- 3. 나이별 발생률 */
+  (function () {
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const SX = IB.seg("inc-sex", redraw);
+    const A = IB.range("inc-a", (v) => v + "세", redraw);
+    const KINDS = [["cancer", "accent", "암"], ["stroke", "warn", "뇌졸중"], ["ami", "bad", "급성심근경색"]];
+    cv = IB.canvas("#inc-cv", (ctx, w, h) => {
+      const P = IB.palette(), sex = SX(), age = A();
+      const series = KINDS.map(([k, col]) => {
+        const d = []; for (let a = 20; a <= 90; a++) d.push([a, INS.incidence(k, a, sex) * 1e5]);
+        return { data: d, color: P[col], width: 2.4 };
+      });
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 62 }, { x: [20, 90], y: [0, 2700], series, xLabel: "나이", yLabel: "10만 명당 1년", xFmt: (v) => v + "세" });
+      G = c;
+      vline(ctx, c.X(age), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      KINDS.forEach(([k, col]) => { const v = INS.incidence(k, age, sex) * 1e5; knob(ctx, c.X(age), c.Y(v), P, P[col], 5); });
+      knob(ctx, c.X(age), c.box.y + c.box.h, P, P.text, 7);
+      const lx = age > 70 ? c.X(age) - 8 : c.X(age) + 10, al = age > 70 ? "right" : "left";
+      KINDS.forEach(([k, col, nm], i) => {
+        const v = INS.incidence(k, age, sex) * 1e5;
+        T(ctx, nm + " " + Math.round(v).toLocaleString("ko-KR"), lx, c.box.y + 12 + i * 16, { size: 11, color: P[col], align: al, base: "middle", weight: 600 });
+      });
+      const ids = ["inc-o-c", "inc-o-s", "inc-o-h"];
+      KINDS.forEach(([k], i) => IB.stat(ids[i], pctf(INS.incidence(k, age, sex)) + " <small>/</small> " + pctf(INS.prob(k, age, 10, sex))));
+    }, { aspect: 0.56, minHeight: 280, maxHeight: 380 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; const a = Math.round(20 + ((x - b.x) / b.w) * 70); A.set(IB.clamp(a, 20, 89)); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 정의의 폭 */
+  (function () {
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const GR = IB.seg("def-g", redraw);
+    const SX = IB.seg("def-sex", redraw);
+    const A = IB.range("def-a", (v) => v + "세", redraw);
+    const E = IB.range("def-e", (v) => v + "세", redraw);
+    const DEF = { brain: [["hemorrhage", "뇌출혈"], ["stroke", "뇌졸중"], ["cerebro", "뇌혈관질환"]], heart: [["ami", "급성심근경색"], ["ischemic", "허혈성심장질환"]] };
+    const cache = {};
+    function price(kind, age, sex, end) {
+      const key = [kind, age, sex, end].join("|");
+      if (cache[key] == null) {
+        const n = Math.max(1, end - age);
+        cache[key] = INS.price({ type: kind, age, sex, S: 2e7, term: n, pay: Math.min(20, n), refund: 0, lapse: 0.04 }).monthly;
+      }
+      return cache[key];
+    }
+    cv = IB.canvas("#def-cv", (ctx, w, h) => {
+      const P = IB.palette(), sex = SX(), age = A(), end = Math.max(E(), age + 5), list = DEF[GR()];
+      const rows = list.map(([k, nm]) => ({ k, nm, p: INS.prob(k, age, end - age, sex), m: price(k, age, sex, end) }));
+      const L = w < 480 ? 102 : 116, half = (h - 40) / 2;
+      const cols = [P.bad, P.warn, P.accent].slice(3 - rows.length);
+      const panel = (y0, title, val, max, fmt) => {
+        T(ctx, title, 12, y0 + 12, { size: 12, color: P.dim, base: "middle", weight: 600 });
+        const B = { x: L, y: y0 + 26, w: w - L - 74, h: half - 34 };
+        const rh = B.h / rows.length, bh = Math.min(24, rh * 0.62);
+        rows.forEach((r, i) => {
+          const cy = B.y + rh * (i + 0.5), v = val(r), bw = (v / max) * B.w;
+          T(ctx, r.nm, B.x - 6, cy, { size: w < 480 ? 11 : 12, color: P.text, align: "right", base: "middle" });
+          ctx.fillStyle = cols[i]; ctx.globalAlpha = 0.85; ctx.fillRect(B.x, cy - bh / 2, Math.max(1, bw), bh); ctx.globalAlpha = 1;
+          T(ctx, fmt(v), B.x + bw + 6, cy, { size: 11.5, mono: true, color: P.text, base: "middle" });
+        });
+        ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(B.x, B.y); ctx.lineTo(B.x, B.y + B.h); ctx.stroke();
+      };
+      const maxP = Math.max(0.05, ...rows.map((r) => r.p)), maxM = Math.max(...rows.map((r) => r.m));
+      panel(4, age + "세 가입 → " + end + "세까지 받을 확률", (r) => r.p, maxP, (v) => (v * 100).toFixed(1) + "%");
+      panel(4 + half + 8, "월 보험료(2,000만원, 무해지형)", (r) => r.m, maxM, (v) => won(v));
+      T(ctx, "교육용 모델", w - 10, h - 8, { size: 10.5, color: P.faint, align: "right" });
+      const n = rows[0], wd = rows[rows.length - 1];
+      IB.stat("def-o-n", (n.p * 100).toFixed(1) + "% <small>" + n.nm + "</small>");
+      IB.stat("def-o-w", (wd.p * 100).toFixed(1) + "% <small>" + wd.nm + "</small>");
+      IB.stat("def-o-d", tone("bad-t", ((wd.p - n.p) * 100).toFixed(1) + "%p"));
+      IB.stat("def-o-x", IB.fmt(wd.m / n.m, 2) + "<small>배</small>");
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 420 });
+  })();
+
+  /* ---------------------------------------------------------- 5. 소액암 비중 */
+  (function () {
+    // 암 진단 중 소액암(갑상선·제자리·경계성·기타피부암) 비중: 나이·성별 교육용 가정(실제 통계 아님)
+    const SH = { f: [[25, 0.46], [35, 0.45], [45, 0.37], [55, 0.24], [65, 0.14], [75, 0.08], [85, 0.06]], m: [[25, 0.26], [35, 0.25], [45, 0.18], [55, 0.1], [65, 0.06], [75, 0.045], [85, 0.04]] };
+    const share = (sex, a) => { const t = SH[sex]; if (a <= t[0][0]) return t[0][1]; for (let i = 1; i < t.length; i++) if (a <= t[i][0]) { const u = (a - t[i - 1][0]) / (t[i][0] - t[i - 1][0]); return t[i - 1][1] + (t[i][1] - t[i - 1][1]) * u; } return t[t.length - 1][1]; };
+    const S = 3e7;
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const SX = IB.seg("thy-sex", redraw);
+    const A = IB.range("thy-a", (v) => v + "세", redraw);
+    const R = IB.range("thy-r", (v) => v + "%", redraw);
+    cv = IB.canvas("#thy-cv", (ctx, w, h) => {
+      const P = IB.palette(), sex = SX(), age = A(), r = R() / 100;
+      const wide = w >= 520;
+      const cw = wide ? w * 0.64 : w, ch = wide ? h : h * 0.62;
+      const c = IB.chart(ctx, { x: 52, y: 16, w: cw - 52 - 14, h: ch - 16 - 44 }, {
+        x: [25, 85], y: [0, 1], yFmt: (v) => Math.round(v * 100) + "%", xFmt: (v) => v + "세", xLabel: "진단 나이",
+        series: [{ data: Array.from({ length: 61 }, (_, i) => [25 + i, share(sex, 25 + i)]), color: P.warn, width: 2.4 }],
+      });
+      G = c;
+      ctx.save(); ctx.globalAlpha = 0.1; ctx.fillStyle = P.accent; ctx.fillRect(c.box.x, c.box.y, c.box.w, c.box.h);
+      ctx.globalAlpha = 0.28; ctx.fillStyle = P.warn; ctx.beginPath(); ctx.moveTo(c.X(25), c.Y(0));
+      for (let a = 25; a <= 85; a++) ctx.lineTo(c.X(a), c.Y(share(sex, a)));
+      ctx.lineTo(c.X(85), c.Y(0)); ctx.closePath(); ctx.fill(); ctx.restore();
+      const s = share(sex, age);
+      vline(ctx, c.X(age), c.box.y, c.box.y + c.box.h, P.text, [5, 4], 1.4);
+      knob(ctx, c.X(age), c.Y(s), P, P.warn, 6);
+      knob(ctx, c.X(age), c.box.y + c.box.h, P, P.text, 7);
+      T(ctx, "소액암 " + Math.round(s * 100) + "%", c.X(age) + (age > 70 ? -8 : 8), c.Y(s) - 14, { size: 11.5, color: P.warn, align: age > 70 ? "right" : "left", base: "middle", weight: 600 });
+      const ev = S * ((1 - s) + s * r);
+      const dx = wide ? cw + (w - cw) / 2 : w / 2, dy = wide ? h * 0.42 : ch + (h - ch) / 2 - 4, R0 = wide ? Math.min((w - cw) / 2 - 16, h * 0.28) : Math.min((h - ch) / 2 - 10, w * 0.2);
+      IB.donut(ctx, dx, dy, R0, [{ label: "소액암", value: s, color: P.warn }, { label: "그 밖의 암", value: 1 - s, color: P.accent }], { inner: 0.62, center: { big: IB.wonAxis(ev), small: "기대 지급" } });
+      if (wide) T(ctx, age + "세 " + (sex === "f" ? "여성" : "남성") + " 진단 1건", dx, dy + R0 + 24, { size: 11.5, color: P.dim, align: "center", base: "middle" });
+      IB.stat("thy-o-s", Math.round(s * 100) + "%");
+      IB.stat("thy-o-e", won(ev));
+      IB.stat("thy-o-r", Math.round((ev / S) * 100) + "%");
+    }, { get height() { const w = document.getElementById("thy-cv").parentElement.clientWidth || 600; return w >= 520 ? Math.min(380, Math.max(280, w * 0.5)) : 440; } });
+    IB.drag(cv.canvas, { move(x, y) { if (!G) return; const b = G.box; if (y > b.y + b.h + 30) return; const a = Math.round(25 + ((x - b.x) / b.w) * 60); A.set(IB.clamp(a, 25, 85)); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 입원 일당 */
+  (function () {
+    const AGE = 32, END = 80, PAY = 20, I = 0.025, LOAD = 0.4;
+    const surv = INS.survival(AGE, END - AGE, "m", "insured");
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const D = IB.range("hosp-d", (v) => won(v), redraw);
+    const L = IB.range("hosp-l", (v) => v + "일", redraw);
+    const TR = IB.range("hosp-t", (v) => (v > 0 ? "+" : "") + v + "%", redraw);
+    const KD = document.getElementById("hosp-k");
+    KD.addEventListener("change", redraw);
+    const perStay = (d, l, k) => d * l * Math.exp(-k / Math.max(0.1, l));
+    function model() {
+      const d = D(), l0 = L(), tr = TR() / 100, k = KD.checked ? 3 : 0;
+      const exp0 = [], expA = [];
+      let pvB = 0, ann = 0;
+      for (let t = 0; t < END - AGE; t++) {
+        const p = INS.incidence("hosp", AGE + t, "m");
+        const e0 = p * perStay(d, l0, k), eA = p * perStay(d, l0 * Math.pow(1 + tr, t), k);
+        exp0.push(e0); expA.push(eA);
+        pvB += surv[t] * e0 * Math.pow(1 + I, -(t + 1));
+        if (t < PAY) ann += surv[t] * Math.pow(1 + I, -t);
+      }
+      const prem = (pvB / ann) * (1 + LOAD);
+      let totB = 0; expA.forEach((e, t) => (totB += e * surv[t]));
+      return { d, l0, k, exp0, expA, prem, totP: prem * PAY, totB };
+    }
+    cv = IB.canvas("#hosp-cv", (ctx, w, h) => {
+      const P = IB.palette(), m = model();
+      const ymax = Math.max(m.prem, ...m.exp0, ...m.expA) * 1.15;
+      const c = IB.chart(ctx, { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 46 }, {
+        x: [AGE, END], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: "나이", yLabel: "연 금액",
+        series: [
+          { data: [[AGE, m.prem], [AGE + PAY, m.prem], [AGE + PAY, 0], [END, 0]], color: P.bad, width: 2.4 },
+          { data: m.exp0.map((e, t) => [AGE + t + 0.5, e]), color: P.dim, width: 1.6, dash: [5, 4] },
+          { data: m.expA.map((e, t) => [AGE + t + 0.5, e]), color: P.ok, width: 2.6 },
+        ],
+      });
+      const last = m.expA[m.expA.length - 1], first = m.exp0[m.exp0.length - 1];
+      T(ctx, "가입 당시 예상", c.X(END) - 4, c.Y(first) - 10, { size: 11, color: P.dim, align: "right", base: "middle" });
+      T(ctx, "실제 기대", c.X(END) - 4, c.Y(last) + (last < first ? 12 : -24), { size: 11, color: P.ok, align: "right", base: "middle", weight: 600 });
+      T(ctx, "보험료(20년)", c.X(AGE) + 6, c.Y(m.prem) - 10, { size: 11, color: P.bad, base: "middle", weight: 600 });
+      IB.stat("hosp-o-p", won(m.prem / 12));
+      IB.stat("hosp-o-t", won(m.totP));
+      IB.stat("hosp-o-b", won(m.totB));
+      const ratio = m.totB / m.totP;
+      IB.stat("hosp-o-r", tone(ratio < 0.5 ? "bad-t" : ratio < 0.8 ? "warn-t" : "ok-t", Math.round(ratio * 100) + "%"));
+    }, { aspect: 0.56, minHeight: 280, maxHeight: 380 });
+  })();
+
+  /* ---------------------------------------------------------- 7. 쌓은 진단비 vs 보험료 */
+  (function () {
+    const unit = {};
+    ["cancer", "cerebro", "ischemic"].forEach((k) => { unit[k] = INS.price({ type: k, age: 32, sex: "m", S: 1e7, term: 68, pay: 20, refund: 0, lapse: 0.04 }).monthly / 1e7; });
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const Cc = IB.range("over-c", (v) => won(v), redraw);
+    const Bb = IB.range("over-b", (v) => won(v), redraw);
+    const Nn = IB.range("over-n", (v) => won(v), redraw);
+    cv = IB.canvas("#over-cv", (ctx, w, h) => {
+      const P = IB.palette(), cA = Cc(), b = Bb(), net = Nn();
+      const need = INS.incomeGap(net, 12, { extra: 1e7 });
+      const pc = cA * unit.cancer, pb = b * unit.cerebro, ph = b * unit.ischemic, tot = pc + pb + ph, ratio = tot / net;
+      // 위: 암 진단비 띠
+      const A = { x: 16, y: 48, w: w - 32, h: 22 };
+      const XA = (v) => A.x + (v / 2e8) * A.w;
+      T(ctx, "암 진단비 합계와 필요액(소득 공백)", A.x, 14, { size: 12, color: P.dim, base: "middle", weight: 600 });
+      ctx.fillStyle = P.grid; ctx.fillRect(A.x, A.y, A.w, A.h);
+      ctx.fillStyle = cA > need * 2 ? P.bad : P.accent; ctx.globalAlpha = 0.75; ctx.fillRect(A.x, A.y, XA(cA) - A.x, A.h); ctx.globalAlpha = 1;
+      const nx = XA(Math.min(need, 2e8));
+      vline(ctx, nx, A.y - 6, A.y + A.h + 6, P.ok, [], 2.2);
+      T(ctx, "필요 " + IB.wonAxis(need), Math.min(nx + 4, w - 70), A.y + A.h + 16, { size: 11, color: P.ok, base: "middle", weight: 600 });
+      [0, 5e7, 1e8, 1.5e8, 2e8].forEach((v, i) => T(ctx, IB.wonAxis(v), XA(v), A.y - 8, { size: 10.5, mono: true, color: P.faint, align: i === 0 ? "left" : i === 4 ? "right" : "center", base: "middle" }));
+      knob(ctx, XA(cA), A.y + A.h / 2, P, P.accent, 8);
+      G = { A, XA };
+      // 아래: 보험료 / 실수령 게이지
+      const top = A.y + A.h + 46;
+      T(ctx, "진단비 보험료 ÷ 월 실수령", 16, top, { size: 12, color: P.dim, base: "middle", weight: 600 });
+      const Bx = { x: 16, y: top + 18, w: w - 32, h: 30 };
+      const MAXR = 0.15, XB = (v) => Bx.x + (Math.min(v, MAXR) / MAXR) * Bx.w;
+      [[0, 0.05, P.ok], [0.05, 0.1, P.warn], [0.1, MAXR, P.bad]].forEach(([a, bb, col]) => { ctx.fillStyle = col; ctx.globalAlpha = 0.12; ctx.fillRect(XB(a), Bx.y, XB(bb) - XB(a), Bx.h); ctx.globalAlpha = 1; });
+      let x0 = 0;
+      [[pc, P.accent, "암"], [pb, P.warn, "뇌"], [ph, P.bad, "심장"]].forEach(([v, col, lab]) => {
+        const r0 = x0 / net, r1 = (x0 + v) / net;
+        if (v > 0) { ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(XB(r0), Bx.y + 4, Math.max(1, XB(r1) - XB(r0)), Bx.h - 8); ctx.globalAlpha = 1; if (XB(r1) - XB(r0) > 28) T(ctx, lab, (XB(r0) + XB(r1)) / 2, Bx.y + Bx.h / 2, { size: 11, color: "#fff", align: "center", base: "middle", weight: 600 }); }
+        x0 += v;
+      });
+      [0, 0.05, 0.1, 0.15].forEach((v, i) => T(ctx, Math.round(v * 100) + "%", XB(v), Bx.y + Bx.h + 14, { size: 10.5, mono: true, color: P.faint, align: i === 0 ? "left" : i === 3 ? "right" : "center", base: "middle" }));
+      const msg = ratio >= 0.1 ? "진단비만으로 실수령의 10% 이상" : ratio >= 0.05 ? "진단비만으로 5%를 넘는다" : "진단비 부담은 가벼운 편";
+      T(ctx, msg, 16, Bx.y + Bx.h + 36, { size: 12, color: ratio >= 0.1 ? P.bad : ratio >= 0.05 ? P.warn : P.ok, base: "middle", weight: 600 });
+      IB.stat("over-o-p", won(tot));
+      IB.stat("over-o-r", tone(ratio >= 0.1 ? "bad-t" : ratio >= 0.05 ? "warn-t" : "ok-t", IB.pct(ratio, 1)));
+      IB.stat("over-o-g", IB.fmt(cA / need, 2) + "<small>배</small>");
+    }, { height: 250 });
+    IB.drag(cv.canvas, { move(x, y) { if (!G) return; if (y > G.A.y + G.A.h + 30) return; const v = ((x - G.A.x) / G.A.w) * 2e8; Cc.set(IB.clamp(Math.round(v / 5e6) * 5e6, 0, 2e8)); } });
+  })();
+})();
+</script>
+</body>
+</html>

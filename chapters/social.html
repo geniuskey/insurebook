@@ -1,0 +1,850 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사회보험: 이미 가진 보험 · InsureBook</title>
+<meta name="description" content="월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/social.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="사회보험: 이미 가진 보험 · InsureBook">
+<meta property="og:description" content="월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/social.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/social.html#chapter","name":"사회보험: 이미 가진 보험","headline":"사회보험: 이미 가진 보험 · InsureBook","description":"월급 명세서에는 이미 네 가지 보험이 있다. 건강보험의 소득 재분배, 국민연금의 장애·유족연금, 산재보험의 휴업·장해급여, 고용보험의 실업급여와 상병수당 시범사업, 장기요양보험의 본인부담을 계산하고, 사적 보험이 메울 빈틈을 필요에서 사회보험을 빼서 구한다.","url":"https://insurebook.euiyun.com/chapters/social.html","position":13,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"13. 사회보험: 이미 가진 보험","item":"https://insurebook.euiyun.com/chapters/social.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="social">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 13</div>
+    <h1>사회보험: 이미 가진 보험</h1>
+    <p class="lead">보장 분석표를 처음 받아 든 사람은 대개 보험사 계약만 적는다. 종신, 실손, 암보험, 운전자. 그런데 월급 명세서를 펼치면 매달 수십만원씩 빠져나가는 보험이 네 개 더 있다. 국민연금, 건강보험, 장기요양보험, 고용보험. 회사가 전액 내는 산재보험까지 치면 다섯이다. 이 보험들은 내가 고르지 않았고 해지할 수도 없지만, 큰 병, 장애, 사망, 실직, 노후 돌봄이라는 인생의 큰 위험을 이미 꽤 막고 있다. 이 장은 그 보장을 숫자로 꺼내 놓고, 사적 보험이 메워야 할 빈틈은 그 다음에야 정해진다는 것을 직접 계산한다.</p>
+    <ul class="objectives">
+      <li>월급 명세서의 4대 보험료가 무엇을 보장하는지, 회사와 내가 어떻게 나눠 내는지 본다.</li>
+      <li>사회보험과 민영보험의 차이(의무 가입, 소득 비례 보험료, 재분배, 법이 정한 급여)를 비교하고, 건강보험이 소득에 따라 누구에게 얼마나 이득인지 계산한다.</li>
+      <li>국민연금의 장애연금·유족연금을 단순화한 모델로 추정하고, 가입기간이 짧아도 20년으로 쳐 주는 장치를 확인한다.</li>
+      <li>산재보험의 휴업급여, 고용보험의 실업급여와 상한, 상병수당 시범사업, 장기요양보험의 본인부담을 계산한다.</li>
+      <li>위험별로 필요한 돈에서 사회보험을 빼 사적 보험이 메울 빈틈을 구한다.</li>
+    </ul>
+  </header>
+
+  <section id="payslip">
+    <h2>월급 명세서에 이미 있는 보험</h2>
+    <p>월급 명세서의 공제 칸은 대개 세금과 4대 보험으로 이루어진다. 4대 보험은 <span class="term">사회보험</span><span class="en">(Social insurance)</span>이다. 법으로 가입이 정해져 있고, 보험료는 소득에 비례하며, 받는 급여는 법이 정한다. 지우의 10월 명세서에서 4대 보험 칸만 떼어 보면 이렇다(세전 월 400만원, 2026년 기준 요율로 계산한 예시).</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 330" role="img" aria-label="세전 월 400만원 급여명세서의 4대 보험 공제와 각 보험이 막는 위험">
+        <rect x="8" y="8" width="424" height="314" rx="10" class="f-elev"/>
+        <text x="24" y="36" class="lbl-b">지우의 10월 급여명세서(예시)</text>
+        <text x="24" y="62" class="lbl-dim">기본급(세전)</text>
+        <text x="230" y="62" text-anchor="end" class="t-mono">4,000,000</text>
+        <line x1="24" y1="76" x2="416" y2="76" class="s-dash"/>
+        <text x="24" y="98" class="lbl-dim">공제 항목</text>
+        <text x="230" y="98" text-anchor="end" class="lbl-dim">내 몫</text>
+        <text x="246" y="98" class="lbl-dim">막는 위험</text>
+        <rect x="18" y="108" width="404" height="30" rx="6" class="f-acc-soft"/>
+        <text x="28" y="128" class="lbl">국민연금 4.75%</text>
+        <text x="230" y="128" text-anchor="end" class="t-mono">190,000</text>
+        <text x="246" y="128" class="lbl-acc">노후 · 장애 · 사망</text>
+        <rect x="18" y="142" width="404" height="30" rx="6" class="f-ok-soft"/>
+        <text x="28" y="162" class="lbl">건강보험 3.595%</text>
+        <text x="230" y="162" text-anchor="end" class="t-mono">143,800</text>
+        <text x="246" y="162" class="lbl">병원비</text>
+        <rect x="18" y="176" width="404" height="30" rx="6" class="f-acc2-soft"/>
+        <text x="28" y="196" class="lbl">장기요양보험</text>
+        <text x="230" y="196" text-anchor="end" class="t-mono">18,890</text>
+        <text x="246" y="196" class="lbl-acc2">노후 돌봄</text>
+        <rect x="18" y="210" width="404" height="30" rx="6" class="f-warn-soft"/>
+        <text x="28" y="230" class="lbl">고용보험 0.9%</text>
+        <text x="230" y="230" text-anchor="end" class="t-mono">36,000</text>
+        <text x="246" y="230" class="lbl">실직 · 육아휴직</text>
+        <rect x="18" y="244" width="404" height="30" rx="6" class="f-surface"/>
+        <text x="28" y="264" class="lbl">산재보험</text>
+        <text x="230" y="264" text-anchor="end" class="t-mono">0</text>
+        <text x="246" y="264" class="lbl-dim">업무 재해 · 회사 부담</text>
+        <line x1="24" y1="286" x2="416" y2="286" class="s-line"/>
+        <text x="24" y="308" class="lbl-b">4대 보험 내 몫 합계</text>
+        <text x="230" y="308" text-anchor="end" class="t-mono">388,690</text>
+        <text x="246" y="308" class="lbl-dim">회사도 비슷하게 낸다</text>
+      </svg>
+      <figcaption><b>그림 1. 월급 명세서에 이미 있는 보험.</b> 세전 400만원이면 4대 보험으로 매달 약 39만원이 빠진다. 국민연금·건강보험·장기요양보험은 회사가 같은 금액을 더 내고, 고용보험은 회사가 조금 더 내며, 산재보험은 회사가 전부 낸다. 요율은 2026년 기준(국민연금 9.5%의 절반, 건강보험 7.19%의 절반, 장기요양은 건강보험료의 13.14%)이며 해마다 바뀐다.</figcaption>
+    </figure>
+
+    <p>사적 보험료와 비교하면 크기가 실감 난다. 지우네가 보험사에 내는 돈이 자동차보험을 빼고 월 21.8만원인데, 지우 혼자 4대 보험으로 그 두 배 가까이를 내고 있다. 회사 몫까지 합치면 지우를 위해 매달 80만원 가까운 돈이 사회보험으로 들어간다. 이 돈이 무엇을 사 주는지 모르고 사적 보험을 설계하면 같은 위험을 두 번 사거나, 반대로 사회보험이 막지 못하는 빈틈을 놓친다.</p>
+    <p>아래에서 세전 월급을 바꿔 본다. 위쪽 막대는 내 몫과 회사 몫의 구성이고, 아래 곡선은 월급 대비 내 몫의 비율이다. 곡선 위 손잡이를 끌어도 된다.</p>
+
+    <div class="sim" id="sim-ps">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>월급과 4대 보험료</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ps-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 월급 <output id="ps-g-out"></output></span><input type="range" id="ps-g" min="1500000" max="10000000" step="50000" value="4000000"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>국민연금</span><span><i style="background:var(--ok)"></i>건강보험</span><span><i style="background:var(--accent-2)"></i>장기요양</span><span><i style="background:var(--warn)"></i>고용보험</span><span><i style="background:var(--text-dim)"></i>산재(회사)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">내 몫(월)</span><span class="v" id="ps-o-e">—</span></div>
+        <div class="stat"><span class="k">회사 몫(월)</span><span class="v" id="ps-o-c">—</span></div>
+        <div class="stat"><span class="k">월급 대비 내 몫</span><span class="v" id="ps-o-r">—</span></div>
+        <div class="stat"><span class="k">국민연금 기준소득</span><span class="v" id="ps-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 400만원에서 내 몫은 약 38.9만원, 월급의 약 9.7%다. ② 월급을 637만원 넘게 올린다. 국민연금 보험료가 기준소득월액 상한(약 637만원)에서 멈춰, 그 위로는 월급 대비 비율이 내려간다. 곡선이 꺾이는 곳이 상한이다. ③ 150만원으로 내린다. 비율은 거의 그대로다. 사회보험료는 소득에 정비례해서, 소득이 적으면 적게 낸다. (2026년 기준 요율: 국민연금 9.5%(각 4.75%), 건강보험 7.19%(각 3.595%), 장기요양 건강보험료의 13.14%, 고용보험 근로자 0.9%·회사 0.9%+0.25%(150인 미만 가정). 산재는 업종 평균 약 1.5%를 가정했으며 업종마다 크게 다르다.)</div>
+    </div>
+
+    <p>곡선은 대부분의 구간에서 평평하다. 내 몫은 월급의 약 9.7%로 정해져 있고, 소득이 두 배면 보험료도 두 배다. 꺾이는 곳은 국민연금 상한 하나다. 그런데 받는 쪽은 다르다. 건강보험은 보험료를 두 배 내도 병원비를 두 배로 돌려주지 않는다. 이 비대칭이 사회보험의 정체다.</p>
+  </section>
+
+  <section id="compare">
+    <h2>사회보험과 민영보험은 무엇이 다른가</h2>
+    <p>사회보험도 위험을 모아 나눈다는 점에서는 <a href="pooling.html">2장</a>의 보험과 같다. 하지만 누가 들어오고, 얼마를 내고, 무엇을 받는지가 전혀 다른 원리로 정해진다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th></th><th>사회보험</th><th>민영보험</th></tr></thead>
+      <tbody>
+        <tr><td>가입</td><td>법으로 의무. 고르거나 해지할 수 없다</td><td>자유. 보험사가 심사해 거절·부담보·할증할 수 있다</td></tr>
+        <tr><td>보험료</td><td>소득(건강보험 지역가입자는 소득·재산)에 비례</td><td>위험(나이·성별·병력·직업)에 비례</td></tr>
+        <tr><td>급여</td><td>법이 정한다. 필요(진료)나 소득에 따라 지급</td><td>계약이 정한다. 가입금액만큼 지급</td></tr>
+        <tr><td>재분배</td><td>크다. 고소득자가 저소득자를, 건강한 사람이 아픈 사람을 돕는다</td><td>원칙적으로 없다. 같은 위험이면 같은 값</td></tr>
+        <tr><td>역선택</td><td>의무 가입이라 일어나지 않는다</td><td>심사·고지의무·면책기간으로 막는다(<a href="asymmetry.html">4장</a>)</td></tr>
+        <tr><td>사업비</td><td>작다. 판매 수수료가 없다</td><td>신계약비·유지비가 보험료에 들어 있다(<a href="commission.html">15장</a>)</td></tr>
+        <tr><td>재원</td><td>보험료 + 정부 지원. 세대 간 이전이 있다</td><td>보험료와 운용수익. 계약마다 수지를 맞춘다</td></tr>
+        <tr><td>바뀌는 방식</td><td>법·제도 개정으로 모든 가입자가 함께 바뀐다</td><td>가입 당시 약관이 원칙적으로 유지된다</td></tr>
+      </tbody>
+    </table></div>
+    <p>마지막 줄이 실무에서 중요하다. 사회보험은 제도가 바뀌면 이미 가입한 사람의 급여도 바뀐다. 국민연금의 보험료율과 소득대체율, 실업급여의 상한액, 건강보험의 본인부담률이 그렇다. 사적 보험 설계에서 사회보험을 빼고 계산할 때는 "지금 제도 기준"이라는 꼬리표를 붙이고, 몇 년마다 다시 확인해야 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 300" role="img" aria-label="다섯 가지 큰 위험과 그것을 막는 사회보험, 남는 빈틈">
+        <defs><marker id="sc-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="50" y="20" text-anchor="middle" class="lbl-dim">위험</text>
+        <text x="220" y="20" text-anchor="middle" class="lbl-dim">사회보험</text>
+        <text x="400" y="20" text-anchor="middle" class="lbl-dim">남는 빈틈</text>
+        <rect x="8" y="32" width="84" height="44" rx="8" class="f-bad-soft"/><text x="50" y="59" text-anchor="middle" class="lbl">큰 병</text>
+        <rect x="110" y="32" width="220" height="44" rx="8" class="f-acc-soft"/><text x="220" y="51" text-anchor="middle" class="lbl">건강보험 · 상한제 · 산정특례</text><text x="220" y="68" text-anchor="middle" class="t-dim">상병수당(시범사업)</text>
+        <text x="400" y="51" text-anchor="middle" class="lbl-bad">비급여</text><text x="400" y="68" text-anchor="middle" class="lbl-bad">소득 공백</text>
+        <rect x="8" y="86" width="84" height="44" rx="8" class="f-bad-soft"/><text x="50" y="113" text-anchor="middle" class="lbl">장애</text>
+        <rect x="110" y="86" width="220" height="44" rx="8" class="f-acc-soft"/><text x="220" y="105" text-anchor="middle" class="lbl">국민연금 장애연금</text><text x="220" y="122" text-anchor="middle" class="t-dim">업무상이면 산재 장해급여</text>
+        <text x="400" y="113" text-anchor="middle" class="lbl-bad">모자란 소득</text>
+        <rect x="8" y="140" width="84" height="44" rx="8" class="f-bad-soft"/><text x="50" y="167" text-anchor="middle" class="lbl">사망</text>
+        <rect x="110" y="140" width="220" height="44" rx="8" class="f-acc-soft"/><text x="220" y="159" text-anchor="middle" class="lbl">국민연금 유족연금</text><text x="220" y="176" text-anchor="middle" class="t-dim">업무상이면 산재 유족급여</text>
+        <text x="400" y="159" text-anchor="middle" class="lbl-bad">유족 생활비</text><text x="400" y="176" text-anchor="middle" class="lbl-bad">대출 상환</text>
+        <rect x="8" y="194" width="84" height="44" rx="8" class="f-bad-soft"/><text x="50" y="221" text-anchor="middle" class="lbl">실직</text>
+        <rect x="110" y="194" width="220" height="44" rx="8" class="f-acc-soft"/><text x="220" y="213" text-anchor="middle" class="lbl">고용보험 구직급여</text><text x="220" y="230" text-anchor="middle" class="t-dim">비자발적 실직, 120~270일</text>
+        <text x="400" y="213" text-anchor="middle" class="lbl-bad">상한 위 소득</text><text x="400" y="230" text-anchor="middle" class="lbl-bad">자발적 퇴사</text>
+        <rect x="8" y="248" width="84" height="44" rx="8" class="f-bad-soft"/><text x="50" y="275" text-anchor="middle" class="lbl">노후 돌봄</text>
+        <rect x="110" y="248" width="220" height="44" rx="8" class="f-acc-soft"/><text x="220" y="267" text-anchor="middle" class="lbl">장기요양보험</text><text x="220" y="284" text-anchor="middle" class="t-dim">재가 15% · 시설 20% 본인부담</text>
+        <text x="400" y="267" text-anchor="middle" class="lbl-bad">식비 · 간병</text><text x="400" y="284" text-anchor="middle" class="lbl-bad">등급 밖 기간</text>
+        <path d="M92 54 H108" class="s-line" marker-end="url(#sc-ar)"/><path d="M92 108 H108" class="s-line" marker-end="url(#sc-ar)"/><path d="M92 162 H108" class="s-line" marker-end="url(#sc-ar)"/><path d="M92 216 H108" class="s-line" marker-end="url(#sc-ar)"/><path d="M92 270 H108" class="s-line" marker-end="url(#sc-ar)"/>
+        <path d="M330 54 H350" class="s-dash" marker-end="url(#sc-ar)"/><path d="M330 108 H350" class="s-dash" marker-end="url(#sc-ar)"/><path d="M330 162 H350" class="s-dash" marker-end="url(#sc-ar)"/><path d="M330 216 H350" class="s-dash" marker-end="url(#sc-ar)"/><path d="M330 270 H350" class="s-dash" marker-end="url(#sc-ar)"/>
+      </svg>
+      <figcaption><b>그림 2. 다섯 가지 큰 위험과 사회보험.</b> 인생의 큰 위험마다 이미 사회보험이 하나씩 서 있다. 사적 보험이 할 일은 오른쪽 칸, 사회보험이 막고 남은 빈틈이다. 이 장의 마지막 시뮬레이터에서 빈틈의 크기를 계산한다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="nhis">
+    <h2>건강보험의 가치: 누가 얼마나 이득인가</h2>
+    <p><a href="health.html">8장</a>에서 건강보험이 병원비를 얼마나 막아 주는지 보았다. 이번에는 거꾸로 묻는다. 평생 내는 건강보험료와 평생 받는 급여를 비교하면 누가 이득일까. 민영보험이라면 답은 "평균적으로 손해"다(<a href="pooling.html">2장</a>). 사회보험은 다르다. 보험료는 소득에 비례하지만 급여는 아플 때 필요한 만큼 나오니, 소득이 낮을수록 낸 것보다 많이 받는다.</p>
+    <p>아래 그래프는 한 사람이 25세부터 85세까지 해마다 내는 건강보험료(장기요양 포함)와 해마다 받을 것으로 기대되는 공단 부담 급여다. 월급을 바꾸고, 회사가 내는 몫까지 포함할지 정한다. 그래프 위를 끌면 그 나이의 값을 읽는다.</p>
+
+    <div class="sim" id="sim-nv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>평생 건강보험료 vs 기대 급여</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nv-cv"></canvas><span class="hint">좌우로 끌어 나이를 고른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 월급(현역) <output id="nv-g-out"></output></span><input type="range" id="nv-g" min="1500000" max="10000000" step="50000" value="4000000"></label>
+          <label class="check"><input type="checkbox" id="nv-emp"> 회사가 내는 몫도 포함</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>해마다 내는 보험료</span><span><i style="background:var(--ok)"></i>해마다 기대되는 급여(공단 부담)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">고른 나이 · 보험료 / 급여</span><span class="v" id="nv-o-a">—</span></div>
+        <div class="stat"><span class="k">평생 보험료(25~85세)</span><span class="v" id="nv-o-p">—</span></div>
+        <div class="stat"><span class="k">평생 기대 급여</span><span class="v" id="nv-o-b">—</span></div>
+        <div class="stat"><span class="k">급여 ÷ 보험료</span><span class="v" id="nv-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 월 400만원, 내 몫만 보면 이 책의 교육용 모델로 평생 보험료 약 8,525만원에 기대 급여 약 1억 4,911만원, 1.75배다. 55세 무렵부터 해마다 받는 급여가 내는 보험료를 넘는다. ② 회사 몫을 포함하면 보험료가 두 배가 되어 0.87배로 내려간다. 회사 몫도 결국 나를 고용하는 비용이라 이쪽이 더 정직한 비교다. ③ 월급을 150만원과 1,000만원으로 바꾼다. 초록 곡선(급여)은 꿈쩍하지 않고 빨간 곡선(보험료)만 오르내린다. 저소득자에게는 몇 배 이득, 고소득자에게는 손해인 보험이다. 그래도 고소득자가 이 보험을 떠날 수 없는 것이 의무 가입의 힘이다. (외래·입원·중증질환의 공단 부담을 INS.medical, INS.incidence로 계산하고, 약제·검사 등 나머지를 한꺼번에 반영해 월 350만원 소득자의 평생 보험료(회사 몫 포함)와 기대 급여가 같아지도록 맞춘 교육용 모델이다. 60세 이후 보험료는 현역의 3분의 1로 가정했고, 피부양 가족의 급여는 넣지 않았다.)</div>
+    </div>
+
+    <p>초록 곡선은 소득과 상관없이 같은 모양이다. 병은 소득을 가리지 않기 때문이다. 빨간 곡선만 소득에 따라 오르내린다. 그래서 건강보험은 <b>건강한 젊은 고소득자에게서 아픈 고령 저소득자에게로</b> 돈을 옮기는 장치다. 같은 사람 안에서도 젊을 때 내고 늙어서 받으니, 시간을 건너는 저축 같은 성격도 있다. 그리고 그래프에 넣지 않은 것이 하나 더 있다. 직장가입자 한 사람의 보험료로 소득이 없는 배우자, 자녀, 부모가 피부양자로 함께 보장받는다. 가족 단위로 보면 급여 쪽 곡선은 훨씬 높아진다.</p>
+    <div class="callout pro">
+      <strong>"건강보험료가 너무 많이 나와요"라는 질문</strong>
+      퇴직자와 자영업자 상담에서 자주 나온다. 직장을 그만두면 지역가입자가 되어 소득뿐 아니라 재산(주택·자동차 등)에도 보험료가 붙어, 소득이 줄었는데 보험료가 오르는 일이 생긴다. 실무에서 안내할 수 있는 길은 세 가지다. 소득·재산 요건을 채우면 가족의 피부양자로 들어가는 것, 퇴직 후 일정 기간(약 36개월) 직장 때 보험료 수준으로 낼 수 있는 임의계속가입, 그리고 소득이 줄었으면 조정 신청이다. 요건은 해마다 바뀌므로 공단에 확인하라고 덧붙인다. 이 질문에 정확히 답하는 설계사는 "보험 파는 사람"이 아니라 "돈 문제를 같이 보는 사람"으로 기억된다.
+    </div>
+  </section>
+
+  <section id="pension">
+    <h2>국민연금의 숨은 보험: 장애연금과 유족연금</h2>
+    <p>국민연금은 흔히 노후 연금으로만 알려져 있다. 그런데 국민연금 안에는 두 개의 보험이 더 들어 있다. 가입 중에 생긴 질병이나 사고로 장애가 남으면 받는 <span class="term">장애연금</span><span class="en">(Disability pension)</span>, 가입자가 사망하면 가족이 받는 <span class="term">유족연금</span><span class="en">(Survivor pension)</span>이다. 사적 보험 설계에서 가장 자주 빠지는 사회보험이 바로 이 둘이다.</p>
+    <ul>
+      <li><b>장애연금</b>: 장애 정도(국민연금 기준 1~4급)에 따라 기본연금액의 1급 100%, 2급 80%, 3급 60%를 매달 받고, 부양가족이 있으면 부양가족연금이 더해진다. 4급은 기본연금액의 225%를 한 번에 받는다.</li>
+      <li><b>유족연금</b>: 가입기간이 10년 미만이면 기본연금액의 40%, 10~20년이면 50%, 20년 이상이면 60%에 부양가족연금을 더해 배우자(또는 자녀·부모 등 순위에 따라) 받는다.</li>
+      <li><b>짧은 가입기간 보정</b>: 장애연금과 유족연금은 가입기간이 20년이 안 되어도 <b>20년 가입한 것으로 보고</b> 기본연금액을 계산한다. 사회초년생이 사고를 당해도 연금이 너무 작아지지 않게 한 장치다.</li>
+      <li><b>요건</b>: 가입 중 발생했을 것, 그리고 가입·납부 기간 요건(가입 대상 기간의 일정 비율 이상 납부 등)을 채워야 한다. 오래 체납했다면 받지 못할 수 있다.</li>
+    </ul>
+    <p>기본연금액의 실제 공식은 가입 연도별 소득대체율과 전체 가입자의 평균소득(A값), 본인의 평균소득(B값)을 가입기간별로 나눠 계산하는 꽤 복잡한 식이다. 여기서는 크기를 가늠하기 위한 단순화 모델을 쓴다.</p>
+    <div class="formula">$$\text{기본연금액(월)} \approx 0.43 \times \frac{A + B}{2} \times \frac{n}{40}$$<div class="where">\(A\): 전체 가입자 평균소득월액(약 310만원으로 가정), \(B\): 본인 평균소득월액(기준소득월액 범위 약 40만~637만원), \(n\): 가입연수(최대 40, 장애·유족은 20 미만이면 20). 0.43은 2026년부터의 소득대체율 43%다. <b>이 책의 단순화 모델</b>이며, 실제 금액은 가입 이력에 따라 다르다. 정확한 예상액은 국민연금공단에서 조회한다.</div></div>
+    <p>A가 들어가 있다는 것이 국민연금의 재분배 장치다. 내 소득 B가 평균보다 낮으면 평균 쪽으로 끌어올려 주고, 높으면 끌어내린다. 아래에서 소득과 가입연수를 정하고 급여 종류를 고른다. 그래프의 손잡이를 좌우로 끌어 가입연수를 바꿀 수 있다. 점선은 20년 보정이 없을 때의 기본연금액이다.</p>
+
+    <div class="sim" id="sim-np">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>장애연금·유족연금 어림 계산기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="np-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="np-kind"><button data-value="d1">장애 1급</button><button data-value="d2" class="on">장애 2급</button><button data-value="d3">장애 3급</button><button data-value="d4">장애 4급</button><button data-value="sv">유족</button></div>
+          <label class="ctrl"><span>본인 평균소득(B, 월) <output id="np-b-out"></output></span><input type="range" id="np-b" min="1000000" max="8000000" step="50000" value="4000000"></label>
+          <label class="ctrl"><span>가입연수 <output id="np-n-out"></output></span><input type="range" id="np-n" min="1" max="40" step="1" value="6"></label>
+          <label class="ctrl"><span>부양 자녀 수 <output id="np-k-out"></output></span><input type="range" id="np-k" min="0" max="3" step="1" value="0"></label>
+          <label class="check"><input type="checkbox" id="np-sp" checked> 배우자 있음(장애연금의 부양가족연금)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>이번 급여(월)</span><span><i style="background:var(--text-faint)"></i>20년 보정이 없을 때의 기본연금액</span><span><i style="background:var(--accent-2)"></i>보정된 기본연금액</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기본연금액(보정 후, 월)</span><span class="v" id="np-o-b">—</span></div>
+        <div class="stat"><span class="k">받는 급여</span><span class="v" id="np-o-m">—</span></div>
+        <div class="stat"><span class="k">10년 합계(명목)</span><span class="v" id="np-o-t">—</span></div>
+        <div class="stat"><span class="k">본인 소득 대비</span><span class="v" id="np-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(월 400만원, 6년 가입, 장애 2급)에서 기본연금액은 20년 보정 덕분에 약 76만원이다. 보정이 없으면 약 23만원이니 세 배 넘게 올려 준 셈이다. 장애 2급 연금은 약 61만원에 배우자 몫이 더해진다. ② "유족"을 누른다. 가입 10년 미만이라 40%, 약 31만원이다. 손잡이를 끌어 10년, 20년을 넘겨 보면 비율이 50%, 60%로 계단처럼 오른다. ③ 소득을 800만원으로 올린다. 소득이 두 배 가까이 되어도 급여는 그만큼 오르지 않는다. 기준소득 상한(약 637만원)과 평균소득 A가 함께 끌어내리기 때문이다. 고소득자일수록 사회보험이 대신하는 몫이 작고 사적 보장의 빈틈이 크다. (단순화 모델: A 약 310만원, 소득대체율 43%, 부양가족연금 배우자 연 약 30만원·자녀 연 약 20만원. 실제 금액은 가입 이력·제도 개정에 따라 다르다.)</div>
+    </div>
+
+    <p>계산기가 보여 주는 핵심은 두 가지다. 첫째, 젊어서 가입기간이 짧아도 장애·유족연금은 20년 가입한 것으로 쳐서 계산하므로 생각보다 크다. 사회초년생의 사망보장이나 소득보장을 설계할 때 이 금액을 빼지 않으면 필요 보장을 부풀리게 된다. 둘째, 소득이 높을수록 국민연금이 대신해 주는 비율은 낮아진다. 월 400만원 소득자의 장애 2급 연금은 배우자 몫을 더해도 소득의 약 16%, 유족연금은 약 8%다. 국민연금은 바닥을 깔아 줄 뿐 생활을 그대로 지켜 주지는 않는다.</p>
+    <div class="callout deep">
+      <strong>함께 받을 때의 조정과 제도 개정</strong>
+      같은 사고로 여러 사회보험 급여가 생기면 겹치는 만큼을 조정한다. 업무상 재해로 산재 장해급여와 국민연금 장애연금을 함께 받으면 국민연금 쪽은 절반만 지급하는 식이다(유족급여도 비슷하다). 국민연금 안에서도 본인의 노령연금과 유족연금이 함께 생기면 둘 중 하나를 고르고 다른 쪽은 일부만 받는다. 또 2025년 국민연금 개정으로 보험료율은 2026년부터 해마다 0.5%포인트씩 13%까지 오르고 소득대체율은 43%로 정해졌다. 소득대체율은 가입한 연도의 비율이 그 기간분에 적용되므로, 실제 기본연금액은 과거 가입분(더 낮거나 높은 비율)과 섞여 계산된다. 이 장의 모델이 실제와 다를 수 있는 가장 큰 이유다.
+    </div>
+
+    <div class="callout pro">
+      <strong>니즈 분석표에 유족연금 칸을 만든다</strong>
+      필요 사망보장을 계산할 때 유족연금을 빼는 설계사는 많지 않다. 고객에게 큰 보장을 권하기 쉬워서이기도 하고, 계산이 번거로워서이기도 하다. 그러나 유족연금 월 30만원은 25년이면 현재가치로 수천만원이다. 국민연금공단의 예상연금 조회(가입내역)를 고객과 함께 열어 보고, 장애연금과 유족연금 예상액을 니즈 분석표의 "이미 있는 보장" 칸에 적는다. 금액을 줄여 제안해도 고객은 그 상담을 더 신뢰한다. 반대로 고객이 "국민연금이 다 해 준다"고 말하면, 위 계산기의 소득 대비 비율을 보여 주며 바닥과 생활의 차이를 설명한다.
+    </div>
+  </section>
+
+  <section id="sanjae">
+    <h2>산재보험: 일하다 다치면</h2>
+    <p><span class="term">산업재해보상보험</span><span class="en">(Workers' compensation)</span>, 줄여서 산재보험은 일하다가 다치거나 병에 걸리거나 사망했을 때 보상하는 사회보험이다. 보험료는 회사가 전액 낸다. 업무 중 사고뿐 아니라 업무 때문에 생긴 질병, 그리고 통상적인 경로로 출퇴근하다 당한 사고도 대상이다. 산재로 인정되면 다른 어떤 보장보다 두텁다.</p>
+    <ul>
+      <li><b>요양급여</b>: 치료비를 낸다. 건강보험과 달리 급여 진료의 본인부담이 없다(비급여 일부는 제외).</li>
+      <li><b>휴업급여</b>: 치료 때문에 일하지 못한 기간에 평균임금의 70%를 준다. 4일 이상 요양해야 하고 처음 3일은 지급하지 않는다. 너무 낮으면 최저 보상 기준이 적용된다.</li>
+      <li><b>장해급여</b>: 치료가 끝난 뒤 장해가 남으면 1~14급에 따라 준다. 중증인 1~3급은 연금으로만 받는데, 1급은 해마다 평균임금 329일분이다. 경증은 일시금이다.</li>
+      <li><b>유족급여</b>: 업무상 사망이면 유족에게 연금(평균임금의 약 47%에 유족 수에 따라 가산) 또는 일시금을 준다. 장의비도 따로 있다.</li>
+    </ul>
+    <p>산재의 휴업급여와 같은 질병이 업무와 무관할 때를 나란히 놓아 본다. 업무 외 질병이면 회사의 유급병가가 없는 한 소득이 끊긴다. 일부 지역에서는 그 공백을 <span class="term">상병수당</span>이 조금 메운다. 상병수당은 업무와 무관한 질병·부상으로 일하지 못할 때 소득 일부를 주는 제도인데, 2022년부터 시범사업으로만 운영 중이고 전국 본사업은 아직 확정되지 않았다. 아래에서 원인을 고르고 월급과 쉬는 기간을 정하면, 달마다 들어오는 돈이 차례로 쌓인다.</p>
+
+    <div class="sim" id="sim-sj">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>일을 쉬는 동안 들어오는 돈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sj-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="sj-cause"><button data-value="work" class="on">업무상 부상(산재)</button><button data-value="pilot">업무 외 질병 · 시범지역</button><button data-value="none">업무 외 질병</button></div>
+          <label class="ctrl"><span>세전 월급 <output id="sj-g-out"></output></span><input type="range" id="sj-g" min="2000000" max="8000000" step="100000" value="4000000"></label>
+          <label class="ctrl"><span>쉬는 기간 <output id="sj-m-out"></output></span><input type="range" id="sj-m" min="1" max="12" step="1" value="6"></label>
+          <div class="btn-row"><button class="btn" id="sj-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-faint)"></i>잃은 월급</span><span><i style="background:var(--ok)"></i>사회보험이 준 돈</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">잃은 월급(세전)</span><span class="v" id="sj-o-l">—</span></div>
+        <div class="stat"><span class="k">사회보험이 준 돈</span><span class="v" id="sj-o-p">—</span></div>
+        <div class="stat"><span class="k">소득대체율</span><span class="v" id="sj-o-r">—</span></div>
+        <div class="stat"><span class="k">빈틈</span><span class="v" id="sj-o-g">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 업무상 부상, 월 400만원, 6개월이면 휴업급여가 한 달 약 276만원씩 들어온다(첫 달은 3일을 뺀다). 치료비도 산재가 낸다. ② "업무 외 질병 · 시범지역"을 누른다. 상병수당은 하루 약 5만원(최저임금의 60% 수준)이고 대기기간 뒤 최대 120일로 가정했다. 5개월째부터는 0이다. ③ "업무 외 질병"을 누른다. 막대가 모두 비어 있다. 같은 6개월인데 원인에 따라 받는 돈이 약 1,630만원에서 0원까지 갈린다. 사적 보험의 소득보장이 겨냥해야 할 곳이 바로 이 빈 막대다. (산재 휴업급여 = 평균임금의 70%, 최고·최저 보상 기준은 단순화. 상병수당은 시범사업 모형마다 대기기간·지급기간·금액이 달라 대기 7일·120일·하루 49,536원을 가정했다. 회사 유급병가는 넣지 않았다.)</div>
+    </div>
+
+    <p>같은 6개월이라도 원인이 무엇이냐에 따라 막대의 높이가 극단적으로 다르다. 업무상 부상이면 소득의 약 70%가 이어지고, 시범지역의 업무 외 질병이면 처음 몇 달 하루 5만원 남짓이 들어오며, 그 밖의 업무 외 질병이면 사회보험이 주는 소득은 0이다. 대부분의 큰 병(암, 뇌졸중, 심장병)은 업무 외 질병이다. 사적 보험의 진단비가 "소득 공백"을 겨냥해야 하는 이유가 여기 있다(<a href="fixed.html">9장</a>).</p>
+  </section>
+
+  <section id="employment">
+    <h2>고용보험: 실업급여와 그 상한</h2>
+    <p>고용보험의 대표 급여는 <span class="term">구직급여</span>, 흔히 말하는 실업급여다. 회사 사정으로 그만두거나(권고사직, 계약 만료 등) 정당한 사유로 퇴사한 사람이 다시 일자리를 찾는 동안 받는다. 스스로 그만둔 경우는 원칙적으로 받지 못한다. 육아휴직 급여와 출산전후휴가 급여도 고용보험에서 나온다.</p>
+    <div class="formula">$$\text{1일 구직급여} = \min\big(\text{상한},\ \max(\text{하한},\ 0.6 \times \text{1일 평균임금})\big)$$<div class="where">상한은 하루 약 6만 8천원, 하한은 최저임금의 80%(8시간 기준 약 6만 6천원)이다(2026년 기준 약). 받는 기간(소정급여일수)은 나이와 가입기간에 따라 120~270일이다.</div></div>
+    <p>식은 평균임금의 60%라고 말하지만, 상한과 하한이 매우 가까이 붙어 있다는 것이 핵심이다. 아래에서 월급을 바꾸거나 곡선 위 손잡이를 끌어 본다. 점선은 상한·하한이 없을 때의 60%다.</p>
+
+    <div class="sim" id="sim-ub">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>실업급여: 60%라는 말과 상한</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ub-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>퇴직 전 세전 월급 <output id="ub-g-out"></output></span><input type="range" id="ub-g" min="1500000" max="10000000" step="50000" value="4000000"></label>
+          <label class="ctrl"><span>고용보험 가입기간 <output id="ub-y-out"></output></span><input type="range" id="ub-y" min="0.5" max="15" step="0.5" value="6"></label>
+          <label class="check"><input type="checkbox" id="ub-50"> 50세 이상(또는 장애인)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>실제 구직급여(월 환산)</span><span><i style="background:var(--text-faint)"></i>평균임금의 60%(상·하한 없을 때)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">1일 구직급여</span><span class="v" id="ub-o-d">—</span></div>
+        <div class="stat"><span class="k">월 환산(30일)</span><span class="v" id="ub-o-m">—</span></div>
+        <div class="stat"><span class="k">월급 대비</span><span class="v" id="ub-o-r">—</span></div>
+        <div class="stat"><span class="k">받는 기간 · 총액</span><span class="v" id="ub-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 월 400만원이면 60%는 하루 약 7.9만원이지만 상한에 걸려 약 6만 8천원, 월 약 204만원이다. 월급 대비 약 51%다. ② 월급을 1,000만원까지 올린다. 받는 돈은 그대로라 월급 대비 20%까지 떨어진다. 곡선이 평평하게 눌린 구간 전체가 상한이 만든 빈틈이다. ③ 월급을 150만원까지 내린다. 이번엔 하한 덕분에 월급과 거의 같은 금액을 받는다. 상한과 하한이 가까워 실업급여는 사실상 소득과 거의 무관한 정액에 가깝다. 가입기간을 0.5년과 15년으로 바꾸면 기간이 120일에서 240일(50세 이상 270일)까지 달라진다. (2026년 기준 약: 상한 1일 68,100원, 하한 66,048원(최저임금 10,320원 × 8시간 × 80%). 평균임금은 월급 × 12 ÷ 365로 단순화했다.)</div>
+    </div>
+
+    <p>"실업급여는 월급의 60%"라는 말은 월급이 약 340만원 근처인 사람에게만 맞는다. 그보다 많이 벌던 사람은 상한에 걸려 60%에 한참 못 미치고, 적게 벌던 사람은 하한 덕분에 60%보다 많이 받는다. 결국 실업급여는 실직 기간에 생활의 바닥을 깔아 주는 정액에 가깝다. 소득이 높은 가구일수록 실직의 빈틈은 비상금이 막아야 한다. 실직은 보험으로 사기 어려운 위험이기도 하다. 본인이 시기를 어느 정도 고를 수 있어 역선택과 도덕적 해이가 심하기 때문이다(<a href="asymmetry.html">4장</a>). 그래서 실직 위험의 사적 대비는 보험보다 비상금이 맡는다(<a href="pooling.html">2장</a>).</p>
+
+    <h3>고용보험의 또 다른 얼굴: 출산과 육아</h3>
+    <p>고용보험은 실직만 다루지 않는다. 출산전후휴가 급여, 배우자 출산휴가 급여, 육아휴직 급여도 고용보험에서 나온다. 육아휴직 급여는 2025년 개편으로 첫 몇 달은 통상임금에 가깝게, 이후로는 비율과 상한이 낮아지는 구조가 되었다(첫 3개월 월 상한 약 250만원, 이후 단계적으로 낮아진다, 2026년 기준 약). 부모가 함께 또는 차례로 육아휴직을 쓰면 상한을 높여 주는 특례도 있다. 금액과 요건이 자주 바뀌는 영역이라 숫자는 고용노동부 안내로 확인해야 하지만, 아이를 계획하는 가구라면 "육아휴직 기간의 소득 공백"이 이미 상당 부분 사회보험으로 메워진다는 점을 기억해 둔다. 이 기간을 대비한다고 저축성 보험을 따로 들 이유는 크지 않다.</p>
+  </section>
+
+  <section id="ltc">
+    <h2>장기요양보험: 노후 돌봄의 바닥</h2>
+    <p>나이가 들거나 노인성 질병(치매, 뇌혈관질환, 파킨슨병 등)으로 혼자 일상생활을 하기 어려워지면 <span class="term">노인장기요양보험</span><span class="en">(Long-term care insurance)</span>이 돌봄 비용을 함께 낸다. 보험료는 건강보험료에 붙어 걷는다(건강보험료의 13.14%, 2026년 기준). 65세 이상이거나, 65세 미만이라도 노인성 질병이 있으면 신청할 수 있다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 250" role="img" aria-label="장기요양 신청부터 등급 판정, 재가급여와 시설급여, 본인부담까지의 흐름">
+        <defs><marker id="lt-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="14" width="96" height="46" rx="8" class="f-elev"/><text x="58" y="34" text-anchor="middle" class="lbl">신청</text><text x="58" y="51" text-anchor="middle" class="t-dim">공단</text>
+        <rect x="128" y="14" width="96" height="46" rx="8" class="f-elev"/><text x="176" y="34" text-anchor="middle" class="lbl">방문조사</text><text x="176" y="51" text-anchor="middle" class="t-dim">심신 상태</text>
+        <rect x="246" y="14" width="184" height="46" rx="8" class="f-acc-soft"/><text x="338" y="34" text-anchor="middle" class="lbl-acc">등급판정</text><text x="338" y="51" text-anchor="middle" class="t-dim">1~5등급 · 인지지원등급</text>
+        <path d="M106 37 H126" class="s-line" marker-end="url(#lt-ar)"/><path d="M224 37 H244" class="s-line" marker-end="url(#lt-ar)"/>
+        <path d="M300 60 L130 96" class="s-line" marker-end="url(#lt-ar)"/><path d="M370 60 L340 96" class="s-line" marker-end="url(#lt-ar)"/>
+        <rect x="10" y="98" width="230" height="78" rx="8" class="f-ok-soft"/>
+        <text x="125" y="120" text-anchor="middle" class="lbl-b">재가급여</text>
+        <text x="125" y="140" text-anchor="middle" class="lbl-dim">방문요양·주야간보호 등</text>
+        <text x="125" y="162" text-anchor="middle" class="lbl">본인부담 15%</text>
+        <rect x="256" y="98" width="174" height="78" rx="8" class="f-acc2-soft"/>
+        <text x="343" y="120" text-anchor="middle" class="lbl-b">시설급여</text>
+        <text x="343" y="140" text-anchor="middle" class="lbl-dim">요양원(주로 1·2등급)</text>
+        <text x="343" y="162" text-anchor="middle" class="lbl">본인부담 20%</text>
+        <text x="10" y="204" class="lbl-dim">등급별 월 한도 안에서만 위 비율. 한도 초과분과 식비·</text>
+        <text x="10" y="224" class="lbl-dim">상급침실료 등 비급여는 전액 본인. 저소득층은 40·60% 감경.</text>
+      </svg>
+      <figcaption><b>그림 3. 장기요양보험의 길.</b> 공단에 신청하면 방문조사와 등급판정을 거쳐 등급이 정해진다. 집에서 돌봄을 받으면(재가) 비용의 15%, 요양원에 들어가면(시설) 20%를 낸다. 비율은 등급별 한도 안의 급여 비용에만 적용되고, 식비 같은 비급여는 따로 낸다.</figcaption>
+    </figure>
+
+    <p>본인부담률만 보면 돌봄 비용이 작아 보인다. 실제로 매달 내는 돈은 급여 비용의 15~20%에 비급여가 더해진 금액이다. 아래에서 등급과 이용 방식을 고르고, 식비 같은 비급여를 정해 본다.</p>
+
+    <div class="sim" id="sim-lt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>장기요양 한 달 비용</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lt-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="lt-g"><button data-value="1" class="on">1등급</button><button data-value="2">2등급</button><button data-value="3">3등급</button><button data-value="4">4등급</button><button data-value="5">5등급</button></div>
+          <div class="seg" id="lt-use"><button data-value="home">재가(집)</button><button data-value="fac" class="on">시설(요양원)</button></div>
+          <label class="ctrl"><span>비급여(식비·간식·상급침실 등, 월) <output id="lt-x-out"></output></span><input type="range" id="lt-x" min="0" max="1500000" step="50000" value="500000"></label>
+          <label class="check"><input type="checkbox" id="lt-cut"> 본인부담 감경(40%) 대상</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>공단 부담</span><span><i style="background:var(--warn)"></i>본인부담(급여)</span><span><i style="background:var(--bad)"></i>비급여</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 급여 비용</span><span class="v" id="lt-o-c">—</span></div>
+        <div class="stat"><span class="k">공단 부담</span><span class="v" id="lt-o-n">—</span></div>
+        <div class="stat"><span class="k">월 내 돈</span><span class="v" id="lt-o-o">—</span></div>
+        <div class="stat"><span class="k">3년 내 돈</span><span class="v" id="lt-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 1등급·시설에서 급여 비용은 한 달 약 270만원이고, 본인부담 20%인 약 54만원에 비급여 50만원을 더해 매달 약 104만원을 낸다. ② "재가(집)"로 바꾼다. 월 한도를 다 쓴다고 보면 본인부담은 약 35만원으로 줄지만, 한도 밖의 돌봄(가족의 시간, 추가 간병인)은 이 계산에 없다. ③ 3등급 이하에서 "시설"을 누르면 경고가 뜬다. 시설급여는 원칙적으로 1·2등급이 받고, 등급이 낮으면 재가만 쓰거나 예외 인정을 받아야 한다. 비급여를 150만원으로 올리면 공단 몫보다 내 돈이 커지는 지점이 보인다. (2026년 무렵 대략값: 시설 하루 1등급 약 9.0만원·2등급 약 8.4만원·3~5등급 약 7.9만원, 재가 월 한도 1등급 약 231만원~5등급 약 118만원. 실제 수가와 한도는 해마다 고시된다.)</div>
+    </div>
+
+    <p>장기요양보험은 돌봄의 바닥을 깔아 준다. 그러나 요양원 한 달에 100만원 안팎을 몇 년씩 내야 하고, 집에서 돌보면 공단이 내 주는 한도 밖의 시간은 가족의 몫이 된다. 사적 간병·치매보험이 노리는 빈틈이 여기다. 다만 돌봄이 필요한 시기는 대개 수십 년 뒤라, 지금 30대가 계산할 때는 보험료를 수십 년 내는 비용과, 그 사이 제도가 바뀔 가능성을 함께 저울에 올려야 한다.</p>
+  </section>
+
+  <section id="gap">
+    <h2>사적 보험이 메울 빈틈 = 필요 − 사회보험</h2>
+    <p>이제 이 장의 계산을 한곳에 모은다. 위험마다 "그 일이 생기면 필요한 돈"을 정하고, 거기서 사회보험이 주는 돈을 뺀다. 남는 것이 사적 보험(과 비상금, 자산)이 메워야 할 빈틈이다. 순서가 중요하다. 필요를 먼저 정하고, 사회보험을 빼고, 그 다음에 보험을 고른다. 거꾸로 보험 상품부터 고르면 사회보험이 이미 막고 있는 곳에 보험료를 또 내게 된다.</p>
+    <p>아래 막대는 위험마다 필요한 돈 전체를 100%로 놓은 것이다. 파란 부분이 사회보험, 빨간 부분이 빈틈이다. 연봉과 장애·사망의 대비 기간을 정하고, 업무상 사고인지와 상병수당 시범지역인지를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-gp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>위험별 필요와 사회보험, 그리고 빈틈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연봉(세전) <output id="gp-s-out"></output></span><input type="range" id="gp-s" min="24000000" max="120000000" step="1000000" value="48000000"></label>
+          <label class="ctrl"><span>장애·사망 대비 기간 <output id="gp-y-out"></output></span><input type="range" id="gp-y" min="5" max="25" step="1" value="10"></label>
+          <label class="check"><input type="checkbox" id="gp-sj"> 업무상 사고·질병(산재 인정)</label>
+          <label class="check"><input type="checkbox" id="gp-sick"> 상병수당 시범지역</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>사회보험</span><span><i style="background:var(--bad)"></i>빈틈(사적 보험·비상금·자산의 몫)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필요 합계</span><span class="v" id="gp-o-n">—</span></div>
+        <div class="stat"><span class="k">사회보험</span><span class="v" id="gp-o-s">—</span></div>
+        <div class="stat"><span class="k">빈틈 합계</span><span class="v" id="gp-o-g">—</span></div>
+        <div class="stat"><span class="k">가장 큰 빈틈</span><span class="v" id="gp-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 지우의 기본값(연봉 4,800만원, 10년)에서 실직(62%)과 노후 돌봄(68%)은 사회보험이 절반 넘게 막고, 큰 병은 29%, 장애는 19%, 사망은 10%만 막는다. 빈틈이 큰 곳은 장애와 사망이다. ② "업무상 사고·질병"을 켠다. 장애는 산재 장해연금이 더해져 빈틈이 사라지고, 사망도 70% 가까이 막힌다. 같은 사고라도 출퇴근길이냐 주말 등산길이냐에 따라 빈틈이 수억원 달라진다. 사적 보험은 업무 밖의 사고와 질병을 기준으로 설계해야 한다. ③ 연봉을 1억 2천만원으로 올린다. 필요는 커지는데 사회보험은 상한 때문에 거의 늘지 않아 모든 빈틈이 커진다. (교육용 모델. 실수령 = 세전의 82.5%. 큰 병: 암 1년 치료 3,000만원(비급여 30%, 산정특례)과 소득 12개월. 장애: 국민연금 장애 2급(산재면 장해 2급 연 291일분 + 국민연금 절반). 사망: 유족연금(산재면 평균임금 52% 유족연금 + 국민연금 절반)과 소득. 실직: 6개월, 구직급여. 노후 돌봄: 시설 1등급 3년(급여 월 270만원 + 비급여 50만원). 국민연금 가입 6년, 32세 가정.)</div>
+    </div>
+
+    <p>막대를 보면 사적 보험의 우선순위가 숫자로 드러난다. 실직과 노후 돌봄은 사회보험이 이미 절반 넘게 막고, 남는 빈틈도 비교적 작다. 실직의 빈틈은 비상금이 맡는 편이 낫다. 반면 업무 밖에서 생긴 장애와 사망, 그리고 큰 병의 소득 공백은 사회보험이 일부만 막는다. 여기가 사적 보험이 가장 일을 많이 해야 하는 곳이다. 그리고 "업무상"이 켜지면 빈틈이 극적으로 줄어든다는 것도 기억해 둔다. 사적 보험은 <b>산재가 아닌 경우</b>를 기준으로 설계하고, 산재는 덤으로 생각하는 것이 안전하다.</p>
+    <p>이 빼기는 사망보장 계산에서 특히 크다. 지우의 유족연금 약 33만원(배우자 몫 포함)을 25년 동안 받는다고 보면, 이 책의 엔진(INS.needs)으로 계산한 현재가치는 약 9,300만원이다. 필요 사망보장에서 이만큼을 먼저 빼고 시작한다는 뜻이다. 그 계산은 <a href="life.html">10장</a>에서 이어진다.</p>
+
+    <div class="callout buyer">
+      <strong>내 사회보험 안전망을 확인하는 법</strong>
+      ① 국민연금공단에서 가입내역과 예상연금액을 조회한다. 장애·유족연금도 가입기간과 소득으로 대략 가늠할 수 있다. 체납 기간이 있으면 요건을 따로 확인한다. ② 건강보험료 고지액으로 내 소득분위와 본인부담상한액을 가늠한다(<a href="health.html">8장</a>). ③ 고용보험 가입기간을 확인한다(고용24 등). 이직이 잦았다면 이전 직장 기간이 합산되는지 본다. ④ 내가 사는(일하는) 지역이 상병수당 시범지역인지, 회사에 유급병가 규정이 있는지 확인한다. ⑤ 이 네 가지를 적은 한 장을 보험 증권 묶음 맨 앞에 끼워 둔다. 보장 분석은 그 한 장에서 시작한다.
+    </div>
+
+    <div class="callout warn">
+      <strong>사회보험 수치는 해마다, 때로는 한꺼번에 바뀐다</strong>
+      이 장의 요율(국민연금 9.5%, 건강보험 7.19%, 장기요양 13.14%, 고용보험 0.9%)과 국민연금 소득대체율 43%, 기준소득월액 상한(약 637만원), 실업급여 상·하한(약 6만 8천원·6만 6천원), 장기요양 수가와 한도는 2026년 기준 대표값이다. 국민연금은 2026년부터 보험료율을 해마다 0.5%포인트씩 13%까지 올리기로 개정되었고, 건강보험료율과 실업급여 상한, 장기요양 수가도 매년 다시 정해진다. 상병수당은 시범사업이며 본사업의 내용과 시기는 확정되지 않았다. 장애·유족연금 계산은 이 책의 단순화 모델이다. 실제 금액은 국민연금공단, 국민건강보험공단, 근로복지공단, 고용노동부의 안내로 확인한다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네의 사회보험 안전망</h2>
+    <p>도윤은 보장 분석표의 맨 위 칸을 비워 두고 있었다. 사적 보험을 적기 전에 사회보험부터 적기 위해서다. 숫자는 이 책의 교육용 모델과 2026년 기준 대표값으로 계산했다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>위험(지우 기준)</th><th class="num">필요</th><th class="num">사회보험</th><th class="num">빈틈</th><th>사회보험의 내용</th></tr></thead>
+      <tbody>
+        <tr><td>큰 병(암 1년)</td><td class="num">6,960만</td><td class="num">1,995만</td><td class="num">4,965만</td><td>공단 부담(산정특례 5%), 급여 본인부담 상한 약 313만원</td></tr>
+        <tr><td>장애(2급, 10년)</td><td class="num">3억 9,600만</td><td class="num">7,627만</td><td class="num">3억 1,973만</td><td>장애연금 월 약 61만원(20년 보정) + 배우자 몫</td></tr>
+        <tr><td>사망(10년)</td><td class="num">3억 9,600만</td><td class="num">3,964만</td><td class="num">3억 5,636만</td><td>유족연금 월 약 33만원(배우자 몫 포함)</td></tr>
+        <tr><td>실직(6개월)</td><td class="num">1,980만</td><td class="num">1,226만</td><td class="num">754만</td><td>구직급여 하루 약 6만 8천원, 210일 중 180일</td></tr>
+        <tr><td>노후 돌봄(시설 3년)</td><td class="num">1억 1,520만</td><td class="num">7,776만</td><td class="num">3,744만</td><td>장기요양 시설급여 80%</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 13장</span></div>
+      <h4>보장 분석표의 첫 줄은 사회보험이다</h4>
+      <p>지우는 국민연금 고지서를 노후 연금으로만 알고 있었다. 도윤이 국민연금공단 조회 화면을 함께 열어 보며 단순화 모델로 계산하자 숫자가 나왔다. 지우는 가입 6년째지만 장애연금과 유족연금은 20년 가입한 것으로 쳐서 기본연금액이 월 약 76만원이다. 지우가 장애 2급이 되면 장애연금 월 약 61만원에 배우자 몫이 붙고, 지우가 사망하면 민서는 유족연금 월 약 33만원(배우자 몫 포함, 가입 10년 미만이라 40%)을 받는다. 민서 쪽으로 계산하면 민서가 사망할 때 지우가 받는 유족연금은 월 약 26만원이다. 지우는 "국민연금이 보험이었다"는 말을 두 번 했다.</p>
+      <p>큰 병의 바닥은 8장에서 확인한 본인부담상한(약 313만원)과 산정특례다. 다만 지우네가 사는 곳은 상병수당 시범지역이 아니고, 지우 회사에는 유급병가가 1년에 며칠뿐이다. 업무 외 질병으로 쉬면 소득은 사회보험에서 거의 나오지 않는다. 출퇴근길 사고라면 산재가 휴업급여로 월급의 70%(월 약 276만원)를 주지만, 도윤은 "설계는 산재가 아닌 경우를 기준으로 한다"고 못 박았다. 실직은 구직급여가 6개월 필요의 약 62%를 막고, 남는 약 754만원은 예금 3,000만원이 감당할 수 있는 크기다. 실직을 보험으로 사지 않는 이유다.</p>
+      <p>정리하면 사적 보험이 메울 빈틈은 업무 밖의 장애와 사망, 그리고 큰 병의 소득 공백과 비급여로 좁혀졌다. 도윤의 시각에서 이 계산은 제안할 보장 금액을 줄이는 일이다. 유족연금 현재가치 약 9,300만원(25년 기준)만큼 필요 사망보장이 줄고, 수수료도 그만큼 준다. 도윤은 그 사실을 숨기지 않고 말했고, 지우는 오히려 다음 상담 날짜를 먼저 잡았다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>사회보험 안전망: 상한제(약 313만원), 장애연금 월 약 61만원, 유족연금 월 약 33만원, 산재(업무상만), 상병수당 없음(시범지역 아님), 실직은 구직급여 + 비상금. 사적 보장은 업무 밖 사고·질병 기준.</div><div><b>아직 남은 문제</b>사회보험을 뺀 뒤에도 남는 사망·장애·소득 공백의 빈틈을 어떤 상품으로, 누구에게서, 얼마의 비용으로 메울 것인가.</div><div><b>다음 단계</b><a href="agent.html">14장</a>에서 도윤은 자기 입장과 판매채널의 차이를 먼저 꺼낸다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>월급 명세서에는 국민연금·건강보험·장기요양·고용보험이 이미 있고, 산재보험은 회사가 전액 낸다. 세전 400만원이면 내 몫만 월 약 39만원이다.</li>
+      <li>사회보험은 의무 가입, 소득 비례 보험료, 법이 정한 급여, 큰 재분배가 특징이다. 의무 가입이라 역선택이 없고, 제도가 바뀌면 기존 가입자의 급여도 바뀐다.</li>
+      <li>건강보험의 급여는 소득과 무관하고 보험료는 소득에 비례해, 소득이 낮을수록 낸 것보다 많이 받는다. 피부양 가족도 함께 보장된다.</li>
+      <li>국민연금에는 장애연금(1급 100%, 2급 80%, 3급 60%, 4급 일시금 225%)과 유족연금(가입 10년 미만 40%, 10~20년 50%, 20년 이상 60%)이 들어 있고, 가입기간이 20년 미만이어도 20년으로 쳐서 계산한다.</li>
+      <li>산재는 업무상 재해에 치료비와 평균임금 70%의 휴업급여, 장해·유족급여를 준다. 업무 외 질병의 소득 공백은 상병수당 시범지역이 아니면 사회보험이 거의 메우지 않는다.</li>
+      <li>실업급여는 평균임금의 60%지만 상한(하루 약 6만 8천원)과 하한이 가까워 사실상 정액에 가깝다. 고소득자일수록 대체율이 낮다.</li>
+      <li>장기요양보험은 재가 15%, 시설 20%를 본인이 내고, 식비 등 비급여는 따로 낸다.</li>
+      <li>사적 보험이 메울 빈틈 = 필요 − 사회보험. 필요를 먼저 정하고 사회보험을 뺀 뒤 상품을 고르며, 업무상이 아닌 경우를 기준으로 설계한다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>월급 명세서의 4대 보험 가운데 근로자 공제 칸이 0원이고 회사가 보험료를 전액 내는 것은?</p>
+        <div class="opts">
+          <button class="opt">고용보험</button>
+          <button class="opt" data-correct>산재보험</button>
+          <button class="opt">장기요양보험</button>
+          <button class="opt">국민연금</button>
+        </div>
+        <div class="quiz-exp">산재보험료는 사업주가 전액 부담한다. 국민연금·건강보험·장기요양은 근로자와 회사가 절반씩, 고용보험은 실업급여 몫을 나눠 내고 회사가 고용안정 몫을 더 낸다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>국민연금 가입 6년 차인 32세 직장인이 질병으로 장애 2급 판정을 받았다(요건 충족). 장애연금은 어떻게 계산되는가?</p>
+        <div class="opts">
+          <button class="opt">가입기간이 10년 미만이라 받을 수 없다</button>
+          <button class="opt">6년 가입분 기본연금액의 40%를 받는다</button>
+          <button class="opt">낸 보험료를 일시금으로 돌려받는다</button>
+          <button class="opt" data-correct>가입기간을 20년으로 보고 계산한 기본연금액의 80%에 부양가족연금을 더해 받는다</button>
+        </div>
+        <div class="quiz-exp">장애연금과 유족연금은 가입기간이 20년 미만이면 20년으로 보고 기본연금액을 계산한다. 장애 2급은 기본연금액의 80%이고, 부양가족이 있으면 부양가족연금이 더해진다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>세전 월 600만원을 받던 사람이 권고사직으로 실업급여를 받는다. 월 환산 금액에 대한 설명으로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>하루 상한(약 6만 8천원)에 걸려 월 약 204만원, 월급의 약 34%다</button>
+          <button class="opt">월급의 60%인 360만원이다</button>
+          <button class="opt">월급의 70%인 420만원이다</button>
+          <button class="opt">소득이 높아 실업급여 대상이 아니다</button>
+        </div>
+        <div class="quiz-exp">평균임금의 60%는 하루 약 11.8만원이지만 상한이 하루 약 6만 8천원이라 30일 기준 약 204만원이다. 고소득자일수록 실업급여의 소득대체율은 낮다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>사적 보험의 필요 보장액을 정하는 순서로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt">인기 상품을 먼저 고르고 보험료 예산에 맞춰 가입금액을 정한다</button>
+          <button class="opt">산재보험이 있으니 모든 사고는 사회보험이 해결한다고 보고 질병만 대비한다</button>
+          <button class="opt" data-correct>위험별 필요한 돈을 정하고, 사회보험이 주는 돈을 뺀 빈틈을 사적 보험·비상금·자산으로 메운다</button>
+          <button class="opt">사회보험은 제도가 바뀔 수 있으니 계산에서 완전히 뺀다</button>
+        </div>
+        <div class="quiz-exp">필요 − 사회보험 = 빈틈이다. 사회보험은 제도 변화 가능성을 표시해 두고 계산에 넣되, 업무상 재해에만 나오는 산재 급여는 기준에서 빼고 설계하는 것이 안전하다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function seg(ctx, x, y, w, h, color, P, label, alpha) {
+    if (w <= 0.5 || h <= 0.5) return;
+    ctx.save();
+    ctx.globalAlpha = alpha || 0.28; ctx.fillStyle = color; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
+    ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.strokeRect(x + 0.75, y + 0.75, Math.max(0, w - 1.5), Math.max(0, h - 1.5));
+    ctx.restore();
+    if (label) {
+      ctx.font = IB.font(11);
+      if (ctx.measureText(label).width + 8 <= w && h >= 14) T(ctx, label, x + w / 2, y + h / 2 + 0.5, { size: 11, color: P.text, align: "center", base: "middle" });
+    }
+  }
+  const invX = (c, x0, x1, px) => x0 + ((px - c.box.x) / c.box.w) * (x1 - x0);
+
+  /* ---------------------------------------------------------- 사회보험 모델(2026년 기준 대표값, 교육용) */
+  const SOC = {
+    pension: 0.0475, pensionCap: 6.37e6, pensionFloor: 4e5,
+    health: INS.KR.healthRate / 2, ltc: INS.KR.ltcRate, emp: 0.009, empCo: 0.009 + 0.0025, sanjae: 0.015,
+    A: 3.1e6, repl: 0.43, spouseY: 3e5, childY: 2e5,
+    ubCap: 68100, ubFloor: 66048, sickDay: 49536, sickDays: 120, sickWait: 7,
+    netRatio: 0.825,
+  };
+  SOC.premiums = function (g) {
+    const pb = IB.clamp(g, SOC.pensionFloor, SOC.pensionCap), h = g * SOC.health;
+    const e = { pension: pb * SOC.pension, health: h, ltc: h * SOC.ltc, emp: g * SOC.emp, sanjae: 0 };
+    const c = { pension: pb * SOC.pension, health: h, ltc: h * SOC.ltc, emp: g * SOC.empCo, sanjae: g * SOC.sanjae };
+    const sum = (o) => o.pension + o.health + o.ltc + o.emp + o.sanjae;
+    return { e, c, eT: sum(e), cT: sum(c), pb };
+  };
+  /** 단순화한 기본연금액(월): 0.43 × (A+B)/2 × n/40, floor20이면 20년 미만을 20년으로 */
+  SOC.basic = function (B, n, floor20) {
+    const b = IB.clamp(B, SOC.pensionFloor, SOC.pensionCap);
+    const yrs = Math.min(40, floor20 ? Math.max(20, n) : n);
+    return SOC.repl * (SOC.A + b) / 2 * yrs / 40;
+  };
+  SOC.ubDaily = (g) => Math.min(SOC.ubCap, Math.max(SOC.ubFloor, 0.6 * g * 12 / 365));
+  SOC.ubDays = (yrs, over50) => { const t = over50 ? [120, 180, 210, 240, 270] : [120, 150, 180, 210, 240]; return t[yrs < 1 ? 0 : yrs < 3 ? 1 : yrs < 5 ? 2 : yrs < 10 ? 3 : 4]; };
+  const COLORS = (P) => ({ pension: P.accent, health: P.ok, ltc: P.accent2, emp: P.warn, sanjae: P.dim });
+  const NAMES = { pension: "연금", health: "건강", ltc: "요양", emp: "고용", sanjae: "산재" };
+
+  /* ---------------------------------------------------------- 1. 월급과 4대 보험료 */
+  (function () {
+    let cv = null, G = null;
+    const GMIN = 1.5e6, GMAX = 1e7;
+    const rd = () => cv && cv.redraw();
+    const Gr = IB.range("ps-g", (v) => won(v), rd);
+    cv = IB.canvas("#ps-cv", (ctx, w, h) => {
+      const P = IB.palette(), g = Gr(), pr = SOC.premiums(g), C = COLORS(P);
+      // 위: 내 몫 / 회사 몫 막대 (같은 축척: 월급의 12%까지)
+      const bx = 64, bw = w - bx - 16;
+      const scale = bw / (g * 0.125);
+      [["내 몫", pr.e, 18], ["회사 몫", pr.c, 54]].forEach(([lab, o, y]) => {
+        T(ctx, lab, 12, y + 13, { size: 12, color: P.text, base: "middle", weight: 600 });
+        let x = bx;
+        ["pension", "health", "ltc", "emp", "sanjae"].forEach((k) => { const ww = o[k] * scale; seg(ctx, x, y, ww, 26, C[k], P, NAMES[k]); x += ww; });
+        T(ctx, IB.wonAxis(Object.values(o).reduce((a, b) => a + b, 0)), Math.min(x + 4, w - 4), y + 13, { size: 11, mono: true, color: P.dim, base: "middle", align: x + 40 > w ? "right" : "left" });
+      });
+      // 아래: 월급 대비 내 몫 비율 곡선
+      const box = { x: 52, y: 110, w: w - 52 - 26, h: h - 110 - 44 };
+      const data = [];
+      for (let v = GMIN; v <= GMAX + 1; v += 5e4) data.push([v, SOC.premiums(v).eT / v]);
+      const c = IB.chart(ctx, box, { x: [GMIN, GMAX], y: [0.07, 0.105], xTicks: [2e6, 4e6, 6e6, 8e6], xFmt: IB.wonAxis, yFmt: (v) => (v * 100).toFixed(1) + "%", xLabel: w < 520 ? null : "세전 월급 → 월급 대비 내 몫",
+        series: [{ data, color: P.accent, width: 2.4 }], vlines: [{ x: SOC.pensionCap, color: P.faint, label: "연금 상한" }] });
+      G = c;
+      knob(ctx, c.X(g), c.Y(pr.eT / g), P, P.accent, 7);
+      IB.stat("ps-o-e", tone("bad-t", won(pr.eT, { digits: 1 })));
+      IB.stat("ps-o-c", won(pr.cT, { digits: 1 }));
+      IB.stat("ps-o-r", IB.pct(pr.eT / g, 1));
+      IB.stat("ps-o-p", won(pr.pb) + (g > SOC.pensionCap ? " <small>상한</small>" : ""));
+    }, { aspect: 0.68, minHeight: 300, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x, y) { if (!G || y < 100) return; Gr.set(Math.round(IB.clamp(invX(G, GMIN, GMAX, x), GMIN, GMAX) / 5e4) * 5e4); } });
+  })();
+
+  /* ---------------------------------------------------------- 2. 건강보험의 가치 */
+  (function () {
+    let cv = null, G = null, age = 45;
+    const A0 = 25, A1 = 85, K = 2.33;
+    const rd = () => cv && cv.redraw();
+    const Gr = IB.range("nv-g", (v) => won(v), rd);
+    const emp = document.getElementById("nv-emp");
+    emp.addEventListener("change", rd);
+    const o1 = INS.medical({ cost: 5e4, nonCov: 0.2, setting: "clinic" });
+    const h1 = INS.medical({ cost: 4e6, nonCov: 0.25, setting: "inpatient" });
+    const b1 = INS.medical({ cost: 2.5e7, nonCov: 0.3, setting: "inpatient", special: "cancer" });
+    const BEN = [];
+    for (let a = A0; a <= A1; a++) {
+      const visits = 6 + 0.0035 * Math.pow(a - 20, 2);
+      const big = INS.incidence("cancer", a, "m") + INS.incidence("stroke", a, "m") + INS.incidence("ami", a, "m");
+      BEN.push(K * (visits * o1.nhis + INS.incidence("hosp", a, "m") * h1.nhis + big * b1.nhis));
+    }
+    const prem = (a, g) => { const p = g * SOC.health * (1 + SOC.ltc) * 12 * (emp.checked ? 2 : 1); return a < 60 ? p : p / 3; };
+    cv = IB.canvas("#nv-cv", (ctx, w, h) => {
+      const P = IB.palette(), g = Gr();
+      const pd = [], bd = [];
+      let PT = 0, BT = 0, cross = null;
+      for (let a = A0; a <= A1; a++) {
+        const p = prem(a, g), b = BEN[a - A0];
+        pd.push([a, p]); bd.push([a, b]); PT += p; BT += b;
+        if (cross == null && b > p) cross = a;
+      }
+      const ymax = Math.max(BEN[BEN.length - 1], prem(30, 1e7)) * 1.05;
+      const box = { x: 58, y: 20, w: w - 58 - 24, h: h - 20 - 44 };
+      const c = IB.chart(ctx, box, { x: [A0, A1], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: w < 520 ? null : "나이(해마다 내는 돈과 받는 돈)",
+        series: [{ data: bd, color: P.ok, width: 2.6 }, { data: pd, color: P.bad, width: 2.6 }], vlines: [{ x: 60, color: P.faint, label: w < 420 ? "" : "은퇴 가정" }] });
+      G = c;
+      if (cross != null) { ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(c.X(cross), c.Y(BEN[cross - A0]), 3.5, 0, TAU); ctx.fill(); T(ctx, cross + "세부터 받는 쪽이 큼", c.X(cross) - 6, c.Y(BEN[cross - A0]) - 10, { size: 11, color: P.text, align: "right" }); }
+      const px = c.X(age);
+      vline(ctx, px, box.y, box.y + box.h, P.text, [4, 3], 1);
+      knob(ctx, px, box.y + 8, P, P.text, 6);
+      IB.stat("nv-o-a", age + "세 · " + IB.wonAxis(prem(age, g)) + " / " + IB.wonAxis(BEN[age - A0]));
+      IB.stat("nv-o-p", tone("bad-t", won(PT)));
+      IB.stat("nv-o-b", tone("ok-t", won(BT)));
+      const r = BT / PT;
+      IB.stat("nv-o-r", tone(r >= 1 ? "ok-t" : "warn-t", r.toFixed(2) + "배"));
+    }, { aspect: 0.62, minHeight: 280, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; age = Math.round(IB.clamp(invX(G, A0, A1, x), A0, A1)); rd(); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 장애·유족연금 어림 계산기 */
+  (function () {
+    let cv = null, G = null;
+    const rd = () => cv && cv.redraw();
+    const KIND = IB.seg("np-kind", rd);
+    const Br = IB.range("np-b", (v) => won(v), rd);
+    const Nr = IB.range("np-n", (v) => v + "년", rd);
+    const Kr = IB.range("np-k", (v) => v + "명", rd);
+    const sp = document.getElementById("np-sp");
+    sp.addEventListener("change", rd);
+    const RATE = { d1: 1, d2: 0.8, d3: 0.6 };
+    function benefit(kind, B, n) {
+      const base = SOC.basic(B, n, true);
+      const kids = Kr() * SOC.childY / 12, spouse = sp.checked ? SOC.spouseY / 12 : 0;
+      if (kind === "d4") return { base, monthly: 0, lump: base * 2.25, rate: 2.25 };
+      if (kind === "sv") { const r = n < 10 ? 0.4 : n < 20 ? 0.5 : 0.6; return { base, monthly: base * r + kids, lump: 0, rate: r }; }
+      return { base, monthly: base * RATE[kind] + spouse + kids, lump: 0, rate: RATE[kind] };
+    }
+    cv = IB.canvas("#np-cv", (ctx, w, h) => {
+      const P = IB.palette(), kind = KIND(), B = Br(), n = Nr(), bf = benefit(kind, B, n);
+      const lumpMode = kind === "d4";
+      const raw = [], adj = [], ben = [];
+      for (let k = 1; k <= 40; k++) { raw.push([k, SOC.basic(B, k, false)]); adj.push([k, SOC.basic(B, k, true)]); const b = benefit(kind, B, k); ben.push([k, lumpMode ? b.lump : b.monthly]); }
+      const ymax = lumpMode ? SOC.basic(8e6, 40, true) * 2.4 : SOC.basic(8e6, 40, true) * 1.15;
+      const box = { x: 58, y: 22, w: w - 58 - 24, h: h - 22 - 44 };
+      const c = IB.chart(ctx, box, { x: [0, 40], y: [0, ymax], xTicks: [0, 10, 20, 30, 40], xFmt: (v) => v + "년", yFmt: IB.wonAxis, xLabel: w < 520 ? null : lumpMode ? "가입연수 → 일시금" : "가입연수 → 월 금액",
+        bands: [{ x0: 0, x1: 20, color: IB.color("accent-soft") }],
+        series: lumpMode ? [{ data: raw, color: P.faint, width: 1.5, dash: [5, 4] }, { data: ben, color: P.accent, width: 2.6 }]
+          : [{ data: raw, color: P.faint, width: 1.5, dash: [5, 4] }, { data: adj, color: P.accent2, width: 1.8 }, { data: ben, color: P.accent, width: 2.8 }] });
+      G = c;
+      if (w >= 420) T(ctx, "20년 보정 구간", c.X(10), box.y + 14, { size: 11, color: P.accent, align: "center" });
+      const val = lumpMode ? bf.lump : bf.monthly, px = c.X(n);
+      vline(ctx, px, box.y, box.y + box.h, P.text, [4, 3], 1);
+      knob(ctx, px, c.Y(val), P, P.accent, 7);
+      const right = px > box.x + box.w * 0.6;
+      T(ctx, (lumpMode ? "일시금 " : "월 ") + won(val), px + (right ? -12 : 12), c.Y(val) - 12, { size: 12, color: P.text, align: right ? "right" : "left", weight: 700 });
+      IB.stat("np-o-b", won(bf.base) + (n < 20 ? " <small>20년 보정</small>" : ""));
+      IB.stat("np-o-m", lumpMode ? "일시금 " + won(bf.lump) : "월 " + won(bf.monthly) + " <small>" + Math.round(bf.rate * 100) + "%</small>");
+      IB.stat("np-o-t", lumpMode ? won(bf.lump) : won(bf.monthly * 120));
+      IB.stat("np-o-r", lumpMode ? IB.pct(bf.lump / (B * 12), 0) + " <small>연봉 대비</small>" : IB.pct(bf.monthly / B, 0));
+    }, { aspect: 0.62, minHeight: 280, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; Nr.set(Math.round(IB.clamp(invX(G, 0, 40, x), 1, 40))); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 일을 쉬는 동안 들어오는 돈 (애니메이션) */
+  (function () {
+    let cv = null, t = 0, hold = 0;
+    const rd = () => cv && cv.redraw();
+    const restart = () => { t = 0; hold = 0; rd(); };
+    const CAUSE = IB.seg("sj-cause", restart);
+    const Gr = IB.range("sj-g", (v) => won(v), rd);
+    const Mr = IB.range("sj-m", (v) => v + "개월", restart);
+    function months() {
+      const g = Gr(), n = Mr(), cause = CAUSE(), out = [];
+      let sickLeft = SOC.sickDays;
+      for (let m = 1; m <= n; m++) {
+        let pay = 0;
+        if (cause === "work") pay = 0.7 * g * 12 / 365 * (m === 1 ? 27 : 30);
+        else if (cause === "pilot") { const days = Math.min(sickLeft, m === 1 ? 30 - SOC.sickWait : 30); sickLeft -= days; pay = days * SOC.sickDay; }
+        out.push({ m, lost: g, pay });
+      }
+      return out;
+    }
+    cv = IB.canvas("#sj-cv", (ctx, w, h) => {
+      const P = IB.palette(), M = months();
+      const box = { x: 52, y: 30, w: w - 52 - 14, h: h - 30 - 40 };
+      const ymax = 8.4e6;
+      const c = IB.chart(ctx, box, { x: [0, 12], y: [0, ymax], xTicks: [], yFmt: IB.wonAxis });
+      const slot = box.w / 12, bw = slot * 0.7;
+      const shown = Math.min(M.length, t);
+      M.forEach((mm, i) => {
+        const x = box.x + slot * i + (slot - bw) / 2;
+        const f = IB.clamp(shown - i, 0, 1);
+        T(ctx, mm.m + "", x + bw / 2, box.y + box.h + 14, { size: 11, mono: true, color: P.dim, align: "center", base: "middle" });
+        ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = P.faint; ctx.strokeRect(x + 0.5, c.Y(mm.lost), bw - 1, c.Y(0) - c.Y(mm.lost)); ctx.restore();
+        if (f > 0) { const v = mm.pay * f; seg(ctx, x, c.Y(v), bw, c.Y(0) - c.Y(v), P.ok, P, null, 0.4); }
+      });
+      T(ctx, "개월", box.x + box.w, box.y + box.h + 30, { size: 11, color: P.faint, align: "right", base: "middle" });
+      const label = { work: "산재 휴업급여(평균임금 70%)", pilot: "상병수당(시범사업 가정)", none: "사회보험 소득 없음" }[CAUSE()];
+      T(ctx, label, 12, 16, { size: 12, color: CAUSE() === "none" ? P.bad : P.ok, base: "middle", weight: 700 });
+      T(ctx, Math.max(1, Math.ceil(Math.min(shown, M.length))) + "개월째", w - 14, 16, { size: 12, color: P.dim, align: "right", base: "middle" });
+      const totL = M.reduce((s, x) => s + x.lost, 0), totP = M.reduce((s, x) => s + x.pay, 0);
+      IB.stat("sj-o-l", won(totL));
+      IB.stat("sj-o-p", tone("ok-t", won(totP)));
+      IB.stat("sj-o-r", IB.pct(totP / totL, 0));
+      IB.stat("sj-o-g", tone("bad-t", won(totL - totP)));
+    }, { aspect: 0.6, minHeight: 260, maxHeight: 380 });
+    IB.loop(cv.canvas, (dt) => {
+      const n = Mr();
+      if (t < n) t = Math.min(n, t + dt * 2.2);
+      else { hold += dt; if (hold > 2.5) { hold = 0; t = 0; } }
+      cv.redraw();
+    });
+    document.getElementById("sj-re").addEventListener("click", restart);
+  })();
+
+  /* ---------------------------------------------------------- 5. 실업급여와 상한 */
+  (function () {
+    let cv = null, G = null;
+    const GMIN = 1.5e6, GMAX = 1e7;
+    const rd = () => cv && cv.redraw();
+    const Gr = IB.range("ub-g", (v) => won(v), rd);
+    const Yr = IB.range("ub-y", (v) => v + "년", rd);
+    const o50 = document.getElementById("ub-50");
+    o50.addEventListener("change", rd);
+    cv = IB.canvas("#ub-cv", (ctx, w, h) => {
+      const P = IB.palette(), g = Gr();
+      const real = [], raw = [];
+      for (let v = GMIN; v <= GMAX + 1; v += 5e4) { real.push([v, SOC.ubDaily(v) * 30]); raw.push([v, 0.6 * v * 12 / 365 * 30]); }
+      const box = { x: 58, y: 22, w: w - 58 - 24, h: h - 22 - 44 };
+      const c = IB.chart(ctx, box, { x: [GMIN, GMAX], y: [0, 6.2e6], xTicks: [2e6, 4e6, 6e6, 8e6], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: w < 520 ? null : "퇴직 전 세전 월급 → 월 환산 구직급여",
+        series: [{ data: raw, color: P.faint, width: 1.6, dash: [5, 4] }, { data: real, color: P.ok, width: 2.8 }] });
+      G = c;
+      const d = SOC.ubDaily(g), m = d * 30, px = c.X(g), py = c.Y(m);
+      // 빈틈: 60% 선과 실제 사이
+      const r60 = 0.6 * g * 12 / 365 * 30;
+      if (r60 > m) { vline(ctx, px, c.Y(r60), py, P.bad, [2, 2], 2); T(ctx, "상한이 깎은 몫 " + IB.wonAxis(r60 - m), px + (px > box.x + box.w * 0.6 ? -8 : 8), (c.Y(r60) + py) / 2, { size: 11, color: P.bad, align: px > box.x + box.w * 0.6 ? "right" : "left", base: "middle" }); }
+      knob(ctx, px, py, P, P.ok, 7);
+      T(ctx, "월급 대비 " + IB.pct(m / g, 0), px + (px > box.x + box.w * 0.6 ? -10 : 10), py + 18, { size: 12, color: P.text, align: px > box.x + box.w * 0.6 ? "right" : "left", weight: 700 });
+      const days = SOC.ubDays(Yr(), o50.checked);
+      IB.stat("ub-o-d", won(d) + (d >= SOC.ubCap ? " <small>상한</small>" : d <= SOC.ubFloor ? " <small>하한</small>" : ""));
+      IB.stat("ub-o-m", won(m));
+      IB.stat("ub-o-r", tone(m / g < 0.5 ? "warn-t" : "ok-t", IB.pct(m / g, 0)));
+      IB.stat("ub-o-t", days + "일 · " + won(d * days));
+    }, { aspect: 0.62, minHeight: 280, maxHeight: 400 });
+    IB.drag(cv.canvas, { move(x) { if (!G) return; Gr.set(Math.round(IB.clamp(invX(G, GMIN, GMAX, x), GMIN, GMAX) / 5e4) * 5e4); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 장기요양 한 달 비용 */
+  (function () {
+    let cv = null;
+    const FAC = { 1: 90000, 2: 84000, 3: 79000, 4: 79000, 5: 79000 };      // 시설 하루 수가(약)
+    const HOME = { 1: 2310000, 2: 2080000, 3: 1490000, 4: 1370000, 5: 1180000 }; // 재가 월 한도(약)
+    const rd = () => cv && cv.redraw();
+    const Gs = IB.seg("lt-g", rd);
+    const U = IB.seg("lt-use", rd);
+    const X = IB.range("lt-x", (v) => won(v), rd);
+    const cut = document.getElementById("lt-cut");
+    cut.addEventListener("change", rd);
+    cv = IB.canvas("#lt-cv", (ctx, w, h) => {
+      const P = IB.palette(), g = Number(Gs()), fac = U() === "fac";
+      const cost = fac ? FAC[g] * 30 : HOME[g];
+      const rate = (fac ? 0.2 : 0.15) * (cut.checked ? 0.6 : 1);
+      const self = cost * rate, nhis = cost - self, extra = X(), mine = self + extra;
+      const top = 44, bx = 16, bw = w - 32, bh = 46;
+      const total = cost + extra, maxT = 2.7e6 + 1.5e6, sc = bw / maxT;
+      T(ctx, (fac ? "시설" : "재가") + " · " + g + "등급 · 한 달", bx, 20, { size: 13, color: P.text, base: "middle", weight: 700 });
+      seg(ctx, bx, top, nhis * sc, bh, P.accent, P, "공단 " + IB.wonAxis(nhis));
+      seg(ctx, bx + nhis * sc, top, self * sc, bh, P.warn, P, IB.wonAxis(self));
+      seg(ctx, bx + (nhis + self) * sc, top, extra * sc, bh, P.bad, P, IB.wonAxis(extra));
+      T(ctx, "총 " + won(total), bx + total * sc + 6 > w - 70 ? w - 16 : bx + total * sc + 6, top + bh + 18, { size: 11.5, color: P.dim, align: bx + total * sc + 6 > w - 70 ? "right" : "left" });
+      // 내 돈 막대(아래)
+      const y2 = top + bh + 44;
+      T(ctx, "내가 매달 내는 돈", bx, y2 - 8, { size: 12, color: P.dim });
+      seg(ctx, bx, y2, self * sc, bh * 0.7, P.warn, P);
+      seg(ctx, bx + self * sc, y2, extra * sc, bh * 0.7, P.bad, P);
+      T(ctx, won(mine), bx + mine * sc + 8, y2 + bh * 0.35, { size: 13, color: P.bad, base: "middle", weight: 700 });
+      if (fac && g >= 3) T(ctx, "시설급여는 원칙적으로 1·2등급. " + g + "등급은 예외 인정이 필요하다.", bx, h - 16, { size: 11.5, color: P.warn, weight: 600 });
+      else if (!fac) T(ctx, "월 한도를 모두 쓴다고 가정. 한도 밖 돌봄은 가족 몫이다.", bx, h - 16, { size: 11.5, color: P.dim });
+      IB.stat("lt-o-c", won(cost));
+      IB.stat("lt-o-n", won(nhis));
+      IB.stat("lt-o-o", tone("bad-t", won(mine)) + " <small>본인 " + Math.round(rate * 100) + "%</small>");
+      IB.stat("lt-o-t", won(mine * 36));
+    }, { height: 210 });
+  })();
+
+  /* ---------------------------------------------------------- 7. 위험별 필요와 사회보험, 빈틈 */
+  (function () {
+    let cv = null;
+    const disp = [0, 0, 0, 0, 0];
+    const rd = () => cv && cv.redraw();
+    const S = IB.range("gp-s", (v) => won(v), () => {});
+    const Y = IB.range("gp-y", (v) => v + "년", () => {});
+    const sj = document.getElementById("gp-sj"), sick = document.getElementById("gp-sick");
+    const INS_YEARS = 6, AGE = 32;
+    const decileOf = (g) => (g <= 2e6 ? 3 : g <= 3e6 ? 5 : g <= 4.5e6 ? 7 : g <= 6e6 ? 8 : g <= 8e6 ? 9 : 10);
+    function rows() {
+      const g = S() / 12, net = g * SOC.netRatio, yrs = Y(), out = [];
+      const m = INS.medical({ cost: 3e7, nonCov: 0.3, setting: "inpatient", special: "cancer" });
+      const cap = INS.cap(m.copay, decileOf(g));
+      out.push({ k: "큰 병", d: "암 1년 치료 + 소득 12개월", need: 3e7 + net * 12, soc: m.nhis + cap.refund + (sick.checked ? SOC.sickDay * SOC.sickDays : 0) });
+      const b = SOC.basic(g, INS_YEARS, true);
+      const dis = (b * 0.8 + SOC.spouseY / 12) * 12 * yrs, sjDis = g * 12 / 365 * 291 * yrs;
+      out.push({ k: "장애", d: "2급 · 소득 " + yrs + "년", need: net * 12 * yrs, soc: sj.checked ? sjDis + dis / 2 : dis });
+      const sv = (b * 0.4 + SOC.spouseY / 12) * 12 * yrs, sjSv = g * 12 / 365 * 365 * 0.52 * yrs;
+      out.push({ k: "사망", d: "유족 소득 " + yrs + "년", need: net * 12 * yrs, soc: sj.checked ? sjSv + sv / 2 : sv });
+      const days = Math.min(180, SOC.ubDays(INS_YEARS, AGE >= 50));
+      out.push({ k: "실직", d: "6개월", need: net * 6, soc: SOC.ubDaily(g) * days });
+      out.push({ k: "노후 돌봄", d: "시설 3년", need: (2.7e6 + 5e5) * 36, soc: 2.7e6 * 0.8 * 36 });
+      out.forEach((r) => { r.soc = Math.min(r.soc, r.need); r.gap = r.need - r.soc; r.f = r.soc / r.need; });
+      return out;
+    }
+    cv = IB.canvas("#gp-cv", (ctx, w, h) => {
+      const P = IB.palette(), R = rows();
+      const narrow = w < 480, lx = 12, bx = narrow ? 12 : 104, bw = w - bx - 14;
+      const rh = (h - 16) / R.length;
+      R.forEach((r, i) => {
+        const y0 = 10 + i * rh;
+        const by = narrow ? y0 + 20 : y0 + (rh - 26) / 2 + 6, bh = narrow ? Math.min(24, rh - 30) : 26;
+        if (narrow) T(ctx, r.k + " · 필요 " + IB.wonAxis(r.need), lx, y0 + 12, { size: 12, color: P.text, base: "middle", weight: 700 });
+        else { T(ctx, r.k, lx, by + 8, { size: 13, color: P.text, base: "middle", weight: 700 }); T(ctx, "필요 " + IB.wonAxis(r.need), lx, by + 24, { size: 11, color: P.dim, base: "middle" }); }
+        const f = disp[i];
+        seg(ctx, bx, by, bw * f, bh, P.accent, P, f > 0.14 ? IB.pct(f, 0) : null, 0.32);
+        seg(ctx, bx + bw * f, by, bw * (1 - f), bh, P.bad, P, (1 - f) > 0.3 ? "빈틈 " + IB.wonAxis(r.need * (1 - f)) : null, 0.24);
+        if (!narrow) T(ctx, r.d, bx, by - 6, { size: 10.5, color: P.faint });
+      });
+      const N = R.reduce((s, r) => s + r.need, 0), So = R.reduce((s, r) => s + r.soc, 0);
+      const big = R.slice().sort((a, b) => b.gap - a.gap)[0];
+      IB.stat("gp-o-n", won(N));
+      IB.stat("gp-o-s", tone("ok-t", won(So)));
+      IB.stat("gp-o-g", tone("bad-t", won(N - So)));
+      IB.stat("gp-o-x", big.k + " <small>" + IB.wonAxis(big.gap) + "</small>");
+    }, { get height() { const w = document.getElementById("gp-cv").parentElement.clientWidth || 600; return w < 480 ? 330 : 320; } });
+    [sj, sick].forEach((el) => el.addEventListener("change", rd));
+    IB.loop(cv.canvas, (dt) => {
+      const R = rows(), k = 1 - Math.exp(-dt * 6);
+      let moving = false;
+      R.forEach((r, i) => { const d = r.f - disp[i]; if (Math.abs(d) > 0.0005) { disp[i] += d * k; moving = true; } else disp[i] = r.f; });
+      if (moving) cv.redraw();
+      else if (!cv._settled) { cv._settled = true; cv.redraw(); }
+      if (moving) cv._settled = false;
+    });
+  })();
+})();
+</script>
+</body>
+</html>

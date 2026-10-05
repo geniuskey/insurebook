@@ -1,0 +1,10 @@
+{
+  "id": "insurebook",
+  "title": "InsureBook",
+  "description": "보험은 왜 이렇게 복잡하고, 보험설계사는 왜 존재하는가. 위험을 나누는 수학과 보험료 계산, 약관과 갱신, 실손·진단비·종신·저축성·자동차보험, 수수료와 보험회사의 속사정, 청구와 분쟁, 보장 설계까지. 지우네 상담 노트를 따라 숫자를 직접 바꾸며 배웁니다.",
+  "url": "https://insurebook.euiyun.com/",
+  "repo": "https://github.com/geniuskey/insurebook",
+  "field": "money",
+  "status": "published",
+  "domain": "insurebook.euiyun.com"
+}

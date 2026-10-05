@@ -1,0 +1,1063 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설계사를 위한 장: 좋은 상담 · InsureBook</title>
+<meta name="description" content="좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://insurebook.euiyun.com/chapters/advisor.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#2a5bd7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="InsureBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="설계사를 위한 장: 좋은 상담 · InsureBook">
+<meta property="og:description" content="좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://insurebook.euiyun.com/chapters/advisor.html">
+<meta property="og:image" content="https://insurebook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://insurebook.euiyun.com/chapters/advisor.html#chapter","name":"설계사를 위한 장: 좋은 상담","headline":"설계사를 위한 장: 좋은 상담 · InsureBook","description":"좋은 보험 상담은 어떻게 생겼는가. 금융소비자보호법의 6대 판매원칙, 적합성 진단과 설명의무, 고객의 권리 시계, 니즈 환기 대화, 고령자 보호와 완전판매, 유지율과 소개로 보는 오래 가는 설계사의 경제학, 윤리적 딜레마를 시뮬레이터로 익힌다.","url":"https://insurebook.euiyun.com/chapters/advisor.html","position":19,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://insurebook.euiyun.com/og.png","dateModified":"2026-10-05","isPartOf":{"@type":"Book","@id":"https://insurebook.euiyun.com/#book","name":"InsureBook · 보험이 복잡한 이유를 푸는 교과서","url":"https://insurebook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"InsureBook","item":"https://insurebook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"19. 설계사를 위한 장: 좋은 상담","item":"https://insurebook.euiyun.com/chapters/advisor.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/insure.js"></script>
+<!--head:end-->
+<style>
+  .su-list { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); padding: 14px; }
+  .su-card { border: 1px solid var(--border); border-left-width: 4px; border-radius: 10px; padding: 10px 12px; background: var(--bg-elev); font-size: 13.5px; }
+  .su-card.pass { border-left-color: var(--ok); } .su-card.warn { border-left-color: var(--warn); } .su-card.fail { border-left-color: var(--bad); }
+  .su-card .hd { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .su-card .hd b { font-size: 14px; color: var(--text); }
+  .su-card .pr { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin: 2px 0 6px; }
+  .su-card ul { margin: 0; padding-left: 16px; color: var(--text-dim); }
+  .su-card li { margin: 2px 0; }
+  .dg-chat { height: 270px; overflow-y: auto; padding: 14px; display: grid; gap: 8px; align-content: start; }
+  .dg-msg { max-width: 86%; padding: 8px 12px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+  .dg-msg.adv { justify-self: end; background: var(--accent-soft); color: var(--text); border-bottom-right-radius: 4px; }
+  .dg-msg.cus { justify-self: start; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+  .dg-msg.sys { justify-self: center; max-width: 100%; font-size: 12.5px; color: var(--text-dim); background: transparent; padding: 2px 6px; }
+  .dg-opts { display: grid; gap: 8px; }
+  .dg-opts .btn { text-align: left; font-size: 13.5px; line-height: 1.45; }
+  .dl-text { padding: 12px 16px 16px; font-size: 14.5px; color: var(--text-dim); line-height: 1.6; border-top: 1px solid var(--border); }
+  .dl-text b { color: var(--text); }
+  .ex-list { display: grid; gap: 7px; }
+  .ex-list .check { font-size: 13.5px; line-height: 1.35; align-items: flex-start; }
+  .ex-list .check input { margin-top: 2px; flex: none; }
+  .ex-list .check.core span::after { content: " 핵심"; font-size: 11px; color: var(--bad); font-weight: 700; }
+  .ex-list .check.na { opacity: .45; }
+</style>
+</head>
+<body data-chapter="advisor">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 19</div>
+    <h1>설계사를 위한 장: 좋은 상담</h1>
+    <p class="lead">도윤은 3년 차다. 같은 해에 시작한 동기 열두 명 가운데 남은 사람은 다섯이다. 떠난 사람들 중에는 첫해 실적이 가장 좋았던 사람도 있었다. 이 장은 현장의 보험설계사를 위해 쓴 장이다. 법이 요구하는 판매원칙, 고객의 이해를 끌어내는 대화, 오래 가는 설계사의 수입 구조, 그리고 매달 마주치는 윤리적 선택을 다룬다. 동시에 보험에 가입하는 사람에게는 <b>좋은 상담이 어떻게 생겼는지</b> 알아보는 기준이 된다.</p>
+    <ul class="objectives">
+      <li>금융소비자보호법의 6대 판매원칙을 상담의 각 단계에 연결한다.</li>
+      <li>고객 정보로 제안의 적합성을 진단하고, 부적합의 이유를 말로 설명한다.</li>
+      <li>설명의무의 핵심 항목과 빠졌을 때 고객이 가지는 권리를 날짜로 이해한다.</li>
+      <li>공포 중심 판매와 질문 중심 발견이 고객의 이해와 신뢰를 어떻게 다르게 만드는지 본다.</li>
+      <li>첫해 수수료 극대화와 유지율·소개 극대화가 10년 수입에서 어떻게 갈리는지 계산한다.</li>
+    </ul>
+  </header>
+
+  <section id="principles">
+    <h2>6대 판매원칙</h2>
+    <p>2021년부터 시행된 <span class="term">금융소비자보호법</span><span class="en">(금소법)</span>은 은행·증권·보험을 가리지 않고 금융상품을 파는 모든 사람에게 같은 원칙을 지운다. 이전에도 보험업법에 설명의무와 적합성 원칙이 있었지만, 금소법은 이를 여섯 가지 판매원칙으로 묶고, 위반하면 고객이 계약을 해지할 수 있는 권리와 판매업자에 대한 제재를 함께 두었다. 보험이 복잡한 상품인 만큼, 이 원칙들은 대부분 <b>정보의 차이</b>(<a href="asymmetry.html">4장</a>)를 판매 현장에서 메우려는 장치다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 340" role="img" aria-label="금융소비자보호법의 6대 판매원칙: 해야 할 것 세 가지(적합성, 적정성, 설명의무)와 하지 말아야 할 것 세 가지(불공정영업행위, 부당권유행위, 허위·과장광고)">
+        <text x="112" y="20" text-anchor="middle" class="lbl-acc">해야 할 것</text>
+        <text x="328" y="20" text-anchor="middle" class="lbl-bad">하지 말아야 할 것</text>
+        <rect x="8" y="32" width="208" height="92" rx="10" class="f-acc-soft"/>
+        <text x="22" y="56" class="lbl-b">① 적합성 원칙</text>
+        <text x="22" y="80" class="lbl">권유 전에 고객 정보를 파악하고</text>
+        <text x="22" y="100" class="lbl">맞지 않는 상품은 권하지 않는다</text>
+        <rect x="8" y="134" width="208" height="92" rx="10" class="f-acc-soft"/>
+        <text x="22" y="158" class="lbl-b">② 적정성 원칙</text>
+        <text x="22" y="182" class="lbl">고객이 스스로 사려 할 때도</text>
+        <text x="22" y="202" class="lbl">맞지 않으면 알리고 확인받는다</text>
+        <rect x="8" y="236" width="208" height="92" rx="10" class="f-acc-soft"/>
+        <text x="22" y="260" class="lbl-b">③ 설명의무</text>
+        <text x="22" y="284" class="lbl">중요한 사항을 이해할 수 있게</text>
+        <text x="22" y="304" class="lbl">설명하고 이해했는지 확인받는다</text>
+        <rect x="224" y="32" width="208" height="92" rx="10" class="f-bad-soft"/>
+        <text x="238" y="56" class="lbl-b">④ 불공정영업행위 금지</text>
+        <text x="238" y="80" class="lbl">우월한 지위로 다른 상품을</text>
+        <text x="238" y="100" class="lbl">끼워 팔거나 불리하게 하지 않는다</text>
+        <rect x="224" y="134" width="208" height="92" rx="10" class="f-bad-soft"/>
+        <text x="238" y="158" class="lbl-b">⑤ 부당권유행위 금지</text>
+        <text x="238" y="182" class="lbl">단정적 판단, 사실과 다른 말,</text>
+        <text x="238" y="202" class="lbl">비교 왜곡으로 권하지 않는다</text>
+        <rect x="224" y="236" width="208" height="92" rx="10" class="f-bad-soft"/>
+        <text x="238" y="260" class="lbl-b">⑥ 허위·과장광고 금지</text>
+        <text x="238" y="284" class="lbl">보장·환급을 부풀리거나</text>
+        <text x="238" y="304" class="lbl">불리한 점을 숨기지 않는다</text>
+      </svg>
+      <figcaption><b>그림 1. 금융소비자보호법의 6대 판매원칙.</b> 왼쪽 세 가지는 상담에서 반드시 해야 할 일이고, 오른쪽 세 가지는 해서는 안 될 일이다. 적정성 원칙은 권유 없이 고객이 스스로 변액보험 같은 상품을 사려 할 때 적용된다. 세부 적용 범위와 예외는 시행령·감독규정에 따르며 바뀔 수 있다(2026년 기준).</figcaption>
+    </figure>
+
+    <p>원칙을 외우는 것보다 상담의 어느 단계에서 무엇을 지키는지를 아는 것이 실무에 쓸모 있다. 아래 흐름은 한 건의 상담을 여덟 단계로 나누고, 단계마다 남겨야 할 기록을 붙인 것이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 250" role="img" aria-label="상담 여덟 단계와 각 단계의 기록: 니즈 파악, 보장 분석, 설계·비교, 설명·확인, 청약·서명, 해피콜, 청구 지원, 정기 점검">
+        <defs><marker id="ad-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <g>
+          <rect x="6" y="20" width="96" height="78" rx="9" class="f-acc-soft"/>
+          <text x="54" y="42" text-anchor="middle" class="lbl-acc">1 니즈 파악</text>
+          <text x="54" y="64" text-anchor="middle" class="lbl-dim">적합성 진단서</text>
+          <text x="54" y="84" text-anchor="middle" class="lbl-dim">(고객 정보)</text>
+          <rect x="116" y="20" width="96" height="78" rx="9" class="f-acc-soft"/>
+          <text x="164" y="42" text-anchor="middle" class="lbl-acc">2 보장 분석</text>
+          <text x="164" y="64" text-anchor="middle" class="lbl-dim">보장 분석표</text>
+          <text x="164" y="84" text-anchor="middle" class="lbl-dim">(공백·중복)</text>
+          <rect x="226" y="20" width="96" height="78" rx="9" class="f-acc-soft"/>
+          <text x="274" y="42" text-anchor="middle" class="lbl-acc">3 설계·비교</text>
+          <text x="274" y="64" text-anchor="middle" class="lbl-dim">비교 자료</text>
+          <text x="274" y="84" text-anchor="middle" class="lbl-dim">(교체면 비교안내)</text>
+          <rect x="336" y="20" width="96" height="78" rx="9" class="f-warn-soft"/>
+          <text x="384" y="42" text-anchor="middle" class="lbl-b">4 설명·확인</text>
+          <text x="384" y="64" text-anchor="middle" class="lbl-dim">설명 확인서</text>
+          <text x="384" y="84" text-anchor="middle" class="lbl-dim">(녹취·자필)</text>
+          <rect x="336" y="150" width="96" height="78" rx="9" class="f-warn-soft"/>
+          <text x="384" y="172" text-anchor="middle" class="lbl-b">5 청약·서명</text>
+          <text x="384" y="194" text-anchor="middle" class="lbl-dim">청약서·약관</text>
+          <text x="384" y="214" text-anchor="middle" class="lbl-dim">교부</text>
+          <rect x="226" y="150" width="96" height="78" rx="9" class="f-ok-soft"/>
+          <text x="274" y="172" text-anchor="middle" class="lbl-b">6 해피콜</text>
+          <text x="274" y="194" text-anchor="middle" class="lbl-dim">완전판매</text>
+          <text x="274" y="214" text-anchor="middle" class="lbl-dim">모니터링</text>
+          <rect x="116" y="150" width="96" height="78" rx="9" class="f-ok-soft"/>
+          <text x="164" y="172" text-anchor="middle" class="lbl-b">7 청구 지원</text>
+          <text x="164" y="194" text-anchor="middle" class="lbl-dim">서류 안내</text>
+          <text x="164" y="214" text-anchor="middle" class="lbl-dim">(17장)</text>
+          <rect x="6" y="150" width="96" height="78" rx="9" class="f-acc2-soft"/>
+          <text x="54" y="172" text-anchor="middle" class="lbl-acc2">8 정기 점검</text>
+          <text x="54" y="194" text-anchor="middle" class="lbl-dim">1년마다</text>
+          <text x="54" y="214" text-anchor="middle" class="lbl-dim">생애 사건 때</text>
+        </g>
+        <line x1="102" y1="59" x2="114" y2="59" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="212" y1="59" x2="224" y2="59" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="322" y1="59" x2="334" y2="59" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="384" y1="98" x2="384" y2="148" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="336" y1="189" x2="324" y2="189" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="226" y1="189" x2="214" y2="189" class="s-line" marker-end="url(#ad-ar1)"/>
+        <line x1="116" y1="189" x2="104" y2="189" class="s-line" marker-end="url(#ad-ar1)"/>
+        <path d="M54 150 V104" class="s-dash" marker-end="url(#ad-ar1)"/>
+        <text x="62" y="128" class="lbl-dim">다시 1로</text>
+      </svg>
+      <figcaption><b>그림 2. 상담의 여덟 단계와 기록.</b> 1~4단계가 적합성·설명의무의 무대이고, 5~6단계에서 회사가 그 이행을 확인한다. 판매는 5단계에서 끝나지만 상담은 7~8단계로 이어진다. 오래 가는 설계사의 수입은 대부분 이 뒤쪽 고리에서 나온다(이 장의 6절).</figcaption>
+    </figure>
+  </section>
+
+  <section id="suitability">
+    <h2>적합성 진단</h2>
+    <p><span class="term">적합성 원칙</span><span class="en">(Suitability)</span>은 "권하기 전에 묻는다"는 뜻이다. 나이, 소득과 재산, 부양가족, 이미 가진 보장, 감당할 수 있는 보험료, 가입 목적을 먼저 파악하고, 그 정보에 비춰 맞지 않는 상품은 권하지 않는다. 적합성은 상품의 좋고 나쁨이 아니라 <b>이 사람과 이 상품의 관계</b>다. 같은 종신보험이 어떤 고객에게는 적합하고 어떤 고객에게는 부적합하다.</p>
+    <p>아래에서 고객의 정보를 바꾸면 일곱 가지 제안이 각각 적합·주의·부적합으로 갈리고, 그 이유가 붙는다. 기본값은 지우와 비슷한 고객이다. 나이와 부양가족부터 움직여 본다.</p>
+
+    <div class="sim" id="sim-su">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>제안별 적합성 진단</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><div class="su-list" id="su-list"></div></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>나이 <output id="su-age-out"></output></span><input type="range" id="su-age" min="20" max="75" step="1" value="32"></label>
+          <label class="ctrl"><span>가구 월 실수령 <output id="su-inc-out"></output></span><input type="range" id="su-inc" min="1500000" max="15000000" step="100000" value="5900000"></label>
+          <div class="seg" id="su-dep"><button data-value="none">부양가족 없음</button><button data-value="spouse">배우자</button><button data-value="child" class="on">배우자+자녀(계획)</button></div>
+          <label class="ctrl"><span>이미 있는 사망보장 <output id="su-life-out"></output></span><input type="range" id="su-life" min="0" max="500000000" step="10000000" value="100000000"></label>
+          <div class="seg" id="su-cov"><button data-value="none">기존 보장 없음</button><button data-value="silson">실손만</button><button data-value="both" class="on">실손+진단비</button></div>
+          <label class="ctrl"><span>추가 보험료 예산(월) <output id="su-bud-out"></output></span><input type="range" id="su-bud" min="10000" max="1000000" step="10000" value="200000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">적합</span><span class="v" id="su-o-p">—</span></div>
+        <div class="stat"><span class="k">주의(설명·확인 필요)</span><span class="v" id="su-o-w">—</span></div>
+        <div class="stat"><span class="k">부적합</span><span class="v" id="su-o-f">—</span></div>
+        <div class="stat"><span class="k">사망보장 공백(모델)</span><span class="v" id="su-o-g">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(지우와 비슷한 고객, 아이 계획)에서 정기보험은 적합, 실손은 이미 있어 부적합, 종신은 예산의 대부분을 쓴다는 주의가 뜬다. ② 부양가족을 "배우자"로, 다시 "없음"으로 바꾼다. 사망보장 필요액이 기존 1억원보다 작아져 정기보험이 부적합으로 바뀌고, 종신보험에는 "목적 확인" 주의가 붙는다. ③ 나이를 65세 이상으로 올린다. 정기보험(60세 만기)은 성립하지 않고, 변액은 고령 투자성 상품이라 부적합, 종신은 납입이 80대까지 이어지면서 예산을 넘는다. ④ 예산을 3만원으로 내리면 거의 모든 제안이 예산 초과로 떨어진다. (보험료는 이 책의 교육용 모델 값. 필요 사망보장은 INS.needs로 계산했다: 배우자만이면 월 60만원 10년, 자녀가 있으면 월 120만원 20년과 교육비 5,000만원. 실제 적합성 판단은 회사의 진단 기준과 고객 면담을 따른다.)</div>
+    </div>
+
+    <p>진단 결과에서 "부적합"보다 중요한 칸은 "주의"다. 부적합은 대개 숫자로 분명하다(예산 초과, 이미 있는 실손, 만기까지 기간 부족). 주의는 <b>설명하고 확인받아야 하는</b> 칸이다. 부양가족 없는 고객의 종신보험은 상속 재원이나 장례 비용처럼 분명한 목적이 있으면 적합할 수 있다. 문제는 그 목적을 묻지 않고 "저축도 된다"로 넘어갈 때 생긴다. 적합성 원칙의 핵심은 판단 그 자체보다 <b>판단의 근거를 묻고 남기는 것</b>이다.</p>
+    <p>고객이 부적합한 상품을 스스로 원할 수도 있다. 이때는 권유를 멈추고, 맞지 않는다는 사실과 이유를 알린 뒤 고객의 확인을 받는 절차를 따른다. 확인서 한 장으로 책임이 사라지는 것은 아니다. 고객이 이유를 정말 이해했는지가 나중에 분쟁의 쟁점이 된다.</p>
+  </section>
+
+  <section id="explain">
+    <h2>설명의무 체크리스트</h2>
+    <p><span class="term">설명의무</span>는 "설명했다"가 아니라 "고객이 이해할 수 있게 설명하고, 이해했다는 확인을 받았다"까지다. 금소법은 중요한 사항을 빠뜨리거나, 사실과 다르게 알리거나, 이해하기 어렵게 설명하는 것을 모두 위반으로 본다. 보험에서 중요한 사항은 상품마다 조금씩 다르다. 갱신형이면 갱신 때의 인상 가능성이, 무해지형이면 해지환급금이 없다는 점이, 변액이면 원금 손실 가능성과 예금자보호의 한계가 핵심이 된다.</p>
+    <p>아래에서 상품 유형을 고르고, 상담에서 실제로 설명한 항목에 체크한다. 핵심 항목이 빠지면 그 결과로 고객에게 생기는 권리와 판매자에게 생기는 위험이 그림에 나타난다.</p>
+
+    <div class="sim" id="sim-ex">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>설명의무 완성도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ex-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="ex-type"><button data-value="renew" class="on">갱신형 진단비</button><button data-value="nolapse">무해지 종신</button><button data-value="variable">변액보험</button></div>
+          <div class="ex-list" id="ex-list"></div>
+          <div class="btn-row"><button class="btn sm" id="ex-all">모두 설명</button><button class="btn sm" id="ex-none">모두 지우기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">완성도</span><span class="v" id="ex-o-s">—</span></div>
+        <div class="stat"><span class="k">빠진 핵심 항목</span><span class="v" id="ex-o-m">—</span></div>
+        <div class="stat"><span class="k">고객의 권리</span><span class="v" id="ex-o-r">—</span></div>
+        <div class="stat"><span class="k">판매자 위험</span><span class="v" id="ex-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본 상태(보장 내용과 납입기간만 설명)에서 완성도는 낮고 핵심 항목이 여럿 빠져 있다. 고객에게는 위법계약해지 요구권이 생긴다. ② "모두 설명"을 누른 뒤 "갱신 때 보험료가 오를 수 있다는 점" 하나만 지운다. 갱신형에서는 그 하나가 핵심이라 위험이 다시 커진다. ③ 상품을 무해지 종신으로 바꾼다. 같은 체크 상태에서도 핵심 항목이 달라져 결과가 바뀐다. (가중치는 이 책의 교육용 단순화다. 실제 중요사항의 범위와 제재 수준은 법령과 감독규정, 사안에 따라 다르다.)</div>
+    </div>
+
+    <p>체크리스트가 보여 주는 것은 하나다. <b>상품마다 "그 하나"가 다르다.</b> 갱신형 진단비를 팔면서 갱신 인상을 빠뜨리는 것은 무해지 종신에서 해지환급금을 빠뜨리는 것만큼 치명적이다. 고객이 나중에 가장 크게 놀라는 지점이 바로 그 상품의 핵심 항목이고, 분쟁도 대부분 거기서 시작한다.</p>
+    <p>핵심 항목이 빠진 계약에는 고객 쪽 권리가 생긴다. 금소법의 <span class="term">위법계약해지권</span>은 판매원칙 위반이 있으면 고객이 위반 사실을 안 날부터 1년, 계약일부터 5년 안에 계약 해지를 요구할 수 있게 한다. 해지는 장래를 향해 효력이 생기고, 판매자는 해지에 따른 수수료나 위약금을 요구할 수 없다. 판매업자에게는 과태료와 과징금(위반과 관련된 수입의 일정 비율, 최대 약 50% 이내)이 부과될 수 있고, 설명의무 위반으로 손해배상을 다툴 때는 판매업자가 고의·과실이 없었음을 입증해야 한다(2026년 기준, 세부는 법령에 따른다).</p>
+
+    <h3>고객이 가진 권리의 시계</h3>
+    <p>권리는 날짜로 움직인다. 가입 직후에는 이유 없이 물릴 수 있는 <span class="term">청약철회</span>가, 몇 달 안에는 서류·설명 결함에 대한 <span class="term">품질보증해지</span>가, 몇 년 안에는 위법계약해지가 열려 있다. 반대로 보험회사도 고지의무 위반을 이유로 계약을 해지할 수 있는 기간이 정해져 있다. 아래 그림의 세로선을 끌어 "오늘"을 옮기며 어떤 문이 열려 있는지 본다. 청약일을 0일, 증권을 받은 날을 3일째로 가정했다.</p>
+
+    <div class="sim" id="sim-rt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>청약 후 며칠째인가: 열려 있는 권리</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rt-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>오늘(청약 후) <output id="rt-day-out"></output></span><input type="range" id="rt-day" min="0" max="2000" step="1" value="10"></label>
+          <label class="ctrl"><span>고객이 위반을 안 날 <output id="rt-know-out"></output></span><input type="range" id="rt-know" min="0" max="1800" step="10" value="400"></label>
+          <label class="check"><input type="checkbox" id="rt-viol" checked> 판매원칙 위반이 있었다(설명 누락 등)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">오늘</span><span class="v" id="rt-o-d">—</span></div>
+        <div class="stat"><span class="k">고객이 쓸 수 있는 권리</span><span class="v" id="rt-o-r">—</span></div>
+        <div class="stat"><span class="k">보험사의 고지의무 해지</span><span class="v" id="rt-o-i">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 10일째에 둔다. 청약철회, 품질보증해지, (위반이 있으면) 위법계약해지까지 세 문이 모두 열려 있다. ② 세로선을 20일째로 끈다. 증권을 받은 지 15일이 지나 청약철회가 닫힌다. ③ 100일째로 옮기면 품질보증해지(3개월)도 닫힌다. ④ "안 날"을 1,800일로 늦춰 본다. 위법계약해지는 안 날부터 1년이지만 계약일부터 5년을 넘을 수 없어 1,825일에서 끊긴다. (INS.KR의 2026년 기준 값. 청약철회는 증권 수령 15일·청약 30일 중 먼저 끝나는 날, 건강진단을 받는 계약 등 예외가 있다. 고지의무 해지는 보장개시 후 2년 무사고, 계약일 3년 등 제한이 있다.)</div>
+    </div>
+
+    <p>설계사에게 이 시계는 두 가지를 말한다. 첫째, 청약철회 기간은 고객이 집에서 다시 생각할 시간이다. 그 기간에 연락해 "혹시 이해가 안 되는 부분이 있었는지" 묻는 설계사는 해피콜에서 문제가 생길 일이 거의 없다. 둘째, 설명이 빠진 계약은 5년 동안 열려 있는 문을 남긴다. 첫해 수수료를 받고 끝나는 거래가 아니라, 5년 동안 되돌아올 수 있는 거래다.</p>
+
+    <div class="callout pro">
+      <strong>설명은 순서와 말로 남긴다</strong>
+      설명의무는 체크리스트를 읽어 주는 것으로 끝나지 않는다. 현장에서 오래 쓰이는 순서는 이렇다. ① 이 계약이 무엇을 보장하는지 고객의 상황으로 다시 말한다("민서 님이 암 진단을 받으면 3,000만원이 한 번 나옵니다"). ② 주지 않는 경우를 같은 무게로 말한다(면책 90일, 1년 감액, 유사암). ③ 돈이 움직이는 시점을 말한다(갱신 시점과 예상 인상, 해지하면 받는 돈). ④ 고객의 권리를 말한다(청약철회 15일, 위법계약해지). ⑤ 고객에게 자기 말로 요약해 달라고 한다. ⑤에서 막히는 항목이 설명이 덜 된 항목이다. 상담 기록에는 "무엇을 설명했다"보다 "고객이 무엇을 확인했다"를 적는다.
+    </div>
+  </section>
+
+  <section id="dialogue">
+    <h2>니즈 환기 대화</h2>
+    <p><a href="agent.html">14장</a>에서 본 것처럼 보험은 사람들이 스스로 사지 않는 상품이다. 위험을 과소평가하고, 오늘의 지출을 내일의 보장보다 크게 느끼기 때문이다. 그래서 설계사의 일에는 <span class="term">니즈 환기</span>, 즉 고객이 자기 위험을 보게 돕는 일이 들어 있다. 문제는 방법이다. 가장 빠른 방법은 공포다. "주변에 아픈 사람 많잖아요, 준비 안 하면 큰일 납니다." 공포는 계약을 만들지만, 이해를 만들지는 않는다.</p>
+    <p>아래 대화에서 설계사가 되어 네 번의 선택을 한다. 고객은 35세 맞벌이, 아이 하나, 실손만 있는 가상의 인물이다. 선택마다 고객의 <b>이해도</b>와 <b>신뢰도</b>가 움직이고, 대화가 끝나면 계약 여부와 13회차 유지 전망이 나온다. 한 번은 질문 위주로, 한 번은 공포 위주로 끝까지 가 본다.</p>
+
+    <div class="sim" id="sim-dg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>대화로 보는 상담: 공포 vs 질문</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view">
+          <div class="dg-chat" id="dg-chat"></div>
+          <canvas id="dg-cv"></canvas>
+        </div>
+        <div class="sim-controls">
+          <div class="dg-opts" id="dg-opts"></div>
+          <div class="btn-row"><button class="btn" id="dg-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">이해도</span><span class="v" id="dg-o-u">—</span></div>
+        <div class="stat"><span class="k">신뢰도</span><span class="v" id="dg-o-t">—</span></div>
+        <div class="stat"><span class="k">결과</span><span class="v" id="dg-o-r">—</span></div>
+        <div class="stat"><span class="k">13회차 유지 전망(모델)</span><span class="v" id="dg-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 네 번 모두 고객에게 묻는 선택지(질문)를 고른다. 선택지 순서는 단계마다 섞여 있다. 이해도와 신뢰도가 함께 오르고, 계약이 되든 안 되든 고객이 스스로 결정한다. ② 처음부터 다시, 모두 공포 선택지를 고른다. 신뢰도는 떨어지는데 압박 때문에 계약이 될 수 있다. 그 대신 이해도가 낮아 유지 전망이 떨어지고, 해피콜에서 문제가 될 위험이 표시된다. ③ 마지막 단계에서 "첫 달 보험료를 내 주겠다"를 고른다. 신뢰도가 잠깐 오르는 것처럼 보이지만 특별이익 제공으로 법 위반이다. (이해도·신뢰도 변화와 유지 전망은 이 책의 교육용 모델이다. 실제 고객의 반응은 사람마다 다르다.)</div>
+    </div>
+
+    <p>두 길의 차이는 계약 여부보다 <b>계약의 질</b>에서 크게 난다. 공포로 만든 계약은 고객이 왜 샀는지 설명하지 못한다. 그래서 첫 보험료 인상, 첫 생활비 압박, 다른 설계사의 한마디에 해지된다. 질문으로 만든 계약은 고객이 자기 숫자(소득, 생활비, 공백)로 이유를 안다. <a href="commission.html">15장</a>의 계산처럼 2년 안의 해지는 설계사에게 환수로 돌아오니, 이 차이는 고객만의 문제가 아니다.</p>
+    <p>질문 중심 상담이 좋은 것은 착해서가 아니라 정보가 모이기 때문이다. 질문은 고객의 소득, 생활비, 기존 보장, 건강 이력을 드러내고, 그 정보가 곧 적합성 진단과 고지의무 확인의 재료가 된다. 공포는 정보를 모으지 않는다. 고객은 불안해질 뿐 자기 상황을 말하지 않는다.</p>
+
+    <div class="callout buyer">
+      <strong>좋은 상담인지 알아보는 다섯 가지 신호</strong>
+      <ul>
+        <li>상품 이야기보다 내 소득·생활비·가족·기존 보험을 먼저 묻는다.</li>
+        <li>지금 가진 보험을 해지하라는 말보다 "고칠 수 있는지"를 먼저 본다(<a href="planning.html">18장</a>).</li>
+        <li>보장하지 않는 경우, 갱신 인상, 해지환급금을 보장 내용과 같은 무게로 말한다.</li>
+        <li>"오늘만", "이번 달까지만"으로 서두르게 하지 않고, 청약철회 기간을 먼저 알려 준다.</li>
+        <li>자기 수수료나 소속(전속·GA·대리·중개)을 물으면 피하지 않고 답한다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="vulnerable">
+    <h2>고령자·취약 소비자 보호와 완전판매</h2>
+    <p>같은 설명도 듣는 사람에 따라 이해의 정도가 다르다. 고령자, 금융 경험이 적은 사람, 장애가 있는 사람, 한국어가 익숙하지 않은 사람에게는 같은 설명으로 같은 이해를 만들기 어렵다. 그래서 감독 당국과 업계는 이런 고객에게 <b>더 강화된 절차</b>를 요구한다. 대표적인 것이 65세 이상 고객이다(2026년 기준 대표 기준이며, 세부는 회사·채널·상품마다 다르다).</p>
+    <ul>
+      <li><b>설명 강화</b>: 핵심 사항을 더 쉬운 말과 큰 글씨 자료로 설명하고, 고객이 이해했는지 다시 확인한다.</li>
+      <li><b>녹취와 가족 확인</b>: 고령자 대상 판매, 특히 투자성 상품이나 고액 계약은 상담 녹취를 남기고, 가족이나 조력자의 동석·확인을 권하는 경우가 많다.</li>
+      <li><b>숙고할 시간</b>: 청약 뒤에 고객이 다시 생각할 수 있도록 별도의 확인 절차를 두기도 한다.</li>
+      <li><b>적합성의 엄격한 적용</b>: 납입 기간이 기대여명을 넘거나 소득 대비 보험료가 큰 계약, 장기 투자를 전제로 한 상품은 특히 꼼꼼히 본다.</li>
+    </ul>
+    <p>회사 쪽에도 확인 장치가 있다. 청약 뒤 회사가 고객에게 직접 연락해 설명을 제대로 들었는지, 자필 서명을 했는지, 청약서 사본과 약관을 받았는지 묻는 <span class="term">해피콜</span>이다. 고객이 "설명을 못 들었다"고 답하면 계약은 보류되거나 재설명 대상이 된다. 이와 함께 회사는 판매 과정을 표본 점검하는 <span class="term">완전판매 모니터링</span>을 하고, 불완전판매 비율이 높은 설계사는 교육·제재 대상이 된다. 설계사에게 해피콜은 시험이 아니라 <b>고객의 이해가 남아 있는지 확인하는 마지막 거울</b>이다. 위 대화에서 공포 길로 간 계약이 걸리는 곳이 바로 여기다.</p>
+
+    <div class="callout pro">
+      <strong>고령 고객 상담에서 자주 생기는 실수</strong>
+      ① 자녀가 동석하지 않은 상태에서 고액 계약을 한 번에 마무리한다. ② "전에 드신 것과 같은 거예요"라며 기존 계약 교체를 가볍게 처리한다(비교안내 누락). ③ 보장 기간이 기대여명을 훨씬 넘거나, 납입 기간이 80대까지 이어지는 설계를 그대로 낸다. ④ 녹취를 남기지만 핵심 항목(해지환급금, 원금 손실)을 빠르게 읽고 넘어간다. 고령 고객의 분쟁은 계약 몇 년 뒤 가족이 서류를 보며 시작되는 경우가 많다. 그때 남아 있는 것은 상담 기록과 녹취뿐이다.
+    </div>
+  </section>
+
+  <section id="economics">
+    <h2>오래 가는 설계사의 경제학</h2>
+    <p>이제 설계사 자신의 숫자를 본다. <a href="commission.html">15장</a>에서 본 것처럼 모집수수료는 첫해에 몰려서 나오고(이 책의 기본 모델: 월 보험료의 12배를 첫해, 나머지 5배를 6년에 걸쳐), 1년 안에 해지되면 첫해 수수료를 모두, 2년째에 해지되면 절반을 돌려줘야 한다. 그래서 한 계약에서 기대할 수 있는 수수료는 해지 시점의 확률로 가중한 평균이다.</p>
+    <div class="formula">$$E[C] = \sum_{L=1}^{7} P(L)\, C(L) + S_7\, C(\text{유지})$$<div class="where">\(P(L)\): \(L\)년째에 해지될 확률(유지율 곡선에서), \(C(L)\): 그때 설계사에게 남는 수수료(지급 − 환수), \(S_7\): 7년 뒤에도 유지될 확률. 유지율이 낮으면 첫해의 큰 수수료가 환수로 깎인다.</div></div>
+    <p>두 설계사를 10년 동안 비교한다. <b>A</b>는 첫해 수수료를 극대화한다. 보험료가 큰 상품을 많이 팔지만 지인 시장이 줄어들며 신계약이 해마다 15%씩 줄고, 유지율이 업계 평균보다 낮다. <b>B</b>는 유지율과 소개를 극대화한다. 처음에는 월 3건, 보험료도 작게 시작하지만 유지율이 높고, 유지 중인 고객이 해마다 일정 비율로 새 고객을 소개한다. 재생을 눌러 10년을 흘려 본다.</p>
+
+    <div class="sim" id="sim-ec">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>두 설계사의 10년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ec-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="ec-view"><button data-value="year" class="on">해마다 수수료</button><button data-value="cum">누적 수수료</button></div>
+          <label class="ctrl"><span>A의 첫해 신계약(월) <output id="ec-n-out"></output></span><input type="range" id="ec-n" min="2" max="12" step="1" value="6"></label>
+          <label class="ctrl"><span>A의 해지 경향(평균 대비) <output id="ec-pow-out"></output></span><input type="range" id="ec-pow" min="1" max="2.5" step="0.1" value="1.6"></label>
+          <label class="ctrl"><span>B의 소개율(유지 고객당 연) <output id="ec-ref-out"></output></span><input type="range" id="ec-ref" min="0" max="0.2" step="0.01" value="0.1"></label>
+          <div class="btn-row"><button class="btn primary" id="ec-play">재생</button><button class="btn" id="ec-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>A: 첫해 수수료 극대화</span><span><i style="background:var(--ok)"></i>B: 유지율·소개 극대화</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">10년 누적 A / B</span><span class="v" id="ec-o-c">—</span></div>
+        <div class="stat"><span class="k">10년째 연간 A / B</span><span class="v" id="ec-o-y">—</span></div>
+        <div class="stat"><span class="k">연간 역전 시점</span><span class="v" id="ec-o-x">—</span></div>
+        <div class="stat"><span class="k">유지 고객 A / B</span><span class="v" id="ec-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 이 책의 교육용 모델로 계산하면 A는 첫해 약 1억원을 벌지만 해마다 줄고, B는 첫해 약 4천만원에서 시작해 5년째에 연간 수수료가 역전되고, 10년 누적에서도 앞선다(약 6.5억원 대 5.9억원). ② B의 소개율을 0으로 내린다. A가 줄어드는 탓에 연간 수수료는 결국 역전되지만, B의 곡선은 거의 평평해지고 10년 누적은 A에 한참 못 미친다(약 4.7억원 대 5.9억원). B의 무기는 유지율 자체보다 유지가 낳는 소개다. ③ A의 해지 경향을 2.5로 올린다. 환수가 커져 A의 곡선이 전체적으로 내려가고, 연간 역전이 4년째로 앞당겨진다. (A: 월 보험료 15만원, 신계약 해마다 15% 감소. B: 월 3건, 월 보험료 10만원, 해지 경향 0.6. 해지 경향 1은 INS.KR.persistency의 업계 평균 근처 곡선이다. 수수료는 INS.commission의 기본값이며 비용·세금·시책을 뺀 모집수수료 기대값이다.)</div>
+    </div>
+
+    <p>그래프의 교차가 이 장의 경제학이다. A의 수입은 <b>새 계약의 흐름</b>에만 기대니 지인 시장이 줄면 함께 줄고, 낮은 유지율이 환수로 그 흐름마저 깎는다. B의 수입은 <b>유지되는 고객의 수</b>에 기대니 시간이 갈수록 쌓인다. 10년 뒤 A에게 남은 고객은 100여 명, B에게는 300명이 넘는다. 이 고객들이 청구 지원과 정기 점검을 받으며 다시 가족과 동료를 데려온다.</p>
+    <p>모델에는 빠진 것도 있다. 현실에는 첫해 실적에 붙는 시책(추가 수당)이 있어 A의 초반 수입은 더 크다. 반대로 승환과 불완전판매가 쌓이면 회사의 제재, 민원, 위법계약해지에 따른 손실이 A쪽에 더 붙는다. 수수료를 여러 해에 나눠 주는 분급 확대 같은 개편이 추진되고 있어 이 차이는 앞으로 더 커질 수 있다(확정 전, <a href="commission.html">15장</a>). 이 계산의 요점은 숫자 자체가 아니라 방향이다. <b>고객의 이익과 설계사의 장기 이익은 생각보다 같은 쪽을 향한다.</b></p>
+  </section>
+
+  <section id="dilemmas">
+    <h2>윤리적 딜레마</h2>
+    <p>원칙은 분명해도 현장의 선택은 흐릿하다. 지점의 압박, 친구의 부탁, 고객 본인의 고집, 다음 달 바뀌는 상품. 아래 네 장의 카드는 설계사가 실제로 자주 마주치는 장면이다. 카드를 고르고 세 가지 대응 가운데 하나를 눌러 본다. 막대는 그 선택이 네 가지 기준(고객의 이익, 설계사의 단기 수입, 장기 신뢰와 소개, 규제 위험)에 주는 영향을 개념적으로 보여 준다.</p>
+
+    <div class="sim" id="sim-dl">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>딜레마 카드</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dl-cv"></canvas><div class="dl-text" id="dl-text"></div></div>
+        <div class="sim-controls">
+          <div class="seg" id="dl-case"><button data-value="0" class="on">시책 기간</button><button data-value="1">지인 영업</button><button data-value="2">절판 마케팅</button><button data-value="3">원하지만 맞지 않는 상품</button></div>
+          <div class="dg-opts" id="dl-opts"></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">고른 대응</span><span class="v" id="dl-o-c">—</span></div>
+        <div class="stat"><span class="k">고객 이익</span><span class="v" id="dl-o-a">—</span></div>
+        <div class="stat"><span class="k">규제 위험</span><span class="v" id="dl-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 네 카드 모두에서 각 대응을 눌러 막대 모양을 비교한다. 단기 수입이 가장 큰 대응은 거의 언제나 규제 위험도 가장 크다. ② 추천 대응(초록 표시)은 단기 수입을 조금 내주고 장기 신뢰를 얻는 모양이다. ③ "원하지만 맞지 않는 상품"에서 "거절하고 끝낸다"를 고른다. 규제 위험은 낮지만 고객 이익도 장기 신뢰도 낮다. 거절보다 설명이 나은 이유다. (점수는 판단을 돕기 위한 개념적 표시이며 측정값이 아니다.)</div>
+    </div>
+
+    <p>네 카드의 추천 대응에는 공통점이 있다. 고객의 결정을 대신하지 않고, <b>정보를 주고 기록을 남긴다.</b> 시책을 포기하는 것도, 친구에게 분석부터 하자고 말하는 것도, 절판 소식을 과장 없이 전하는 것도, 원하는 상품의 부적합 이유를 끝까지 설명하는 것도 그 자리에서는 손해처럼 보인다. 그러나 앞 절의 그래프처럼, 그 손해는 몇 년에 걸쳐 신뢰와 소개로 돌아온다. 반대로 지인 이름을 빌린 계약(작성계약), 첫 보험료 대납 같은 특별이익 제공은 손해가 아니라 위법이다.</p>
+  </section>
+
+  <section id="growth">
+    <h2>성장: 자격, 보수교육, 기록</h2>
+    <p>설계사로 일하려면 보험 종류별로 자격을 갖추고 협회에 등록해야 한다. 판매할 수 있는 상품의 범위가 자격에 따라 정해진다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 290" role="img" aria-label="보험설계사의 자격과 성장: 생명보험·손해보험·제3보험 자격, 변액보험 판매자격, 보수교육, 기록">
+        <defs><marker id="ad-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="8" y="196" width="136" height="84" rx="9" class="f-acc-soft"/>
+        <text x="76" y="222" text-anchor="middle" class="lbl-acc">생명보험</text>
+        <text x="76" y="244" text-anchor="middle" class="lbl-dim">종신·정기·연금</text>
+        <text x="76" y="264" text-anchor="middle" class="lbl-dim">자격시험·등록</text>
+        <rect x="152" y="196" width="136" height="84" rx="9" class="f-acc-soft"/>
+        <text x="220" y="222" text-anchor="middle" class="lbl-acc">손해보험</text>
+        <text x="220" y="244" text-anchor="middle" class="lbl-dim">자동차·화재·배상</text>
+        <text x="220" y="264" text-anchor="middle" class="lbl-dim">자격시험·등록</text>
+        <rect x="296" y="196" width="136" height="84" rx="9" class="f-acc-soft"/>
+        <text x="364" y="222" text-anchor="middle" class="lbl-acc">제3보험</text>
+        <text x="364" y="244" text-anchor="middle" class="lbl-dim">질병·상해·간병</text>
+        <text x="364" y="264" text-anchor="middle" class="lbl-dim">자격시험·등록</text>
+        <line x1="76" y1="194" x2="76" y2="160" class="s-line" marker-end="url(#ad-ar3)"/>
+        <rect x="8" y="104" width="200" height="54" rx="9" class="f-acc2-soft"/>
+        <text x="108" y="126" text-anchor="middle" class="lbl-acc2">변액보험 판매자격</text>
+        <text x="108" y="146" text-anchor="middle" class="lbl-dim">투자성 상품 · 추가 시험</text>
+        <rect x="232" y="104" width="200" height="54" rx="9" class="f-ok-soft"/>
+        <text x="332" y="126" text-anchor="middle" class="lbl-b">보수교육</text>
+        <text x="332" y="146" text-anchor="middle" class="lbl-dim">등록 후 주기적 의무(약 2년)</text>
+        <rect x="8" y="12" width="424" height="70" rx="9" class="f-warn-soft"/>
+        <text x="220" y="38" text-anchor="middle" class="lbl-b">기록: 오래 가는 설계사의 자산</text>
+        <text x="220" y="62" text-anchor="middle" class="lbl-dim">적합성 진단 · 설명 확인 · 비교안내 · 상담 메모 · 청구 지원 이력</text>
+        <line x1="108" y1="102" x2="108" y2="84" class="s-line" marker-end="url(#ad-ar3)"/>
+        <line x1="332" y1="102" x2="332" y2="84" class="s-line" marker-end="url(#ad-ar3)"/>
+        <line x1="220" y1="194" x2="290" y2="160" class="s-dash" marker-end="url(#ad-ar3)"/>
+        <line x1="364" y1="194" x2="350" y2="160" class="s-dash" marker-end="url(#ad-ar3)"/>
+      </svg>
+      <figcaption><b>그림 3. 자격과 성장의 사다리.</b> 아래층은 판매할 수 있는 상품의 범위를 정하는 자격이고, 변액보험은 생명보험 자격 위에 별도 자격이 필요하다. 등록 뒤에는 주기적인 보수교육을 받는다. 자격 체계와 교육 주기는 2026년 기준 대표적인 모습이며 협회·감독 기준에 따라 바뀔 수 있다.</figcaption>
+    </figure>
+
+    <ul>
+      <li><b>자격</b>: 생명보험, 손해보험, 제3보험(질병·상해·간병) 설계사 자격이 각각 있고, 시험과 교육을 거쳐 협회에 등록한다. 변액보험을 팔려면 별도의 판매자격이 필요하다. GA 소속이라면 여러 회사의 상품을 비교해 설명할 수 있는 만큼, 비교의 공정성에 대한 책임도 크다.</li>
+      <li><b>보수교육</b>: 등록 뒤에는 주기적으로(대략 2년마다) 보수교육을 받아야 한다. 제도와 상품이 해마다 바뀌는 업종이라, 교육은 의무이기 전에 생존 수단이다.</li>
+      <li><b>기록</b>: 좋은 상담은 기록으로 증명된다. 고객이 무엇을 원했고, 무엇을 권했고, 무엇을 권하지 않았고, 고객이 무엇을 확인했는지. 5년 뒤의 분쟁에서 기억은 증거가 되지 않는다. 기록은 분쟁을 막는 방패이자, 정기 점검 때 고객의 변화를 알아보는 도구다.</li>
+    </ul>
+    <p>보험설계사는 정보의 차이를 메우는 직업이다(<a href="agent.html">14장</a>). 그 차이를 판매에 이용하면 단기 수입이 생기고, 그 차이를 줄이는 데 쓰면 오래 가는 고객이 생긴다. 이 책 전체가 설계사에게 하고 싶은 말은 결국 하나다. <b>고객이 이 책을 다 읽었더라도 당신에게 상담을 받고 싶어 할 상담을 하라.</b></p>
+
+    <div class="callout warn">
+      <strong>제도와 기준은 해마다 바뀐다</strong>
+      이 장의 금소법 판매원칙, 위법계약해지 기간(안 날 1년·계약일 5년), 청약철회(증권 15일·청약 30일), 품질보증해지(3개월), 과징금·과태료 수준, 고령자 보호 절차, 자격·보수교육 체계는 2026년 기준의 대표적인 내용이다. 수수료 분급 확대 같은 판매수수료 개편은 추진 중이며 확정 전이다. 수수료와 유지율의 계산은 이 책의 교육용 모델이고, 실제 수수료 체계는 회사·상품·소속에 따라 다르다. 실무에서는 회사의 내부통제 기준과 최신 법령·감독규정을 따른다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>도윤의 상담 기록</h2>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 19장</span></div>
+      <h4>팔기 전에 분석, 판 뒤에 기록: 도윤의 3년</h4>
+      <p>도윤은 18장의 설계를 청약하기 전에 상담 기록을 처음부터 다시 정리했다. <b>적합성 진단</b>: 지우(32세)와 민서(31세), 가구 실수령 590만원, 아이 계획, 기존 사망보장 1억5,000만원(단체보험 포함), 추가 보험료 예산 월 15만~20만원. 정기보험·비갱신 진단비는 모두 적합, 실손 추가는 부적합(이미 있음)으로 적고, 종신 교체는 "검토했으나 권하지 않음"과 그 숫자(같은 보장을 다시 사는 데 2,500만원 이상)를 남겼다. 교체가 없으니 비교안내 대상은 아니었지만, 지우가 받은 다른 설계사의 교체 제안서와 비교한 표를 확인서와 함께 붙였다. <b>설명의무</b>: 계약마다 핵심 항목(암 진단비는 90일 면책과 1년 감액, 정기보험은 만기 환급이 없고 50세 만기분은 그때 끝난다는 점, 무해지형 뇌·심장 진단비는 납입 중 해지하면 돌려받는 돈이 0원이라는 점)을 민서가 자기 말로 요약하게 하고, 청약철회 기간을 달력에 같이 적었다.</p>
+      <p>도윤이 겪은 딜레마도 기록에 있다. 청약 직전 달은 지점의 종신보험 시책 기간이었다. 지점장은 "그 집 종신을 새 상품으로 바꾸면 이번 달 목표가 끝난다"고 했다. 이 책의 모델(INS.commission)로 보면 지우네 신규 계약(월 161,557원)의 첫해 수수료는 약 194만원인데, 종신 교체까지 하면 약 196만원이 더 붙어 두 배가 된다. 도윤은 교체 계산기의 화면을 지점장에게 보여 주고 시책을 포기했다. 3년 뒤인 2029년, 지우네의 새 계약은 모두 37회차를 넘겨 유지 중이다(모델의 업계 평균 37회차 유지율은 약 62%). 그사이 민서의 충수염 청구를 도왔고(17장), 지우의 회사 동료 두 가정이 "분석부터 해 준다는 그 친구"를 찾아왔다. 지우는 이제 친구에게 도윤을 소개할 때 "보험을 잘 파는 사람"이 아니라 "보험을 잘 설명하는 사람"이라고 말한다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>적합성 진단·설명 확인·교체 검토 기록을 남기고 청약. 시책 기간의 종신 교체 압박은 거절.</div><div><b>아직 남은 문제</b>지우네의 숫자를 다른 가족에 넣으면 무엇이 달라지는가. 수천 번의 인생으로 돌려 보면 이 설계는 얼마나 버티는가.</div><div><b>다음 단계</b><a href="lab.html">20장</a> 실험실에서 지우네 또는 자기 가족을 넣어 직접 돌린다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>금소법의 6대 판매원칙은 해야 할 것(적합성, 적정성, 설명의무)과 하지 말아야 할 것(불공정영업행위, 부당권유행위, 허위·과장광고)으로 나뉜다. 상담의 단계마다 지킬 원칙과 남길 기록이 있다.</li>
+      <li>적합성은 상품이 아니라 고객과 상품의 관계다. "주의" 칸, 즉 목적을 묻고 설명하고 확인받아야 하는 판단이 가장 중요하다.</li>
+      <li>설명의무는 "고객이 이해했다는 확인"까지다. 상품마다 핵심 항목이 다르고(갱신 인상, 해지환급금, 원금 손실), 빠지면 위법계약해지(안 날 1년, 계약일 5년)와 판매자 제재로 이어질 수 있다.</li>
+      <li>공포 중심 판매는 계약을 만들 수 있지만 이해를 만들지 못해 유지율과 해피콜에서 무너진다. 질문 중심 상담은 정보를 모아 적합성과 고지의 재료가 된다.</li>
+      <li>고령자·취약 소비자에게는 설명 강화, 녹취·가족 확인 같은 강화된 절차가 적용된다. 해피콜과 완전판매 모니터링은 고객의 이해를 확인하는 마지막 거울이다.</li>
+      <li>기대 수수료는 해지 확률로 가중한 평균이다. 교육용 모델에서 첫해 수수료 극대화는 초반에 앞서지만, 유지율과 소개를 쌓는 쪽이 몇 년 안에 연간 수입에서 역전한다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>고객이 설계사의 권유 없이 스스로 변액보험에 가입하려 한다. 이때 판매자가 고객 정보를 파악하고, 상품이 맞지 않으면 그 사실을 알려야 하는 원칙은?</p>
+        <div class="opts">
+          <button class="opt">설명의무</button>
+          <button class="opt">불공정영업행위 금지</button>
+          <button class="opt" data-correct>적정성 원칙</button>
+          <button class="opt">허위·과장광고 금지</button>
+        </div>
+        <div class="quiz-exp">적합성 원칙은 판매자가 권유할 때, 적정성 원칙은 권유 없이 고객이 스스로 일정한 상품(변액보험 같은 투자성 성격의 상품 등)을 사려 할 때 적용된다. 맞지 않으면 그 사실을 알리고 확인을 받는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>갱신형 진단비를 팔면서 다른 항목은 모두 설명했지만 갱신 때 보험료가 오를 수 있다는 점을 빠뜨렸다. 이 장의 관점에서 가장 알맞은 평가는?</p>
+        <div class="opts">
+          <button class="opt" data-correct>갱신형에서는 그 항목이 핵심이라, 고객이 위법계약해지를 요구할 수 있는 사유가 될 수 있다</button>
+          <button class="opt">대부분 설명했으니 설명의무를 다한 것이다</button>
+          <button class="opt">약관에 적혀 있으므로 설명하지 않아도 된다</button>
+          <button class="opt">청약철회 기간이 지나면 어떤 권리도 남지 않는다</button>
+        </div>
+        <div class="quiz-exp">설명의무는 항목의 개수가 아니라 상품의 중요한 사항을 이해시켰는지로 판단한다. 갱신 인상은 갱신형의 핵심이다. 판매원칙 위반이 있으면 고객은 안 날부터 1년, 계약일부터 5년 안에 위법계약해지를 요구할 수 있다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>청약 후 20일째, 증권은 3일째에 받았다. 판매 과정에 특별한 위반은 없었다. 고객이 지금 쓸 수 있는 권리로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt">청약철회</button>
+          <button class="opt">위법계약해지</button>
+          <button class="opt">아무 권리도 없다</button>
+          <button class="opt" data-correct>약관·청약서 미교부나 중요 내용 미설명 같은 사유가 있으면 품질보증해지(3개월)</button>
+        </div>
+        <div class="quiz-exp">청약철회는 증권을 받은 날부터 15일(18일째)까지라 이미 지났다. 위법계약해지는 판매원칙 위반이 있어야 한다. 품질보증해지는 계약일부터 3개월 안에, 약관·청약서 미교부, 중요 내용 미설명, 자필서명 누락 같은 사유가 있을 때 쓸 수 있다. 물론 일반 해지는 언제든 할 수 있지만 해지환급금만 받는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>이 장의 10년 모델에서 유지율·소개를 극대화한 설계사 B가 첫해 수수료를 극대화한 A를 연간 수입에서 앞지르는 가장 중요한 이유는?</p>
+        <div class="opts">
+          <button class="opt">B가 첫해에 보험료가 큰 상품을 더 많이 팔기 때문이다</button>
+          <button class="opt" data-correct>유지되는 고객이 쌓이고, 그 고객이 새 고객을 소개해 신계약 흐름이 커지기 때문이다</button>
+          <button class="opt">B는 환수 규칙을 적용받지 않기 때문이다</button>
+          <button class="opt">A의 수수료율이 B보다 법적으로 낮기 때문이다</button>
+        </div>
+        <div class="quiz-exp">두 설계사는 같은 수수료 규칙을 쓴다. A는 지인 시장이 줄며 신계약이 줄고 낮은 유지율이 환수로 수입을 깎는다. B는 유지 고객이 쌓이고 소개가 신계약을 늘린다. 소개율을 0으로 두면 B는 10년 누적에서 A를 따라잡지 못한다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2));
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  /** 캔버스 줄바꿈: 반환값은 마지막 줄 아래 y */
+  function wrap(ctx, s, x, y, maxW, lh, o) {
+    ctx.font = IB.font(o.size || 12, false, o.weight);
+    const words = s.split(" "); let line = "";
+    words.forEach((wd) => {
+      const t = line ? line + " " + wd : wd;
+      if (ctx.measureText(t).width > maxW && line) { T(ctx, line, x, y, o); y += lh; line = wd; } else line = t;
+    });
+    if (line) { T(ctx, line, x, y, o); y += lh; }
+    return y;
+  }
+  const onScreen = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+  /* ---------------------------------------------------------- 1. 적합성 진단 */
+  (function () {
+    const upd = () => render();
+    const ageI = IB.range("su-age", (v) => v + "세", upd);
+    const incI = IB.range("su-inc", (v) => won(v), upd);
+    const dep = IB.seg("su-dep", upd);
+    const lifeI = IB.range("su-life", (v) => won(v), upd);
+    const cov = IB.seg("su-cov", upd);
+    const budI = IB.range("su-bud", (v) => won(v), upd);
+    const list = document.getElementById("su-list");
+    function need() {
+      const d = dep();
+      if (d === "none") return 0;
+      if (d === "spouse") return INS.needs({ monthlyExpense: 60e4, years: 10 }).need;
+      return INS.needs({ monthlyExpense: 120e4, years: 20, education: 5e7 }).need;
+    }
+    function render() {
+      const age = ageI(), inc = incI(), d = dep(), life = lifeI(), c = cov(), bud = budI();
+      const gap = Math.max(0, need() - life);
+      const P = (o) => INS.price(o).monthly;
+      const items = [];
+      // 1 정기
+      (function () {
+        const it = { n: "정기보험 3억원(60세 만기)", f: [], w: [], m: null };
+        if (age >= 55) it.f.push("60세 만기까지 5년이 남지 않아 상품이 성립하기 어렵다");
+        else {
+          it.m = P({ type: "term", age, S: 3e8, term: 60 - age, pay: 60 - age });
+          if (d === "none") it.f.push("부양가족이 없어 사망보장 필요액이 거의 없다");
+          else if (gap < 5e7) it.f.push("기존 사망보장으로 필요액이 대부분 채워져 있다");
+          else if (gap < 3e8 * 0.75) it.w.push("공백(" + won(gap) + ")보다 금액이 크다. 금액을 줄여 제안한다");
+          if (it.m > bud) it.f.push("예산 초과");
+        }
+        items.push(it);
+      })();
+      // 2 종신 20년납
+      (function () {
+        const it = { n: "종신보험 1억원(20년납)", f: [], w: [], m: P({ type: "whole", age, S: 1e8, pay: 20 }) };
+        if (d === "none") it.w.push("평생 사망보장이 필요한 목적(상속 재원·장례 등)을 묻고 기록한다");
+        if (age + 20 > 65) it.w.push("납입이 " + (age + 20) + "세까지, 은퇴 뒤로 이어진다");
+        if (it.m > bud) it.f.push("예산 초과");
+        else if (it.m > bud * 0.7) it.w.push("예산의 대부분을 한 계약에 쓴다");
+        items.push(it);
+      })();
+      // 3 단기납 종신
+      (function () {
+        const it = { n: "단기납 종신 1억원(5년납)", f: [], w: [], m: P({ type: "whole", age, S: 1e8, pay: 5 }) };
+        it.w.push("환급률을 저축처럼 설명하면 부당권유가 될 수 있다. 해지 시점별 환급률을 보여 준다");
+        if (d === "none" && age < 40) it.w.push("부양가족 없는 젊은 고객: 가입 목적 확인");
+        if (it.m > bud) it.f.push("예산 초과");
+        items.push(it);
+      })();
+      // 4 저축성
+      (function () {
+        const it = { n: "저축성보험 월 50만원(10년)", f: [], w: [], m: 5e5 };
+        it.w.push("보장 예산과 별개. 비상금·연금저축이 먼저인지 확인한다");
+        if (5e5 > inc * 0.1) it.f.push("실수령의 10%를 넘는 부담. 중도 해지 손실 위험이 크다");
+        if (age >= 60) it.w.push("10년 유지가 필요한 비과세 요건과 유동성 확인");
+        items.push(it);
+      })();
+      // 5 암 진단비
+      (function () {
+        const it = { n: "암 진단 3,000만원(비갱신)", f: [], w: [], m: null };
+        if (age > 70) it.f.push("가입 가능 나이를 넘는다(모델)");
+        else {
+          it.m = P({ type: "cancer", age, S: 3e7, term: 90 - age, pay: 20 });
+          if (c === "both") it.w.push("기존 진단비와 합한 금액이 소득 공백 기준(9장)을 넘지 않는지 본다");
+          if (it.m > bud) it.f.push("예산 초과");
+        }
+        items.push(it);
+      })();
+      // 6 실손
+      (function () {
+        const it = { n: "실손의료보험(4세대)", f: [], w: [], m: INS.silsonPremium(age, 4) };
+        if (c !== "none") it.f.push("이미 실손이 있다. 여러 개여도 실제 손해만큼만 나눠 보상한다");
+        if (age >= 65 && c === "none") it.w.push("고령: 심사와 노후·유병자 실손 등 다른 선택지를 비교한다");
+        if (it.m > bud) it.f.push("예산 초과");
+        items.push(it);
+      })();
+      // 7 변액
+      (function () {
+        const it = { n: "변액유니버셜 월 30만원", f: [], w: [], m: 3e5 };
+        it.w.push("투자성향 확인과 원금 손실·예금자보호 한계 설명이 필요하다");
+        if (age >= 65) it.f.push("고령 고객의 장기 투자성 상품: 투자 기간이 맞지 않을 수 있다");
+        if (it.m > bud) it.f.push("예산 초과");
+        items.push(it);
+      })();
+      let np = 0, nw = 0, nf = 0;
+      list.innerHTML = items.map((it) => {
+        const st = it.f.length ? "fail" : it.w.length ? "warn" : "pass";
+        if (st === "pass") np++; else if (st === "warn") nw++; else nf++;
+        const badge = st === "pass" ? tone("ok-t", "적합") : st === "warn" ? tone("warn-t", "주의") : tone("bad-t", "부적합");
+        const rs = it.f.concat(it.w);
+        if (!rs.length) rs.push("필요·예산·나이에 맞는다");
+        return '<div class="su-card ' + st + '"><div class="hd"><b>' + esc(it.n) + "</b>" + badge + '</div><div class="pr">' + (it.m != null ? "월 " + won(it.m) : "보험료 계산 안 함") + "</div><ul>" + rs.map((r) => "<li>" + esc(r) + "</li>").join("") + "</ul></div>";
+      }).join("");
+      IB.stat("su-o-p", tone("ok-t", String(np)) + " <small>/ 7</small>");
+      IB.stat("su-o-w", tone("warn-t", String(nw)));
+      IB.stat("su-o-f", tone("bad-t", String(nf)));
+      IB.stat("su-o-g", won(gap));
+    }
+    render();
+  })();
+
+  /* ---------------------------------------------------------- 2. 설명의무 */
+  (function () {
+    const ITEMS = [
+      { id: "cover", t: "보장 내용과 지급 사유" },
+      { id: "excl", t: "면책·감액 기간, 보험금을 주지 않는 사유" },
+      { id: "renew", t: "갱신 때 보험료가 오를 수 있다는 점", only: ["renew"] },
+      { id: "surr", t: "해지환급금(무·저해지면 없거나 일부)과 중도 해지 손실" },
+      { id: "loss", t: "원금 손실 가능성(투자 실적 연동)", only: ["variable"] },
+      { id: "depo", t: "예금자보호 여부와 한도(1억원)" },
+      { id: "disc", t: "고지의무와 위반 시 불이익" },
+      { id: "cool", t: "청약철회권(증권 15일·청약 30일)" },
+      { id: "illeg", t: "위법계약해지권(안 날 1년·계약일 5년)" },
+      { id: "term", t: "납입기간·보장기간·만기" },
+      { id: "seller", t: "판매자의 소속과 권한(대리·중개)" },
+    ];
+    const CORE = {
+      renew: ["cover", "excl", "renew", "surr", "disc", "cool"],
+      nolapse: ["cover", "excl", "surr", "disc", "cool"],
+      variable: ["cover", "loss", "depo", "surr", "disc", "cool"],
+    };
+    const on = new Set(["cover", "term"]);
+    const box = document.getElementById("ex-list");
+    box.innerHTML = ITEMS.map((it) => '<label class="check" data-id="' + it.id + '"><input type="checkbox" data-id="' + it.id + '"><span>' + it.t + "</span></label>").join("");
+    const inputs = [...box.querySelectorAll("input")];
+    let gauge = 0, target = 0, cv = null;
+    const type = IB.seg("ex-type", () => { sync(); });
+    function applies(it) { return !it.only || it.only.indexOf(type()) >= 0; }
+    function sync() {
+      inputs.forEach((inp) => {
+        const it = ITEMS.find((x) => x.id === inp.dataset.id), lab = inp.parentElement;
+        const ap = applies(it);
+        inp.disabled = !ap; inp.checked = ap && on.has(it.id);
+        lab.classList.toggle("na", !ap);
+        lab.classList.toggle("core", ap && CORE[type()].indexOf(it.id) >= 0);
+      });
+      calc();
+    }
+    let R = null;
+    function calc() {
+      const core = CORE[type()];
+      let tot = 0, got = 0; const missing = [];
+      ITEMS.forEach((it) => {
+        if (!applies(it)) return;
+        const wgt = core.indexOf(it.id) >= 0 ? 12 : 5;
+        tot += wgt;
+        if (on.has(it.id)) got += wgt; else if (core.indexOf(it.id) >= 0) missing.push(it);
+      });
+      R = { score: got / tot, missing };
+      target = R.score;
+      if (cv && !onScreen(cv.canvas)) { gauge = target; cv.redraw(); }
+      IB.stat("ex-o-s", IB.pct(R.score, 0));
+      IB.stat("ex-o-m", missing.length ? tone("bad-t", missing.length + "개") : tone("ok-t", "없음"));
+      IB.stat("ex-o-r", missing.length ? tone("warn-t", "위법계약해지 요구") : "청약철회 등 기본");
+      IB.stat("ex-o-k", missing.length >= 3 ? tone("bad-t", "높음") : missing.length ? tone("warn-t", "있음") : tone("ok-t", "낮음"));
+    }
+    inputs.forEach((inp) => inp.addEventListener("change", () => { if (inp.checked) on.add(inp.dataset.id); else on.delete(inp.dataset.id); calc(); }));
+    document.getElementById("ex-all").addEventListener("click", () => { ITEMS.forEach((it) => on.add(it.id)); sync(); });
+    document.getElementById("ex-none").addEventListener("click", () => { on.clear(); sync(); });
+    sync();
+    gauge = target;
+    const el = document.getElementById("ex-cv");
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      const cx = w / 2, cy = 110, Rr = Math.min(92, w * 0.28);
+      ctx.lineCap = "round"; ctx.lineWidth = 16;
+      ctx.strokeStyle = P.surface; ctx.beginPath(); ctx.arc(cx, cy, Rr, Math.PI, TAU); ctx.stroke();
+      const col = gauge < 0.6 ? P.bad : gauge < 0.95 ? P.warn : P.ok;
+      if (gauge > 0.005) { ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(cx, cy, Rr, Math.PI, Math.PI + Math.PI * gauge); ctx.stroke(); }
+      ctx.lineCap = "butt";
+      T(ctx, Math.round(gauge * 100) + "%", cx, cy - 12, { size: 28, weight: 800, mono: true, color: P.text, align: "center" });
+      T(ctx, "설명 완성도", cx, cy + 8, { size: 12, color: P.dim, align: "center" });
+      // 결과 문장
+      let y = cy + 42; const x = 16, mw = w - 32;
+      const lines = [];
+      if (R.missing.length) {
+        lines.push({ c: P.bad, s: "빠진 핵심: " + R.missing.map((m) => m.t.split("(")[0]).join(", ") });
+        lines.push({ c: P.text, s: "고객: 판매원칙 위반을 안 날부터 1년, 계약일부터 5년 안에 위법계약해지를 요구할 수 있다. 수수료·위약금 없이 장래를 향해 해지된다." });
+        if (R.missing.some((m) => m.id === "cover" || m.id === "excl" || m.id === "surr")) lines.push({ c: P.text, s: "중요 내용 미설명은 계약일부터 3개월 안의 품질보증해지 사유도 된다." });
+        lines.push({ c: P.dim, s: "판매자: 과태료·과징금(관련 수입의 최대 약 50% 이내), 손해배상 시 고의·과실 없음을 판매자가 입증해야 한다(2026년 기준)." });
+      } else {
+        lines.push({ c: P.ok, s: "핵심 항목을 모두 설명했다." });
+        lines.push({ c: P.text, s: "남은 일: 고객이 자기 말로 요약하게 하고, 설명 확인서·녹취·상담 기록으로 남긴다. 청약철회 기간에 한 번 더 연락한다." });
+      }
+      lines.forEach((l) => { y = wrap(ctx, l.s, x, y, mw, 18, { size: 12.5, color: l.c }) + 6; });
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 420 ? 400 : w < 640 ? 340 : 300; } });
+    IB.loop(el, (dt) => { if (Math.abs(target - gauge) > 0.002) { gauge += (target - gauge) * Math.min(1, dt * 5); cv.redraw(); } else if (gauge !== target) { gauge = target; cv.redraw(); } });
+    const red = () => cv.redraw();
+    inputs.forEach((inp) => inp.addEventListener("change", red));
+    document.getElementById("ex-all").addEventListener("click", red);
+    document.getElementById("ex-none").addEventListener("click", red);
+    document.querySelectorAll("#ex-type button").forEach((b) => b.addEventListener("click", red));
+  })();
+
+  /* ---------------------------------------------------------- 3. 권리 시계 */
+  (function () {
+    const K = INS.KR, ISSUE = 3, MAXD = 2000;
+    const cool = Math.min(ISSUE + K.coolingOff.fromPolicy, K.coolingOff.fromApply);
+    const quality = Math.round(K.qualityCancelMonths * 30.4);
+    const illegalEnd = K.illegalCancel.contractYears * 365;
+    const insEnd = K.disclosure.contractYears * 365;
+    let G = null, cv = null;
+    const upd = () => cv && cv.redraw();
+    const dayI = IB.range("rt-day", (v) => v + "일", upd);
+    const knowI = IB.range("rt-know", (v) => v + "일째", upd);
+    const viol = document.getElementById("rt-viol");
+    viol.addEventListener("change", upd);
+    const el = document.getElementById("rt-cv");
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      const box = { x: 14, y: 28, w: w - 28, h: h - 28 - 56 };
+      const X = (d) => box.x + Math.sqrt(IB.clamp(d, 0, MAXD) / MAXD) * box.w;
+      G = { box };
+      const today = dayI(), know = knowI(), v = viol.checked;
+      const illStart = v ? 0 : null, illEndD = v ? Math.min(illegalEnd, know + K.illegalCancel.knowYears * 365) : 0;
+      const rows = [
+        { n: "청약철회", a: 0, b: cool, c: P.ok, note: "낸 보험료 전액" },
+        { n: "품질보증해지", a: 0, b: quality, c: P.accent, note: "낸 보험료+이자" },
+        { n: "위법계약해지", a: illStart, b: illEndD, c: P.warn, note: v ? "위약금 없이 장래 해지" : "위반이 없으면 해당 없음" },
+        { n: "보험사 고지의무 해지", a: 0, b: insEnd, c: P.bad, note: "보장개시 2년 무사고면 제한" },
+      ];
+      const rh = box.h / rows.length;
+      [0, 30, 91, 365, 730, 1095, 1825].forEach((d) => {
+        const x = X(d); ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(x, box.y); ctx.lineTo(x, box.y + box.h); ctx.stroke();
+        const lab = d === 0 ? "0" : d < 365 ? d + "일" : Math.round(d / 365) + "년";
+        if (w > 420 || [0, 30, 365, 1095, 1825].indexOf(d) >= 0) T(ctx, lab, x, box.y + box.h + 15, { size: 10.5, mono: true, color: P.dim, align: "center" });
+      });
+      rows.forEach((r, i) => {
+        const y = box.y + i * rh, bh = Math.min(16, rh * 0.36), by = y + rh * 0.58;
+        const open = r.a != null && today >= r.a && today <= r.b;
+        T(ctx, r.n + (open ? " · 열림" : ""), box.x, y + rh * 0.36, { size: 12, weight: 700, color: open ? P.text : P.dim });
+        rrect(ctx, box.x, by, box.w, bh, 4); ctx.fillStyle = P.surface; ctx.fill();
+        if (r.a != null && r.b > r.a) { rrect(ctx, X(r.a), by, Math.max(3, X(r.b) - X(r.a)), bh, 4); ctx.fillStyle = r.c; ctx.globalAlpha = open ? 1 : 0.45; ctx.fill(); ctx.globalAlpha = 1; }
+        ctx.font = IB.font(11);
+        const nt = r.note, tw = ctx.measureText(nt).width;
+        ctx.font = IB.font(12, false, 700);
+        const lw2 = ctx.measureText(r.n + (open ? " · 열림" : "")).width;
+        if (w >= 520 && box.x + lw2 + 12 < box.x + box.w - tw) T(ctx, nt, box.x + box.w, y + rh * 0.36, { size: 11, color: P.dim, align: "right" });
+      });
+      if (v) { const kx = X(know); ctx.strokeStyle = P.warn; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(kx, box.y + 2 * rh + 4); ctx.lineTo(kx, box.y + 3 * rh - 4); ctx.stroke(); ctx.setLineDash([]); }
+      const tx = X(today);
+      ctx.strokeStyle = P.text; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(tx, box.y - 6); ctx.lineTo(tx, box.y + box.h); ctx.stroke(); ctx.lineWidth = 1;
+      knob(ctx, tx, box.y - 8, P, P.accent, 7);
+      T(ctx, "오늘 " + today + "일", IB.clamp(tx, box.x + 34, box.x + box.w - 34), box.y - 18, { size: 11.5, weight: 700, color: P.text, align: "center" });
+      const openR = rows.slice(0, 3).filter((r) => r.a != null && today >= r.a && today <= r.b).map((r) => r.n);
+      IB.stat("rt-o-d", "청약 후 " + today + "일" + (today >= 365 ? " <small>(" + (today / 365).toFixed(1) + "년)</small>" : ""));
+      IB.stat("rt-o-r", openR.length ? openR.join(", ") : tone("warn-t", "일반 해지만"));
+      IB.stat("rt-o-i", today <= insEnd ? tone("warn-t", "가능 기간(조건부)") : tone("ok-t", "계약일 3년 경과"));
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 420 ? 320 : 290; } });
+    IB.drag(cv.canvas, {
+      move(x) { if (!G) return; const u = IB.clamp((x - G.box.x) / G.box.w, 0, 1); dayI.set(Math.round(u * u * MAXD)); },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 4. 니즈 환기 대화 */
+  (function () {
+    const STAGES = [
+      {
+        cus: "보험이요? 하나 있긴 한데, 뭘 더 들어야 하는지 잘 모르겠어요.",
+        opts: [
+          { k: "Q", t: "오늘은 상품 얘기 전에, 지금 가족이 어떻게 살고 있는지부터 여쭤봐도 될까요?", du: 6, dt: 10, r: "아, 네. 그런 걸 먼저 묻는 분은 처음이네요." },
+          { k: "F", t: "주변에 아픈 분들 많지 않으세요? 준비 안 하시면 정말 큰일 납니다.", du: 0, dt: -8, r: "음… 그렇긴 한데, 좀 무섭게 말씀하시네요." },
+          { k: "P", t: "이번 달까지만 나오는 좋은 상품이 있어요. 일단 한번 보시죠.", du: -4, dt: -14, r: "벌써 상품부터요? 저는 아직 뭐가 필요한지도 모르는데요." },
+        ],
+      },
+      {
+        cus: "맞벌이고 아이가 하나 있어요. 남편은 회사 단체보험이 있다던데요.",
+        opts: [
+          { k: "Q", t: "두 분 소득과 매달 생활비, 이미 가진 보험을 같이 표로 정리해 볼까요? 단체보험은 퇴사하면 사라지니 따로 보겠습니다.", du: 16, dt: 8, r: "좋아요. 실손 증권이랑 급여 명세서 가져올게요." },
+          { k: "F", t: "남편분께 무슨 일 생기면 아이는 어떻게 키우시려고요? 단체보험으로는 턱없습니다.", du: 3, dt: -6, r: "…그런 생각까지는 안 해 봤는데, 좀 불안해지네요." },
+          { k: "P", t: "다른 분들도 다 이 정도는 드세요. 월 25만원이면 웬만한 건 다 됩니다.", du: -5, dt: -10, r: "다른 사람이 아니라 저희 집 얘기를 듣고 싶은데요." },
+        ],
+      },
+      {
+        cus: "그래서, 저희한테 뭐가 비어 있는 거예요?",
+        opts: [
+          { k: "Q", t: "사망보장 공백이 약 2억원이고, 정기보험이면 월 몇만원 수준입니다. 종신과 비교한 표도 함께 보여 드릴게요.", du: 16, dt: 10, r: "숫자로 보니까 이해가 돼요. 종신은 왜 비싼지도 알겠고요." },
+          { k: "F", t: "암 진단비는 최소 1억은 있어야 안심입니다. 치료비가 어마어마하거든요.", du: -3, dt: -5, r: "1억이요? 그럼 보험료가 얼마나 되는데요…" },
+          { k: "P", t: "종신보험으로 하시면 나중에 환급도 됩니다. 저축도 되고 보장도 되고요.", du: -8, dt: -3, r: "저축도 된다니 좋긴 한데… 정확히 얼마를 돌려받는 거죠?" },
+        ],
+      },
+      {
+        cus: "생각해 볼게요. 오늘 꼭 정해야 하나요?",
+        opts: [
+          { k: "Q", t: "아니요. 청약 후에도 15일 안에는 철회할 수 있습니다. 배우자분과 상의해 보시고 궁금한 걸 적어 주세요.", du: 8, dt: 12, r: "그렇게 말씀해 주시니 오히려 믿음이 가네요. 상의하고 연락드릴게요." },
+          { k: "F", t: "다음 달이면 상령일이 지나 보험료가 오릅니다. 오늘 하시는 게 무조건 이득이에요.", du: 2, dt: -5, r: "오른다니까… 일단 하긴 할게요. 그런데 뭘 샀는지는 잘 모르겠어요." },
+          { k: "P", t: "오늘 서명하시면 첫 달 보험료는 제가 내 드릴게요.", du: -4, dt: 4, illegal: true, r: "어머, 그래도 돼요? 그럼 오늘 할게요." },
+        ],
+      },
+    ];
+    let st, U, Tr, hist, picks, illegal, done, cur = { u: 20, t: 40 };
+    const chat = document.getElementById("dg-chat"), opts = document.getElementById("dg-opts");
+    function add(cls, s) { const d = document.createElement("div"); d.className = "dg-msg " + cls; d.textContent = s; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; }
+    function reset() {
+      st = 0; U = 20; Tr = 40; hist = [{ u: U, t: Tr }]; picks = []; illegal = false; done = false;
+      chat.innerHTML = ""; add("sys", "고객: 35세, 맞벌이, 아이 하나, 실손만 있음 (가상)"); add("cus", STAGES[0].cus);
+      showOpts(); stats();
+      if (cv) { if (!onScreen(cv.canvas)) cur = { u: U, t: Tr }; cv.redraw(); }
+    }
+    function showOpts() {
+      opts.innerHTML = "";
+      if (done) return;
+      const order = [[0, 1, 2], [1, 2, 0], [2, 0, 1], [0, 2, 1]][st];
+      order.forEach((i) => {
+        const o = STAGES[st].opts[i];
+        const b = document.createElement("button"); b.className = "btn"; b.textContent = o.t; b.dataset.stage = st;
+        b.addEventListener("click", () => pick(Number(b.dataset.stage), i));
+        opts.appendChild(b);
+      });
+    }
+    function pick(stage, i) {
+      if (done || stage !== st) return;
+      const o = STAGES[st].opts[i];
+      add("adv", o.t);
+      U = IB.clamp(U + o.du, 0, 100); Tr = IB.clamp(Tr + o.dt, 0, 100);
+      picks.push(o.k); if (o.illegal) illegal = true;
+      add("cus", o.r);
+      hist.push({ u: U, t: Tr });
+      st++;
+      if (st < STAGES.length) add("cus", STAGES[st].cus);
+      else finish();
+      showOpts(); stats();
+      if (cv && !onScreen(cv.canvas)) { cur = { u: U, t: Tr }; cv.redraw(); }
+    }
+    function outcome() {
+      const f = picks.filter((k) => k === "F").length, p = picks.filter((k) => k === "P").length, last = picks[3];
+      let signed, how;
+      if (illegal) { signed = true; how = "특별이익으로 계약"; }
+      else if (last === "Q") { signed = Tr >= 60; how = signed ? "스스로 결정(상의 후 계약)" : "보류(재상담)"; }
+      else if (last === "F") { signed = true; how = "압박으로 계약"; }
+      else { signed = Tr >= 45; how = signed ? "계약" : "거절"; }
+      const persist = IB.clamp(0.5 + 0.0045 * U + 0.0015 * Tr - (illegal ? 0.1 : 0), 0.3, 0.97);
+      return { signed, how, persist, f, p };
+    }
+    function finish() {
+      done = true;
+      const o = outcome();
+      if (illegal) add("sys", "특별이익 제공(보험료 대납)은 보험업법 위반이다. 계약은 됐지만 설계사는 제재 대상이 되고, 해피콜·민원으로 드러날 수 있다.");
+      else if (o.f + o.p >= 3) add("sys", "해피콜에서 \"설명을 제대로 못 들었다\"는 답이 나올 위험이 크다. 이해도가 낮은 계약은 첫 갱신·첫 인상 때 해지되기 쉽다.");
+      else if (o.signed) add("sys", "고객이 자기 숫자로 이유를 알고 계약했다. 청약철회 기간에 한 번 더 연락해 질문을 받는다.");
+      else add("sys", "오늘은 계약이 없지만 고객이 다시 연락할 이유가 남았다. 분석표를 보내고 상담 기록을 남긴다.");
+    }
+    function stats() {
+      IB.stat("dg-o-u", String(U));
+      IB.stat("dg-o-t", String(Tr));
+      if (!done) { IB.stat("dg-o-r", "대화 중 <small>" + st + " / 4</small>"); IB.stat("dg-o-p", "—"); return; }
+      const o = outcome();
+      IB.stat("dg-o-r", o.signed ? (illegal ? tone("bad-t", o.how) : o.how.indexOf("압박") >= 0 ? tone("warn-t", o.how) : tone("ok-t", o.how)) : tone("warn-t", o.how));
+      IB.stat("dg-o-p", o.signed ? tone(o.persist >= 0.8 ? "ok-t" : o.persist >= 0.65 ? "warn-t" : "bad-t", IB.pct(o.persist, 0)) : "계약 없음");
+    }
+    let cv = null;
+    reset();
+    const el = document.getElementById("dg-cv");
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      const box = { x: 40, y: 14, w: w - 40 - 70, h: h - 14 - 26 };
+      const n = hist.length;
+      const data = (key) => hist.map((p, i) => [i, i === n - 1 ? (key === "u" ? cur.u : cur.t) : p[key]]);
+      const c = IB.chart(ctx, box, {
+        x: [0, 4], y: [0, 100], xTicks: [0, 1, 2, 3, 4], yTicks: [0, 50, 100], xFmt: (v) => (v === 0 ? "시작" : v + "턴"),
+        series: [{ data: data("u"), color: P.accent, width: 2.5 }, { data: data("t"), color: P.accent2, width: 2.5 }],
+      });
+      const lu = data("u").pop(), lt = data("t").pop();
+      [[lu, P.accent, "이해 " + Math.round(lu[1])], [lt, P.accent2, "신뢰 " + Math.round(lt[1])]].forEach(([p, col, lab], k) => {
+        ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(p[0]), c.Y(p[1]), 4.5, 0, TAU); ctx.fill();
+        let ly = c.Y(p[1]); if (Math.abs(c.Y(lu[1]) - c.Y(lt[1])) < 14) ly += k ? 8 : -8;
+        T(ctx, lab, c.X(p[0]) + 8, ly, { size: 11, weight: 700, color: col, base: "middle" });
+      });
+    }, { height: 150 });
+    IB.loop(el, (dt) => {
+      const tg = hist[hist.length - 1], k = Math.min(1, dt * 5);
+      if (Math.abs(tg.u - cur.u) > 0.2 || Math.abs(tg.t - cur.t) > 0.2) { cur.u += (tg.u - cur.u) * k; cur.t += (tg.t - cur.t) * k; cv.redraw(); }
+      else if (cur.u !== tg.u || cur.t !== tg.t) { cur = { u: tg.u, t: tg.t }; cv.redraw(); }
+    });
+    document.getElementById("dg-re").addEventListener("click", reset);
+  })();
+
+  /* ---------------------------------------------------------- 5. 두 설계사의 10년 */
+  (function () {
+    const K = INS.KR.persistency;
+    const base = [1, K[13], K[25], K[37], K[49], K[61]];
+    base.push(base[5] * 0.92); base.push(base[6] * 0.93);
+    const cache = {};
+    function cohort(pw) {
+      const key = pw.toFixed(2); if (cache[key]) return cache[key];
+      const S = base.map((s) => Math.pow(s, pw)), e = new Array(7).fill(0); let claw = 0;
+      for (let L = 1; L <= 7; L++) {
+        const p = S[L - 1] - S[L], c = INS.commission({ monthly: 1, lapseYear: L });
+        c.rows.forEach((r, k) => (e[k] += p * r.net)); claw += p * c.clawback;
+      }
+      INS.commission({ monthly: 1 }).rows.forEach((r, k) => (e[k] += S[7] * r.net));
+      return (cache[key] = { S, e, claw });
+    }
+    const survAt = (C, k) => (k <= 7 ? C.S[k] : C.S[7] * Math.pow(0.95, k - 7));
+    function run(o) {
+      const C = cohort(o.pow), cohorts = [], out = [{ y: 0, year: 0, cum: 0, inf: 0 }];
+      let cum = 0, claw = 0;
+      for (let y = 1; y <= 10; y++) {
+        let n = o.n * 12 * Math.pow(o.decay, y - 1);
+        if (o.ref) n += o.ref * cohorts.reduce((s, c) => s + c.n * survAt(C, y - c.y), 0);
+        cohorts.push({ y, n });
+        claw += n * o.m * C.claw;
+        let year = 0; cohorts.forEach((c) => { const k = y - c.y; if (k < 7) year += c.n * o.m * C.e[k]; });
+        cum += year;
+        const inf = cohorts.reduce((s, c) => s + c.n * survAt(C, y - c.y + 1), 0);
+        out.push({ y, year, cum, inf, n });
+      }
+      return { rows: out, claw };
+    }
+    let prog = 10, playing = false, A, B;
+    const upd = () => { calc(); if (cv) cv.redraw(); };
+    const view = IB.seg("ec-view", upd);
+    const nI = IB.range("ec-n", (v) => v + "건", upd);
+    const pI = IB.range("ec-pow", (v) => "×" + v.toFixed(1), upd);
+    const rI = IB.range("ec-ref", (v) => (v * 100).toFixed(0) + "%", upd);
+    function calc() {
+      A = run({ n: nI(), m: 15e4, pow: pI(), decay: 0.85 });
+      B = run({ n: 3, m: 10e4, pow: 0.6, decay: 1, ref: rI() });
+      const a = A.rows[10], b = B.rows[10];
+      let cross = null; for (let y = 1; y <= 10; y++) if (B.rows[y].year > A.rows[y].year) { cross = y; break; }
+      IB.stat("ec-o-c", IB.wonAxis(a.cum) + " / " + tone(b.cum > a.cum ? "ok-t" : "bad-t", IB.wonAxis(b.cum)));
+      IB.stat("ec-o-y", IB.wonAxis(a.year) + " / " + IB.wonAxis(b.year));
+      IB.stat("ec-o-x", cross ? cross + "년째" : tone("bad-t", "10년 안에 없음"));
+      IB.stat("ec-o-k", Math.round(a.inf) + " / " + Math.round(b.inf) + "<small>명</small>");
+    }
+    calc();
+    let cv = null;
+    const el = document.getElementById("ec-cv");
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      const key = view() === "cum" ? "cum" : "year";
+      const hi = Math.max(...A.rows.map((r) => r[key]), ...B.rows.map((r) => r[key]), 1);
+      const lo = Math.min(0, ...A.rows.map((r) => r[key]));
+      const cut = (rows) => { const d = []; const k = Math.floor(prog); for (let i = 0; i <= k && i <= 10; i++) d.push([i, rows[i][key]]); if (k < 10) { const f = prog - k; d.push([prog, rows[k][key] + (rows[k + 1][key] - rows[k][key]) * f]); } return d; };
+      const box = { x: 58, y: 18, w: w - 58 - 18, h: h - 18 - 44 };
+      const c = IB.chart(ctx, box, {
+        x: [0, 10], y: [lo * 1.1, hi * 1.1], yFmt: IB.wonAxis, xFmt: (v) => v + "년", xTicks: [0, 2, 4, 6, 8, 10],
+        series: [{ data: cut(A.rows), color: P.bad, width: 2.5 }, { data: cut(B.rows), color: P.ok, width: 2.5 }],
+      });
+      const la = cut(A.rows).pop(), lb = cut(B.rows).pop();
+      [[la, P.bad, "A"], [lb, P.ok, "B"]].forEach(([p, col, lab]) => {
+        ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(p[0]), c.Y(p[1]), 5, 0, TAU); ctx.fill();
+        if (p[0] > 0.3) T(ctx, lab + " " + IB.wonAxis(p[1]), Math.min(c.X(p[0]) + 8, box.x + box.w - 60), c.Y(p[1]) - 9, { size: 11.5, weight: 700, color: col });
+      });
+      T(ctx, key === "cum" ? "누적 모집수수료(기대값)" : "해마다 모집수수료(기대값)", box.x + 6, box.y + 12, { size: 11.5, color: P.dim });
+    }, { aspect: 0.58, minHeight: 260, maxHeight: 360 });
+    const playBtn = document.getElementById("ec-play");
+    playBtn.addEventListener("click", () => { if (prog >= 10) prog = 0; playing = !playing; playBtn.textContent = playing ? "멈춤" : "재생"; if (!onScreen(cv.canvas)) { prog = 10; playing = false; playBtn.textContent = "재생"; cv.redraw(); } });
+    document.getElementById("ec-re").addEventListener("click", () => { prog = 0; playing = false; playBtn.textContent = "재생"; cv.redraw(); });
+    IB.loop(el, (dt) => {
+      if (playing) { prog = Math.min(10, prog + dt * 2); if (prog >= 10) { playing = false; playBtn.textContent = "재생"; } cv.redraw(); }
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 딜레마 카드 */
+  (function () {
+    const MET = ["고객 이익", "단기 수입", "장기 신뢰·소개", "규제 위험"];
+    const CASES = [
+      {
+        s: "이번 달은 종신보험 실적에 시책(추가 수당)이 붙었다. 고객 C(28세, 미혼)는 실손과 진단비를 원한다.",
+        o: [
+          { t: "종신보험 위주로 다시 설계해 권한다", v: [25, 85, 25, 55], e: "고객의 니즈(실손·진단비)와 다른 상품을 권하는 것은 적합성 원칙에 걸린다. 부양가족이 없는 고객에게 종신을 권하려면 분명한 목적이 있어야 한다. 시책은 한 달이지만, 맞지 않는 계약은 해지와 환수로 돌아온다." },
+          { t: "고객 니즈대로 실손·진단비를 설계하고 시책은 포기한다", v: [90, 35, 85, 5], rec: true, e: "<b>추천.</b> 단기 수입은 줄지만 고객은 필요한 것을 정확히 얻고, 계약은 오래 유지된다. 시책 기간의 압박이 있었다는 사실과 판단 근거를 상담 기록에 남겨 두면 지점과의 대화에서도 설명이 된다." },
+          { t: "종신을 \"저축처럼 돌려받는 보험\"으로 설명해 권한다", v: [10, 90, 10, 95], e: "보장성 보험을 저축처럼 설명하는 것은 부당권유이자 설명의무 위반이 될 수 있다. 고객이 해지환급금 표를 보는 순간 신뢰가 무너지고, 위법계약해지와 민원의 대상이 된다." },
+        ],
+      },
+      {
+        s: "대학 동기 모임. \"너 보험 한다며, 하나씩 들어 줄게\"라는 분위기다. 아무도 자기 보험을 잘 모른다.",
+        o: [
+          { t: "친구들에게 같은 상품을 한 건씩 부탁한다", v: [35, 75, 30, 35], e: "부탁으로 든 보험은 필요와 무관하게 들어간다. 지인 계약은 관계가 멀어지면 함께 해지되는 경우가 많아 유지율이 낮고, 친구 관계도 상한다." },
+          { t: "분석부터 해 주겠다고 하고, 필요한 사람에게만 제안한다", v: [85, 40, 90, 5], rec: true, e: "<b>추천.</b> 친구에게도 처음 보는 고객과 같은 절차(적합성 진단, 설명, 기록)를 쓴다. 당장 계약은 적지만 \"분석해 주는 친구\"라는 평판이 남고, 그것이 소개로 이어진다. 도윤이 지우에게 한 방식이다." },
+          { t: "가족 명의를 빌려 실적을 채운다", v: [0, 60, 0, 100], e: "실제 가입 의사가 없는 사람 명의로 계약을 만드는 작성계약은 위법이다. 대개 몇 달 안에 해지되어 환수가 생기고, 적발되면 등록 취소 같은 제재를 받을 수 있다." },
+        ],
+      },
+      {
+        s: "다음 달 예정이율 인하로 일부 상품의 보험료가 오른다는 공지가 나왔다.",
+        o: [
+          { t: "\"곧 없어진다\"며 상담 중인 고객 모두에게 오늘 서명을 재촉한다", v: [30, 80, 30, 60], e: "인상 자체는 사실이어도, 필요를 따지지 않고 서두르게 만들면 적합성과 설명이 빠진다. 서둘러 든 계약은 청약철회와 조기 해지가 많다." },
+          { t: "인상 사실과 폭을 그대로 알리고, 이미 필요가 확인된 고객에게만 일정을 안내한다", v: [80, 55, 85, 5], rec: true, e: "<b>추천.</b> 보험료 인상은 고객에게 중요한 정보다. 다만 그 정보는 필요가 확인된 고객의 결정 시점을 앞당기는 데만 쓴다. 인상 폭을 숫자로 보여 주면 과장 없이도 충분하다." },
+          { t: "\"마지막 기회, 평생 다시 없는 조건\" 단체 문자를 보낸다", v: [20, 70, 20, 85], e: "사실보다 부풀린 표현은 허위·과장광고 금지에 걸릴 수 있고, 광고성 문자는 심의와 내부 기준을 거쳐야 한다. 무엇보다 고객은 이런 문자를 받을 때마다 설계사를 판매원으로만 기억한다." },
+        ],
+      },
+      {
+        s: "62세 고객이 \"자녀에게 물려주고 싶다\"며 단기납 종신을 월 150만원 원한다. 소득은 연금 월 200만원이다.",
+        o: [
+          { t: "고객이 원하니 그대로 가입시킨다", v: [20, 95, 30, 80], e: "소득의 75%를 보험료로 내는 계약은 유지가 어렵다. 고령 고객의 고액 계약은 가족이 나중에 서류를 보며 분쟁이 시작되는 경우가 많고, 적합성 진단 기록이 없으면 판매자가 책임을 진다." },
+          { t: "부적합 이유를 숫자로 설명하고 금액 축소·다른 상속 방법을 함께 제시한다. 그래도 원하면 절차에 따라 확인과 기록을 남긴다", v: [85, 50, 85, 15], rec: true, e: "<b>추천.</b> 고객의 목적(상속)은 존중하되 방법을 다시 설계한다. 감당할 수 있는 금액, 가족의 동석, 녹취, 부적합 사실의 확인 절차를 거친다. 고객의 결정권과 판매자의 책임을 둘 다 지키는 길이다." },
+          { t: "맞지 않으니 거절하고 상담을 끝낸다", v: [40, 0, 35, 10], e: "규제 위험은 낮지만 고객의 목적은 그대로 남는다. 고객은 다른 곳에서 설명 없이 같은 계약을 할 수도 있다. 거절보다 설명과 대안이 고객에게 낫다." },
+        ],
+      },
+    ];
+    let ci = 0, oi = null, cur = [0, 0, 0, 0], cv = null;
+    const text = document.getElementById("dl-text"), opts = document.getElementById("dl-opts");
+    function renderOpts() {
+      opts.innerHTML = "";
+      CASES[ci].o.forEach((o, i) => {
+        const b = document.createElement("button"); b.className = "btn" + (oi === i ? " primary" : ""); b.textContent = o.t; b.dataset.case = ci;
+        b.addEventListener("click", () => { if (Number(b.dataset.case) !== ci) return; oi = i; renderOpts(); show(); });
+        opts.appendChild(b);
+      });
+    }
+    function show() {
+      const c = CASES[ci];
+      if (oi == null) {
+        text.innerHTML = "<b>장면.</b> " + c.s + " 오른쪽에서 대응을 하나 고른다.";
+        IB.stat("dl-o-c", "—"); IB.stat("dl-o-a", "—"); IB.stat("dl-o-b", "—");
+      } else {
+        const o = c.o[oi];
+        text.innerHTML = "<b>장면.</b> " + c.s + "<br>" + o.e;
+        IB.stat("dl-o-c", o.rec ? tone("ok-t", "추천 대응") : tone("warn-t", "다시 생각"));
+        IB.stat("dl-o-a", String(o.v[0]));
+        IB.stat("dl-o-b", tone(o.v[3] >= 60 ? "bad-t" : o.v[3] >= 30 ? "warn-t" : "ok-t", String(o.v[3])));
+      }
+      if (cv && !onScreen(cv.canvas)) { cur = oi == null ? [0, 0, 0, 0] : CASES[ci].o[oi].v.slice(); cv.redraw(); }
+    }
+    IB.seg("dl-case", (v) => { ci = Number(v); oi = null; renderOpts(); show(); });
+    renderOpts(); show();
+    const el = document.getElementById("dl-cv");
+    cv = IB.canvas(el, (ctx, w, h) => {
+      const P = IB.palette();
+      const cols = [P.ok, P.accent2, P.accent, P.bad];
+      const lw = Math.min(110, w * 0.3), bx = lw + 10, bw = w - bx - 44, top = 16, rh = (h - top - 8) / 4;
+      MET.forEach((m, i) => {
+        const cy = top + i * rh + rh / 2, bh = Math.min(18, rh * 0.5);
+        T(ctx, m, lw, cy, { size: 12.5, weight: 600, color: P.text, align: "right", base: "middle" });
+        rrect(ctx, bx, cy - bh / 2, bw, bh, 4); ctx.fillStyle = P.surface; ctx.fill();
+        if (cur[i] > 0.5) { rrect(ctx, bx, cy - bh / 2, (bw * cur[i]) / 100, bh, 4); ctx.fillStyle = cols[i]; ctx.fill(); }
+        T(ctx, oi == null ? "—" : String(Math.round(cur[i])), bx + bw + 6, cy, { size: 11, mono: true, color: P.dim, base: "middle" });
+      });
+    }, { height: 170 });
+    IB.loop(el, (dt) => {
+      const tg = oi == null ? [0, 0, 0, 0] : CASES[ci].o[oi].v; let mv = false;
+      cur = cur.map((v, i) => { const d = tg[i] - v; if (Math.abs(d) > 0.3) mv = true; return Math.abs(d) > 0.3 ? v + d * Math.min(1, dt * 6) : tg[i]; });
+      if (mv) cv.redraw();
+    });
+  })();
+})();
+</script>
+</body>
+</html>
