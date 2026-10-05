@@ -637,7 +637,7 @@
     cv = IB.canvas("#cp-cv", (ctx, w, h) => {
       const P = IB.palette(), Y = year(), full = Y.at(12);
       const ymax = Math.max(full.cum, full.tot, Y.cap) * 1.12;
-      const box = { x: 58, y: 28, w: w - 58 - 16, h: h - 28 - 44 };
+      const box = { x: 58, y: 28, w: w - 58 - 24, h: h - 28 - 44 };
       const c = IB.chart(ctx, box, { x: [0, 12], y: [0, ymax], xTicks: [0, 3, 6, 9, 12], xFmt: (v) => v + "월", yFmt: IB.wonAxis, xLabel: "치료가 이어진 달" });
       const tt = Math.min(12, t), pts = [];
       for (let k = 0; k <= 48; k++) { const kk = (k / 48) * tt; pts.push([kk, Y.at(kk)]); }
@@ -743,9 +743,9 @@
     cv = IB.canvas("#sw-cv", (ctx, w, h) => {
       const P = IB.palette(), S = series();
       const ymax = Math.max(S[2][S[2].length - 1][1], S[4][S[4].length - 1][1], S[0][S[0].length - 1][1]) * 1.06;
-      const box = { x: 58, y: 22, w: w - 58 - 16, h: h - 22 - 44 };
+      const box = { x: 58, y: 22, w: w - 58 - 24, h: h - 22 - 44 };
       const c = IB.chart(ctx, box, {
-        x: [A0, A1], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: w < 520 ? "나이" : "나이(누적 = 보험료 + 기대 자기부담)",
+        x: [A0, A1], y: [0, ymax], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: w < 520 ? null : "나이(누적 = 보험료 + 기대 자기부담)",
         series: [{ data: S[0], color: P.faint, width: 1.6, dash: [5, 4] }, { data: S[2], color: P.accent2, width: 2.6 }, { data: S[4], color: P.accent, width: 2.6 }],
       });
       G = c;
@@ -779,7 +779,7 @@
     cv = IB.canvas("#sc-cv", (ctx, w, h) => {
       const P = IB.palette(), a = A(), gr = grade(a);
       const box = { x: 58, y: 24, w: w - 58 - 18, h: h - 24 - 46 };
-      const c = IB.chart(ctx, box, { x: [0, XMAX], y: [0, 34000], xTicks: [0, 1e6, 2e6, 3e6, 4e6, 5e6], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: "지난 1년 비급여 보험금" });
+      const c = IB.chart(ctx, box, { x: [0, XMAX], y: [0, 34000], xTicks: [0, 1e6, 2e6, 3e6, 4e6], xFmt: IB.wonAxis, yFmt: IB.wonAxis, xLabel: w < 520 ? null : "지난 1년 비급여 보험금" });
       G = c;
       // 계단: 급여 주계약(고정) + 비급여 특약(등급별)
       const steps = [[0, 0.95], [1, 1], [1e6, 2], [1.5e6, 3], [3e6, 4], [XMAX, 4]];
@@ -875,9 +875,9 @@
         if (on.checked && a < r) saved += pk; else cs += on.checked ? INS.silsonPremium(a, g, "f") * 12 : pk;
         keep.push([a + 1, ck]); stop.push([a + 1, cs]);
       }
-      const box = { x: 58, y: 24, w: w - 58 - 16, h: h - 24 - 44 };
+      const box = { x: 58, y: 24, w: w - 58 - 24, h: h - 24 - 44 };
       const c = IB.chart(ctx, box, {
-        x: [A0, A1], y: [0, ck * 1.06], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: "나이(누적 개인실손 보험료)",
+        x: [A0, A1], y: [0, ck * 1.06], yFmt: IB.wonAxis, xFmt: (v) => v + "세", xLabel: w < 520 ? null : "나이(누적 개인실손 보험료)",
         bands: on.checked ? [{ x0: A0, x1: r, color: IB.color("accent-soft") || P.grid }] : [],
         series: [{ data: keep, color: P.bad, width: 2.4 }].concat(on.checked ? [{ data: stop, color: P.accent, width: 2.6 }] : []),
       });

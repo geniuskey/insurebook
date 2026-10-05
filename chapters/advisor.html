@@ -731,7 +731,7 @@
     const el = document.getElementById("rt-cv");
     cv = IB.canvas(el, (ctx, w, h) => {
       const P = IB.palette();
-      const box = { x: 14, y: 28, w: w - 28, h: h - 28 - 34 };
+      const box = { x: 14, y: 28, w: w - 28, h: h - 28 - 56 };
       const X = (d) => box.x + Math.sqrt(IB.clamp(d, 0, MAXD) / MAXD) * box.w;
       G = { box };
       const today = dayI(), know = knowI(), v = viol.checked;
@@ -756,7 +756,9 @@
         if (r.a != null && r.b > r.a) { rrect(ctx, X(r.a), by, Math.max(3, X(r.b) - X(r.a)), bh, 4); ctx.fillStyle = r.c; ctx.globalAlpha = open ? 1 : 0.45; ctx.fill(); ctx.globalAlpha = 1; }
         ctx.font = IB.font(11);
         const nt = r.note, tw = ctx.measureText(nt).width;
-        T(ctx, nt, box.x + box.w - tw - 2 > X(r.b) + 6 || r.a == null ? box.x + box.w : Math.min(box.x + box.w, X(r.b) - 6), y + rh * 0.36, { size: 11, color: P.dim, align: "right" });
+        ctx.font = IB.font(12, false, 700);
+        const lw2 = ctx.measureText(r.n + (open ? " · 열림" : "")).width;
+        if (box.x + lw2 + 12 < box.x + box.w - tw) T(ctx, nt, box.x + box.w - tw - 2 > X(r.b) + 6 || r.a == null ? box.x + box.w : Math.min(box.x + box.w, X(r.b) - 6), y + rh * 0.36, { size: 11, color: P.dim, align: "right" });
       });
       if (v) { const kx = X(know); ctx.strokeStyle = P.warn; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(kx, box.y + 2 * rh + 4); ctx.lineTo(kx, box.y + 3 * rh - 4); ctx.stroke(); ctx.setLineDash([]); }
       const tx = X(today);
@@ -767,7 +769,7 @@
       IB.stat("rt-o-d", "청약 후 " + today + "일" + (today >= 365 ? " <small>(" + (today / 365).toFixed(1) + "년)</small>" : ""));
       IB.stat("rt-o-r", openR.length ? openR.join(", ") : tone("warn-t", "일반 해지만"));
       IB.stat("rt-o-i", today <= insEnd ? tone("warn-t", "가능 기간(조건부)") : tone("ok-t", "계약일 3년 경과"));
-    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 420 ? 300 : 270; } });
+    }, { get height() { const w = el.parentElement.clientWidth || 600; return w < 420 ? 320 : 290; } });
     IB.drag(cv.canvas, {
       move(x) { if (!G) return; const u = IB.clamp((x - G.box.x) / G.box.w, 0, 1); dayI.set(Math.round(u * u * MAXD)); },
     });
