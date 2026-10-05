@@ -1,0 +1,920 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and InsureBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "보험회사는 보험료에서 보험금과 사업비를 빼고 남는 돈, 그리고 그 돈을 굴린 투자이익으로 산다. 손해율·사업비율·합산비율, 금리와 역마진, IFRS17과 CSM, 지급여력비율(K-ICS), 재보험, 보험사가 어려워졌을 때의 계약이전과 예금자보호를 시뮬레이터로 익힌다."}-->
+<!--head:end-->
+</head>
+<body data-chapter="company">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 16</div>
+    <h1>보험회사의 속사정</h1>
+    <p class="lead">상담이 거의 끝나 갈 무렵 지우가 물었다. "그런데 보험사가 망하면 어떻게 돼? 내 종신보험은 아직 6년이나 더 내야 하는데." 민서도 덧붙였다. "실손 보험료는 왜 해마다 오르는 거야? 나는 병원도 거의 안 갔는데." 두 질문은 같은 곳을 가리킨다. 보험회사가 어떻게 돈을 벌고, 언제 돈을 잃고, 얼마나 버틸 수 있는가. 이 장은 보험사의 손익계산서와 재무상태표를 가입자의 눈높이로 펼쳐 놓고, 그 숫자가 내 보험료와 내 계약의 안전에 어떻게 이어지는지를 직접 움직여 본다.</p>
+    <ul class="objectives">
+      <li>보험이익(보험료 − 보험금 − 사업비)과 투자이익으로 보험사의 수익 구조를 설명한다.</li>
+      <li>손해율·사업비율·합산비율을 읽고, 실손 보험료가 오르는 이유를 손해율로 설명한다.</li>
+      <li>금리가 내려갈 때 생기는 역마진과, 옛 고금리 계약이 가입자에게 귀한 이유를 본다.</li>
+      <li>IFRS17의 CSM(보험계약마진)이 이익을 어떻게 나눠 인식하는지, 보험사가 왜 보장성 상품을 앞다퉈 파는지 이해한다.</li>
+      <li>지급여력비율(K-ICS), 재보험, 계약이전과 예금자보호로 "보험사가 망하면"에 답한다.</li>
+    </ul>
+  </header>
+
+  <section id="money">
+    <h2>보험회사는 어떻게 돈을 버는가</h2>
+    <p>보험회사의 장사는 겉으로 보면 단순하다. 많은 사람에게서 보험료를 받고, 사고가 난 사람에게 보험금을 주고, 그 사이에서 판매·관리 비용을 쓰고, 남는 돈이 이익이다. 다만 보통의 장사와 순서가 거꾸로다. 빵집은 밀가루 값을 알고 빵 값을 정하지만, 보험사는 <b>원가(보험금)를 모르는 채로 가격(보험료)을 먼저 받는다.</b> 원가는 몇 년, 길게는 수십 년 뒤에야 확정된다. 이 시차가 보험사의 거의 모든 속사정을 만든다.</p>
+    <p>시차에는 좋은 면도 있다. 보험료는 지금 들어오고 보험금은 나중에 나가니, 그 사이 보험사는 큰돈을 맡아 굴린다. 이 돈을 <span class="term">책임준비금</span><span class="en">(Policy reserve)</span>이라 하고(<a href="pricing.html">3장</a>), 보험사는 이것을 채권·대출·주식·부동산에 투자해 <span class="term">투자이익</span><span class="en">(Investment income)</span>을 낸다. 그래서 보험사의 이익은 두 갈래다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 460 330" role="img" aria-label="보험회사 돈의 흐름: 보험료가 보험금, 사업비, 준비금으로 나뉘고 준비금은 운용되어 투자이익을 낸다">
+        <defs><marker id="cm-ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="14" y="20" width="120" height="60" rx="8" class="f-acc-soft"/>
+        <text x="74" y="46" text-anchor="middle" class="lbl-acc">가입자 전체</text>
+        <text x="74" y="66" text-anchor="middle" class="lbl-dim">보험료를 낸다</text>
+        <line x1="134" y1="50" x2="186" y2="50" class="s-acc" marker-end="url(#cm-ar1)"/>
+        <rect x="190" y="14" width="150" height="72" rx="8" class="f-elev"/>
+        <rect x="190" y="14" width="150" height="72" rx="8" fill="none" class="s-line"/>
+        <text x="265" y="44" text-anchor="middle" class="lbl-b">보험회사</text>
+        <text x="265" y="64" text-anchor="middle" class="lbl-dim">보험료 100원</text>
+        <line x1="220" y1="86" x2="80" y2="140" class="s-bad" marker-end="url(#cm-ar1)"/>
+        <line x1="255" y1="86" x2="230" y2="140" class="s-acc2" marker-end="url(#cm-ar1)"/>
+        <line x1="300" y1="86" x2="380" y2="140" class="s-acc" marker-end="url(#cm-ar1)"/>
+        <rect x="14" y="144" width="130" height="58" rx="8" class="f-bad-soft"/>
+        <text x="79" y="168" text-anchor="middle" class="lbl-bad">보험금</text>
+        <text x="79" y="188" text-anchor="middle" class="lbl-dim">→ 손해율</text>
+        <rect x="164" y="144" width="130" height="58" rx="8" class="f-acc2-soft"/>
+        <text x="229" y="168" text-anchor="middle" class="lbl-acc2">사업비</text>
+        <text x="229" y="188" text-anchor="middle" class="lbl-dim">→ 사업비율</text>
+        <rect x="314" y="144" width="132" height="58" rx="8" class="f-acc-soft"/>
+        <text x="380" y="168" text-anchor="middle" class="lbl-acc">준비금으로 적립</text>
+        <text x="380" y="188" text-anchor="middle" class="lbl-dim">나중에 줄 돈</text>
+        <line x1="380" y1="202" x2="380" y2="236" class="s-acc" marker-end="url(#cm-ar1)"/>
+        <rect x="314" y="240" width="132" height="58" rx="8" class="f-ok-soft"/>
+        <text x="380" y="264" text-anchor="middle" class="lbl-b">채권·대출·주식</text>
+        <text x="380" y="284" text-anchor="middle" class="lbl-dim">→ 투자이익</text>
+        <path d="M14 228 h280" class="s-dash"/>
+        <text x="14" y="252" class="lbl">보험이익 = 보험료 − 보험금 − 사업비</text>
+        <text x="14" y="276" class="lbl">투자이익 = 운용수익 − 약속한 이자</text>
+        <text x="14" y="310" class="lbl-dim">두 이익의 합이 보험사의 이익이다.</text>
+      </svg>
+      <figcaption><b>그림 1. 보험회사 돈의 흐름.</b> 보험료 100원은 보험금, 사업비, 준비금으로 나뉜다. 손해보험의 1년짜리 상품(자동차 등)은 대부분 그해의 보험금과 사업비로 나가고, 생명보험·장기보험은 큰 몫이 준비금으로 쌓여 오래 운용된다. 준비금에는 가입자에게 약속한 이자(예정이율)가 붙어 있어서, 운용수익이 그보다 낮으면 투자 쪽에서 손실이 난다.</figcaption>
+    </figure>
+
+    <p>보험이익을 가늠하는 세 개의 비율이 있다. 보험료 대비 보험금의 비율이 <span class="term">손해율</span><span class="en">(Loss ratio)</span>, 보험료 대비 사업비의 비율이 <span class="term">사업비율</span><span class="en">(Expense ratio)</span>, 둘을 더한 것이 <span class="term">합산비율</span><span class="en">(Combined ratio)</span>이다. 합산비율이 100%를 넘으면 보험 장사 자체는 적자다. 그래도 회사 전체가 흑자일 수 있는 것은 투자이익 때문이다.</p>
+    <div class="formula">$$\text{보험이익} = \text{보험료} - \text{보험금} - \text{사업비}, \qquad \text{합산비율} = \underbrace{\frac{\text{보험금}}{\text{보험료}}}_{\text{손해율}} + \underbrace{\frac{\text{사업비}}{\text{보험료}}}_{\text{사업비율}}$$<div class="where">합산비율 100%가 보험영업의 손익분기점이다. 합산비율이 103%면 보험료 100원마다 보험영업에서 3원을 잃고, 투자이익이 그보다 크면 회사 전체로는 남는다. 실제 회계에서는 분모를 무엇으로 잡는지(경과보험료, 위험보험료, IFRS17의 보험수익)에 따라 같은 회사의 손해율도 다르게 계산된다.</div></div>
+    <p>아래에서 보험료 100원이 어떻게 쓰이는지 직접 나눠 본다. 먼저 위쪽 단추로 상품 유형을 고른 다음, 손해율과 사업비율을 밀어 합산비율이 100% 선을 넘는 순간을 본다. 투자이익은 보험료 100원당 몇 원을 버는지로 넣는다.</p>
+
+    <div class="sim" id="sim-lr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보험료 100원의 행방: 손해율·사업비율·합산비율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lr-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="lr-kind"><button data-value="silson" class="on">실손</button><button data-value="auto">자동차</button><button data-value="long">장기 보장성</button></div>
+          <label class="ctrl"><span>손해율 <output id="lr-l-out"></output></span><input type="range" id="lr-l" min="40" max="150" step="1" value="115"></label>
+          <label class="ctrl"><span>사업비율 <output id="lr-e-out"></output></span><input type="range" id="lr-e" min="5" max="40" step="1" value="12"></label>
+          <label class="ctrl"><span>투자이익(보험료 100원당) <output id="lr-i-out"></output></span><input type="range" id="lr-i" min="0" max="15" step="0.5" value="4"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">합산비율</span><span class="v" id="lr-o-c">—</span></div>
+        <div class="stat"><span class="k">보험영업 손익(100원당)</span><span class="v" id="lr-o-u">—</span></div>
+        <div class="stat"><span class="k">투자이익 포함 손익</span><span class="v" id="lr-o-t">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v" id="lr-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "실손"에서 시작한다. 손해율 115%만으로 이미 100% 선을 넘었다. 사업비를 아무리 줄여도 보험영업은 적자다. ② "자동차"를 누른다. 손해율 80% 안팎에 사업비율이 더해지면 합산비율이 100% 근처에 붙는다. 자동차보험의 적정 손해율을 흔히 약 80% 안팎으로 말하는 이유다. ③ 손해율을 150%까지 밀어 본다. 투자이익을 15원까지 올려도 메울 수 없는 지점이 온다. 그때는 보험료를 올리거나 상품을 바꾸는 수밖에 없다. (세 단추의 값은 상품의 성격을 보여 주는 교육용 예시이며 특정 회사나 연도의 통계가 아니다.)</div>
+    </div>
+
+    <p>합산비율이 100%를 조금 넘는 것은 보험사에게 드문 일이 아니다. 투자이익이 그 차이를 메워 주기 때문이다. 문제는 손해율이 투자이익으로도 메울 수 없을 만큼 높아질 때다. 실손보험이 그런 예로 자주 거론된다. 실손보험은 해에 따라 손해율이 100%를 넘는 일이 있었고, 특히 비급여 진료가 많은 일부 항목에서 보험금이 빠르게 늘었다. 실손보험의 손해율은 보통 영업보험료 전체가 아니라 그중 보험금을 위해 떼어 둔 <span class="term">위험보험료</span>를 분모로 계산하므로, 100%를 넘으면 사업비를 쓰기도 전에 이미 적자라는 뜻이다.</p>
+
+    <h3>손해율이 높으면 다음 해 보험료가 오른다</h3>
+    <p>실손보험은 1년마다 보험료를 다시 계산하는 갱신형이다(<a href="health.html">8장</a>). 올해 손해율이 높았다면 보험사는 다음 해 보험료를 올려 손해율을 손익분기 근처로 되돌리려 한다. 의료 이용이 해마다 늘면 원가도 함께 올라가니, 보험료는 한 번 오르고 끝나지 않는다. 아래에서 지우의 2세대 실손 보험료 월 28,000원을 출발점으로 둔다. 올해 손해율, 의료비 증가율, 한 해에 올릴 수 있는 폭의 상한을 바꾸며 10년 동안 보험료가 어떻게 따라가는지 본다.</p>
+
+    <div class="sim" id="sim-rate">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>손해율이 보험료를 끌어올리는 과정</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rate-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>올해 손해율 <output id="rate-l-out"></output></span><input type="range" id="rate-l" min="60" max="160" step="1" value="120"></label>
+          <label class="ctrl"><span>보험금 증가율(연) <output id="rate-g-out"></output></span><input type="range" id="rate-g" min="0" max="15" step="0.5" value="5"></label>
+          <label class="ctrl"><span>한 해 인상 상한 <output id="rate-c-out"></output></span><input type="range" id="rate-c" min="5" max="50" step="1" value="25"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>월 보험료(막대)</span><span><i style="background:var(--accent)"></i>손해율(선)</span><span><i style="background:var(--text-dim)"></i>손익분기 손해율 85%</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">다음 갱신 인상률</span><span class="v" id="rate-o-1">—</span></div>
+        <div class="stat"><span class="k">10년 뒤 월 보험료</span><span class="v" id="rate-o-p">—</span></div>
+        <div class="stat"><span class="k">10년 뒤 손해율</span><span class="v" id="rate-o-l">—</span></div>
+        <div class="stat"><span class="k">10년 누적 적자(100원당)</span><span class="v" id="rate-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(손해율 120%, 보험금 연 5% 증가, 상한 25%)에서는 첫 갱신에 상한 25%까지 올라 28,000원이 35,000원이 되고, 두 해 만에 손해율이 85%로 돌아온다. 그 뒤로도 보험료는 해마다 5%씩 오른다. 원가가 오르기 때문이다. ② 인상 상한을 5%로 묶는다. 보험료는 천천히 오르지만 손해율이 내려오지 않고, 보험사의 누적 적자가 쌓인다. 이런 상태가 오래가면 회사는 새 세대의 상품으로 구조를 바꾸려 한다. ③ 손해율을 60%로 내린다. 보험료가 내려간다. 갱신형은 손해율이 낮으면 내릴 수도 있다. (손익분기 손해율 85%, 나이에 따른 인상은 빼고 손해율에 따른 조정만 본 교육용 모델이다. 실제 인상률은 회사·세대·연령마다 다르고 감독당국의 의견도 반영된다.)</div>
+    </div>
+
+    <p>시뮬레이터는 두 가지를 보여 준다. 첫째, 실손 보험료가 오르는 가장 큰 이유는 나 한 사람의 병원 이용이 아니라 <b>같은 상품에 든 가입자 전체의 보험금</b>이다. 민서처럼 병원을 거의 안 가는 사람도 같은 세대·같은 나이대의 손해율이 오르면 같이 오른다. 4세대 실손에 비급여 이용량에 따른 할인·할증이 들어간 것은 이 불공평을 조금이라도 줄이려는 장치다. 둘째, 인상을 억누르면 문제가 사라지는 것이 아니라 회사의 적자로 옮겨 간다. 그 적자가 쌓이면 결국 상품 판매를 멈추거나 구조를 바꾼 새 세대가 나온다. 실손이 1세대에서 4세대로, 그리고 개편이 추진 중인 5세대로 이어져 온 배경이다.</p>
+
+    <div class="callout pro">
+      <strong>"보험료가 왜 또 올랐어요?"에 답하는 법</strong>
+      갱신 안내문을 받은 고객이 가장 자주 하는 질문이다. 세 가지를 나눠 설명하면 오해가 줄어든다. ① 나이가 한 살 늘어서 오르는 몫(연령 증가분), ② 같은 상품 가입자 전체의 손해율 때문에 오르는 몫(위험률 조정분), ③ 4세대라면 본인의 비급여 이용에 따른 할인·할증. 안내문에 이 구분이 적혀 있으면 함께 짚어 준다. "설계사가 잘못 팔아서 오른 것"이라는 오해도, "내가 병원을 많이 가서 오른 것"이라는 자책도 대개 사실이 아니다. 다만 세대를 바꾸는 전환은 보험료만 보고 권하지 않는다. 자기부담과 보장 범위가 함께 바뀐다(<a href="health.html">8장</a>).
+    </div>
+  </section>
+
+  <section id="rates">
+    <h2>금리와 역마진: 옛 약속이 무거워질 때</h2>
+    <p>생명보험과 장기보험은 수십 년짜리 계약이다. 보험사는 보험료를 계산할 때 "받은 돈을 연 몇 %로 굴릴 수 있다"는 가정을 넣는다. 이것이 <span class="term">예정이율</span><span class="en">(Assumed interest rate)</span>이다(<a href="pricing.html">3장</a>). 예정이율이 높을수록 미래에 붙을 이자를 미리 깎아 주는 셈이라 보험료가 싸다. 지우의 종신보험은 2012년에 예정이율 약 4%로 계산되었다. 같은 주계약을 같은 18세에 예정이율 2.5%로 계산하면, 이 책의 교육용 모델로 월 보험료가 약 5.6만원에서 약 11.8만원으로 두 배 넘게 뛴다.</p>
+    <p>예정이율로 계산된 계약 가운데 <span class="term">확정형</span>은 그 이율을 계약 내내 바꾸지 않는다. 보험사는 금리가 높던 시절에 연 6~7%대, 그 이전에는 더 높은 이율을 약속한 계약을 많이 팔았다. 이후 시장 금리가 크게 내려가자 보험사가 굴려서 버는 <span class="term">운용수익률</span>이 약속한 이율(부담금리)보다 낮아지는 일이 생겼다. 이 차이를 <span class="term">역마진</span><span class="en">(Negative spread)</span>이라 한다. 반대로 <span class="term">금리연동형</span>은 시장 금리에 따라 해마다 이율(공시이율)이 바뀌어 보험사의 부담이 덜하지만, 그래도 <span class="term">최저보증이율</span> 아래로는 내려가지 않는다.</p>
+    <p>아래 그래프의 시장 금리는 실제 통계가 아니라 "높았다가 오래 내려오고, 최근 조금 반등한" 모양만 흉내 낸 가상 경로다. 확정형 비중과 자산 만기를 정하고, 2030년 이후 구간의 손잡이를 위아래로 끌어 앞으로의 금리를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-spread">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>운용수익률 vs 부담금리: 역마진의 50년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sp-cv"></canvas><span class="hint">2030년 뒤 손잡이를 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>앞으로의 시장 금리 <output id="sp-f-out"></output></span><input type="range" id="sp-f" min="0.5" max="6" step="0.1" value="3"></label>
+          <label class="ctrl"><span>신계약 중 확정형 비중 <output id="sp-s-out"></output></span><input type="range" id="sp-s" min="0" max="100" step="5" value="70"></label>
+          <label class="ctrl"><span>자산(채권) 평균 만기 <output id="sp-d-out"></output></span><input type="range" id="sp-d" min="2" max="20" step="1" value="7"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>시장 금리(가상, 점선)</span><span><i style="background:var(--ok)"></i>운용수익률</span><span><i style="background:var(--bad)"></i>부담금리(계약에 약속한 이율의 평균)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">2026년 운용수익률</span><span class="v" id="sp-o-a">—</span></div>
+        <div class="stat"><span class="k">2026년 부담금리</span><span class="v" id="sp-o-l">—</span></div>
+        <div class="stat"><span class="k">2026년 이차(차이)</span><span class="v" id="sp-o-s">—</span></div>
+        <div class="stat"><span class="k">역마진이었던 해</span><span class="v" id="sp-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 2010년대 중반부터 빨간 선(부담금리)이 초록 선(운용수익률) 위로 올라간다. 금리는 내려갔는데 옛 계약의 높은 이율은 그대로 남아 있기 때문이다. ② 확정형 비중을 0%로 내린다. 금리연동형은 부담금리가 시장을 따라 내려오니 역마진이 크게 줄어든다. 다만 금리를 0.5%까지 끌어내리면 최저보증이율 1% 아래로는 못 내려가 다시 역마진이 생긴다. ③ 자산 만기를 20년으로 늘린다. 옛 고금리 채권을 오래 들고 있어 운용수익률이 천천히 내려온다. 만기를 2년으로 줄이면 금리 하락이 곧바로 수익에 꽂힌다. (새 계약 이율 = 시장 금리 × 0.75(최저 1%), 금리연동형 이율 = 운용수익률 − 0.5%p(최저보증 1%), 계약은 해마다 4%씩 소멸, 운용수익률 = 최근 자산 만기 동안의 시장 금리 평균 + 0.3%p. 모양을 보기 위한 교육용 모델이다.)</div>
+    </div>
+
+    <p>역마진은 한 해의 실수가 아니라 <b>수십 년 전의 약속이 지금의 시장과 어긋나서</b> 생긴다. 그래서 보험사는 금리가 내려갈 때 새 계약의 예정이율을 낮추고(같은 보장의 보험료가 오른다), 확정형 대신 금리연동형을 팔고, 부채 만기에 맞춰 더 긴 채권을 사들인다. 신문에서 "예정이율 인하로 보험료 몇 % 인상"이라는 기사가 나오는 것도 이 때문이다. 반대로 금리가 오르면 예정이율이 올라 보장성 보험료가 내려가는 방향으로 움직인다.</p>
+    <p>가입자 쪽에서 보면 결론이 또렷하다. 고금리 시절에 확정형으로 가입한 계약은 지금 같은 조건으로는 다시 살 수 없는 <b>귀한 계약</b>이다. 보험사에게는 부담스러운 계약이고, 가입자에게는 시장보다 높은 이자를 보장받는 자산이다. 오래된 계약을 "요즘 상품이 더 좋다"는 말만 듣고 해지하거나 갈아타는 것(<a href="commission.html">15장</a>의 승환)은 이 가치를 버리는 일이 될 수 있다.</p>
+
+    <div class="callout buyer">
+      <strong>오래된 계약을 정리하기 전에 볼 것</strong>
+      <ul>
+        <li>증권이나 보험사 앱에서 계약의 <b>예정이율(또는 공시이율·최저보증이율)</b>과 확정형인지 금리연동형인지를 확인한다.</li>
+        <li>지금 같은 보장을 새로 사면 보험료가 얼마인지 비교 견적을 받는다. 나이와 예정이율이 모두 불리해져 있는 경우가 많다.</li>
+        <li>보장이 과하거나 보험료가 부담되면 해지 대신 <b>감액·특약 삭제·납입 중지 기능</b>이 있는지 먼저 묻는다.</li>
+        <li>해지하면 같은 조건의 계약은 다시 살 수 없다. 해지환급금만 보고 판단하지 않는다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ifrs17">
+    <h2>IFRS17과 CSM: 이익을 언제 인식하는가</h2>
+    <p>2023년부터 한국 보험사는 새 회계기준 <span class="term">IFRS17</span>을 쓴다. 바뀐 것은 많지만 가입자가 알아 둘 핵심은 하나다. <b>보험계약에서 앞으로 남을 것으로 기대되는 이익을, 판 날 한꺼번에 잡지 않고 보장 기간에 걸쳐 나눠 인식한다.</b> 그 "아직 인식하지 않은 미래 이익"을 담아 두는 그릇이 <span class="term">CSM</span><span class="en">(Contractual Service Margin, 보험계약마진)</span>이다.</p>
+    <p>예전 방식에서는 받은 보험료가 그해의 수익(매출)으로 잡혔다. 그래서 보험료를 짧은 기간에 많이 받는 상품, 특히 저축성 보험을 많이 팔면 매출과 초기 실적이 커 보였다. IFRS17에서는 저축처럼 돌려줄 돈(투자요소)은 수익에서 빠지고, 보장을 제공한 만큼만 수익으로 인식한다. 계약을 팔면 그 계약의 부채가 세 덩어리로 측정된다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 450 300" role="img" aria-label="IFRS17 보험부채의 구성: 최선추정부채, 위험조정, 보험계약마진">
+        <defs><marker id="cm-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="80" y="22" text-anchor="middle" class="lbl-b">미래에 들어올 돈</text>
+        <rect x="20" y="34" width="120" height="236" rx="6" class="f-ok-soft"/>
+        <text x="80" y="140" text-anchor="middle" class="lbl">미래 보험료의</text>
+        <text x="80" y="160" text-anchor="middle" class="lbl">현재가치</text>
+        <text x="300" y="22" text-anchor="middle" class="lbl-b">보험부채로 잡는 것</text>
+        <rect x="190" y="34" width="220" height="150" rx="6" class="f-bad-soft"/>
+        <text x="300" y="98" text-anchor="middle" class="lbl-bad">최선추정부채(BEL)</text>
+        <text x="300" y="120" text-anchor="middle" class="lbl-dim">보험금·사업비의 현재가치</text>
+        <rect x="190" y="188" width="220" height="30" rx="6" class="f-warn-soft"/>
+        <text x="300" y="208" text-anchor="middle" class="lbl">위험조정(RA): 불확실성 몫</text>
+        <rect x="190" y="222" width="220" height="48" rx="6" class="f-acc-soft"/>
+        <text x="300" y="242" text-anchor="middle" class="lbl-acc">CSM: 아직 인식 안 한 이익</text>
+        <text x="300" y="260" text-anchor="middle" class="lbl-dim">보장 기간 동안 조금씩 이익으로</text>
+        <path d="M150 34 v236" class="s-dash"/>
+        <line x1="420" y1="246" x2="440" y2="246" class="s-acc" marker-end="url(#cm-ar2)"/>
+        <text x="20" y="292" class="lbl-dim">높이는 개념용. 계약 시점에 두 쪽 합이 같아지도록 CSM이 정해진다.</text>
+      </svg>
+      <figcaption><b>그림 2. IFRS17이 보험계약을 재는 방식.</b> 미래 보험료의 현재가치에서 보험금·사업비의 현재가치(BEL)와 불확실성 몫(RA)을 뺀 나머지가 CSM이다. CSM은 계약 첫날 이익으로 잡히지 않고 부채에 머물다가, 보장을 제공하는 해마다 일부씩 이익으로 넘어간다. 계산 결과 CSM이 음수라면(팔자마자 손해가 예상되는 계약) 그 손실은 즉시 인식한다.</figcaption>
+    </figure>
+
+    <p>CSM이 이익으로 풀려나오는 모습을 직접 본다. 상품 단추를 고르고, 재생을 누르거나 그래프 위 세로선을 끌어 해를 옮긴다. 위쪽은 CSM 잔액, 아래쪽은 해마다 인식하는 이익이다. 회색 막대는 "보험료가 들어오는 해에 이익이 잡히는" 옛 방식을 단순화한 것이다. 이어서 "가정 악화"를 올려 몇 년 뒤 보험금이 예상보다 늘어나는 상황을 만든다.</p>
+
+    <div class="sim" id="sim-csm">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>CSM이 풀려나오는 속도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="csm-cv"></canvas><span class="hint">세로선을 끌어 해를 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="csm-kind"><button data-value="health" class="on">건강보험</button><button data-value="short">단기납 종신</button><button data-value="save">저축성</button></div>
+          <label class="ctrl"><span>가정 악화(남은 보험금 증가) <output id="csm-x-out"></output></span><input type="range" id="csm-x" min="0" max="60" step="1" value="0"></label>
+          <label class="ctrl"><span>악화가 드러나는 해 <output id="csm-d-out"></output></span><input type="range" id="csm-d" min="1" max="15" step="1" value="5"></label>
+          <div class="btn-row"><button class="btn primary" id="csm-play">재생</button><button class="btn" id="csm-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>IFRS17 인식 이익 · CSM 잔액</span><span><i style="background:var(--text-dim)"></i>옛 방식(단순화)</span><span><i style="background:var(--bad)"></i>즉시 인식한 손실</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">고른 해</span><span class="v" id="csm-o-t">—</span></div>
+        <div class="stat"><span class="k">CSM 잔액</span><span class="v" id="csm-o-c">—</span></div>
+        <div class="stat"><span class="k">누적 이익 · IFRS17</span><span class="v" id="csm-o-n">—</span></div>
+        <div class="stat"><span class="k">누적 이익 · 옛 방식</span><span class="v" id="csm-o-o">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "단기납 종신"을 고른다. 보험료는 5년 만에 다 들어오지만 보장은 30년 넘게 이어진다. 옛 방식(회색)은 이익이 처음 5년에 몰리고, IFRS17(파랑)은 30년에 고르게 퍼진다. ② "건강보험"과 "저축성"을 비교한다. 같은 보험료 100에서 남길 이익(CSM)이 건강보험 쪽이 훨씬 크다. 보험사가 보장성 상품 판매에 힘을 쏟는 이유다. ③ 가정 악화를 40% 이상으로 올린다. 악화분이 CSM을 깎다가 CSM이 바닥나면 넘친 몫이 그해 손실(빨강)로 한꺼번에 잡힌다. (보험료 합계 100, 연 해지율 3%, 할인과 이자 부리는 생략, 상품별 CSM은 건강보험 18·단기납 종신 9·저축성 3으로 둔 교육용 가정이다.)</div>
+    </div>
+
+    <p>시뮬레이터에서 본 대로 IFRS17은 두 가지를 바꿨다. 하나는 <b>이익의 시간표</b>다. 보험료가 일찍 들어와도 이익은 보장을 제공하는 만큼만 나온다. 다른 하나는 <b>이익의 크기를 재는 잣대</b>다. 매출(보험료)이 아니라 CSM이 회사의 미래 이익을 보여 주는 지표가 되었고, 보험사들은 분기마다 "신계약 CSM이 얼마 늘었다"를 실적으로 내세운다.</p>
+    <p>CSM이 큰 상품은 보험료 대비 남는 이익이 큰 보장성 상품이다. 건강보험(암·뇌·심장 진단비, 수술비, 간병 등)이 대표적이다. 그래서 IFRS17 도입을 전후해 보험사들이 건강보험 경쟁에 뛰어들었고, 생명보험사는 종신보험을 짧게 납입하도록 바꾼 <span class="term">단기납 종신</span>을 높은 환급률을 앞세워 팔기도 했다(<a href="life.html">10장</a>). 환급률 경쟁이 과열되자 감독당국이 제동을 거는 일도 있었다. 이 경쟁은 가입자에게 선택지와 가격 경쟁을 주지만, 판매 현장에서 보장성 상품을 "필요 이상으로" 권하는 압력이 될 수도 있다.</p>
+
+    <div class="callout deep">
+      <strong>CSM은 어떻게 풀려나오나</strong>
+      계약 시점의 CSM은 "미래 보험료의 현재가치 − 미래 보험금·사업비의 현재가치 − 위험조정"으로 정한다. 그 뒤 해마다 이자를 붙이고(부리), 미래에 관한 가정이 바뀌면 그 효과를 CSM에서 더하거나 빼고, 남은 잔액을 <span class="term">보장단위</span><span class="en">(Coverage units)</span>의 비율만큼 이익으로 넘긴다.
+      <div class="formula">$$\text{상각액}_t = \text{CSM}_t \times \frac{\text{보장단위}_t}{\sum_{s \ge t} \text{보장단위}_s}$$<div class="where">보장단위는 그해 제공한 보장의 양(유지 계약 수 × 가입금액 등)이다. 남은 보장이 많을수록 올해 몫은 작다. 가정 악화가 CSM보다 크면 CSM은 0이 되고 초과분은 즉시 손실(손실부담계약)로 인식한다. 실제로는 할인율, 위험조정 해제, 경험조정 등이 함께 움직인다.</div></div>
+      CSM이 미래 이익의 저장고인 만큼, 가정을 낙관적으로 잡으면 CSM이 부풀 수 있다. 해지율·손해율 가정을 어떻게 잡을지에 대해 감독당국이 가이드라인을 내는 이유다.
+    </div>
+
+    <div class="callout pro">
+      <strong>"요즘 왜 다들 건강보험만 권해요?"</strong>
+      고객이 이렇게 물으면 회사의 사정과 고객의 필요를 분리해서 말한다. 회사 쪽 사정: IFRS17에서 보장성 상품이 이익(CSM)을 많이 남기고, 그래서 시책과 수수료도 그쪽에 몰린다. 고객 쪽 필요: 진단비·수술비가 실제로 필요한지는 소득 공백과 기존 보장으로 따로 계산한다(<a href="fixed.html">9장</a>). 회사가 밀어 주는 상품과 고객에게 필요한 상품이 겹치면 다행이지만, 겹치지 않을 때 어느 쪽을 따를지가 설계사의 신뢰를 정한다. 단기납 종신의 높은 환급률을 설명할 때는 "그 환급률이 몇 년째, 어떤 조건에서 나오는지"와 "중도 해지 시 환급률"을 함께 보여 준다.
+    </div>
+  </section>
+
+  <section id="kics">
+    <h2>지급여력(K-ICS): 나쁜 해를 견디는 힘</h2>
+    <p>보험사가 보험금을 못 줄 정도로 망가지는 것은 평범한 해가 아니라 <b>아주 나쁜 해</b>다. 금리가 급락하고, 주가가 폭락하고, 대형 재해가 겹치는 해. 그래서 감독당국은 보험사에게 "나쁜 해가 와도 버틸 만큼의 자본"을 쌓게 한다. 2023년부터 한국은 이 기준으로 <span class="term">K-ICS</span><span class="en">(신지급여력제도)</span>를 쓴다.</p>
+    <div class="formula">$$\text{지급여력비율} = \frac{\text{가용자본(지급여력금액)}}{\text{요구자본(지급여력기준금액)}} \times 100\%$$<div class="where">가용자본: 자산에서 부채를 시가로 평가해 뺀, 손실을 흡수할 수 있는 돈(CSM의 상당 부분이 여기 포함된다). 요구자본: 금리·주식·보험·대재해 등의 위험이 동시에 닥치는 나쁜 상황(대략 200년에 한 번 수준)에서 잃을 수 있는 돈을 위험끼리의 상관관계를 반영해 합친 값.</div></div>
+    <p>비율이 100%면 "200년에 한 번 꼴의 나쁜 해가 와도 자본으로 버틸 수 있다"는 뜻이다. 100% 아래로 떨어지면 감독당국이 단계적으로 개입한다(대략 100% 미만 경영개선권고, 50% 미만 경영개선요구, 0% 미만 경영개선명령의 순서, 2026년 기준). 법정 최소 기준과 별도로 감독당국이 권고하는 수준은 이보다 높고(약 130~150% 범위에서 정해지고 조정되어 왔다), 도입 초기의 충격을 줄이는 경과조치도 있다. 숫자는 바뀔 수 있으니 공시를 볼 때 그해의 기준을 함께 확인한다.</p>
+    <p>아래는 자산 100, 보험부채 80인 가상의 생명보험사다. 부채는 수십 년 뒤의 보험금이라 만기(듀레이션)가 13년으로 길다. 자산 만기를 정하고, 금리 하락과 대재해 손실을 키워 비율이 어디서 무너지는지 본다.</p>
+
+    <div class="sim" id="sim-kics">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>스트레스 시나리오와 지급여력비율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ks-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>금리 하락 <output id="ks-r-out"></output></span><input type="range" id="ks-r" min="0" max="2.5" step="0.1" value="0"></label>
+          <label class="ctrl"><span>대재해 손실 <output id="ks-c-out"></output></span><input type="range" id="ks-c" min="0" max="8" step="0.25" value="0"></label>
+          <label class="ctrl"><span>자산 듀레이션 <output id="ks-d-out"></output></span><input type="range" id="ks-d" min="4" max="14" step="0.5" value="8"></label>
+          <label class="check"><input type="checkbox" id="ks-re"> 재보험(대재해 1 초과분의 80% 이전)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가용자본</span><span class="v" id="ks-o-a">—</span></div>
+        <div class="stat"><span class="k">요구자본</span><span class="v" id="ks-o-r">—</span></div>
+        <div class="stat"><span class="k">지급여력비율</span><span class="v" id="ks-o-k">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v" id="ks-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 금리를 1%p 낮춘다. 자산도 오르지만 만기가 긴 부채가 더 크게 불어나 가용자본이 약 4 줄고 비율이 200%대에서 160%대로 내려간다. ② 금리를 2.5%p까지 낮추면 100% 선이 깨진다. 이제 자산 듀레이션을 13으로 맞춘다. 금리가 아무리 내려가도 자산과 부채가 같이 움직여 비율이 거의 그대로다. 보험사가 긴 채권을 사는 이유다. ③ 대재해 손실을 6까지 올려 비율을 무너뜨린 다음 재보험을 켠다. 손실 대부분이 재보험사로 넘어가 비율이 회복된다. (단위는 가상의 회사 규모 기준. 요구자본 = √(금리² + 주식 3.5² + 보험 4² + 대재해²) + 운영 1, 금리위험 = 부채 80 × 듀레이션 차이 × 1%p. 실제 K-ICS의 위험 측정은 훨씬 세분화되어 있다.)</div>
+    </div>
+
+    <p>지급여력비율은 회사의 "체력 점수"이지만 몇 가지를 함께 읽어야 한다. 첫째, 같은 회사도 금리가 움직이면 비율이 크게 출렁인다. 시뮬레이터에서 본 것처럼 부채 만기가 길고 자산 만기가 짧은 회사일수록 금리 하락에 약하다. 둘째, 비율을 끌어올리는 방법에는 이익을 쌓는 것 말고도 후순위채·신종자본증권 발행, 재보험 가입, 위험한 자산 줄이기가 있다. 비율이 갑자기 올랐다면 무엇으로 올렸는지 본다. 셋째, 비율이 높다고 그 회사의 상품이 좋다는 뜻은 아니다. 지급여력비율은 회사가 망할 가능성에 관한 지표이고, 보험료나 보험금 지급의 친절함과는 다른 이야기다.</p>
+  </section>
+
+  <section id="reinsurance">
+    <h2>재보험: 보험사의 보험</h2>
+    <p>보험사도 감당하기 어려운 위험이 있다. 대형 태풍이 한 지역의 공장 수백 곳을 한꺼번에 쓸고 가거나, 한 건의 대형 사고로 수천억원을 물어 줘야 하는 경우다. 대수의 법칙은 사고들이 서로 독립일 때 잘 작동하는데(<a href="pooling.html">2장</a>), 자연재해는 많은 계약을 동시에 덮친다. 이런 꼬리 위험을 보험사는 다시 다른 회사에 넘긴다. 이것이 <span class="term">재보험</span><span class="en">(Reinsurance)</span>이다.</p>
+    <p>재보험에는 여러 방식이 있는데, 대재해에 많이 쓰는 것이 <span class="term">초과손해액 재보험</span><span class="en">(Excess of loss)</span>이다. 사고 한 건의 손실 가운데 일정 금액(보유한도)까지는 보험사가 내고, 그 위로 정해진 한도까지는 재보험사가 낸다. 자동차보험의 자기부담금을 보험사 규모로 키운 셈이다.</p>
+    <p>아래에서는 가상의 손해보험사가 해마다 대재해를 평균 1.2건 겪는다. 손실 크기는 대부분 작지만 가끔 터무니없이 큰 꼬리가 있다(파레토 분포). 보유한도와 재보험 한도를 바꾸고, 해가 지나가는 것을 지켜본다. 회색 막대는 원래 손실, 파란 막대는 재보험 뒤 보험사가 실제로 떠안는 손실이다.</p>
+
+    <div class="sim" id="sim-re">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>초과손해액 재보험이 꼬리를 자르는 모습</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="re-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>보유한도(사고 1건당) <output id="re-r-out"></output></span><input type="range" id="re-r" min="100" max="3000" step="50" value="500"></label>
+          <label class="ctrl"><span>재보험 한도(보유한도 위로) <output id="re-l-out"></output></span><input type="range" id="re-l" min="0" max="20000" step="500" value="8000"></label>
+          <div class="btn-row"><button class="btn" id="re-pause">일시정지</button><button class="btn" id="re-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text-faint)"></i>원래 손실</span><span><i style="background:var(--accent)"></i>재보험 뒤 보유 손실</span><span><i style="background:var(--bad)"></i>재보험 한도를 넘은 손실</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">평균 연손실 · 재보험 없음</span><span class="v" id="re-o-m">—</span></div>
+        <div class="stat"><span class="k">연 재보험료</span><span class="v" id="re-o-p">—</span></div>
+        <div class="stat"><span class="k">200년에 한 번 · 없음</span><span class="v" id="re-o-g">—</span></div>
+        <div class="stat"><span class="k">200년에 한 번 · 있음(재보험료 포함)</span><span class="v" id="re-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 몇십 년을 지켜본다. 대부분의 해는 재보험이 거의 일하지 않지만, 가끔 회색 막대가 하늘로 솟는 해에 파란 막대는 낮게 머문다. 200년에 한 번 수준의 손실이 수천억원대에서 크게 줄어든다. ② 재보험 한도를 0으로 내린다. 재보험료는 0이 되지만 꼬리가 그대로 돌아온다. 한도를 너무 작게 잡으면 그 위로 빨간 꼬리가 다시 생긴다. ③ 보유한도를 100억원까지 내린다. 꼬리는 더 깎이지만 재보험료가 평균 손실의 큰 몫을 차지한다. 작은 손실까지 넘기면 비싸다는 2장의 결론이 보험사에도 똑같이 적용된다. (단위 억원. 사고 수는 포아송 평균 1.2건, 손실은 최소 50억원·꼬리 지수 1.5의 파레토 분포(최대 3조원), 재보험료 = 기대 재보험금 × 1.5. 20,000년을 미리 돌려 통계를 낸 교육용 모델이다.)</div>
+    </div>
+
+    <p>재보험은 평균적으로는 보험사에게 손해다. 재보험사도 사업비와 이익을 붙이기 때문이다. 그래도 보험사가 재보험을 사는 이유는 개인이 보험을 사는 이유와 같다. 평균을 조금 내주고 최악의 해를 크게 끌어올린다. 앞 절의 지급여력비율에서 대재해 위험의 요구자본이 줄어드는 것도 같은 효과다. 국내 보험사가 인수한 위험 가운데 상당 부분은 국내외 재보험사로 다시 퍼져 나가고, 그 덕분에 한 나라의 대형 재해가 한 회사를 무너뜨리지 않는다.</p>
+  </section>
+
+  <section id="failure">
+    <h2>보험사가 어려워지면</h2>
+    <p>이제 지우의 질문으로 돌아간다. 보험사가 정말 어려워지면 무슨 일이 생길까. 은행 예금과 달리 보험은 "계약"이라는 점이 중요하다. 내 종신보험은 1억원의 사망보험금을 약속한 계약이지, 1억원이 통장에 들어 있는 것이 아니다. 그래서 보험사 부실 처리의 첫 번째 목표는 돈을 나눠 주는 것이 아니라 <b>계약을 살려서 다른 회사로 넘기는 것</b>이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 450 330" role="img" aria-label="보험사가 어려워질 때의 처리 경로: 적기시정조치, 계약이전이나 합병, 파산 시 예금자보호">
+        <defs><marker id="cm-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="140" y="10" width="170" height="44" rx="8" class="f-ok-soft"/>
+        <text x="225" y="37" text-anchor="middle" class="lbl-b">정상 영업</text>
+        <line x1="225" y1="54" x2="225" y2="78" class="s-line" marker-end="url(#cm-ar3)"/>
+        <rect x="110" y="82" width="230" height="56" rx="8" class="f-warn-soft"/>
+        <text x="225" y="104" text-anchor="middle" class="lbl-b">지급여력비율 하락</text>
+        <text x="225" y="124" text-anchor="middle" class="lbl-dim">적기시정조치: 자본 확충·비용 절감</text>
+        <line x1="190" y1="138" x2="110" y2="172" class="s-line" marker-end="url(#cm-ar3)"/>
+        <line x1="260" y1="138" x2="340" y2="172" class="s-line" marker-end="url(#cm-ar3)"/>
+        <rect x="14" y="176" width="200" height="72" rx="8" class="f-acc-soft"/>
+        <text x="114" y="200" text-anchor="middle" class="lbl-acc">계약이전 · 합병 · 매각</text>
+        <text x="114" y="220" text-anchor="middle" class="lbl-dim">계약은 다른 회사로 이어진다</text>
+        <text x="114" y="238" text-anchor="middle" class="lbl-dim">(조건이 바뀔 수 있다)</text>
+        <rect x="236" y="176" width="200" height="72" rx="8" class="f-bad-soft"/>
+        <text x="336" y="200" text-anchor="middle" class="lbl-bad">파산(이전 실패)</text>
+        <text x="336" y="220" text-anchor="middle" class="lbl-dim">계약 효력이 사라지고</text>
+        <text x="336" y="238" text-anchor="middle" class="lbl-dim">돈으로 정산한다</text>
+        <line x1="336" y1="248" x2="336" y2="272" class="s-bad" marker-end="url(#cm-ar3)"/>
+        <rect x="236" y="276" width="200" height="46" rx="8" class="f-elev"/>
+        <rect x="236" y="276" width="200" height="46" rx="8" fill="none" class="s-line"/>
+        <text x="336" y="296" text-anchor="middle" class="lbl-b">예금자보호</text>
+        <text x="336" y="314" text-anchor="middle" class="lbl-dim">보험사별 1인당 1억원까지</text>
+        <text x="14" y="282" class="lbl">대부분의 부실은</text>
+        <text x="14" y="304" class="lbl">왼쪽 길로 처리하려 한다.</text>
+      </svg>
+      <figcaption><b>그림 3. 보험사 부실의 처리 경로.</b> 지급여력비율이 떨어지면 감독당국이 단계적으로 개입하고, 회복이 어려우면 계약을 건전한 회사로 넘기는 계약이전이나 합병·매각을 추진한다. 이 경우 가입자의 계약은 대개 그대로 이어진다. 이전이 안 되고 파산하면 계약이 끝나고, 해지환급금 등을 기준으로 예금보험공사가 보험사별 1인당 1억원까지 지급한다.</figcaption>
+    </figure>
+
+    <p><span class="term">계약이전</span>은 부실 보험사의 계약을 묶어서 다른 보험사가 인수하는 것이다. 가입자는 회사 이름이 바뀐 새 증권을 받고 보장은 이어진다. 다만 인수하는 회사도 손해를 보면서 받지는 않으니, 이전 과정에서 예정이율을 낮추거나 보험금을 깎는 등 <b>계약 조건이 불리하게 조정될 수 있다</b>. 한국에서도 과거 부실 보험사의 계약이 다른 회사로 이전된 일이 있었다.</p>
+    <p>계약이전이 안 되어 파산하면 <span class="term">예금자보호</span>가 마지막 안전망이다. 2026년 기준 보호 한도는 보험사별로 1인당 1억원이다(2025년 9월부터 5천만원에서 1억원으로 올랐다). 보호 금액은 보험금 1억원이 아니라 <b>해지환급금</b>(사고가 이미 났다면 사고보험금, 만기가 되었다면 만기보험금)과 기타 지급금을 합친 금액을 기준으로 한다. 변액보험의 주계약처럼 특별계정에서 운용되는 적립금은 원칙적으로 보호 대상이 아니고(최저보증 보험금 등 일부는 예외), 법인이 계약자인 계약 등도 제외된다. 세부 범위는 상품설명서의 예금자보호 안내 문구로 확인한다.</p>
+    <p>아래에서 한 사람이 두 보험사에 가진 돈을 정해 본다. A생명의 해지환급금과 아직 받지 못한 보험금, B손해보험의 해지환급금을 바꾸고, A생명에 변액보험 적립금이 있는 경우도 켜 본다.</p>
+
+    <div class="sim" id="sim-dp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>예금자보호 1억원은 어디까지 지켜 주나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>A생명 해지환급금 합계 <output id="dp-a-out"></output></span><input type="range" id="dp-a" min="0" max="200000000" step="1000000" value="10000000"></label>
+          <label class="ctrl"><span>A생명 미지급 보험금 <output id="dp-c-out"></output></span><input type="range" id="dp-c" min="0" max="100000000" step="1000000" value="0"></label>
+          <label class="ctrl"><span>B손해보험 해지환급금 <output id="dp-b-out"></output></span><input type="range" id="dp-b" min="0" max="150000000" step="1000000" value="5000000"></label>
+          <label class="check"><input type="checkbox" id="dp-v"> A생명에 변액보험 적립금 5,000만원도 있다</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>보호되는 몫</span><span><i style="background:var(--bad)"></i>한도를 넘는 몫</span><span><i style="background:var(--warn)"></i>보호 대상이 아닌 몫(변액 적립금)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">A생명에서 보호</span><span class="v" id="dp-o-a">—</span></div>
+        <div class="stat"><span class="k">B손해보험에서 보호</span><span class="v" id="dp-o-b">—</span></div>
+        <div class="stat"><span class="k">보호 밖</span><span class="v" id="dp-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값은 지우와 비슷한 규모다(종신보험 해지환급금 약 1천만원). 보호 한도 1억원에 한참 못 미친다. ② A생명 해지환급금을 1억원 넘게 올리고 미지급 보험금도 더한다. 둘을 합쳐 1억원까지만 보호되고 나머지는 빨갛게 남는다. ③ B손해보험을 올린다. 보호 한도는 회사마다 따로라서 B손해보험은 별도의 1억원 칸을 쓴다. 변액 적립금을 켜면 노란 몫은 한도와 상관없이 보호 대상 밖이다(특별계정 자산은 회사 재산과 분리되어 있어 그 자체로 별도 관리된다). (2026년 기준 제도의 단순화. 실제 보호 금액은 예금보험공사가 정하는 기준에 따르고, 보험사에 진 빚(보험계약대출 등)이 있으면 먼저 상계된다.)</div>
+    </div>
+
+    <p>지우의 경우 종신보험 주계약의 해지환급금은 이 책의 교육용 모델로 약 1,016만원이다(2012년 18세 가입, 예정이율 4%, 14년째). 예금자보호 한도 안이다. 그런데 이 숫자가 지우 계약의 진짜 가치는 아니다. 지우가 이 계약으로 가진 것은 1천만원이 아니라 <b>예정이율 4%로 고정된 사망보험금 1억원</b>이고, 같은 보장을 오늘 32세에 2.5%로 사면 교육용 모델로 월 약 16.4만원이 든다. 예금자보호는 해지환급금을 지키지만, 그 계약이 가진 유리한 조건까지 지켜 주지는 않는다. 그래서 보험사 건전성은 "망하면 돈을 받을 수 있나"보다 <b>"계약이 좋은 조건 그대로 이어질 수 있나"</b>의 문제에 가깝다.</p>
+    <p>보험사가 망하지 않더라도 사정이 나빠지면 가입자가 느끼는 변화가 있다. 갱신형 상품의 보험료가 오르고(앞의 손해율 시뮬레이터), 금리연동형의 공시이율이 최저보증 근처로 내려가고, 인기 없는 상품은 판매가 중단된다. 확정형 계약의 보험금을 회사가 마음대로 깎을 수는 없지만, 계약이전 같은 특별한 절차에서는 조건이 조정될 수 있다.</p>
+
+    <div class="callout warn">
+      <strong>제도와 기준은 해마다 바뀐다</strong>
+      예금자보호 한도(2025년 9월 1억원으로 상향), K-ICS의 권고 수준과 경과조치, IFRS17의 계리 가정 가이드라인, 실손보험 개편(5세대 실손은 추진 중이며 세부 내용은 확정 전) 등 이 장의 제도는 2026년 기준이며 자주 바뀐다. 이 장의 손해율·지급여력비율·CSM 숫자는 원리를 보여 주는 교육용 모델의 값이고 특정 회사의 실제 수치가 아니다. 실제 숫자는 각 회사의 경영공시와 협회 공시실, 예금보험공사 안내에서 그해 기준으로 확인한다.
+    </div>
+  </section>
+
+  <section id="indicators">
+    <h2>보험회사 지표 보는 법</h2>
+    <p>가입자가 보험사를 고를 때 회사 이름의 인지도보다 쓸모 있는 숫자들이 공개되어 있다. 생명보험협회·손해보험협회의 공시실, 각 보험사 홈페이지의 경영공시, 금융감독원의 금융소비자 정보포털에서 찾을 수 있다. 네 가지만 보면 된다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표</th><th>무엇을 말하나</th><th>읽는 법</th></tr></thead>
+      <tbody>
+        <tr><td>지급여력비율(K-ICS)</td><td>나쁜 해를 견딜 자본</td><td>100% 아래면 위험 신호. 권고 수준(약 130~150%)과 비교하고, 경과조치 전후 비율을 함께 본다. 분기마다 출렁이므로 추세를 본다.</td></tr>
+        <tr><td>민원 건수(보유계약 10만 건당)</td><td>가입자와의 마찰</td><td>회사 규모가 달라 절대 건수보다 10만 건당 건수로 비교한다. 유형(보험금 지급, 판매, 유지)도 본다.</td></tr>
+        <tr><td>불완전판매비율</td><td>판매 과정의 문제</td><td>설명 부족 등으로 계약이 취소·무효·해지된 비율. 판매 채널(설계사, GA, 방카, 온라인)별로 나뉘어 공시된다.</td></tr>
+        <tr><td>보험금 부지급률·불만족도</td><td>청구했을 때의 태도</td><td>청구 건 대비 지급하지 않은 비율, 지급 관련 소송 건수, 의료자문 의뢰 건수 등. 상품 구성에 따라 달라지므로 같은 업권끼리 비교한다.</td></tr>
+      </tbody>
+    </table></div>
+    <p>이 지표들은 "좋은 회사"를 한 줄로 가려 주지는 않는다. 상품 구성이 다르면 부지급률도 다르고, 판매가 많은 회사는 민원 유형도 다르다. 다만 같은 업권에서 한 회사의 숫자가 유난히 튀면 그 이유를 물어볼 가치가 있다. 그리고 보험은 수십 년짜리 계약이므로, 가입할 때의 보험료 몇천 원 차이보다 <b>청구할 때의 경험</b>이 더 오래 남는다는 것을 기억한다.</p>
+
+    <div class="callout buyer">
+      <strong>가입 전 회사 점검 5분</strong>
+      <ul>
+        <li>협회 공시실에서 최근 분기 지급여력비율과 그 추세를 본다(경과조치 적용 전 숫자도).</li>
+        <li>보유계약 10만 건당 민원 건수와 불완전판매비율을 같은 업권 평균과 비교한다.</li>
+        <li>보험금 부지급률과 지급 관련 소송 건수를 본다.</li>
+        <li>상품설명서의 예금자보호 문구로 내 상품이 보호 대상인지 확인한다(변액 주계약 등은 대상이 아니다).</li>
+      </ul>
+    </div>
+
+    <div class="callout pro">
+      <strong>회사 건전성 질문을 받았을 때</strong>
+      "이 회사 안전해요?"라는 질문에 "큰 회사라 괜찮다"로 답하지 않는다. 공시실 화면을 함께 열어 지급여력비율과 기준선을 보여 주고, 예금자보호는 해지환급금 기준 1억원이라는 점, 실제 부실 때는 계약이전이 먼저 추진된다는 점을 설명한다. GA 소속이라면 여러 회사 상품을 비교할 때 수수료가 아니라 이런 지표와 보장 내용을 기준으로 추천 이유를 기록해 두는 것이 비교안내 의무와 고객 신뢰 양쪽에 도움이 된다(<a href="advisor.html">19장</a>).
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>지우네 상담 노트: 보험사가 망하면?</h2>
+    <div class="casefile">
+      <div class="tag"><b>CASE 지우네</b><span>상담 노트 · 16장</span></div>
+      <h4>"보험사가 망하면 내 종신보험은?"</h4>
+      <p>도윤은 노트북으로 생명보험협회 공시실을 열었다. 지우의 종신보험을 판 생명보험사의 최근 지급여력비율을 함께 보고, 100% 기준선과 권고 수준이 무엇을 뜻하는지 설명했다. 그리고 예금자보호의 숫자를 계산했다. 지우의 종신보험 주계약 해지환급금은 이 책의 교육용 모델로 약 1,016만원, 실손·암보험·운전자보험 같은 보장성 계약은 해지환급금이 거의 없다. 회사별 한도 1억원에 한참 못 미친다. "돈으로 보면 걱정할 일은 거의 없어. 그런데 네 종신보험의 진짜 가치는 1천만원이 아니야." 예정이율 4%로 고정된 1억원 보장을 오늘 다시 사면 교육용 모델로 월 약 16.4만원이 든다. 회사가 어려워지면 첫 번째로 추진되는 것은 계약이전이고, 그때 계약이 그대로 이어지는지가 진짜 관심사다.</p>
+      <p>민서의 질문, 실손 보험료가 왜 오르는지는 손해율 시뮬레이터로 답했다. 지우의 2세대 실손 월 28,000원은 손해율 120%, 보험금 증가 연 5%, 한 해 인상 상한 25%라는 교육용 가정에서 첫 갱신에 35,000원이 되고, 손해율이 돌아온 뒤에도 해마다 오른다. 나이에 따른 인상은 따로 붙는다. 지우가 "그럼 4세대로 바꿔야 해?"라고 묻자 도윤은 고개를 저었다. "그건 <a href="health.html">8장</a>에서 본 대로 보험료와 자기부담을 같이 봐야 해. 손해율은 오르는 이유를 설명할 뿐이지, 바꾸라는 신호는 아니야." 지우는 도윤이 수수료가 생기는 "갈아타기" 쪽으로 이야기를 끌고 가지 않는다는 것을 알아챘다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>보험사 부실 걱정은 지급여력비율 확인으로 갈음. 예금자보호는 해지환급금 기준 회사별 1억원이라 지우네 계약은 모두 한도 안. 고금리 종신보험은 유지.</div><div><b>아직 남은 문제</b>보험사가 멀쩡해도 보험금을 순순히 주지 않는 경우가 있다. 청구는 어떻게 하고, 거절당하면 어떻게 하나.</div><div><b>다음 단계</b><a href="claim.html">17장</a>에서 민서의 충수염 수술로 실제 청구를 해 보고, 지우 아버지의 옛 분쟁 이야기를 듣는다.</div></div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>보험사의 이익 = 보험이익(보험료 − 보험금 − 사업비) + 투자이익(운용수익 − 약속한 이자). 원가를 모르는 채로 가격을 먼저 받는 것이 보험업의 본질이다.</li>
+      <li>합산비율 = 손해율 + 사업비율. 100%를 넘으면 보험영업은 적자이고, 투자이익으로 메우지 못하면 보험료 인상이나 상품 개편으로 이어진다. 실손 보험료 인상은 같은 상품 가입자 전체의 손해율이 주로 결정한다.</li>
+      <li>금리가 내려가면 옛 확정형 계약의 높은 이율이 운용수익률보다 높아져 역마진이 생긴다. 보험사에는 부담이고 가입자에게는 다시 살 수 없는 귀한 계약이다. 예정이율 인하는 같은 보장의 보험료 인상으로 이어진다.</li>
+      <li>IFRS17은 기대이익을 CSM에 담아 보장 기간에 걸쳐 나눠 인식한다. 보험료 대비 CSM이 큰 보장성 상품(건강보험, 단기납 종신)으로 회사들의 경쟁이 쏠리는 이유다.</li>
+      <li>지급여력비율(K-ICS) = 가용자본 ÷ 요구자본. 200년에 한 번 꼴의 나쁜 해를 견딜 힘이며, 100% 아래면 감독당국이 단계적으로 개입한다. 금리에는 자산·부채 만기 차이가, 대재해에는 재보험이 비율을 좌우한다.</li>
+      <li>부실 보험사는 계약이전·합병이 먼저 추진되고, 파산하면 예금자보호가 해지환급금 등을 기준으로 보험사별 1인당 1억원(2026년 기준)까지 지급한다. 변액 주계약 적립금 등은 대상이 아니다.</li>
+      <li>회사를 볼 때는 지급여력비율, 10만 건당 민원, 불완전판매비율, 보험금 부지급률을 협회 공시실에서 같은 업권끼리 비교한다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>어느 손해보험사의 올해 손해율이 82%, 사업비율이 21%, 투자이익이 보험료 100원당 5원이었다. 옳은 설명은?</p>
+        <div class="opts">
+          <button class="opt">합산비율이 82%라서 보험영업에서 18원이 남는다</button>
+          <button class="opt" data-correct>합산비율 103%로 보험영업은 3원 적자지만, 투자이익을 더하면 100원당 약 2원 흑자다</button>
+          <button class="opt">합산비율이 100%를 넘었으므로 이 회사는 곧 지급불능이 된다</button>
+          <button class="opt">투자이익은 보험이익과 무관하므로 회사 손익에 포함되지 않는다</button>
+        </div>
+        <div class="quiz-exp">합산비율 = 손해율 82% + 사업비율 21% = 103%. 보험료 100원당 보험영업에서 3원을 잃지만 투자이익 5원이 있어 회사 전체로는 약 2원이 남는다. 합산비율이 100%를 조금 넘는 것은 흔하며 곧 지급불능을 뜻하지 않는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>시장 금리가 오랫동안 내려가면서 보험사에 역마진이 생겼다. 가장 직접적인 원인은?</p>
+        <div class="opts">
+          <button class="opt">가입자들이 보험금을 예상보다 많이 청구해서</button>
+          <button class="opt">설계사 수수료가 올라서</button>
+          <button class="opt">IFRS17이 도입되어 이익을 나눠 인식하게 되어서</button>
+          <button class="opt" data-correct>과거에 높은 이율을 확정해 약속한 계약이 남아 있는데 운용수익률은 시장 금리를 따라 내려가서</button>
+        </div>
+        <div class="quiz-exp">역마진은 운용수익률이 계약에 약속한 이율(부담금리)보다 낮은 상태다. 확정형 계약의 이율은 계약 내내 바뀌지 않으므로 금리 하락기에 부담이 커진다. 가입자에게는 그만큼 유리한 계약이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>IFRS17에서 CSM(보험계약마진)에 대한 설명으로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>계약에서 기대되는 미래 이익으로, 판매 시점에 한꺼번에 인식하지 않고 보장 기간에 걸쳐 나눠 이익으로 인식한다</button>
+          <button class="opt">가입자가 해지할 때 돌려받는 돈이다</button>
+          <button class="opt">보험료를 받은 해에 전부 매출로 잡히는 금액이다</button>
+          <button class="opt">가정이 나빠져도 바뀌지 않는 고정 금액이다</button>
+        </div>
+        <div class="quiz-exp">CSM은 아직 인식하지 않은 미래 이익의 저장고다. 보장단위에 따라 해마다 일부가 이익으로 넘어가고, 가정이 나빠지면 줄어들며, 악화분이 CSM보다 크면 초과분은 즉시 손실로 인식한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>A생명이 파산해 계약이전도 되지 않았다. A생명에 해지환급금 8,000만원짜리 계약과 아직 받지 못한 보험금 4,000만원이 있는 사람이 예금자보호로 받을 수 있는 금액은? (2026년 기준, 다른 공제 없음)</p>
+        <div class="opts">
+          <button class="opt">8,000만원(해지환급금만 보호)</button>
+          <button class="opt">1억 2,000만원 전액</button>
+          <button class="opt" data-correct>1억원(보험사별 1인당 합산 한도)</button>
+          <button class="opt">가입한 보험의 사망보험금 전액</button>
+        </div>
+        <div class="quiz-exp">예금자보호는 해지환급금(또는 사고·만기 보험금)과 기타 지급금을 합쳐 보험사별 1인당 1억원까지다. 합계 1억 2,000만원 가운데 1억원이 보호되고 2,000만원은 파산 절차의 배당에 따라 일부만 돌려받을 수 있다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => IB.won(x, o);
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  function T(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = IB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function knob(ctx, x, y, P, color, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = color || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function vline(ctx, x, y0, y1, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function hline(ctx, x0, x1, y, color, dash, wdt) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wdt || 1.2; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke(); ctx.restore();
+  }
+  const pct0 = (v) => Math.round(v) + "%";
+  const eok = (v) => (Math.abs(v) >= 1e4 ? +(v / 1e4).toFixed(2) + "조원" : Math.round(v).toLocaleString("ko-KR") + "억원");
+
+  /* ---------------------------------------------------------- 1. 손해율·사업비율·합산비율 */
+  (function () {
+    const PRESET = { silson: [115, 12, 4], auto: [80, 17, 3], long: [75, 22, 8] };
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const L = IB.range("lr-l", pct0, redraw);
+    const E = IB.range("lr-e", pct0, redraw);
+    const I = IB.range("lr-i", (v) => v + "원", redraw);
+    IB.seg("lr-kind", (v) => { const p = PRESET[v]; L.set(p[0]); E.set(p[1]); I.set(p[2]); });
+    cv = IB.canvas("#lr-cv", (ctx, w, h) => {
+      const P = IB.palette(), l = L(), e = E(), inv = I(), cr = l + e, uw = 100 - cr, tot = uw + inv;
+      const x0 = 16, x1 = w - 16, maxV = 190, X = (v) => x0 + (v / maxV) * (x1 - x0);
+      // 받은 보험료 띠
+      T(ctx, "받은 보험료 100원", x0, 22, { size: 12, color: P.dim });
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.25; ctx.fillRect(X(0), 30, X(100) - X(0), 24); ctx.globalAlpha = 1;
+      T(ctx, "100", X(100) - 4, 47, { size: 11, mono: true, color: P.text, align: "right" });
+      // 나간 돈 띠
+      const y2 = 92;
+      T(ctx, "나간 돈: 보험금 + 사업비 = " + cr + "원", x0, y2 - 8, { size: 12, color: P.dim });
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.8; ctx.fillRect(X(0), y2, X(l) - X(0), 30); ctx.globalAlpha = 1;
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.85; ctx.fillRect(X(l), y2, X(cr) - X(l), 30); ctx.globalAlpha = 1;
+      if (X(l) - X(0) > 60) T(ctx, "보험금 " + l, X(0) + 6, y2 + 19, { size: 11.5, color: "#fff", weight: 600 });
+      if (X(cr) - X(l) > 54) T(ctx, "사업비 " + e, X(l) + 5, y2 + 19, { size: 11.5, color: "#fff", weight: 600 });
+      // 100% 선
+      vline(ctx, X(100), 24, y2 + 44, P.text, [5, 4], 1.5);
+      T(ctx, "손익분기 100%", X(100) + 4, y2 + 44, { size: 11, color: P.text, base: "bottom" });
+      if (cr > 100) {
+        ctx.save(); ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.strokeRect(X(100), y2 - 2, X(cr) - X(100), 34); ctx.restore();
+      }
+      // 결과 막대
+      const B = { x: 112, y: y2 + 66, w: w - 112 - 20, h: h - (y2 + 66) - 14 };
+      const rows = [["보험영업", uw], ["투자이익", inv], ["합계", tot]];
+      const span = Math.max(30, Math.abs(uw), Math.abs(tot), inv) * 1.15;
+      const Z = B.x + B.w / 2, S = (B.w / 2) / span, rh = B.h / 3;
+      vline(ctx, Z, B.y, B.y + B.h, P.axis, [], 1);
+      rows.forEach(([lab, v], i) => {
+        const y = B.y + rh * i + rh / 2, bh = Math.min(22, rh * 0.6);
+        T(ctx, lab, B.x - 10, y, { size: 12, color: P.text, align: "right", base: "middle", weight: i === 2 ? 700 : 400 });
+        ctx.fillStyle = v >= 0 ? P.ok : P.bad; ctx.globalAlpha = i === 2 ? 1 : 0.7;
+        const bx = v >= 0 ? Z : Z + v * S; ctx.fillRect(bx, y - bh / 2, Math.max(1.5, Math.abs(v) * S), bh); ctx.globalAlpha = 1;
+        const s = (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(+v.toFixed(1)) + "원";
+        const tx = v >= 0 ? Z + v * S + 5 : Z + v * S - 5;
+        T(ctx, s, tx, y, { size: 11.5, mono: true, color: P.text, align: v >= 0 ? "left" : "right", base: "middle" });
+      });
+      IB.stat("lr-o-c", tone(cr > 100 ? "bad-t" : "ok-t", cr + "%"));
+      IB.stat("lr-o-u", tone(uw >= 0 ? "ok-t" : "bad-t", (uw > 0 ? "+" : "") + uw + "원"));
+      IB.stat("lr-o-t", tone(tot >= 0 ? "ok-t" : "bad-t", (tot > 0 ? "+" : "") + +tot.toFixed(1) + "원"));
+      IB.stat("lr-o-v", cr <= 100 ? tone("ok-t", "보험영업 흑자") : tot >= 0 ? tone("warn-t", "투자로 메움") : tone("bad-t", "인상·개편 압력"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 360 });
+  })();
+
+  /* ---------------------------------------------------------- 2. 손해율 → 보험료 인상 */
+  (function () {
+    const P0 = 28000, TARGET = 0.85, YRS = 10;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const Lr = IB.range("rate-l", pct0, redraw);
+    const Gr = IB.range("rate-g", (v) => v + "%", redraw);
+    const Cr = IB.range("rate-c", (v) => "±" + v + "%", redraw);
+    function run() {
+      const g = Gr() / 100, cap = Cr() / 100;
+      let prem = P0, cl = Lr() / 100 * P0, deficit = 0;
+      const rows = [];
+      for (let y = 0; y <= YRS; y++) {
+        rows.push({ y, prem, lr: cl / prem });
+        deficit += Math.max(0, cl - TARGET * prem) / prem * 100 * (y > 0 ? 1 : 0);
+        const ncl = cl * (1 + g);
+        let need = ncl / TARGET / prem - 1;
+        need = IB.clamp(need, -cap, cap);
+        prem *= 1 + need; cl = ncl;
+      }
+      return { rows, deficit };
+    }
+    cv = IB.canvas("#rate-cv", (ctx, w, h) => {
+      const P = IB.palette(), R = run(), rows = R.rows;
+      const maxP = Math.max(60000, ...rows.map((r) => r.prem)) * 1.1;
+      const box = { x: 52, y: 22, w: w - 52 - 46, h: h - 22 - 40 };
+      const b = IB.bars(ctx, box, { labels: rows.map((r) => (r.y === 0 ? "올해" : r.y + "년")), y: [0, maxP], yFmt: IB.wonAxis, stacks: [{ label: "보험료", color: (i) => (i === 0 ? P.dim : P.bad), data: rows.map((r) => r.prem) }] });
+      // 손해율 오른쪽 축
+      const lrMax = Math.max(1.6, ...rows.map((r) => r.lr)) * 1.05;
+      const Y2 = (v) => box.y + box.h - (v / lrMax) * box.h;
+      ctx.font = IB.font(10.5, true); ctx.fillStyle = P.accent; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      [0.5, 1, 1.5].forEach((v) => { if (v < lrMax) ctx.fillText(Math.round(v * 100) + "%", box.x + box.w + 6, Y2(v)); });
+      hline(ctx, box.x, box.x + box.w, Y2(TARGET), P.dim, [4, 4], 1.2);
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.5; ctx.beginPath();
+      rows.forEach((r, i) => { const x = b.X(i), y = Y2(r.lr); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();
+      rows.forEach((r, i) => { ctx.fillStyle = r.lr > 1 ? P.bad : P.accent; ctx.beginPath(); ctx.arc(b.X(i), Y2(r.lr), 3.5, 0, TAU); ctx.fill(); });
+      T(ctx, "월 보험료", 6, 12, { size: 11, color: P.dim, base: "middle" });
+      T(ctx, "손해율", w - 6, 12, { size: 11, color: P.accent, align: "right", base: "middle" });
+      const last = rows[YRS], first = rows[1].prem / rows[0].prem - 1;
+      IB.stat("rate-o-1", tone(first > 0 ? "bad-t" : "ok-t", (first > 0 ? "+" : "") + IB.pct(first, 1)));
+      IB.stat("rate-o-p", won(Math.round(last.prem / 10) * 10));
+      IB.stat("rate-o-l", tone(last.lr > 0.95 ? "bad-t" : "ok-t", IB.pct(last.lr, 0)));
+      IB.stat("rate-o-d", R.deficit > 0.5 ? tone("bad-t", "−" + Math.round(R.deficit) + "원") : "거의 없음");
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 360 });
+  })();
+
+  /* ---------------------------------------------------------- 3. 운용수익률 vs 부담금리 */
+  (function () {
+    const HIST = [[1980, 12], [1995, 10], [2000, 7.5], [2004, 4.8], [2008, 5.2], [2012, 3.2], [2016, 1.8], [2020, 1.4], [2022, 3.6], [2024, 3.0], [2026, 2.8]];
+    const Y0 = 1995, Y1 = 2045, FLOOR = 1.0;
+    let cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const F = IB.range("sp-f", (v) => v.toFixed(1) + "%", redraw);
+    const S = IB.range("sp-s", (v) => v + "%", redraw);
+    const D = IB.range("sp-d", (v) => v + "년", redraw);
+    function market(y, f) {
+      if (y <= 1980) return 12;
+      if (y >= 2030) return f;
+      if (y > 2026) return IB.lerp(2.8, f, (y - 2026) / 4);
+      for (let i = 1; i < HIST.length; i++) if (y <= HIST[i][0]) { const [a, va] = HIST[i - 1], [b, vb] = HIST[i]; return IB.lerp(va, vb, (y - a) / (b - a)); }
+      return 2.8;
+    }
+    function model() {
+      const f = F(), s = S() / 100, dur = D();
+      const m = {}, a = {}, L = {};
+      for (let y = 1960; y <= Y1; y++) m[y] = market(y, f);
+      for (let y = 1975; y <= Y1; y++) { let sum = 0; for (let k = 0; k < dur; k++) sum += m[y - k]; a[y] = sum / dur + 0.3; }
+      for (let y = Y0; y <= Y1; y++) {
+        let wsum = 0, rsum = 0;
+        for (let k = 1980; k <= y; k++) {
+          const wgt = Math.pow(0.96, y - k);
+          const fixed = Math.max(FLOOR, m[k] * 0.75);
+          const linked = Math.max(FLOOR, a[y] - 0.5);
+          rsum += wgt * (s * fixed + (1 - s) * linked); wsum += wgt;
+        }
+        L[y] = rsum / wsum;
+      }
+      return { m, a, L };
+    }
+    cv = IB.canvas("#sp-cv", (ctx, w, h) => {
+      const P = IB.palette(), M = model();
+      const box = { x: 40, y: 18, w: w - 40 - 16, h: h - 18 - 38 };
+      const ys = []; for (let y = Y0; y <= Y1; y++) ys.push(y);
+      const c = IB.chart(ctx, box, { x: [Y0, Y1], y: [0, 11], xTicks: w < 480 ? [2000, 2020, 2040] : [2000, 2010, 2020, 2030, 2040], xFmt: (v) => String(v), yFmt: (v) => v + "%", bands: [{ x0: 2026, x1: Y1, color: "rgba(127,127,127,0.07)" }] });
+      // 차이 채우기
+      for (let i = 0; i < ys.length - 1; i++) {
+        const y = ys[i], y2 = ys[i + 1];
+        const neg = M.a[y] + M.a[y2] < M.L[y] + M.L[y2];
+        ctx.fillStyle = neg ? P.bad : P.ok; ctx.globalAlpha = 0.18;
+        ctx.beginPath(); ctx.moveTo(c.X(y), c.Y(M.a[y])); ctx.lineTo(c.X(y2), c.Y(M.a[y2])); ctx.lineTo(c.X(y2), c.Y(M.L[y2])); ctx.lineTo(c.X(y), c.Y(M.L[y])); ctx.closePath(); ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+      const line = (key, color, wd, dash) => { ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = wd; ctx.setLineDash(dash || []); ctx.beginPath(); ys.forEach((y, i) => { const px = c.X(y), py = c.Y(M[key][y]); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }); ctx.stroke(); ctx.restore(); };
+      line("m", P.dim, 1.4, [4, 4]);
+      line("a", P.ok, 2.5);
+      line("L", P.bad, 2.5);
+      vline(ctx, c.X(2026), box.y, box.y + box.h, P.faint, [2, 3], 1);
+      T(ctx, "2026", c.X(2026) + 3, box.y + 10, { size: 10.5, mono: true, color: P.dim, base: "middle" });
+      T(ctx, "미래(가정)", c.X(2026) + 3, box.y + 24, { size: 10.5, color: P.dim, base: "middle" });
+      const hx = c.X(2036), hy = c.Y(F());
+      knob(ctx, hx, hy, P, P.text, 7);
+      G = { c, box };
+      const neg = ys.filter((y) => M.a[y] < M.L[y]).length, sp = M.a[2026] - M.L[2026];
+      IB.stat("sp-o-a", (M.a[2026]).toFixed(2) + "%");
+      IB.stat("sp-o-l", (M.L[2026]).toFixed(2) + "%");
+      IB.stat("sp-o-s", tone(sp >= 0 ? "ok-t" : "bad-t", (sp >= 0 ? "+" : "−") + Math.abs(sp).toFixed(2) + "%p"));
+      IB.stat("sp-o-n", neg + "<small>년 / " + ys.length + "년</small>");
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 380 });
+    let grab = false;
+    IB.drag(cv.canvas, {
+      start(x) { grab = !!G && x > G.c.X(2028); },
+      move(x, y) { if (!grab || !G) return; const b = G.box; const v = 11 * (1 - (y - b.y) / b.h); F.set(IB.clamp(Math.round(v * 10) / 10, 0.5, 6)); },
+      end() { grab = false; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 4. CSM 상각 */
+  (function () {
+    const PROD = {
+      health: { pay: 20, cov: 30, csm: 18, name: "건강보험" },
+      short: { pay: 5, cov: 30, csm: 9, name: "단기납 종신" },
+      save: { pay: 10, cov: 10, csm: 3, name: "저축성" },
+    };
+    const N = 30, LAPSE = 0.03, EXP = 10;
+    let t = 0, playing = false, cv = null, G = null;
+    const redraw = () => cv && cv.redraw();
+    const kind = IB.seg("csm-kind", () => { t = 0; redraw(); });
+    const X = IB.range("csm-x", (v) => v + "%", redraw);
+    const Dd = IB.range("csm-d", (v) => v + "년째", redraw);
+    function model() {
+      const p = PROD[kind()], x = X() / 100, d = Dd();
+      const cu = [], prem = [];
+      for (let k = 0; k < N; k++) { const inf = Math.pow(1 - LAPSE, k); cu.push(k < p.cov ? inf : 0); prem.push(k < p.pay ? inf : 0); }
+      const ps = prem.reduce((s, v) => s + v, 0), cs = cu.reduce((s, v) => s + v, 0);
+      const claimsTot = 100 - p.csm - EXP;
+      const tail = (k) => { let s = 0; for (let j = k; j < N; j++) s += cu[j]; return s; };
+      let csm = p.csm; const bal = [], rel = [], loss = [], old = [];
+      const shock = d < p.cov ? x * claimsTot * tail(d) / cs : 0;
+      for (let k = 0; k < N; k++) {
+        let ls = 0;
+        if (k === d && shock > 0) { csm -= shock; if (csm < 0) { ls = -csm; csm = 0; } }
+        bal.push(csm);
+        const tk = tail(k), r = tk > 0 ? csm * cu[k] / tk : 0;
+        csm -= r; rel.push(r); loss.push(ls);
+        let o = p.csm * prem[k] / ps;
+        if (k >= d && shock > 0 && tail(d) > 0) o -= shock * cu[k] / tail(d);
+        old.push(o);
+      }
+      bal.push(csm);
+      return { p, bal, rel, loss, old };
+    }
+    cv = IB.canvas("#csm-cv", (ctx, w, h) => {
+      const P = IB.palette(), M = model();
+      const top = { x: 40, y: 22, w: w - 40 - 14, h: Math.round((h - 70) * 0.38) };
+      const bot = { x: 40, y: top.y + top.h + 34, w: top.w, h: h - (top.y + top.h + 34) - 26 };
+      const XA = (k) => top.x + (k / N) * top.w;
+      // 위: CSM 잔액
+      const cmax = 20;
+      T(ctx, "CSM 잔액(아직 인식 안 한 이익)", top.x, 12, { size: 11.5, color: P.dim, base: "middle" });
+      hline(ctx, top.x, top.x + top.w, top.y + top.h, P.axis, [], 1);
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.28; ctx.beginPath(); ctx.moveTo(XA(0), top.y + top.h);
+      M.bal.forEach((v, k) => ctx.lineTo(XA(k), top.y + top.h - (v / cmax) * top.h)); ctx.lineTo(XA(N), top.y + top.h); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.beginPath(); M.bal.forEach((v, k) => { const y = top.y + top.h - (v / cmax) * top.h; k ? ctx.lineTo(XA(k), y) : ctx.moveTo(XA(k), y); }); ctx.stroke();
+      ctx.font = IB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      ctx.fillText("20", top.x - 5, top.y); ctx.fillText("0", top.x - 5, top.y + top.h);
+      // 아래: 연도별 인식 이익
+      const vals = M.rel.concat(M.old).concat(M.loss.map((v) => -v));
+      const vmax = Math.max(1.5, ...M.old, ...M.rel) * 1.15, vmin = Math.min(-0.5, ...M.old, ...M.loss.map((v) => -v)) * 1.15;
+      const YB = (v) => bot.y + bot.h * (vmax - v) / (vmax - vmin);
+      T(ctx, "해마다 인식하는 이익", bot.x, bot.y - 10, { size: 11.5, color: P.dim, base: "middle" });
+      hline(ctx, bot.x, bot.x + bot.w, YB(0), P.axis, [], 1);
+      const slot = bot.w / N, bw = Math.max(1.5, slot * 0.36);
+      for (let k = 0; k < N; k++) {
+        const cx = bot.x + slot * (k + 0.5);
+        const o = M.old[k]; ctx.fillStyle = P.dim; ctx.globalAlpha = 0.55;
+        ctx.fillRect(cx - bw - 0.5, Math.min(YB(0), YB(o)), bw, Math.abs(YB(o) - YB(0))); ctx.globalAlpha = 1;
+        const r = M.rel[k]; ctx.fillStyle = P.accent; ctx.globalAlpha = k <= t ? 1 : 0.3;
+        ctx.fillRect(cx + 0.5, YB(r), bw, YB(0) - YB(r)); ctx.globalAlpha = 1;
+        if (M.loss[k] > 0) { ctx.fillStyle = P.bad; ctx.fillRect(cx + 0.5, YB(0), bw, YB(-M.loss[k]) - YB(0)); }
+      }
+      ctx.font = IB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      [0, 10, 20, 30].forEach((k) => ctx.fillText(k === 0 ? "1년" : k + "년", Math.min(bot.x + bot.w - 10, bot.x + slot * (k === 0 ? 0.5 : k - 0.5)), bot.y + bot.h + 6));
+      // 스크러버
+      const sx = bot.x + slot * (t + 0.5);
+      vline(ctx, sx, top.y - 4, bot.y + bot.h, P.text, [4, 3], 1.2);
+      knob(ctx, sx, top.y + top.h + 16, P, P.text, 6);
+      G = { bot, slot };
+      let cn = 0, co = 0; for (let k = 0; k <= t; k++) { cn += M.rel[k] - M.loss[k]; co += M.old[k]; }
+      IB.stat("csm-o-t", (t + 1) + "<small>년째</small>");
+      IB.stat("csm-o-c", (+M.bal[t + 1].toFixed(1)).toString());
+      IB.stat("csm-o-n", tone(cn >= 0 ? "ok-t" : "bad-t", (+cn.toFixed(1)).toString()) + " <small>/ 처음 CSM " + M.p.csm + "</small>");
+      IB.stat("csm-o-o", (+co.toFixed(1)).toString());
+    }, { aspect: 0.66, minHeight: 320, maxHeight: 420 });
+    IB.drag(cv.canvas, {
+      move(x) { if (!G) return; t = IB.clamp(Math.floor((x - G.bot.x) / G.slot), 0, N - 1); playing = false; pb.textContent = "재생"; redraw(); },
+    });
+    const pb = document.getElementById("csm-play");
+    pb.addEventListener("click", () => { playing = !playing; if (playing && t >= N - 1) t = 0; pb.textContent = playing ? "멈춤" : "재생"; });
+    document.getElementById("csm-re").addEventListener("click", () => { t = 0; playing = false; pb.textContent = "재생"; redraw(); });
+    let acc = 0;
+    IB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      acc += dt; if (acc < 0.25) return; acc = 0;
+      if (t < N - 1) t++; else { playing = false; pb.textContent = "재생"; }
+      redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 5. K-ICS 스트레스 */
+  (function () {
+    const ASSET = 100, BOND = 80, BEL = 80, DL = 13, RA = 3;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const Rr = IB.range("ks-r", (v) => v.toFixed(1) + "%p", redraw);
+    const Cc = IB.range("ks-c", (v) => v.toFixed(2).replace(/0$/, "").replace(/\.0$/, ""), redraw);
+    const Dd = IB.range("ks-d", (v) => v + "년", redraw);
+    const reEl = document.getElementById("ks-re");
+    reEl.addEventListener("change", redraw);
+    function calc() {
+      const dr = Rr() / 100, da = Dd(), cat = Cc(), re = reEl.checked;
+      const A = ASSET + BOND * da * dr, Lb = BEL + BEL * DL * dr;
+      const catNet = re ? Math.min(cat, 1) + 0.2 * Math.max(0, cat - 1) : cat;
+      const avail = A - Lb - RA - catNet;
+      const intR = BEL * Math.abs(DL - da) * 0.01, eq = 3.5, ins = 4, catR = re ? 0.8 : 1.5;
+      const req = Math.sqrt(intR * intR + eq * eq + ins * ins + catR * catR) + 1;
+      return { A: A - catNet, Lb, avail, req, ratio: avail / req, intR, catNet };
+    }
+    cv = IB.canvas("#ks-cv", (ctx, w, h) => {
+      const P = IB.palette(), C = calc();
+      // 위: 재무상태표 두 기둥
+      const colH = Math.round(h * 0.5), baseY = 22 + colH, sc = colH / 125;
+      const cw = Math.min(90, (w - 60) / 4), xA = w * 0.3 - cw / 2, xL = w * 0.62 - cw / 2;
+      T(ctx, "자산", xA + cw / 2, 14, { size: 12, color: P.dim, align: "center", base: "middle" });
+      T(ctx, "부채 + 가용자본", xL + cw / 2, 14, { size: 12, color: P.dim, align: "center", base: "middle" });
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.5; ctx.fillRect(xA, baseY - C.A * sc, cw, C.A * sc); ctx.globalAlpha = 1;
+      T(ctx, (+C.A.toFixed(1)).toString(), xA + cw / 2, baseY - C.A * sc - 6, { size: 11, mono: true, color: P.text, align: "center" });
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.45; ctx.fillRect(xL, baseY - C.Lb * sc, cw, C.Lb * sc); ctx.globalAlpha = 1;
+      T(ctx, "보험부채 " + (+C.Lb.toFixed(1)), xL + cw / 2, baseY - C.Lb * sc / 2, { size: 11, color: P.text, align: "center", base: "middle" });
+      ctx.fillStyle = P.warn; ctx.globalAlpha = 0.6; ctx.fillRect(xL, baseY - (C.Lb + RA) * sc, cw, RA * sc); ctx.globalAlpha = 1;
+      const top = C.Lb + RA;
+      if (C.avail > 0) {
+        ctx.fillStyle = P.ok; ctx.globalAlpha = 0.75; ctx.fillRect(xL, baseY - (top + C.avail) * sc, cw, C.avail * sc); ctx.globalAlpha = 1;
+        T(ctx, "가용자본 " + (+C.avail.toFixed(1)), xL + cw + 6, baseY - (top + C.avail / 2) * sc, { size: 11, color: P.ok, base: "middle", weight: 600 });
+      } else {
+        ctx.save(); ctx.strokeStyle = P.bad; ctx.setLineDash([4, 3]); ctx.lineWidth = 2; ctx.strokeRect(xL, baseY - top * sc, cw, -C.avail * sc); ctx.restore();
+        T(ctx, "자본잠식 " + (+C.avail.toFixed(1)), xL + cw + 6, baseY - top * sc + 10, { size: 11, color: P.bad, base: "middle", weight: 600 });
+      }
+      T(ctx, "위험조정 3", xL + cw + 6, baseY - (C.Lb + RA / 2) * sc, { size: 10.5, color: P.dim, base: "middle" });
+      hline(ctx, 14, w - 14, baseY, P.axis, [], 1);
+      // 아래: 비율 게이지
+      const gy = baseY + 40, gx0 = 20, gx1 = w - 20, maxR = 3, GX = (r) => gx0 + (IB.clamp(r, -0.3, maxR) + 0.3) / (maxR + 0.3) * (gx1 - gx0);
+      T(ctx, "지급여력비율", gx0, gy - 12, { size: 12, color: P.dim, base: "middle" });
+      [[-0.3, 0, P.bad, 0.35], [0, 0.5, P.bad, 0.22], [0.5, 1, P.warn, 0.25], [1, 1.5, P.warn, 0.1], [1.5, maxR, P.ok, 0.14]].forEach(([a, b, col, al]) => { ctx.fillStyle = col; ctx.globalAlpha = al; ctx.fillRect(GX(a), gy, GX(b) - GX(a), 26); ctx.globalAlpha = 1; });
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.25; ctx.fillRect(GX(1.3), gy, GX(1.5) - GX(1.3), 26); ctx.globalAlpha = 1;
+      [[0, "0%"], [1, "100%"], [2, "200%"], [3, "300%"]].forEach(([r, s]) => { vline(ctx, GX(r), gy - 3, gy + 29, P.axis, [], 1); T(ctx, s, GX(r), gy + 42, { size: 10.5, mono: true, color: P.dim, align: "center" }); });
+      if (w >= 420) T(ctx, "권고 약 130~150%", GX(1.4), gy + 58, { size: 10.5, color: P.accent2, align: "center" });
+      const rx = GX(C.ratio);
+      ctx.fillStyle = C.ratio >= 1.5 ? P.ok : C.ratio >= 1 ? P.warn : P.bad;
+      ctx.beginPath(); ctx.moveTo(rx, gy - 2); ctx.lineTo(rx - 7, gy - 14); ctx.lineTo(rx + 7, gy - 14); ctx.closePath(); ctx.fill();
+      ctx.fillRect(rx - 1.5, gy, 3, 26);
+      const st = C.ratio < 0 ? tone("bad-t", "경영개선명령 수준") : C.ratio < 0.5 ? tone("bad-t", "경영개선요구 수준") : C.ratio < 1 ? tone("bad-t", "경영개선권고 수준") : C.ratio < 1.3 ? tone("warn-t", "권고 수준 아래") : tone("ok-t", "정상");
+      IB.stat("ks-o-a", (+C.avail.toFixed(1)).toString());
+      IB.stat("ks-o-r", (+C.req.toFixed(1)).toString());
+      IB.stat("ks-o-k", tone(C.ratio >= 1.3 ? "ok-t" : C.ratio >= 1 ? "warn-t" : "bad-t", Math.round(C.ratio * 100) + "%"));
+      IB.stat("ks-o-s", st);
+    }, { aspect: 0.62, minHeight: 330, maxHeight: 400 });
+  })();
+
+  /* ---------------------------------------------------------- 6. 재보험 몬테카를로 */
+  (function () {
+    const LAM = 1.2, XM = 50, ALPHA = 1.5, CAPX = 30000, LOAD = 1.5, NSIM = 20000, SHOW = 60;
+    // 미리 만든 사고 목록(시드 고정)
+    const rnd = IB.rng(16017);
+    function poisson(l) { const L = Math.exp(-l); let k = 0, p = 1; do { k++; p *= rnd(); } while (p > L); return k - 1; }
+    const YEARS = [];
+    for (let i = 0; i < NSIM; i++) { const n = poisson(LAM), ev = []; for (let j = 0; j < n; j++) ev.push(Math.min(CAPX, XM / Math.pow(1 - rnd(), 1 / ALPHA))); YEARS.push(ev); }
+    let cv = null, stats = null, shown = [], idx = 0, acc = 0, paused = false;
+    const recalc = () => { stats = null; if (cv) cv.redraw(); };
+    const Rr = IB.range("re-r", (v) => eok(v), recalc);
+    const Lr = IB.range("re-l", (v) => (v === 0 ? "없음" : eok(v)), recalc);
+    function split(ev) {
+      const R = Rr(), Lm = Lr();
+      let gross = 0, ceded = 0, over = 0;
+      ev.forEach((x) => { gross += x; const layer = Math.max(0, x - R); const c = Math.min(layer, Lm); ceded += c; over += layer - c; });
+      return { gross, ceded, net: gross - ceded, over };
+    }
+    function getStats() {
+      if (stats) return stats;
+      const g = [], n = []; let sg = 0, sc = 0;
+      YEARS.forEach((ev) => { const s = split(ev); g.push(s.gross); n.push(s.net); sg += s.gross; sc += s.ceded; });
+      const prem = (sc / NSIM) * LOAD;
+      g.sort((a, b) => a - b); n.sort((a, b) => a - b);
+      const q = (arr) => arr[Math.floor(arr.length * 0.995)];
+      stats = { mean: sg / NSIM, prem, var0: q(g), var1: q(n) + prem };
+      return stats;
+    }
+    function reset() { shown = []; idx = Math.floor(rnd() * 5000); for (let i = 0; i < 12; i++) shown.push(YEARS[(idx++) % NSIM]); if (cv) cv.redraw(); }
+    cv = IB.canvas("#re-cv", (ctx, w, h) => {
+      const P = IB.palette(), S = getStats();
+      const box = { x: 52, y: 26, w: w - 52 - 14, h: h - 26 - 30 };
+      const ymax = Math.max(S.var0 * 1.15, 2000);
+      const Y = (v) => box.y + box.h - (Math.min(v, ymax) / ymax) * box.h;
+      ctx.font = IB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      const step = ymax > 8000 ? 4000 : ymax > 4000 ? 2000 : 1000;
+      for (let v = 0; v <= ymax; v += step) { hline(ctx, box.x, box.x + box.w, Y(v), P.grid, [], 1); ctx.fillStyle = P.dim; ctx.fillText(IB.wonAxis(v * 1e8), box.x - 6, Y(v)); }
+      T(ctx, "연간 손실", 6, 12, { size: 11, color: P.dim, base: "middle" });
+      const slot = box.w / SHOW, bw = Math.max(2, slot * 0.7);
+      shown.forEach((ev, i) => {
+        const s = split(ev), x = box.x + box.w - slot * (shown.length - i) + (slot - bw) / 2;
+        ctx.fillStyle = P.faint; ctx.globalAlpha = 0.55; ctx.fillRect(x, Y(s.gross), bw, Y(0) - Y(s.gross)); ctx.globalAlpha = 1;
+        const keep = s.net - s.over;
+        ctx.fillStyle = P.accent; ctx.fillRect(x, Y(keep), bw, Y(0) - Y(keep));
+        if (s.over > 0) { ctx.fillStyle = P.bad; ctx.fillRect(x, Y(s.net), bw, Y(keep) - Y(s.net)); }
+        if (s.gross > ymax) { ctx.fillStyle = P.faint; T(ctx, "↑", x + bw / 2, box.y + 8, { size: 11, color: P.dim, align: "center", base: "middle" }); }
+      });
+      hline(ctx, box.x, box.x + box.w, Y(S.var0), P.dim, [5, 4], 1.2);
+      T(ctx, "200년에 한 번 · 없음 " + IB.wonAxis(S.var0 * 1e8), box.x + 4, Y(S.var0) - 5, { size: 10.5, color: P.dim });
+      hline(ctx, box.x, box.x + box.w, Y(S.var1), P.accent, [5, 4], 1.4);
+      T(ctx, "있음 " + IB.wonAxis(S.var1 * 1e8), box.x + box.w - 4, Y(S.var1) - 5, { size: 10.5, color: P.accent, align: "right" });
+      hline(ctx, box.x, box.x + box.w, Y(0), P.axis, [], 1);
+      T(ctx, "← 지나간 해", box.x, box.y + box.h + 16, { size: 10.5, color: P.faint, base: "middle" });
+      T(ctx, "올해", box.x + box.w, box.y + box.h + 16, { size: 10.5, color: P.faint, align: "right", base: "middle" });
+      IB.stat("re-o-m", eok(S.mean));
+      IB.stat("re-o-p", eok(S.prem));
+      IB.stat("re-o-g", tone("bad-t", eok(S.var0)));
+      IB.stat("re-o-n", tone(S.var1 < S.var0 * 0.6 ? "ok-t" : "warn-t", eok(S.var1)));
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 380 });
+    reset();
+    IB.loop(cv.canvas, (dt) => {
+      if (paused) return;
+      acc += dt; if (acc < 0.35) return; acc = 0;
+      shown.push(YEARS[(idx++) % NSIM]); if (shown.length > SHOW) shown.shift();
+      cv.redraw();
+    });
+    const pb = document.getElementById("re-pause");
+    pb.addEventListener("click", () => { paused = !paused; pb.textContent = paused ? "재생" : "일시정지"; });
+    document.getElementById("re-re").addEventListener("click", reset);
+  })();
+
+  /* ---------------------------------------------------------- 7. 예금자보호 */
+  (function () {
+    const LIM = INS.KR.depositProtect, VAR = 5e7;
+    let cv = null;
+    const redraw = () => cv && cv.redraw();
+    const A = IB.range("dp-a", (v) => won(v), redraw);
+    const Cc = IB.range("dp-c", (v) => won(v), redraw);
+    const B = IB.range("dp-b", (v) => won(v), redraw);
+    const vEl = document.getElementById("dp-v");
+    vEl.addEventListener("change", redraw);
+    cv = IB.canvas("#dp-cv", (ctx, w, h) => {
+      const P = IB.palette();
+      const aTot = A() + Cc(), aP = Math.min(LIM, aTot), aX = aTot - aP, bP = Math.min(LIM, B()), bX = B() - bP, v = vEl.checked ? VAR : 0;
+      const maxV = Math.max(2.2e8, aTot + v, B()) * 1.05;
+      const box = { x: 94, y: 24, w: w - 94 - 16, h: h - 24 - 34 };
+      const X = (val) => box.x + (val / maxV) * box.w;
+      const rows = [{ lab: "A생명", p: aP, x: aX, v }, { lab: "B손해보험", p: bP, x: bX, v: 0 }];
+      const rh = box.h / 2, bh = Math.min(40, rh * 0.5);
+      rows.forEach((r, i) => {
+        const y = box.y + rh * i + rh / 2;
+        T(ctx, r.lab, box.x - 10, y, { size: 12.5, color: P.text, align: "right", base: "middle", weight: 600 });
+        ctx.fillStyle = P.ok; ctx.globalAlpha = 0.8; ctx.fillRect(X(0), y - bh / 2, X(r.p) - X(0), bh); ctx.globalAlpha = 1;
+        if (r.x > 0) { ctx.fillStyle = P.bad; ctx.globalAlpha = 0.8; ctx.fillRect(X(r.p), y - bh / 2, X(r.p + r.x) - X(r.p), bh); ctx.globalAlpha = 1; }
+        if (r.v > 0) { const s = r.p + r.x; ctx.fillStyle = P.warn; ctx.globalAlpha = 0.75; ctx.fillRect(X(s), y - bh / 2, X(s + r.v) - X(s), bh); ctx.globalAlpha = 1; }
+        const tot = r.p + r.x + r.v;
+        const lbl = won(tot), lx = X(tot) + 6;
+        ctx.font = IB.font(11, true);
+        if (lx + ctx.measureText(lbl).width < w - 4) T(ctx, lbl, lx, y, { size: 11, mono: true, color: P.text, base: "middle" });
+        else T(ctx, lbl, X(tot) - 6, y - bh / 2 - 8, { size: 11, mono: true, color: P.text, align: "right", base: "middle" });
+        // 한도선(회사마다 따로)
+        vline(ctx, X(LIM), y - bh / 2 - 6, y + bh / 2 + 6, P.text, [4, 3], 1.5);
+      });
+      T(ctx, "보험사별 한도 1억원", X(LIM), box.y + box.h + 18, { size: 11, color: P.text, align: "center", base: "middle" });
+      hline(ctx, box.x, box.x + box.w, box.y + box.h, P.axis, [], 1);
+      IB.stat("dp-o-a", won(aP));
+      IB.stat("dp-o-b", won(bP));
+      const out = aX + bX + v;
+      IB.stat("dp-o-x", out > 0 ? tone("bad-t", won(out)) : tone("ok-t", "없음"));
+    }, { aspect: 0.48, minHeight: 230, maxHeight: 300 });
+  })();
+})();
+</script>
+</body>
+</html>
