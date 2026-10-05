@@ -32,6 +32,9 @@
 - 문체는 평서문 "~다". 이모지 금지. 다른 장을 언급할 때는 `<a href="pricing.html">3장</a>`처럼 링크한다. MoneyBook 장을 참고로 걸 때는 전체 URL(`https://moneybook.euiyun.com/chapters/insurance.html`)을 쓴다.
 
 ## head 블록
+
+모든 HTML 페이지에는 아래 Cloudflare Web Analytics 코드를 `<head>`에 한 번 포함한다. SEO 자동 생성 블록 밖에 두며, 공통 Site Token을 유지한다.
+
 각 챕터 `<head>`에는 아래 표식만 두고 `python3 tools/head.py <slug>`를 실행한다(인자 없이 실행하면 전체 장 + 사이트맵 + `index.html`의 JSON-LD를 갱신한다). 제목·번호는 `js/common.js`의 `CHAPTERS`에서 읽는다. `js/insure.js`는 항상 함께 불러온다.
 ```html
 <!doctype html>
@@ -42,6 +45,9 @@
 <head>
 <!--head:start {"desc": "한 문장 설명"}-->
 <!--head:end-->
+<!-- Cloudflare Web Analytics -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"3d6151a0abc94ede89285d462527fa80"}'></script>
+<!-- End Cloudflare Web Analytics -->
 </head>
 ```
 
