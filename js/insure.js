@@ -48,7 +48,7 @@
       tertiary: 0.6,              // 외래: 상급종합병원
     },
     special: { cancer: 0.05, rare: 0.1, severeBurn: 0.05 }, // 산정특례(암·심장·뇌혈관 중증 등 5%, 희귀질환 10%)
-    capByDecile: [870000, 1080000, 1080000, 1670000, 1670000, 3130000, 3130000, 4280000, 5140000, 8080000], // 1~10분위(약, 요양병원 장기입원 제외)
+    capByDecile: [900000, 1120000, 1120000, 1730000, 1730000, 3260000, 3260000, 4460000, 5360000, 8430000], // 2026년 진료일 기준 1~10분위, 요양병원 120일 초과 입원 제외
     nonCoveredOutside: true,      // 비급여는 상한제 계산에 들어가지 않는다
   };
 
@@ -58,7 +58,7 @@
     { gen: 2, name: "2세대", period: "2009.10~2017.3", inCov: 0.1, inNon: 0.1, outDed: 10000, outRateCov: 0, outRateNon: 0, stopLoss: 2e6, renew: "1~3년 갱신, 15년 재가입", premiumX: 2.2, note: "표준화 실손. 자기부담 10%(후기 가입은 20% 선택), 외래 공제 1~2만원." },
     { gen: 3, name: "3세대", period: "2017.4~2021.6", inCov: 0.1, inNon: 0.2, outDed: 10000, outRateCov: 0.1, outRateNon: 0.2, stopLoss: 2e6, renew: "1년 갱신, 15년 재가입", premiumX: 1.4, note: "착한 실손. 도수치료·주사·MRI는 특약(자기부담 30%)으로 분리." },
     { gen: 4, name: "4세대", period: "2021.7~", inCov: 0.2, inNon: 0.3, outDed: 10000, outDedNon: 30000, outRateCov: 0.2, outRateNon: 0.3, stopLoss: 2e6, renew: "1년 갱신, 5년 재가입", premiumX: 1.0, note: "급여·비급여 분리, 비급여 이용량에 따라 다음 해 보험료 할인·할증." },
-    { gen: 5, name: "5세대(개편안)", period: "개편 추진", inCov: 0.2, inNon: 0.3, inNonMild: 0.5, outDed: 10000, outDedNon: 30000, outRateCov: 0.2, outRateNon: 0.5, stopLoss: 2e6, renew: "1년 갱신, 5년 재가입", premiumX: 0.7, plan: true, note: "중증 비급여 중심 보장, 비중증 비급여 자기부담 확대. 세부 내용은 확정 전이며 바뀔 수 있다." },
+    { gen: 5, name: "5세대", period: "2026.5.6~", inCov: 0.2, inNon: 0.3, inNonMild: 0.5, outDed: 10000, outDedNon: 50000, outRateCov: 0.2, outRateNon: 0.5, stopLoss: 2e6, severeStopLoss: 5e6, severeLimit: 50e6, mildLimit: 10e6, renew: "1년 갱신, 5년 재가입", premiumX: 0.7, plan: false, note: "2026년 5월 6일 출시. 급여 외래는 건보 본인부담률 연동, 중증 상급·종합 입원 비급여 자기부담 연500만원 상한. 보험료 배수는 교육용 가정." },
   ];
 
   /* ------------------------------------------------------------ 기본 수학 */
@@ -280,28 +280,53 @@
   /**
    * 진료 한 건의 비용을 건강보험·실손·내 돈으로 나눈다.
    *   o = { cost(총 진료비), nonCov(비급여 비율 0~1), setting("inpatient"|"clinic"|"hospital"|"general"|"tertiary"),
-   *         special(null|"cancer"|"rare"), gen(실손 세대 0=없음,1~5), mild(비급여 중 비중증 비율, 5세대용, 기본 0.5) }
+   *         special(null|"cancer"|"rare"), gen(실손 세대 0=없음,1~5), mild(보장대상 비급여 중 비중증 비율, 5세대용, 기본 0.5), hospital(입원 병원유형, 기본 hospital),
+   *         nhisRate(실제 가중평균 건보 본인부담률, 생략 시 대표율), coveredSelfYtd, severeSelfYtd(상급·종합 중증 입원만),
+   *         coveredPaidYtd, severePaidYtd, mildPaidYtd(5세대 동일 보험연도의 누적액, 기본 0) }
+   *   비급여 특약 두 가지 모두 가입한 보장대상 치료만 계산. 외래 한 건=하루 한 번, 입원 한 건=한 입원 회차.
    * 반환: { covered, nhis, copay(급여 본인부담), nonCovered, patient(실손 전 내 부담), silson, oop(최종 내 부담) }
    */
   INS.medical = function (o) {
     const cost = o.cost || 0, nc = INS.clamp(o.nonCov || 0, 0, 1);
     const setting = o.setting || "inpatient";
     const covered = cost * (1 - nc), nonCovered = cost * nc;
-    const rate = o.special ? INS.NHIS.special[o.special] : INS.NHIS.rate[setting];
+    const rate = o.nhisRate == null ? (o.special ? INS.NHIS.special[o.special] : INS.NHIS.rate[setting]) : INS.clamp(o.nhisRate, 0, 1);
     const copay = covered * rate, nhis = covered - copay, patient = copay + nonCovered;
-    let silson = 0;
+    let silson = 0, silsonBreakdown = null;
     const g = INS.SILSON.find((s) => s.gen === o.gen);
-    if (g) {
+    if (g && g.gen === 5) {
+      // 보장대상 의료비 한 건. 누적값은 같은 보험연도의 해당 특약 기지급/자기부담액.
+      // 제외 치료·가입 특약 선택·약관별 세부 판정은 입력 전에 별도로 확인해야 한다.
+      const mild = INS.clamp(o.mild == null ? 0.5 : o.mild, 0, 1);
+      const severe = nonCovered * (1 - mild), mildCost = nonCovered * mild;
+      const inpatient = setting === "inpatient", hospital = o.hospital || "hospital";
+      const qualifying = inpatient && ["general", "tertiary"].includes(hospital);
+      const remaining = (limit, paid) => Math.max(0, limit - Math.max(0, paid || 0));
+      const covDed = ["general", "tertiary"].includes(setting) ? 20000 : 10000;
+      const selfCov = inpatient ? Math.min(copay * g.inCov, remaining(g.stopLoss, o.coveredSelfYtd)) : Math.min(copay, Math.max(covDed, copay * Math.max(rate, 0.2)));
+      let severeSelf = inpatient ? severe * 0.3 : Math.min(severe, Math.max(30000, severe * 0.3));
+      if (qualifying) severeSelf = Math.min(severeSelf, remaining(g.severeStopLoss, o.severeSelfYtd));
+      const mildSelf = inpatient ? mildCost * 0.5 : Math.min(mildCost, Math.max(50000, mildCost * 0.5));
+      let severePay = Math.min(severe - severeSelf, remaining(g.severeLimit, o.severePaidYtd));
+      let mildPay = Math.min(mildCost - mildSelf, remaining(g.mildLimit, o.mildPaidYtd));
+      if (!inpatient) { severePay = Math.min(severePay, 200000); mildPay = Math.min(mildPay, 200000); }
+      else if (["clinic", "hospital"].includes(hospital)) mildPay = Math.min(mildPay, 3000000);
+      const covPay = Math.min(copay - selfCov, remaining(50e6, o.coveredPaidYtd));
+      silson = covPay + severePay + mildPay;
+      // 자기부담 상한은 공제액에만 적용된다. 연 보상한도 초과액은 여전히 환자가 부담한다.
+      silsonBreakdown = { coveredPay: covPay, severePay, mildPay, coveredDeductible: selfCov,
+        severeCappedDeductible: qualifying ? severeSelf : 0 };
+    } else if (g) {
       if (setting === "inpatient") {
         let selfCov = copay * g.inCov, selfNon;
         if (g.inNonMild != null) { const mild = o.mild == null ? 0.5 : o.mild; selfNon = nonCovered * (mild * g.inNonMild + (1 - mild) * g.inNon); }
         else selfNon = nonCovered * g.inNon;
         let self = selfCov + selfNon;
         if (g.gen >= 2 && g.gen <= 3) self = Math.min(self, g.stopLoss);
-        if (g.gen >= 4) self = Math.min(selfCov, g.stopLoss) + selfNon; // 4세대 이후 비급여는 상한 없음(단순화)
+        if (g.gen === 4) self = Math.min(selfCov, g.stopLoss) + selfNon; // 4세대 비급여에는 자기부담 상한 없음
         silson = Math.max(0, patient - self);
       } else {
-        const outDed = setting === "clinic" ? g.outDed : g.outDed * 1.5;
+        const outDed = g.gen === 4 ? (["general", "tertiary"].includes(setting) ? 20000 : 10000) : (setting === "clinic" ? g.outDed : g.outDed * 1.5);
         let self;
         if (g.gen >= 4) {
           const sc = copay > 0 ? Math.max(outDed, copay * g.outRateCov) : 0;
@@ -313,9 +338,16 @@
       }
       silson = Math.min(silson, 50e6);
     }
-    return { covered, nhis, copay, nonCovered, patient, silson, oop: patient - silson, rate };
+    return { covered, nhis, copay, nonCovered, patient, silson, oop: patient - silson, rate, silsonBreakdown };
   };
-  /** 본인부담상한제: 1년 급여 본인부담 합계와 소득분위(1~10) → 돌려받는 금액 */
+  /** 보험사 한 곳의 일반 계약과 별도보호 대상 사고보험금. 채무 상계·비보호상품은 입력 전에 제외. */
+  INS.protectInsurance = function (general, accident) {
+    const limit = INS.KR.depositProtect;
+    const generalProtected = Math.min(limit, Math.max(0, general));
+    const accidentProtected = Math.min(limit, Math.max(0, accident));
+    return { generalProtected, accidentProtected, protected: generalProtected + accidentProtected, unprotected: Math.max(0, general) + Math.max(0, accident) - generalProtected - accidentProtected };
+  };
+  /** 본인부담상한제: 제외 항목을 뺀 1년 상한제 대상 급여 본인부담 합계와 소득분위(1~10) → 돌려받는 금액 */
   INS.cap = function (annualCopay, decile = 5) {
     const c = INS.NHIS.capByDecile[INS.clamp(Math.round(decile), 1, 10) - 1];
     return { cap: c, refund: Math.max(0, annualCopay - c), paid: Math.min(annualCopay, c) };
